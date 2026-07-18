@@ -39,7 +39,7 @@
 
 验证独立 parser/encoder、bit depth、palette、alpha、row order、压缩、质量和内存报告。
 
-当前：0.1 原生实现已经覆盖 1/4/8 位 palette、16/32 位 bitfields、24/32 位像素、上下行、RLE4/RLE8、五类 PNG filter、分块 IDAT、CRC/Adler 与 Store/Fixed-RLE Deflate；等待完整 CI 后转入 corpus、fuzz 和 benchmark 强化。
+当前：0.1 原生实现已经覆盖 1/4/8 位 palette、16/32 位 bitfields、24/32 位像素、上下行、RLE4/RLE8、五类 PNG filter、分块 IDAT、CRC/Adler 与 Store/Fixed-RLE Deflate；独立 copy-out、12 个行为测试和 Kernel 默认调用已经通过 CI，下一轮转入 corpus、fuzz 和 benchmark 强化。
 
 ### `wav-pcm-to-aiff`
 

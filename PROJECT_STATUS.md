@@ -63,6 +63,7 @@ These are source observations, not a count of unique canonical formats.
 - Runnable defaults: adaptive filter, fixed-RLE compression, undeclared alpha normalized to opaque, 64 KiB IDAT chunks and 100-million-pixel limit.
 - Test-side PNG inflater and unfilter implementation verifies emitted pixels without a third-party codec.
 - Static Adapter buffers the input to bridge the Kernel's forward-only reader to the Capsule's seekable API.
+- GitHub CI passes 12 standalone behavior tests, copy-out build after Adapter deletion, and Kernel default invocation.
 
 ## Intentionally absent
 
@@ -78,4 +79,4 @@ Complete the remaining independent reference Capsule:
 
 1. `wav-pcm-to-aiff`
 
-Before starting it, complete GitHub CI validation of `bmp-to-png` and use any real Adapter feedback to harden the current protocol without adding multi-step planning.
+Use the seekable-reader feedback from `bmp-to-png` while implementing audio streaming, but do not add multi-step planning or a mandatory family IR.
