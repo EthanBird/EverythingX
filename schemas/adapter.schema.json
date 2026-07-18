@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://everythingx.dev/schema/adapter.schema.json",
+  "title": "EverythingX Capsule Adapter",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["adapter_id", "version", "capsule", "protocol", "transport", "capabilities"],
+  "properties": {
+    "adapter_id": {"type": "string", "pattern": "^adapter:[a-z0-9._-]+$"},
+    "version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:[-+][0-9A-Za-z.-]+)?$"},
+    "capsule": {
+      "type": "object",
+      "required": ["id", "version_requirement"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^capsule:"},
+        "version_requirement": {"type": "string"}
+      }
+    },
+    "protocol": {
+      "type": "object",
+      "required": ["name", "version_requirement"],
+      "properties": {
+        "name": {"const": "everythingx-adapter-protocol"},
+        "version_requirement": {"type": "string"}
+      }
+    },
+    "transport": {
+      "type": "object",
+      "required": ["kind"],
+      "properties": {
+        "kind": {"enum": ["static-rust", "process", "c-abi", "wasi", "external-tool"]},
+        "entrypoint": {"type": "string"},
+        "sandbox": {"type": "string"}
+      }
+    },
+    "capabilities": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/capability"}
+    }
+  },
+  "$defs": {
+    "capability": {
+      "type": "object",
+      "required": [
+        "capability_id", "capsule_entrypoint", "strategy", "backend",
+        "inputs", "outputs", "preconditions", "effects", "invariants",
+        "computability", "loss", "execution", "report_mapping"
+      ],
+      "properties": {
+        "capability_id": {"type": "string", "pattern": "^capability:"},
+        "capsule_entrypoint": {"type": "string"},
+        "strategy": {"type": "string"},
+        "backend": {"type": "string"},
+        "inputs": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+        "outputs": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+        "preconditions": {"type": "array", "items": {"type": "string"}},
+        "effects": {"type": "array", "items": {"type": "string"}},
+        "invariants": {"type": "array", "items": {"type": "string"}},
+        "computability": {"enum": ["exact", "conditional_exact", "semantic_lossless", "controlled_lossy", "rendered", "inferential"]},
+        "loss": {"type": "object"},
+        "execution": {
+          "type": "object",
+          "required": ["streaming", "seek_required", "cost_evidence"],
+          "properties": {
+            "streaming": {"type": "boolean"},
+            "seek_required": {"type": "boolean"},
+            "cost_evidence": {"type": "array", "items": {"type": "string"}}
+          }
+        },
+        "report_mapping": {
+          "type": "object",
+          "required": ["unknown_fields_are_preserved"],
+          "properties": {
+            "unknown_fields_are_preserved": {"const": true},
+            "rules": {"type": "array", "items": {"type": "string"}}
+          }
+        }
+      }
+    }
+  }
+}
+

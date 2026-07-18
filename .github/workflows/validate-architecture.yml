@@ -1,0 +1,28 @@
+name: Validate Architecture 2.0
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate repository data and manifests
+        run: python3 tools/validate_repository.py
+
+      - name: Check Capsule dependency boundaries
+        run: python3 tools/check_capsule_independence.py capsules/_template
+
+      - name: Prove Capsule builds after copy-out and Adapter deletion
+        run: python3 tools/check_capsule_independence.py --cargo capsules/_template
+
+      - name: Build optional template Adapter separately
+        run: cargo test --manifest-path capsules/_template/everythingx/adapter/Cargo.toml
+

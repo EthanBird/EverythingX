@@ -1,0 +1,41 @@
+{
+  "adapter_id": "adapter:example-byte-copy-static",
+  "version": "0.0.0",
+  "capsule": {
+    "id": "capsule:example-byte-copy",
+    "version_requirement": "=0.0.0"
+  },
+  "protocol": {
+    "name": "everythingx-adapter-protocol",
+    "version_requirement": "draft-0"
+  },
+  "transport": {
+    "kind": "static-rust",
+    "entrypoint": "invoke"
+  },
+  "capabilities": [
+    {
+      "capability_id": "capability:example-byte-copy/exact/native",
+      "capsule_entrypoint": "convert",
+      "strategy": "exact",
+      "backend": "native",
+      "inputs": ["example:bytes"],
+      "outputs": ["example:bytes"],
+      "preconditions": [],
+      "effects": ["output.bytes == input.bytes"],
+      "invariants": ["byte_identity"],
+      "computability": "exact",
+      "loss": {},
+      "execution": {
+        "streaming": true,
+        "seek_required": false,
+        "cost_evidence": []
+      },
+      "report_mapping": {
+        "unknown_fields_are_preserved": true,
+        "rules": ["bytes_read and bytes_written map to execution measurements"]
+      }
+    }
+  ]
+}
+

@@ -1,0 +1,12 @@
+[package]
+name = "everythingx-adapter-capsule-template"
+version = "0.0.0"
+edition = "2024"
+publish = false
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
+conversion-capsule-template = { path = "../.." }
+

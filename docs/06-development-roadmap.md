@@ -1,67 +1,178 @@
-# 06｜基础代码库的发展路线
+# 06｜Architecture 2.0 开发路线
 
-路线的单位不是“做一个支持 100 种格式的 CLI”，而是增加可验证的原子能力。每一波都先补识别/校验和 family IR，再补解析/序列化，最后补纯变换。
+估算基准：一名全职核心开发者；多人可并行 Capsule，但每个 Capsule 的独立性和证据门槛不降低。
 
-## Wave 0：基础设施（当前）
+## Phase 0｜架构重置（当前）
 
-- 开放格式宇宙、来源记录与规范概念分层。
-- 文件多轴本体、关系词表、可计算性和损失模型。
-- 原子算子 schema、目录模板、构建与校验工具。
-- 9,020 条来源观察作为格式发现与去重候选池。
+交付：
 
-完成标准：本仓库本身可重建、可校验；不以转换 CLI 为目标。
+- Architecture 2.0；
+- Conversion Capsule 规范；
+- Kernel/Adapter 边界；
+- Capsule 与 Adapter schema；
+- 自治目录模板；
+- HEIC→JPEG 参考设计；
+- 宇宙级 Registry 扩展路线。
 
-## Wave 1：低复杂度、无损、可建立信任的原语
+退出条件：仓库中不再存在“Capsule 必须依赖 EverythingX trait/IR”的规范性要求。
 
-优先实现：hex/base-N、checksum、UTF BOM/charset 边界、CSV/TSV dialect、JSON/JSONL、XML 基础解析、PBM/PGM/PPM、BMP 子集、WAV/RIFF PCM、ZIP/TAR 的安全列表与 byte extraction。
+## Phase 1｜Capsule Independence Kit（1–2 周）
 
-原因：这些格式适合验证 parser/serializer 契约、streaming、边界检查、roundtrip、fuzz 和 zero-copy；能快速形成大量可组合算子，而不先陷入复杂 codec。
+开发：
 
-## Wave 2：常用图片、音频、文档容器
+- `check_capsule_independence.py`；
+- 临时复制构建测试；
+- 外部 path dependency 检查；
+- capsule/adapter schema validator；
+- corpus manifest 与 benchmark report schema；
+- release hash 和 SBOM 约定。
 
-- RasterIR：PNG、JPEG 家族、GIF、TIFF/WebP 按 profile 推进；颜色、alpha、bit depth 和 metadata 都进入能力/损失模型。
-- AudioPCM：WAV/BWF/AIFF/FLAC 及 channel/sample 格式原语；codec 与 container 分离。
-- Package/Document：ZIP、OPC/DOCX、ODF、EPUB 的成员、关系与依赖闭包；PDF 先做版本识别、对象图、附件/页面/图片提取，再做渲染或重写。
+退出条件：模板复制出仓库后可独立构建；删除 `everythingx/` 后检查仍通过。
 
-复杂 JPEG/FLAC/字体等可以先提供 external backend 清单，同时并行开发 native backend；两者必须通过同一证据套件。
+## Phase 2｜三个参考 Capsule（3–5 周）
 
-## Wave 3：时基媒体与表格/数据库
+### `utf16-to-utf8`
 
-- TimedMedia：MP4/Matroska 容器、track、codec、timebase、subtitle、metadata；先 remux/extract，后 transcode。
-- Table/Relation：CSV/Arrow/Parquet/Excel 表模型；类型、NULL、公式、格式与关系是不同能力。
-- SQLite：一致快照、schema、table/view/query projection、indexes/constraints/triggers、BLOB extraction、SQL dump；明确“数据库→一张表”和“完整数据库迁移”的差别。
+验证 streaming、endianness、BOM、invalid sequence、替换/拒绝策略和无分配快路径。
 
-## Wave 4：几何、CAD、GIS 与科学数据
+### `bmp-to-png`
 
-- Geometry/Scene：OBJ/MTL、STL、PLY、glTF；区分 mesh、scene、materials、animation 和外部纹理闭包。
-- CAD/BIM：DXF、DWG、STEP、IGES、IFC；建立 B-Rep、parametric history、assemblies、units/tolerance 能力，禁止把 raster preview 当作 CAD 转换。
-- GIS：GeoJSON、Shapefile、GeoPackage、GeoTIFF；CRS/datum/axis order/topology 必须是硬约束。
-- Scientific Array：HDF5、NetCDF、FITS、DICOM；切片、dataset/group、传输语法、去标识与 provenance 分开。
+验证独立 parser/encoder、bit depth、palette、alpha、row order、压缩、质量和内存报告。
 
-## Wave 5：系统与长尾专业领域
+### `wav-pcm-to-aiff`
 
-文件系统/磁盘镜像、固件、抓包、邮件与归档、EDA、财务交换、游戏资产、模型权重与 checkpoint。每个领域单独建立 IR 和安全模型，只通过显式桥梁进入通用家族。
+验证 container、endianness、sample format、metadata、streaming 和大文件边界。
 
-## 什么时候开始图规划
+每个 Capsule 都必须：
 
-满足以下门槛再实现 planner：
+- 独立 Cargo build/test/bench/fuzz；
+- 无 EverythingX public API；
+- 有完整 Options/Error/Report；
+- 有可删除 Adapter；
+- 有至少一个其他程序直接调用示例。
 
-1. 至少三个 family IR 已有稳定版本；
-2. 至少 50 个生产级算子清单与证据齐全；
-3. 至少存在 split、aggregate、render、lossy 和 conditional-exact 各一条真实路径；
-4. 成本、损失和失败分类经过 benchmark/fixture 校准；
-5. 负知识能解释主要不可行请求。
+退出条件：三个 Capsule 在独立临时仓库 CI 通过。
 
-Planner 第一版只读取算子清单和 Artifact facts，不负责格式探测，不偷偷调用工具，也不把 `unknown` 当作可行。
+## Phase 3｜最小 Adapter Protocol 与薄 Kernel（2–3 周）
 
-## 算子优先级评分
+只实现：
 
-候选算子可按下式排队，不是路径运行时成本：
+1. registry snapshot 加载；
+2. Capsule/Adapter handshake；
+3. 一项 capability 调用；
+4. Report→effects/loss/provenance；
+5. static Rust 与 process transport 各一个 reference adapter；
+6. 跨进程资源上限与失败分类。
+
+不实现多步图搜索，不创建统一 family IR。
+
+## Phase 4｜高价值独立库群（持续 3–6 个月）
+
+按“用户频率 × 独立价值 × 可验证性 ÷ 复杂度”推进：
+
+### Text/Table
 
 ```text
-priority = user_frequency × graph_connectivity × semantic_reuse × testability
-         ÷ (spec_ambiguity × implementation_risk × attack_surface)
+utf32-to-utf8
+json-to-jsonl
+jsonl-to-json
+csv-to-jsonl
+jsonl-to-csv
+csv-dialect-normalize
 ```
 
-这会优先产生可复用的 decode/encode/normalize/extract 原语，而不是一次性 A→B 适配器。
+### Raster
+
+```text
+png-to-jpeg
+jpeg-to-png
+png-to-webp
+bmp-to-png
+tiff-to-png
+svg-render-to-png   # 明确是 render
+```
+
+### Audio
+
+```text
+wav-pcm-to-aiff
+aiff-to-wav-pcm
+flac-to-wav-pcm
+wav-pcm-to-flac
+audio-extract-channel
+audio-split-time-range
+```
+
+### Package/Document
+
+```text
+zip-extract-member
+tar-to-zip
+pdf-extract-images
+pdf-extract-attachments
+pdf-split-pages
+pdf-merge-pages
+docx-extract-media
+docx-to-document-tree
+```
+
+### Database
+
+```text
+sqlite-table-to-csv
+sqlite-table-to-jsonl
+csv-to-sqlite-table
+sqlite-extract-blobs
+sqlite-schema-to-sql
+```
+
+每个都是可单独发布的库，不是 Kernel 模块。
+
+## Phase 5｜HEIC→JPEG Gold Capsule（分阶段 3–9 个月）
+
+1. 自研 HEIF container/metadata 与完整损失报告；codec 先采用可替换 backend。
+2. 自研 color/chroma/bit-depth/alpha/HDR pipeline。
+3. 逐步实现 native HEVC still-image decoder 和 JPEG encoder。
+4. SIMD、tile、并行、YCbCr 快路径和内存优化。
+5. 多架构 conformance、differential、quality 和 benchmark 证据。
+
+HEIC Capsule 是“独立、深度验证、专用直达算法”的黄金标准，不作为验证目录结构的第一个简单样例。
+
+## Phase 6｜Planner 启动门槛
+
+以下条件同时满足后才开发多步 Planner：
+
+- 至少 50 个 production Capsule；
+- 至少 80 个经过验证的 AdapterCapability；
+- 至少 30 条真实的可组合多步路径；
+- 至少存在 direct-vs-IR、native-vs-external、quality-vs-speed 对照；
+- benchmark/loss 数据足以形成 Pareto 选择；
+- negative knowledge 可以解释主要不可行请求；
+- Universe 至少 300 个 reviewed concepts 和 500 个 operational variants。
+
+## Phase 7｜宇宙级专业领域（长期）
+
+- Registry 改为内容寻址分片和 append-only assertion log；
+- CAD、GIS、医学、科学、EDA、固件等 Domain Pack；
+- 组织私有 namespace 与本地 snapshot composition；
+- 百万级 SourceRecord 和增量索引；
+- Capsule federation、签名、trust 和审计网络。
+
+## 质量 KPI
+
+不以主仓库代码行数作为核心指标。跟踪：
+
+```text
+独立可构建 Capsule 数
+production Capsule 数
+conformance profile 覆盖
+fuzz CPU-hours / unique regressions
+benchmark 可复现率
+FormatConcept/Variant 审核数
+有证据与 unknown 的比例
+可解释失败率
+跨 Kernel 版本无需升级的 Capsule 比例
+```
+
+最重要的 KPI：删除 EverythingX 主仓库后，已发布 Capsule 仍能独立解决真实转换问题。
 

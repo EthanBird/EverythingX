@@ -101,21 +101,50 @@ def main() -> int:
                 raise ValueError(f"canonical/seed.ndjson:{index}: missing source mapping {target}")
     canonical_ids = ensure_unique(canonical, "format_id", "canonical/seed.ndjson")
 
-    operator_required = {
-        "operator_id", "contract_version", "implementation", "family", "layers",
-        "arity", "inputs", "outputs", "preconditions", "effects", "invariants",
-        "computability", "loss", "algebra", "execution", "dependencies", "security", "evidence"
+    capsule_required = {
+        "capsule_id", "version", "name", "summary", "license", "independence",
+        "conversion", "api", "strategies", "backends", "validation", "security"
     }
-    operator_ids: set[str] = set()
-    for path in sorted((ROOT / "operators").glob("*/operator.json")):
+    capsule_ids: set[str] = set()
+    adapter_ids: set[str] = set()
+    capability_ids: set[str] = set()
+    for path in sorted((ROOT / "capsules").glob("*/capsule.json")):
         record = load_json(path)
-        require_fields(record, operator_required, str(path.relative_to(ROOT)))
-        operator_id = record.get("operator_id", "")
-        if not operator_id.startswith("exop:"):
-            raise ValueError(f"{path}: invalid operator_id")
-        if operator_id in operator_ids:
-            raise ValueError(f"{path}: duplicate operator_id {operator_id}")
-        operator_ids.add(operator_id)
+        require_fields(record, capsule_required, str(path.relative_to(ROOT)))
+        capsule_id = record.get("capsule_id", "")
+        if not capsule_id.startswith("capsule:"):
+            raise ValueError(f"{path}: invalid capsule_id")
+        if capsule_id in capsule_ids:
+            raise ValueError(f"{path}: duplicate capsule_id {capsule_id}")
+        capsule_ids.add(capsule_id)
+        independence = record.get("independence", {})
+        if independence.get("standalone_cargo_build") is not True:
+            raise ValueError(f"{path}: standalone_cargo_build must be true")
+        if independence.get("everythingx_optional") is not True:
+            raise ValueError(f"{path}: everythingx_optional must be true")
+        if independence.get("external_path_dependencies") is not False:
+            raise ValueError(f"{path}: external_path_dependencies must be false")
+
+        adapter_path = path.parent / "everythingx" / "adapter.json"
+        if not adapter_path.is_file():
+            continue
+        adapter = load_json(adapter_path)
+        require_fields(
+            adapter,
+            {"adapter_id", "version", "capsule", "protocol", "transport", "capabilities"},
+            str(adapter_path.relative_to(ROOT)),
+        )
+        adapter_id = adapter.get("adapter_id", "")
+        if not adapter_id.startswith("adapter:") or adapter_id in adapter_ids:
+            raise ValueError(f"{adapter_path}: invalid or duplicate adapter_id {adapter_id}")
+        adapter_ids.add(adapter_id)
+        if adapter.get("capsule", {}).get("id") != capsule_id:
+            raise ValueError(f"{adapter_path}: adapter Capsule ID does not match {capsule_id}")
+        for capability in adapter.get("capabilities", []):
+            capability_id = capability.get("capability_id", "")
+            if not capability_id.startswith("capability:") or capability_id in capability_ids:
+                raise ValueError(f"{adapter_path}: invalid or duplicate capability_id {capability_id}")
+            capability_ids.add(capability_id)
 
     summary = load_json(ROOT / "catalog" / "summary.json")
     if summary["observation_count"] != len(sources):
@@ -130,7 +159,9 @@ def main() -> int:
                 "json_files": len(json_paths),
                 "source_records": len(source_ids),
                 "canonical_seeds": len(canonical_ids),
-                "operator_manifests": len(operator_ids),
+                "capsule_manifests": len(capsule_ids),
+                "adapter_manifests": len(adapter_ids),
+                "capabilities": len(capability_ids),
             },
             ensure_ascii=False,
             indent=2,
@@ -145,4 +176,3 @@ if __name__ == "__main__":
     except (OSError, ValueError, KeyError, TypeError, json.JSONDecodeError) as error:
         print(f"validation failed: {error}", file=sys.stderr)
         raise SystemExit(1)
-

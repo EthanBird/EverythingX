@@ -1,0 +1,66 @@
+{
+  "capsule_id": "capsule:example-byte-copy",
+  "version": "0.0.0",
+  "name": "Example byte-copy Capsule",
+  "summary": "Architecture template only; copies bytes and demonstrates an EverythingX-independent API.",
+  "license": {
+    "expression": "LicenseRef-EverythingX-Template",
+    "file": "LICENSE",
+    "commercial_authorization_required": true
+  },
+  "repository": null,
+  "independence": {
+    "standalone_cargo_build": true,
+    "everythingx_optional": true,
+    "external_path_dependencies": false,
+    "copy_out_tested": false
+  },
+  "conversion": {
+    "source": ["example:bytes"],
+    "target": ["example:bytes"],
+    "arity": {
+      "inputs": {"min": 1, "max": 1},
+      "outputs": {"min": 1, "max": 1}
+    },
+    "scope": ["Template demonstration"],
+    "out_of_scope": ["Production use"]
+  },
+  "api": {
+    "language": "rust",
+    "crate": "conversion-capsule-template",
+    "entrypoint": "convert",
+    "owns_options_error_report": true,
+    "streaming": true,
+    "seek_required": false
+  },
+  "strategies": [
+    {
+      "id": "exact",
+      "guarantees": ["Output bytes equal input bytes"],
+      "tradeoffs": []
+    }
+  ],
+  "backends": [
+    {
+      "id": "native",
+      "tier": "native-portable",
+      "default": true,
+      "dependencies": []
+    }
+  ],
+  "validation": {
+    "specifications": [],
+    "conformance": ["tests/copy.rs"],
+    "differential": [],
+    "properties": ["output == input"],
+    "regression": [],
+    "fuzz": [],
+    "benchmarks": []
+  },
+  "security": {
+    "accepts_untrusted_input": true,
+    "limits": ["Caller-provided Read/Write controls allocation and output destination"],
+    "known_risks": ["Template is not a production converter"]
+  }
+}
+

@@ -105,7 +105,9 @@ Artifact = {
 
 任何统一 IR 若要无损容纳 PDF 的页面绘制、SQLite 的事务约束、STEP 的 B-Rep、音频采样、可执行代码行为和磁盘文件系统，最终只会退化成无语义的字节袋。
 
-应建立**家族 IR + 明确桥梁**：RasterIR、AudioPCM、TimedMedia、DocumentTree/PageGraph、Table/Relation、Array/Tensor、Geometry/BRep/Scene、Archive/Package、AST/IR、Filesystem。跨家族算子必须承认语义投影，例如 `DocumentPage → RasterImage` 是 render，不是假装无损的普通 convert。
+可以建立**可选、自治、版本化的家族协议 + 明确桥梁**：Raster、AudioPCM、TimedMedia、DocumentTree/PageGraph、Table/Relation、Array/Tensor、Geometry/BRep/Scene、Archive/Package、AST/IR、Filesystem。但它们不是 EverythingX Kernel 的强制内部类型。
+
+专用 A→B Conversion Capsule 可以使用私有 IR、流式状态或直接变换；通用 decoder/encoder 可以选择公共协议。跨家族能力仍必须承认语义投影，例如 `DocumentPage → RasterImage` 是 render，不是假装无损的普通 convert。
 
 ## 6. 身份、等价与兼容
 
@@ -117,4 +119,3 @@ Artifact = {
 - `compatible_subset_of`：A 的所有合法实例都是 B 的合法实例。
 
 路径规划不得用一个布尔 `lossless` 代替这些层次。
-

@@ -1,87 +1,98 @@
-# 04｜持续开发的仓库与治理
+# 04｜仓库、发布与治理
 
-## 1. 数据先于代码，证据先于合并
+## 1. Monorepo 是孵化器，不是运行时边界
 
-上游同步只新增/更新 `SourceRecord`。任何 `SourceRecord → FormatConcept` 映射都要单独提交，并经过证据审核；不得依据相同扩展名自动合并。自动分类必须标注 `method=heuristic` 与置信度，不能伪装成人工事实。
+EverythingX 主仓库可以集中孵化 Capsule、Adapter、Registry 和文档，但每个 Capsule 必须像未来会被拆成单独仓库一样设计。
 
-## 2. 推荐开发顺序
+允许根 workspace 方便批量 CI；同时必须单独执行：
 
-1. 扩大事实覆盖：权威注册表、识别库和专业领域 registry。
-2. 建立高价值 canonical concepts 与 operational variants。
-3. 为单一格式实现 identify/validate/parser/serializer。
-4. 为同一家族实现纯 IR 原子变换。
-5. 累积 conformance corpus、roundtrip、fuzz 与 benchmark 证据。
-6. 当原子算子密度足够后，再实现转换图与最优路径。
-
-这符合“基础代码库数量先足够”的目标，也防止规划器先于真实能力而变成纸上接口。
-
-## 3. 每个算子目录
-
-```text
-operators/<domain>.<action>/
-├── operator.json       # 机器清单；图边的唯一来源
-├── README.md           # 语义边界和已知限制
-├── src/lib.rs          # Rust 核心；不含 CLI
-├── tests/
-│   ├── conformance.rs
-│   ├── properties.rs
-│   └── regression.rs
-└── fixtures/README.md  # 样本来源、许可证、预期 hash
+```bash
+cargo build --manifest-path capsules/<name>/Cargo.toml
+cargo test  --manifest-path capsules/<name>/Cargo.toml
 ```
 
-算子可以是单独 crate，后续由 workspace 聚合。核心 trait 应保持极薄；不要为了统一接口而强迫所有格式依赖一个巨型公共 IR。
+CI 还应把 Capsule 复制到临时目录再构建，以发现偷偷引用仓库外部代码的问题。
 
-## 4. 零依赖策略的边界
+## 2. 五类版本分别管理
 
-采用四级实现优先级：
+| 对象 | 版本规则 |
+|---|---|
+| Capsule | 独立 SemVer；API、输入范围和保证属于其版本 |
+| Adapter | 独立 SemVer；声明兼容的 Capsule 与 Protocol 范围 |
+| Protocol | 慢速演进；协商兼容，不绑定 Kernel release |
+| Universe snapshot | 内容寻址 + 上游版本/日期，历史不可重写 |
+| Ontology/schema | 语义化版本；删除或改义升 major |
 
-1. `bytewise`：边界明确时直接切片、拼接、重写 header/index。
-2. `native`：Rust 自研 parser/serializer，标准库或项目内小模块。
-3. `system`：明确、稳定、可隔离的系统 codec/API。
-4. `external`：成熟依赖或外部工具，作为可替换 backend。
+不得用一个 EverythingX 版本号覆盖所有转换库。
 
-“位运算最快”只在算法确实受该部分支配时成立。压缩、熵编码、色彩转换、几何布尔、字体 shaping 和复杂 codec 的正确性、SIMD、缓存局部性与算法复杂度通常比是否手写位运算更关键。所有 backend 使用同一 conformance suite 和 benchmark，按数据决定默认实现。
+## 3. Capsule 进入主仓库
 
-依赖不是布尔值，而是路径成本：依赖体积、许可证、C ABI、动态库、启动开销、攻击面和可复现性分别计量。这样既鼓励自研，又能在专业格式尚未覆盖时保留可用路径。
+必须提交：
 
-## 5. 版本与兼容
+- 自治目录和独立 `Cargo.toml`；
+- `capsule.json`；
+- public API、Options、Error、Report 文档；
+- 规格、corpus provenance 与许可证；
+- conformance/differential/property/regression 测试；
+- fuzz 配置和资源限制；
+- benchmark 方法与基线；
+- 可删除的 `everythingx/` 集成目录。
 
-- Source snapshot：按获取日期与上游版本锁定，不回写历史。
-- Ontology/schema：语义化版本；删除/改义需要 major。
-- Canonical concept：稳定 ID 不复用；弃用用 `superseded_by`。
-- Operator contract：算子语义改变即升版本；实现优化不改变语义时只升 implementation version。
-- Fixtures/expected hash：与算子实现一起审查。
+审核者首先在 Capsule 目录外构建，而不是先运行总 workspace。
 
-## 6. 新格式进入仓库的 Definition of Done
+## 4. 独立转换优先于代码复用
 
-至少具备：
+禁止为了减少几百行重复而让 Capsule 依赖 Kernel 私有 crate。可复用算法有三种合法去向：
 
-- 一个来源记录或可公开审计的私有 schema；
-- 格式家族、表示层、信息模型和载体分类；
-- 版本/profile/依赖边界；
-- 至少一种可靠识别证据，或明确声明 `identification=manual-only`；
-- 安全与资源风险；
-- 若挂算子，输入输出、损失和测试证据完整。
+1. 保留在 Capsule 内部；
+2. 发布为自治、版本化、通用 Rust crate；
+3. 成为另一个具有独立产品价值的 Capsule/协议包。
 
-## 7. 新算子的 Definition of Done
+共享代码必须有自己的 API、版本、测试和许可证，不能成为隐藏的 monorepo 脐带。
 
-- 清单通过 schema 校验，稳定 ID 唯一；
-- 单一语义动作，无隐藏格式分派；
-- 前置条件和失败分类可测试；
-- exact/lossy 声明有 roundtrip、oracle 或度量证据；
-- 不可信输入有长度、递归、内存和解压炸弹边界；
-- provenance 记录输入 hash、算子/实现版本、参数和外部依赖；
-- benchmark 包含吞吐、峰值内存和输出质量，不只测 happy path。
+## 5. Backend 分级
 
-## 8. 专业领域扩展
+```text
+native-portable  自研可移植 Rust
+native-simd      自研 SIMD/architecture path
+system           系统 codec/API
+external         第三方 crate/library/tool
+hardware         GPU/codec accelerator
+```
 
-每个领域可增加自己的 facet、IR、能力词表和容差度量，但共享顶层公理。例如：
+优先发展 native 实现，但正确性、规格覆盖和安全是硬门槛。外部 backend 可以用于早期语义验证、差分 oracle 和暂时覆盖；调用必须显式记录，不能伪装成零依赖。
 
-- SQLite/数据库：schema、constraints、indexes、transactions、views、NULL/type affinity。
-- CAD/BIM：B-Rep/mesh/parametric history、units、topology、tolerance、materials。
-- GIS：CRS、datum、axis order、topology、resolution。
-- 医学：像素与患者/检查元数据、去标识、传输语法、监管 provenance。
-- EDA：层、网表、设计规则、单位与制造约束。
+依赖成本按许可证、C ABI、动态库、体积、攻击面、启动、可复现性和平台覆盖分别建模。
 
-专业语义无法诚实映射到通用 IR 时，保留领域 IR，并用显式投影算子连接到 table、image、geometry 等通用家族。
+## 6. 贡献与著作权链
+
+商业再许可要求清晰权利链。在正式 CLA 签署流程建立前，不合并产生独立著作权的外部代码贡献。格式事实、错误样本和资料链接也必须记录来源与再分发条件。
+
+详见 `CONTRIBUTING.md`、`LICENSE` 与 `SOURCES_AND_LICENSING.md`。
+
+## 7. 格式事实治理
+
+数据同步只改变 SourceRecord snapshot。SourceRecord→FormatConcept 映射是独立审核断言，带证据、置信度和审核状态。
+
+自动 heuristic 必须显式标记；相同 MIME、扩展名、魔数或名称不允许自动合并。专业领域通过 Domain Pack 扩展，不以修改中央 taxonomy 为唯一入口。
+
+## 8. 安全发布
+
+生产 Capsule release 必须：
+
+- 锁定依赖并生成 SBOM；
+- 记录构建器、target 与 artifact hash；
+- 通过 fuzz 和恶意资源边界测试；
+- 公开 known limitations；
+- 对 potential patent/license 做非结论性风险记录；
+- Adapter 与 Capsule artifact 分别签名/寻址；
+- 可从 tag 和 corpus manifest 重现 benchmark。
+
+## 9. 不做的事情
+
+- 不把所有 Capsule 编译进一个巨型二进制作为唯一发布形式。
+- 不要求 Capsule 跟随 Kernel 升级。
+- 不通过共享 Artifact trait 侵入 Capsule API。
+- 不以“步骤原子化”为理由破坏一个转换库的独立完整性。
+- 不在证据不足时宣传最优、无损或全格式支持。
 

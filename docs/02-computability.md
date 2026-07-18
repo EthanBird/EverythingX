@@ -8,7 +8,7 @@
 T : Aⁿ ⇀ Bᵐ
 ```
 
-它带有前置条件 `P`、效果 `E`、不变量 `I`、损失向量 `L`、成本 `C` 与依赖集合 `D`。只有当输入 Artifact 通过识别与校验，且 `P` 成立时，算子才可计算。
+它带有前置条件 `P`、效果 `E`、不变量 `I`、损失向量 `L`、成本 `C` 与依赖集合 `D`。在 Architecture 2.0 中，实际偏函数由独立 Conversion Capsule 提供，EverythingX Adapter 负责将其声明为能力边。只有当输入 Artifact 通过识别与校验，且 `P` 成立时，该能力才可计算。
 
 ## 2. 八级可计算性判定
 
@@ -31,7 +31,7 @@ T : Aⁿ ⇀ Bᵐ
 Info(output) ≤ Info(input) + Info(parameters) + Info(external_state) + Info(model_prior)
 ```
 
-所谓“恢复丢失细节”“图片转可编辑 CAD”“PDF 转原始 DOCX”若没有额外先验，只能是推断或重建，不是精确反转换。算子必须把外部模型、用户提示、字体、schema、密钥等列为显式输入。
+所谓“恢复丢失细节”“图片转可编辑 CAD”“PDF 转原始 DOCX”若没有额外先验，只能是推断或重建，不是精确反转换。Capsule API 与 Adapter 能力都必须把外部模型、用户提示、字体、schema、密钥等列为显式输入。
 
 ## 4. 能力覆盖判定
 
@@ -42,7 +42,7 @@ required = invariants(request) ∩ capabilities(actual_input)
 computable iff required ⊆ capabilities(target_variant) ∪ accepted_losses
 ```
 
-例：RGBA PNG 转 JPEG。若不变量包含 alpha，目标能力不覆盖，且损失预算不允许透明度丢失，则 `impossible`；若用户提供背景色并接受合成，则添加 `flatten_alpha(background)` 算子后变为 `controlled_lossy`。
+例：RGBA PNG 转 JPEG。若不变量包含 alpha，目标能力不覆盖，且损失预算不允许透明度丢失，则 `impossible`；若专用 Capsule 提供 `flatten(background)` 策略，或存在独立 flatten 能力且用户接受合成，则变为 `controlled_lossy`。
 
 ## 5. 损失不是一个数字
 
@@ -90,9 +90,8 @@ L = {
 每次规划都应能给出：
 
 ```text
-识别证据 → 输入有效性 → 算子前置条件 → 中间状态能力
+识别证据 → 输入有效性 → AdapterCapability 前置条件 → Capsule Report/中间状态能力
 → 目标能力覆盖 → 损失预算检查 → 成本与安全约束
 ```
 
 找不到证明链时，结果是 `unknown`，不是乐观地执行。
-

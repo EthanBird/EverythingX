@@ -1,16 +1,20 @@
-# Foundation status — 2026-07-19
+# Project status — Architecture 2.0
 
-## Delivered
+Date: 2026-07-19  
+Status: design reset complete; implementation has not started.
 
-- Six versioned upstream source classes with URL, role, caveat, and hash metadata.
-- 9,020 immutable source observations and reverse indexes.
-- 11 draft canonical examples demonstrating family/concept separation and evidence mappings.
-- Faceted file ontology, typed containment relations, Artifact lifecycle vocabulary.
-- Eight computability states and a 13-dimensional loss model.
-- Directed typed hypergraph operator algebra and dependency-free Rust operator template.
-- Dependency-free Python catalog builder and repository validator.
+## Accepted architecture
 
-## Baseline counts
+- Conversion Capsule is the first-class implementation and release unit.
+- Every Capsule must build, test and run independently of EverythingX.
+- EverythingX integration lives only in a removable Adapter directory.
+- Kernel is a control plane for registry, policy, invocation, proof, provenance and planning.
+- Graph edges are AdapterCapability records, not implementation traits.
+- Family IR is optional and independently versioned, never a mandatory Kernel type.
+- Direct specialized converters and generic composed paths coexist.
+- Format Universe remains a versioned open world with domain and private namespaces.
+
+## Current data foundation
 
 | Metric | Count |
 |---|---:|
@@ -25,16 +29,37 @@
 | Distinct extension strings | 4,036 |
 | Distinct external identifiers | 12,175 |
 
-These are observations, not deduplicated canonical formats.
+These are source observations, not a count of unique canonical formats.
 
-## Intentionally not delivered
+## Delivered in Architecture 2.0
 
-- No CLI, desktop shell, conversion planner, or “universal convert” facade.
-- No automatic source-record merge.
-- No claim that all private or future formats are enumerated.
-- No production conversion operator; `_template` is a contract example only.
+- `ARCHITECTURE.md`
+- Conversion Capsule specification
+- Kernel and Adapter boundary specification
+- Universe-scale registry outlook
+- HEIC→JPEG gold Capsule reference design
+- Capsule and Adapter JSON schemas
+- Standalone Rust Capsule template
+- Removable static Adapter template
+- Capsule independence checker
+- CI proof that the copied Capsule builds after deleting EverythingX integration
+- Revised governance, ADR and development roadmap
 
-## Next repository milestone
+## Intentionally absent
 
-Review the first 100 high-frequency canonical concepts, define operational variants for Wave 1, and implement identify/validate primitives with conformance fixtures. Do not begin path optimization until real operator density and loss evidence meet the thresholds in `docs/06-development-roadmap.md`.
+- No production Capsule yet.
+- No `ex-core` framework that converter libraries must implement.
+- No mandatory shared IR.
+- No CLI, desktop application or multi-step Planner.
+- No claim that the template byte copy is a production conversion capability.
+
+## Next milestone
+
+Build three independent reference Capsules:
+
+1. `utf16-to-utf8`
+2. `bmp-to-png`
+3. `wav-pcm-to-aiff`
+
+Only after all three pass copy-out build/test/bench/fuzz should the minimal Adapter Protocol and Kernel runtime be implemented.
 

@@ -1,8 +1,9 @@
 [package]
-name = "everythingx-operator-template"
+name = "conversion-capsule-template"
 version = "0.0.0"
 edition = "2024"
 publish = false
+license-file = "LICENSE"
 
 [lib]
 path = "src/lib.rs"
