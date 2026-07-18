@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://everythingx.dev/schema/canonical-format.schema.json",
+  "title": "EverythingX canonical format concept or operational variant",
+  "type": "object",
+  "required": ["format_id", "kind", "names", "status", "facets", "mappings"],
+  "additionalProperties": false,
+  "properties": {
+    "format_id": {"type": "string", "pattern": "^exfmt:[a-z0-9-]+:[a-z0-9._-]+(?::[a-z0-9._-]+)*$"},
+    "kind": {"enum": ["family", "concept", "variant", "profile"]},
+    "names": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "status": {"enum": ["draft", "reviewed", "deprecated"]},
+    "parent": {"type": ["string", "null"]},
+    "facets": {"type": "object", "minProperties": 1},
+    "capabilities": {"type": "array", "items": {"type": "string"}},
+    "constraints": {"type": "array", "items": {"type": "string"}},
+    "mappings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source_record_id", "relation", "confidence", "review_status"],
+        "additionalProperties": false,
+        "properties": {
+          "source_record_id": {"type": "string", "pattern": "^src:"},
+          "relation": {"enum": ["exact", "broader", "narrower", "related"]},
+          "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+          "evidence": {"type": "array", "items": {"type": "string"}},
+          "review_status": {"enum": ["proposed", "reviewed", "rejected"]}
+        }
+      }
+    },
+    "relations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "target"],
+        "properties": {"type": {"type": "string"}, "target": {"type": "string"}}
+      }
+    },
+    "notes": {"type": "string"}
+  }
+}
+

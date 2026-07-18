@@ -1,0 +1,61 @@
+{
+  "ontology_version": "0.1.0",
+  "artifact_lifecycle": {
+    "states": [
+      "unobserved",
+      "detected",
+      "ambiguous",
+      "validated",
+      "invalid",
+      "locked",
+      "unlocked",
+      "parsed",
+      "transformed",
+      "serialized",
+      "verified",
+      "blocked"
+    ],
+    "rule": "A state transition records evidence; it never erases previous candidates or provenance."
+  },
+  "computability": [
+    "exact",
+    "conditional_exact",
+    "semantic_lossless",
+    "controlled_lossy",
+    "rendered",
+    "inferential",
+    "impossible",
+    "unknown"
+  ],
+  "knowledge_status": [
+    "registered",
+    "observed",
+    "inferred",
+    "private",
+    "unknown"
+  ],
+  "negative_knowledge": [
+    "impossible_because",
+    "blocked_by",
+    "unsafe_for",
+    "not_implemented",
+    "unknown"
+  ],
+  "loss_dimensions": [
+    "payload",
+    "structure",
+    "precision",
+    "temporal",
+    "spatial",
+    "color",
+    "typography",
+    "metadata",
+    "provenance",
+    "interactivity",
+    "behavior",
+    "relationships",
+    "security"
+  ],
+  "loss_levels": ["none", "normalized", "bounded", "unbounded", "unknown"]
+}
+

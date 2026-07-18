@@ -1,0 +1,44 @@
+name: Rebuild format catalog
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/rebuild-catalog.yml"
+      - "tools/**"
+      - "sources/sources.json"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: rebuild-format-catalog
+  cancel-in-progress: false
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch locked source snapshots
+        run: python3 tools/sync_sources.py --destination ../research/raw
+
+      - name: Build normalized catalog
+        run: python3 tools/build_catalog.py --source-root ../research/raw
+
+      - name: Validate repository
+        run: python3 tools/validate_repository.py
+
+      - name: Commit generated catalog when changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add catalog
+          if git diff --cached --quiet; then
+            echo "Catalog is already current."
+          else
+            git commit -m "Rebuild format catalog"
+            git push
+          fi

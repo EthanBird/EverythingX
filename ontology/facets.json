@@ -1,0 +1,185 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "ontology_version": "0.1.0",
+  "principle": "Facets are orthogonal descriptors. Values within a facet may be multi-valued unless exclusive is true.",
+  "facets": {
+    "mode_of_being": {
+      "exclusive": false,
+      "values": {
+        "perceptual": "Information intended to be perceived as signal or sensation.",
+        "symbolic": "Symbols interpreted through rules and a model.",
+        "behavioral": "Executable, evaluable, interactive, or procedural meaning.",
+        "stateful": "Mutable state, transactions, history, or durable process state.",
+        "composite": "Primarily organizes, packages, or relates other objects."
+      }
+    },
+    "carrier": {
+      "exclusive": false,
+      "values": {
+        "file": "One bounded byte sequence.",
+        "directory": "A directory tree is part of the representation.",
+        "file-set": "Multiple coordinated files without a required directory root.",
+        "byte-stream": "A sequential stream, possibly unbounded in operation.",
+        "block-image": "Random-access block address space or device image.",
+        "object-store-set": "A key-addressed set of objects.",
+        "memory-image": "A serialized process or memory address-space image."
+      }
+    },
+    "representation_form": {
+      "exclusive": false,
+      "values": {
+        "text": "Character-oriented representation with a declared or inferred charset.",
+        "binary": "Representation is not primarily character-oriented.",
+        "mixed": "Textual and binary regions are both semantically significant."
+      }
+    },
+    "logical_model": {
+      "exclusive": false,
+      "values": {
+        "scalar": "Single atomic value.",
+        "sequence": "Ordered values or records.",
+        "record-set": "Collection of keyed or unkeyed records.",
+        "table": "Rows and columns with a schema or inferred types.",
+        "relation-set": "Multiple relations with keys and constraints.",
+        "tree": "Hierarchical nodes with parent-child structure.",
+        "graph": "Nodes and edges, potentially cyclic.",
+        "tensor": "N-dimensional dense or sparse array.",
+        "object-graph": "Typed objects connected by identity-bearing references.",
+        "event-log": "Ordered events, often append-only.",
+        "scene": "Spatial objects, transforms, geometry, appearance, and cameras.",
+        "timeline": "Time-addressed tracks, events, or samples.",
+        "package": "Members plus relationships and package rules.",
+        "filesystem": "Names, directories, metadata, links, and allocation structures.",
+        "opaque-stream-set": "Multiple streams whose payload models are separately identified."
+      }
+    },
+    "semantic_family": {
+      "exclusive": false,
+      "values": {
+        "plain-text": "Human-readable character content without required rich structure.",
+        "structured-text": "Text whose syntax expresses a machine-readable structure.",
+        "document-flow": "Reflowable document content and styles.",
+        "page-description": "Fixed-layout pages and drawing instructions.",
+        "raster-image": "Sampled two-dimensional visual field.",
+        "vector-graphics": "Geometric visual primitives and styles.",
+        "audio-signal": "Audio waveform, events, or coded audio essence.",
+        "timed-media": "Synchronized time-based tracks.",
+        "subtitle-caption": "Timed text or accessibility captions.",
+        "font": "Glyphs, metrics, shaping, and typographic data.",
+        "tabular-data": "Rows, columns, cells, and optional types.",
+        "relational-database": "Relations, constraints, queries, and persistent database state.",
+        "graph-database": "Graph entities, relationships, indexes, and persistent state.",
+        "key-value-database": "Key-addressed values and persistent state.",
+        "scientific-array": "Typed multidimensional scientific data.",
+        "geospatial": "Coordinates, CRS, features, topology, or rasters tied to Earth/space.",
+        "cad-bim": "Engineering geometry, topology, parametrics, assemblies, or building models.",
+        "geometry-3d": "Meshes, curves, surfaces, solids, materials, rigs, or scenes.",
+        "archive": "Members combined for storage or transport.",
+        "package": "Members plus typed relationships and package semantics.",
+        "source-code": "Human-oriented program source.",
+        "executable": "Machine code, bytecode, or loadable executable image.",
+        "configuration": "Parameters that configure another system.",
+        "message": "A communicative message and its headers/attachments.",
+        "network-capture": "Observed packets, flows, or protocol events.",
+        "filesystem-image": "Serialized storage and filesystem structures.",
+        "disk-memory-firmware": "Low-level block, memory, device, or firmware representation.",
+        "cryptographic-material": "Keys, certificates, signatures, or encrypted envelopes.",
+        "simulation-model": "Executable or declarative model of a dynamic system.",
+        "domain-record": "Professional-domain records requiring a domain ontology.",
+        "unknown": "Semantic family has not yet been established."
+      }
+    },
+    "composition": {
+      "exclusive": false,
+      "values": {
+        "unitary": "Interpreted as one principal object.",
+        "container": "Holds separable payload streams or members.",
+        "package": "Members and typed relationships form the object.",
+        "collection": "Represents multiple peer objects.",
+        "compound": "Contains subobjects that may not be independently serializable."
+      }
+    },
+    "closure": {
+      "exclusive": true,
+      "values": {
+        "self-contained": "Required representation data is internal.",
+        "external-references": "Required data may live outside the artifact.",
+        "hybrid": "Some profiles or instances are self-contained and others are not.",
+        "unknown": "Closure has not been established."
+      }
+    },
+    "temporality": {
+      "exclusive": false,
+      "values": {
+        "atemporal": "No intrinsic time axis.",
+        "discrete-sequence": "Ordered frames or states.",
+        "sampled-continuous": "A continuous phenomenon represented by samples.",
+        "event-stream": "Events ordered by logical or wall-clock time.",
+        "version-history": "Historical states are part of the representation."
+      }
+    },
+    "spatiality": {
+      "exclusive": false,
+      "values": {
+        "none": "No intrinsic spatial coordinates.",
+        "1d": "One-dimensional domain.",
+        "2d": "Two-dimensional domain.",
+        "2.5d": "Surfaces or elevation over a two-dimensional domain.",
+        "3d": "Three-dimensional domain.",
+        "nd": "General N-dimensional domain."
+      }
+    },
+    "mutability": {
+      "exclusive": false,
+      "values": {
+        "immutable-snapshot": "Artifact represents a point-in-time value.",
+        "mutable-state": "In-place or transactional mutation is part of normal use.",
+        "append-only": "Normal evolution appends records or segments.",
+        "executable-state": "Execution changes or consumes represented state."
+      }
+    },
+    "access_pattern": {
+      "exclusive": false,
+      "values": {
+        "streaming": "Can be processed with bounded forward-only state.",
+        "seek-required": "Requires non-sequential seek for general processing.",
+        "random-access": "Supports or requires arbitrary element access.",
+        "whole-object": "General processing requires the complete object.",
+        "index-assisted": "An index enables bounded access to subsets."
+      }
+    },
+    "active_content": {
+      "exclusive": false,
+      "values": {
+        "none-known": "No active content is defined by the known profile.",
+        "formula": "Contains evaluable expressions.",
+        "macro": "Contains macro programs.",
+        "script": "Contains embedded or referenced scripts.",
+        "executable": "Contains loadable executable code.",
+        "external-action": "Can trigger network, process, or external-resource actions.",
+        "unknown": "Active-content status has not been established."
+      }
+    },
+    "domain": {
+      "exclusive": false,
+      "open_values": true,
+      "values": {
+        "general": "Cross-domain use.",
+        "media": "Multimedia production and delivery.",
+        "publishing-office": "Documents, publishing, and office productivity.",
+        "web": "Web platform and web archives.",
+        "software": "Programming, build, deployment, and observability.",
+        "database-analytics": "Databases, data engineering, and analytics.",
+        "scientific": "Scientific measurement and computation.",
+        "gis": "Geographic information systems.",
+        "cad-bim-manufacturing": "Engineering, architecture, manufacturing, and construction.",
+        "medical": "Clinical, imaging, laboratory, and health records.",
+        "eda": "Electronic design automation.",
+        "finance": "Financial, accounting, and market data.",
+        "archives-preservation": "Digital preservation and records management.",
+        "games": "Games, assets, and interactive entertainment."
+      }
+    }
+  }
+}
+

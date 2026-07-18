@@ -1,0 +1,84 @@
+{
+  "snapshot_id": "everythingx-source-baseline-2026-07-19",
+  "retrieved_at": "2026-07-19",
+  "policy": {
+    "raw_snapshots": "Build inputs are local cache and are not redistributed in this repository artifact.",
+    "normalized_records": "Only factual identifiers, names, globs, signatures metadata, and classifications needed for indexing are emitted. Long descriptive text is not copied.",
+    "provenance": "Every normalized record retains source and snapshot locator. Source-specific terms and licenses continue to apply."
+  },
+  "sources": [
+    {
+      "id": "iana-media-types",
+      "authority": "Internet Assigned Numbers Authority",
+      "role": "Registered media-type labels and references",
+      "version": "registry snapshot retrieved 2026-07-19; registry page updated 2026-07-15",
+      "url": "https://www.iana.org/assignments/media-types/media-types.xml",
+      "documentation": "https://www.iana.org/assignments/media-types/media-types.xhtml",
+      "local_input": "iana-media-types.xml",
+      "sha256": "3b5cf219ab92d84bc028e1394f75e73a5bceccf66396e7f74be72a79d6b135fc",
+      "canonicality": "authoritative-for-media-type-registration",
+      "caveat": "A media type is a content label and may denote a family, encoding, protocol object, or file format."
+    },
+    {
+      "id": "pronom-droid",
+      "authority": "The National Archives (UK)",
+      "role": "Format/version identifiers, extensions, internal signatures, and signature priority",
+      "version": "DROID signature file 124, created 2026-06-09",
+      "url": "https://cdn.nationalarchives.gov.uk/documents/DROID_SignatureFile_V124.xml",
+      "documentation": "https://www.nationalarchives.gov.uk/aboutapps/pronom/droid-signature-files.htm",
+      "local_input": "pronom-droid-signatures-v124.xml",
+      "sha256": "4dce9fc084b0009552e4b02740389c0eb7f18b4647d36f4865cc63d709ff1316",
+      "canonicality": "authoritative-pronom-signature-export",
+      "caveat": "The signature file is an identification subset of the full PRONOM registry."
+    },
+    {
+      "id": "loc-fdd",
+      "authority": "Library of Congress",
+      "role": "Format families, genres, structural properties, signifiers, relations, and sustainability context",
+      "version": "FDD XML bulk snapshot retrieved 2026-07-19",
+      "url": "https://www.loc.gov/preservation/digital/formats/fddXML.zip",
+      "documentation": "https://www.loc.gov/preservation/digital/formats/fdd/fdd_xml_info.shtml",
+      "local_input": "loc-fdd/fddXML",
+      "archive_sha256": "b61ad2463745e338b39ffa5fd4b7a31492edc47312bdd329861e0c57ce8be3a7",
+      "canonicality": "curated-preservation-description",
+      "caveat": "Coverage is curated for preservation and is not intended to enumerate every format."
+    },
+    {
+      "id": "apache-tika",
+      "authority": "Apache Tika project",
+      "role": "Operational MIME aliases, extensions/globs, magic rules, XML roots, and subclass relations",
+      "version": "main branch snapshot retrieved 2026-07-19",
+      "url": "https://raw.githubusercontent.com/apache/tika/main/tika-core/src/main/resources/org/apache/tika/mime/tika-mimetypes.xml",
+      "documentation": "https://tika.apache.org/",
+      "local_input": "apache-tika-mimetypes.xml",
+      "sha256": "167942bc8c2c38910ea9e734b950dd15c519108fad1e8cd483e50504b0d8cc47",
+      "canonicality": "operational",
+      "caveat": "Project detection rules are practical heuristics, not standards registration."
+    },
+    {
+      "id": "freedesktop-shared-mime-info",
+      "authority": "freedesktop.org shared-mime-info project",
+      "role": "Desktop MIME aliases, globs, weighted magic, subclass and tree-magic rules",
+      "version": "master branch snapshot retrieved 2026-07-19",
+      "url": "https://gitlab.freedesktop.org/xdg/shared-mime-info/-/raw/master/data/freedesktop.org.xml.in",
+      "documentation": "https://specifications.freedesktop.org/shared-mime-info/latest-single/",
+      "local_input": "freedesktop-shared-mime.xml.in",
+      "sha256": "f223f57467c902e6221e5bf507194bdfa93fb53e9a2554b2e4e8f2cb25de4f1e",
+      "canonicality": "operational-desktop",
+      "caveat": "Glob and magic behavior follows the shared-mime-info specification and may conflict with other detectors."
+    },
+    {
+      "id": "github-linguist",
+      "authority": "GitHub Linguist project",
+      "role": "Programming, markup, data, prose languages, filenames, and extensions",
+      "version": "main branch snapshot retrieved 2026-07-19",
+      "url": "https://raw.githubusercontent.com/github-linguist/linguist/master/lib/linguist/languages.yml",
+      "documentation": "https://github.com/github-linguist/linguist",
+      "local_input": "github-linguist-languages.yml",
+      "sha256": "8642e45ad18a62225ec367992d508af916b9caf41ee9b274863621965c4ba794",
+      "canonicality": "operational-source-ecosystem",
+      "caveat": "A programming language entry may describe many source-file forms rather than one binary format."
+    }
+  ]
+}
+

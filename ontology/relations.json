@@ -1,0 +1,36 @@
+{
+  "ontology_version": "0.1.0",
+  "relations": {
+    "is_variant_of": {"transitive": true, "meaning": "A is a concrete version or variant of B."},
+    "is_profile_of": {"transitive": false, "meaning": "A constrains B for a purpose or conformance class."},
+    "supersedes": {"transitive": true, "meaning": "A replaces B in a version or governance sequence."},
+    "compatible_subset_of": {"transitive": true, "meaning": "Every conforming A instance is accepted as B."},
+    "equivalent_to": {"symmetric": true, "meaning": "Equivalent under an explicitly named equivalence level."},
+    "serializes": {"meaning": "A byte representation serializes information model B."},
+    "encodes": {"meaning": "A applies an encoding to B."},
+    "compresses": {"meaning": "A stores a compressed representation of B."},
+    "encrypts": {"meaning": "A stores an encrypted representation of B."},
+    "container_of": {"inverse": "contained_by", "meaning": "A holds independently bounded payload B."},
+    "contained_by": {"inverse": "container_of", "meaning": "A is an independently bounded payload of B."},
+    "embeds": {"inverse": "embedded_in", "meaning": "A embeds B within host syntax; B may or may not be byte-separable."},
+    "embedded_in": {"inverse": "embeds", "meaning": "A is embedded in host B."},
+    "packages": {"inverse": "packaged_by", "meaning": "A packages B as a member in a relationship-bearing package."},
+    "packaged_by": {"inverse": "packages", "meaning": "A is a package member of B."},
+    "references": {"inverse": "referenced_by", "meaning": "A points to external B without necessarily containing its bytes."},
+    "referenced_by": {"inverse": "references", "meaning": "A is externally referenced by B."},
+    "has_logical_component": {"meaning": "B becomes a component after parsing A's model."},
+    "renders_as": {"meaning": "B is an observable rendering of A, not necessarily a contained component."},
+    "maps_to": {"meaning": "A source record is asserted to denote canonical concept B; assertion carries evidence."}
+  },
+  "mapping_assertion_fields": [
+    "source_record_id",
+    "canonical_id",
+    "relation",
+    "confidence",
+    "evidence",
+    "review_status",
+    "reviewed_by",
+    "reviewed_at"
+  ]
+}
+

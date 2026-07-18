@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://everythingx.dev/schema/source-record.schema.json",
+  "title": "EverythingX upstream source observation",
+  "type": "object",
+  "required": ["record_id", "source", "external_ids", "names", "evidence"],
+  "additionalProperties": false,
+  "properties": {
+    "record_id": {"type": "string", "pattern": "^src:[a-z0-9-]+:.+$"},
+    "source": {"type": "string", "pattern": "^[a-z0-9-]+$"},
+    "external_ids": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/externalId"}
+    },
+    "names": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "version": {"type": ["string", "null"]},
+    "media_types": {"type": "array", "items": {"type": "string"}},
+    "extensions": {"type": "array", "items": {"type": "string"}},
+    "filenames": {"type": "array", "items": {"type": "string"}},
+    "signatures": {"type": "array", "items": {"type": "object"}},
+    "source_classes": {"type": "object"},
+    "relations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "target"],
+        "properties": {"type": {"type": "string"}, "target": {"type": "string"}}
+      }
+    },
+    "inferred_facets": {
+      "type": "object",
+      "required": ["method", "confidence", "values"],
+      "properties": {
+        "method": {"const": "heuristic"},
+        "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+        "values": {"type": "object"}
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "required": ["snapshot", "locator"],
+      "properties": {
+        "snapshot": {"type": "string"},
+        "locator": {"type": "string"}
+      }
+    }
+  },
+  "$defs": {
+    "externalId": {
+      "type": "object",
+      "required": ["scheme", "value"],
+      "additionalProperties": false,
+      "properties": {
+        "scheme": {"type": "string"},
+        "value": {"type": "string"}
+      }
+    }
+  }
+}
+
