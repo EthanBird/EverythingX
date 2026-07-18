@@ -2,9 +2,17 @@
 
 use std::io::{self, Read, Write};
 
-#[derive(Debug, Clone, Copy, Default)]
+#[derive(Debug, Clone, Copy)]
 pub struct Options {
     pub buffer_size: usize,
+}
+
+impl Default for Options {
+    fn default() -> Self {
+        Self {
+            buffer_size: 64 * 1024,
+        }
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -33,11 +41,10 @@ pub fn convert<R: Read, W: Write>(
     output: &mut W,
     options: &Options,
 ) -> Result<Report, Error> {
-    let buffer_size = if options.buffer_size == 0 {
-        64 * 1024
-    } else {
-        options.buffer_size
-    };
+    let buffer_size = options.buffer_size;
+    if buffer_size == 0 {
+        return Err(Error::InvalidOptions("buffer_size must be greater than zero"));
+    }
     if buffer_size > 16 * 1024 * 1024 {
         return Err(Error::InvalidOptions("buffer_size exceeds 16 MiB"));
     }
@@ -61,4 +68,3 @@ pub fn convert<R: Read, W: Write>(
         warnings: Vec::new(),
     })
 }
-

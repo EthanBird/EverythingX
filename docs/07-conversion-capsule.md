@@ -56,6 +56,8 @@ Capsule 自己定义：
 - `Error`：格式无效、profile 不支持、资源上限、外部条件等；
 - `Report`：识别事实、实际策略、保持/丢失内容、质量度量和警告。
 
+`Options::default()` 必须能够直接运行。它不是配置模板，而是一套确定、文档化并有 fixture 验证的真实策略。对可能丢失 alpha、HDR、精度、关系或行为的转换，默认值优先 reject；只有不会隐藏损失时才自动选择转换策略。
+
 禁止在公共 API 中出现 `ex_core::Artifact`、`ex_registry::FormatId` 或其他 EverythingX 类型。
 
 ## 4. 独立构建规则
@@ -63,9 +65,10 @@ Capsule 自己定义：
 - Capsule 根目录必须有自己的 `Cargo.toml`。
 - 允许内部 workspace member，但所有成员必须位于 Capsule 根目录下。
 - 禁止引用 Capsule 根目录外的 path dependency。
-- 允许 crates.io、git、system 或 optional backend，但必须锁定、列明许可证和安全影响。
+- 允许 crates.io、git、system 或 optional backend，但必须锁定并列明构建、性能与安全影响。
 - 可选 CLI 只能是该 Capsule 的 `src/bin` 或 example，不能依赖 EverythingX CLI。
 - 默认 feature 必须代表文档声明的可用实现，不能只有空壳。
+- 所有必需参数都有可运行默认值，Capsule manifest 与 Adapter 默认映射必须一致。
 
 ## 5. “一项转换”的边界
 
@@ -156,6 +159,4 @@ latency/throughput/peak memory/output size
 - 损失声明可验证；
 - fuzz、安全与资源上限完成；
 - benchmark 可复现；
-- 许可证和潜在专利风险已记录；
 - Adapter 删除后 Capsule 全部核心检查仍通过。
-

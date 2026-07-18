@@ -33,6 +33,15 @@
     "streaming": true,
     "seek_required": false
   },
+  "defaults": {
+    "runnable": true,
+    "strategy": "exact",
+    "backend": "native",
+    "options": {
+      "buffer_size": 65536
+    },
+    "policy": "strict"
+  },
   "strategies": [
     {
       "id": "exact",
@@ -63,4 +72,3 @@
     "known_risks": ["Template is not a production converter"]
   }
 }
-

@@ -43,7 +43,13 @@ def is_within(path: Path, root: Path) -> bool:
 
 def check_path_dependencies(capsule_root: Path) -> list[str]:
     errors: list[str] = []
+    integration = capsule_root / "everythingx"
     for manifest in capsule_root.rglob("Cargo.toml"):
+        # Adapter code is allowed to depend on ex-protocol/ex-kernel. The
+        # independence boundary applies to the Capsule core after the entire
+        # everythingx/ directory is deleted.
+        if integration.exists() and is_within(manifest, integration):
+            continue
         data = tomllib.loads(manifest.read_text(encoding="utf-8"))
         for table in walk_dict(data):
             path_value = table.get("path")
@@ -136,4 +142,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

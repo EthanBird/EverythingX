@@ -1,0 +1,89 @@
+{
+  "adapter_id": "adapter:utf16-to-utf8-static",
+  "version": "0.1.0",
+  "capsule": {
+    "id": "capsule:utf16-to-utf8",
+    "version_requirement": "^0.1.0"
+  },
+  "protocol": {
+    "name": "everythingx-adapter-protocol",
+    "version_requirement": "0.1"
+  },
+  "transport": {
+    "kind": "static-rust",
+    "entrypoint": "Utf16ToUtf8Adapter"
+  },
+  "capabilities": [
+    {
+      "capability_id": "capability:utf16-to-utf8/strict/native-portable",
+      "capsule_entrypoint": "convert",
+      "strategy": "strict",
+      "backend": "native-portable",
+      "inputs": ["exfmt:text:utf-16"],
+      "outputs": ["exfmt:text:utf-8"],
+      "preconditions": ["Input is a finite UTF-16 byte stream"],
+      "effects": ["Output is a UTF-8 byte stream", "Malformed UTF-16 is rejected"],
+      "invariants": ["Unicode scalar sequence"],
+      "computability": "semantic_lossless",
+      "loss": {
+        "payload": "none",
+        "structure": "normalized"
+      },
+      "default_options": {
+        "input_endianness": "auto",
+        "default_endianness": "little",
+        "invalid_sequence": "error",
+        "emit_utf8_bom": false,
+        "buffer_size": 65536
+      },
+      "defaults_are_runnable": true,
+      "execution": {
+        "streaming": true,
+        "seek_required": false,
+        "cost_evidence": []
+      },
+      "report_mapping": {
+        "unknown_fields_are_preserved": true,
+        "rules": [
+          "input/output byte counts map to measurements",
+          "detected byte order and BOM handling map to capsule_report",
+          "replacement_count must be zero for strict strategy"
+        ]
+      }
+    },
+    {
+      "capability_id": "capability:utf16-to-utf8/replace-invalid/native-portable",
+      "capsule_entrypoint": "convert",
+      "strategy": "replace-invalid",
+      "backend": "native-portable",
+      "inputs": ["exfmt:text:utf-16"],
+      "outputs": ["exfmt:text:utf-8"],
+      "preconditions": ["Input is a finite byte stream intended as UTF-16"],
+      "effects": ["Output is a UTF-8 byte stream", "Malformed UTF-16 becomes U+FFFD"],
+      "invariants": ["Order of decodable Unicode scalar values"],
+      "computability": "controlled_lossy",
+      "loss": {
+        "payload": "bounded by replacement_count",
+        "structure": "normalized"
+      },
+      "default_options": {
+        "input_endianness": "auto",
+        "default_endianness": "little",
+        "invalid_sequence": "replace",
+        "emit_utf8_bom": false,
+        "buffer_size": 65536
+      },
+      "defaults_are_runnable": true,
+      "execution": {
+        "streaming": true,
+        "seek_required": false,
+        "cost_evidence": []
+      },
+      "report_mapping": {
+        "unknown_fields_are_preserved": true,
+        "rules": ["replacement_count maps to bounded payload loss"]
+      }
+    }
+  ]
+}
+

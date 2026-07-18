@@ -62,7 +62,7 @@ hardware         GPU/codec accelerator
 
 优先发展 native 实现，但正确性、规格覆盖和安全是硬门槛。外部 backend 可以用于早期语义验证、差分 oracle 和暂时覆盖；调用必须显式记录，不能伪装成零依赖。
 
-依赖成本按许可证、C ABI、动态库、体积、攻击面、启动、可复现性和平台覆盖分别建模。
+依赖成本按 C ABI、动态库、体积、攻击面、启动、可复现性和平台覆盖分别建模。
 
 ## 6. 贡献与著作权链
 
@@ -84,7 +84,6 @@ hardware         GPU/codec accelerator
 - 记录构建器、target 与 artifact hash；
 - 通过 fuzz 和恶意资源边界测试；
 - 公开 known limitations；
-- 对 potential patent/license 做非结论性风险记录；
 - Adapter 与 Capsule artifact 分别签名/寻址；
 - 可从 tag 和 corpus manifest 重现 benchmark。
 
@@ -95,4 +94,3 @@ hardware         GPU/codec accelerator
 - 不通过共享 Artifact trait 侵入 Capsule API。
 - 不以“步骤原子化”为理由破坏一个转换库的独立完整性。
 - 不在证据不足时宣传最优、无损或全格式支持。
-

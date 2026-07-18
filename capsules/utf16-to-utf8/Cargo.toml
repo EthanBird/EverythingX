@@ -1,0 +1,13 @@
+[package]
+name = "utf16-to-utf8"
+version = "0.1.0"
+edition = "2024"
+publish = false
+license-file = "LICENSE"
+description = "Standalone, streaming UTF-16 to UTF-8 conversion library"
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
+

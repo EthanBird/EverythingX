@@ -26,6 +26,10 @@
       "invariants": ["byte_identity"],
       "computability": "exact",
       "loss": {},
+      "default_options": {
+        "buffer_size": 65536
+      },
+      "defaults_are_runnable": true,
       "execution": {
         "streaming": true,
         "seek_required": false,
@@ -38,4 +42,3 @@
     }
   ]
 }
-

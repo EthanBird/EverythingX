@@ -124,7 +124,7 @@ ex-table-protocol
 
 ## 8. Kernel 最小可行实现
 
-在三个参考 Capsule 完成之前不写 Planner。随后只实现：
+在三个参考 Capsule 完成之前不写 Planner。为了尽早验证真实集成边界，可以先实现仅支持直接调用的薄 Kernel：
 
 1. 载入一份 registry snapshot；
 2. 验证一个 Adapter handshake；
@@ -132,5 +132,4 @@ ex-table-protocol
 4. 保存 Report、loss 和 provenance；
 5. 证明删除 EverythingX 后 Capsule 测试不受影响。
 
-只有这一薄链路稳定后，才增加多步规划。
-
+当前实现范围限定为 `ex-protocol` 与 `ex-kernel`：注册、默认配置验证、direct capability discovery、direct invocation 和 provenance。只有三个参考 Capsule 都验证过这一薄链路后，才增加多步规划。

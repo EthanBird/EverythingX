@@ -103,7 +103,7 @@ def main() -> int:
 
     capsule_required = {
         "capsule_id", "version", "name", "summary", "license", "independence",
-        "conversion", "api", "strategies", "backends", "validation", "security"
+        "conversion", "api", "defaults", "strategies", "backends", "validation", "security"
     }
     capsule_ids: set[str] = set()
     adapter_ids: set[str] = set()
@@ -124,6 +124,15 @@ def main() -> int:
             raise ValueError(f"{path}: everythingx_optional must be true")
         if independence.get("external_path_dependencies") is not False:
             raise ValueError(f"{path}: external_path_dependencies must be false")
+        defaults = record.get("defaults", {})
+        if defaults.get("runnable") is not True:
+            raise ValueError(f"{path}: defaults.runnable must be true")
+        strategy_ids = {item.get("id") for item in record.get("strategies", [])}
+        backend_ids = {item.get("id") for item in record.get("backends", [])}
+        if defaults.get("strategy") not in strategy_ids:
+            raise ValueError(f"{path}: default strategy is not declared")
+        if defaults.get("backend") not in backend_ids:
+            raise ValueError(f"{path}: default backend is not declared")
 
         adapter_path = path.parent / "everythingx" / "adapter.json"
         if not adapter_path.is_file():
@@ -145,6 +154,11 @@ def main() -> int:
             if not capability_id.startswith("capability:") or capability_id in capability_ids:
                 raise ValueError(f"{adapter_path}: invalid or duplicate capability_id {capability_id}")
             capability_ids.add(capability_id)
+            if capability.get("defaults_are_runnable") is not True:
+                raise ValueError(f"{adapter_path}: {capability_id} defaults_are_runnable must be true")
+            if capability.get("strategy") == defaults.get("strategy") and capability.get("backend") == defaults.get("backend"):
+                if capability.get("default_options") != defaults.get("options"):
+                    raise ValueError(f"{adapter_path}: {capability_id} default_options do not match Capsule defaults")
 
     summary = load_json(ROOT / "catalog" / "summary.json")
     if summary["observation_count"] != len(sources):

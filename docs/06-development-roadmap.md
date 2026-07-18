@@ -53,9 +53,9 @@
 
 退出条件：三个 Capsule 在独立临时仓库 CI 通过。
 
-## Phase 3｜最小 Adapter Protocol 与薄 Kernel（2–3 周）
+## Phase 3｜最小 Adapter Protocol 与薄 Kernel（已提前启动，持续 2–3 周）
 
-只实现：
+以 `utf16-to-utf8` 的真实 API 为第一轮输入，只实现：
 
 1. registry snapshot 加载；
 2. Capsule/Adapter handshake；
@@ -64,7 +64,7 @@
 5. static Rust 与 process transport 各一个 reference adapter；
 6. 跨进程资源上限与失败分类。
 
-不实现多步图搜索，不创建统一 family IR。
+当前已建立零依赖 `ex-protocol` 和 `ex-kernel` 骨架，以及默认配置的端到端直接调用。后续两个参考 Capsule 只允许校正边界，不得借机加入多步图搜索或统一 family IR。
 
 ## Phase 4｜高价值独立库群（持续 3–6 个月）
 
@@ -175,4 +175,3 @@ FormatConcept/Variant 审核数
 ```
 
 最重要的 KPI：删除 EverythingX 主仓库后，已发布 Capsule 仍能独立解决真实转换问题。
-

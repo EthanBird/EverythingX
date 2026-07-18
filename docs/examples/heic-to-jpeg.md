@@ -97,7 +97,3 @@ timing and peak-memory measurements when requested
 
 Adapter 将这些事实保守映射到 EverythingX 图边结果。Adapter 不得根据成功返回就声称 `semantic_lossless`。
 
-## 7. 法律和分发边界
-
-格式与 codec 的实现、分发和商业使用可能涉及标准文本、第三方代码许可证、商标或专利义务。自研实现不自动消除这些义务；每个 backend 和发布地区都需要单独记录并由专业人士复核。
-

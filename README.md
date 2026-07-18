@@ -103,7 +103,7 @@ tools/          数据同步、目录构建和一致性校验
 
 ## 当前阶段
 
-现在不开发桌面端、CLI 或路径规划器。下一阶段先完成 Conversion Capsule 规范及三个独立参考实现，通过它们反向验证 Adapter 与 Kernel 边界。只有当独立转换库的数量、质量和证据密度达到门槛后，才开发转换图。
+现在不开发桌面端、CLI 或路径规划器。第一个独立 `utf16-to-utf8` Capsule 与只支持注册、默认验证和直接调用的薄 Kernel 已开始实现；接下来用 `bmp-to-png`、`wav-pcm-to-aiff` 继续反向校正协议。只有当独立转换库的数量、质量和证据密度达到门槛后，才开发转换图。
 
 运行数据校验：
 
@@ -124,4 +124,3 @@ python3 tools/validate_repository.py
 Required Notice: Copyright © 2026 EthanBird. All rights reserved.
 
 本项目采用 [PolyForm Noncommercial License 1.0.0](LICENSE)，属于 **source-available（源码可见）**，不是 OSI 意义上的开源软件。任何不在公开许可范围内的商业使用必须事先取得著作权人 EthanBird 的单独书面授权，详见 `COMMERCIAL_LICENSE.md` 与 `COPYRIGHT.md`。
-

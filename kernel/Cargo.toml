@@ -1,0 +1,4 @@
+[workspace]
+members = ["ex-protocol", "ex-kernel"]
+resolver = "3"
+

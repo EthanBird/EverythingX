@@ -56,3 +56,6 @@ Capsule 不依赖 EverythingX。Adapter 依赖 Capsule 和 Protocol；Kernel 依
 
 Registry 保存 impossible、blocked、unsafe、not-implemented 与 unknown，确保系统能说明为什么不能算或缺少什么。
 
+## ADR-015：所有配置都有可运行默认值
+
+Capsule 的 `Default` 必须直接可执行，并与 manifest、Adapter 默认映射和 fixture 一致。默认值采用确定且保守的策略；遇到不可逆损失或无法可靠消除的歧义时默认拒绝，不静默猜测。

@@ -6,8 +6,8 @@
   "additionalProperties": false,
   "required": [
     "capsule_id", "version", "name", "summary", "license",
-    "independence", "conversion", "api", "strategies", "backends",
-    "validation", "security"
+    "independence", "conversion", "api", "defaults", "strategies",
+    "backends", "validation", "security"
   ],
   "properties": {
     "capsule_id": {"type": "string", "pattern": "^capsule:[a-z0-9._-]+$"},
@@ -63,6 +63,18 @@
         "owns_options_error_report": {"const": true},
         "streaming": {"type": "boolean"},
         "seek_required": {"type": "boolean"}
+      }
+    },
+    "defaults": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["runnable", "strategy", "backend", "options"],
+      "properties": {
+        "runnable": {"const": true},
+        "strategy": {"type": "string", "minLength": 1},
+        "backend": {"type": "string", "minLength": 1},
+        "options": {"type": "object"},
+        "policy": {"enum": ["strict", "conservative", "balanced", "fast"]}
       }
     },
     "strategies": {
@@ -126,4 +138,3 @@
     }
   }
 }
-

@@ -1,7 +1,7 @@
 # Project status — Architecture 2.0
 
 Date: 2026-07-19  
-Status: design reset complete; implementation has not started.
+Status: Architecture 2.0 implementation has started.
 
 ## Accepted architecture
 
@@ -45,9 +45,18 @@ These are source observations, not a count of unique canonical formats.
 - CI proof that the copied Capsule builds after deleting EverythingX integration
 - Revised governance, ADR and development roadmap
 
+## First implementation slice
+
+- `capsules/utf16-to-utf8`: zero-dependency, streaming standalone Capsule.
+- Runnable defaults: BOM auto-detection, BOM-less little-endian, strict malformed-sequence rejection, no UTF-8 BOM, 64 KiB buffer.
+- Strict and replace-invalid Adapter capabilities with explicit loss reporting.
+- `kernel/ex-protocol`: handshake, capability, request/result, budget, loss and provenance types.
+- `kernel/ex-kernel`: Adapter registration, default validation, direct discovery and direct invocation.
+- End-to-end test: Kernel invokes the Capsule through Adapter using no caller-supplied options.
+
 ## Intentionally absent
 
-- No production Capsule yet.
+- No claim that the first Capsule has completed fuzz and benchmark campaigns yet.
 - No `ex-core` framework that converter libraries must implement.
 - No mandatory shared IR.
 - No CLI, desktop application or multi-step Planner.
@@ -55,11 +64,9 @@ These are source observations, not a count of unique canonical formats.
 
 ## Next milestone
 
-Build three independent reference Capsules:
+Complete the remaining independent reference Capsules:
 
-1. `utf16-to-utf8`
-2. `bmp-to-png`
-3. `wav-pcm-to-aiff`
+1. `bmp-to-png`
+2. `wav-pcm-to-aiff`
 
-Only after all three pass copy-out build/test/bench/fuzz should the minimal Adapter Protocol and Kernel runtime be implemented.
-
+In parallel, harden the current protocol and Kernel from real Adapter feedback without adding multi-step planning.

@@ -45,7 +45,8 @@
       "required": [
         "capability_id", "capsule_entrypoint", "strategy", "backend",
         "inputs", "outputs", "preconditions", "effects", "invariants",
-        "computability", "loss", "execution", "report_mapping"
+        "computability", "loss", "default_options", "defaults_are_runnable",
+        "execution", "report_mapping"
       ],
       "properties": {
         "capability_id": {"type": "string", "pattern": "^capability:"},
@@ -59,6 +60,8 @@
         "invariants": {"type": "array", "items": {"type": "string"}},
         "computability": {"enum": ["exact", "conditional_exact", "semantic_lossless", "controlled_lossy", "rendered", "inferential"]},
         "loss": {"type": "object"},
+        "default_options": {"type": "object"},
+        "defaults_are_runnable": {"const": true},
         "execution": {
           "type": "object",
           "required": ["streaming", "seek_required", "cost_evidence"],
@@ -80,4 +83,3 @@
     }
   }
 }
-

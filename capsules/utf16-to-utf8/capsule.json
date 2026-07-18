@@ -1,0 +1,88 @@
+{
+  "capsule_id": "capsule:utf16-to-utf8",
+  "version": "0.1.0",
+  "name": "UTF-16 to UTF-8",
+  "summary": "Zero-dependency streaming conversion from UTF-16 byte streams to UTF-8.",
+  "license": {
+    "expression": "PolyForm-Noncommercial-1.0.0",
+    "file": "LICENSE",
+    "commercial_authorization_required": true
+  },
+  "repository": "https://github.com/EthanBird/EverythingX/tree/main/capsules/utf16-to-utf8",
+  "independence": {
+    "standalone_cargo_build": true,
+    "everythingx_optional": true,
+    "external_path_dependencies": false,
+    "copy_out_tested": true
+  },
+  "conversion": {
+    "source": ["exfmt:text:utf-16"],
+    "target": ["exfmt:text:utf-8"],
+    "arity": {
+      "inputs": {"min": 1, "max": 1},
+      "outputs": {"min": 1, "max": 1}
+    },
+    "scope": [
+      "UTF-16LE and UTF-16BE byte streams",
+      "BOM and BOM-less input",
+      "Unicode scalar values represented by valid UTF-16"
+    ],
+    "out_of_scope": ["Charset detection beyond BOM and configured byte order"]
+  },
+  "api": {
+    "language": "rust",
+    "crate": "utf16-to-utf8",
+    "entrypoint": "convert",
+    "owns_options_error_report": true,
+    "streaming": true,
+    "seek_required": false
+  },
+  "defaults": {
+    "runnable": true,
+    "strategy": "strict",
+    "backend": "native-portable",
+    "options": {
+      "input_endianness": "auto",
+      "default_endianness": "little",
+      "invalid_sequence": "error",
+      "emit_utf8_bom": false,
+      "buffer_size": 65536
+    },
+    "policy": "strict"
+  },
+  "strategies": [
+    {
+      "id": "strict",
+      "guarantees": ["Malformed UTF-16 is rejected", "Every emitted scalar equals the decoded input scalar"],
+      "tradeoffs": ["Conversion stops at the first malformed sequence"]
+    },
+    {
+      "id": "replace-invalid",
+      "guarantees": ["Malformed sequences are represented by U+FFFD and counted"],
+      "tradeoffs": ["Malformed source code units are not recoverable"]
+    }
+  ],
+  "backends": [
+    {
+      "id": "native-portable",
+      "tier": "native-portable",
+      "default": true,
+      "dependencies": []
+    }
+  ],
+  "validation": {
+    "specifications": ["Unicode Standard UTF-16 encoding form"],
+    "conformance": ["tests/conversion.rs"],
+    "differential": [],
+    "properties": ["Valid UTF-16 decodes to the same Unicode scalar sequence as Rust char encoding"],
+    "regression": ["Single-byte Read chunks preserve code-unit boundaries"],
+    "fuzz": ["Planned: arbitrary byte streams and reader chunk boundaries"],
+    "benchmarks": ["Planned: ASCII-heavy, BMP-heavy and supplementary-plane corpora"]
+  },
+  "security": {
+    "accepts_untrusted_input": true,
+    "limits": ["buffer_size is constrained to 2 bytes through 16 MiB", "output growth is bounded by decoded scalar encoding"],
+    "known_risks": ["I/O errors may occur after partial output has been written"]
+  }
+}
+
