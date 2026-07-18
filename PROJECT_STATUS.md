@@ -65,6 +65,18 @@ These are source observations, not a count of unique canonical formats.
 - Static Adapter buffers the input to bridge the Kernel's forward-only reader to the Capsule's seekable API.
 - GitHub CI passes 12 standalone behavior tests, copy-out build after Adapter deletion, and Kernel default invocation.
 
+### `wav-pcm-to-aiff` 0.1 implementation
+
+- Zero-dependency RIFF/WAVE scanner and classic AIFF writer with streaming PCM emission.
+- Integer PCM 8/16/24/32-bit containers, unsigned 8-bit conversion, multi-byte endianness conversion and frame/channel-order preservation.
+- WAVE_FORMAT_EXTENSIBLE integer PCM with narrower valid-bit compaction.
+- Arbitrary chunk order, multiple frame-aligned `data` chunks, even-byte padding and strict/relaxed header consistency.
+- Exact AIFF 80-bit extended encoding for integer sample rates.
+- Common LIST/INFO metadata mapping to NAME, AUTH, ANNO and `(c) ` with an explicit discard policy and byte limit.
+- Explicit classic-container boundaries for RF64/BW64, RIFX, compressed/float WAV, 32-bit frame counts and AIFF FORM/SSND sizes.
+- Static Adapter accounts for its seekable input buffer together with Capsule working memory and enforces the output budget.
+- Standalone behavior tests cover PCM widths, metadata, chunk graph, malformed headers, fragmented reads and Kernel default invocation.
+
 ## Intentionally absent
 
 - No claim that the first Capsule has completed fuzz and benchmark campaigns yet.
@@ -75,8 +87,8 @@ These are source observations, not a count of unique canonical formats.
 
 ## Next milestone
 
-Complete the remaining independent reference Capsule:
+Complete the three-Capsule reference gate in CI, then start the high-value independent library group:
 
-1. `wav-pcm-to-aiff`
-
-Use the seekable-reader feedback from `bmp-to-png` while implementing audio streaming, but do not add multi-step planning or a mandatory family IR.
+1. Harden `utf16-to-utf8`, `bmp-to-png` and `wav-pcm-to-aiff` with corpus manifests, fuzz targets and reproducible benchmark reports.
+2. Implement `utf32-to-utf8` as the next zero-dependency representation Capsule.
+3. Follow with `json-to-jsonl` and `jsonl-to-json` without adding multi-step planning or a mandatory family IR.

@@ -104,7 +104,7 @@ tools/          数据同步、目录构建和一致性校验
 
 ## 当前阶段
 
-现在不开发桌面端、CLI 或路径规划器。零依赖 `utf16-to-utf8` 已完成第一轮实现；`bmp-to-png` 已进入生产实现，包含自研 BMP parser、PNG encoder、PNG filters、CRC-32、Adler-32 与两种 Deflate backend。薄 Kernel 仍只支持注册、默认验证和直接调用；接下来以 `wav-pcm-to-aiff` 继续反向校正协议。只有当独立转换库的数量、质量和证据密度达到门槛后，才开发转换图。
+现在不开发桌面端、CLI 或路径规划器。三个零依赖参考 Capsule 已经具备独立实现：`utf16-to-utf8`、自研 parser/encoder/Deflate 的 `bmp-to-png`，以及覆盖 RIFF 扫描、PCM 字节序和有符号性、WAVE_FORMAT_EXTENSIBLE 与常用元数据的 `wav-pcm-to-aiff`。薄 Kernel 仍只支持注册、默认验证和直接调用；下一阶段优先扩充 Text/Table 独立库，并持续强化现有 Capsule 的 corpus、fuzz 与 benchmark 证据。只有当独立转换库的数量、质量和证据密度达到门槛后，才开发转换图。
 
 运行数据校验：
 

@@ -45,6 +45,8 @@
 
 验证 container、endianness、sample format、metadata、streaming 和大文件边界。
 
+当前：0.1 原生实现已经覆盖 RIFF/WAVE integer PCM 8/16/24/32 位、WAVE_FORMAT_EXTENSIBLE valid bits、8 位有符号性转换、多字节端序转换、多 data chunk、常用 LIST/INFO 元数据、AIFF 80 位采样率编码、经典 FORM/SSND 大小边界与可删除静态 Adapter；下一轮转入 corpus、fuzz、benchmark 和差分验证强化。
+
 每个 Capsule 都必须：
 
 - 独立 Cargo build/test/bench/fuzz；
@@ -53,7 +55,7 @@
 - 有可删除 Adapter；
 - 有至少一个其他程序直接调用示例。
 
-退出条件：三个 Capsule 在独立临时仓库 CI 通过。
+退出条件：三个 Capsule 在独立临时仓库 CI 通过；随后保持独立性约束进入 Phase 4。
 
 ## Phase 3｜最小 Adapter Protocol 与薄 Kernel（已提前启动，持续 2–3 周）
 

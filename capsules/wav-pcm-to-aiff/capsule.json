@@ -1,0 +1,116 @@
+{
+  "capsule_id": "capsule:wav-pcm-to-aiff",
+  "version": "0.1.0",
+  "name": "WAV PCM to AIFF",
+  "summary": "Zero-dependency streaming conversion of RIFF/WAVE integer PCM into classic AIFF.",
+  "license": {
+    "expression": "PolyForm-Noncommercial-1.0.0",
+    "file": "LICENSE",
+    "commercial_authorization_required": true
+  },
+  "repository": "https://github.com/EthanBird/EverythingX/tree/main/capsules/wav-pcm-to-aiff",
+  "independence": {
+    "standalone_cargo_build": true,
+    "everythingx_optional": true,
+    "external_path_dependencies": false,
+    "copy_out_tested": true
+  },
+  "conversion": {
+    "source": ["exfmt:audio:wav-pcm"],
+    "target": ["exfmt:audio:aiff-pcm"],
+    "arity": {
+      "inputs": {"min": 1, "max": 1},
+      "outputs": {"min": 1, "max": 1}
+    },
+    "scope": [
+      "RIFF/WAVE WAVE_FORMAT_PCM",
+      "WAVE_FORMAT_EXTENSIBLE with integer PCM subtype",
+      "8/16/24/32-bit integer containers and narrower valid-bit declarations",
+      "Frame-aligned multiple data chunks",
+      "Common RIFF INFO text metadata"
+    ],
+    "out_of_scope": [
+      "IEEE floating point, compressed WAV and AIFC output",
+      "RF64/BW64 output larger than classic AIFF",
+      "RIFX input",
+      "Cue, broadcast, instrument and arbitrary application metadata migration"
+    ]
+  },
+  "api": {
+    "language": "rust",
+    "crate": "wav-pcm-to-aiff",
+    "entrypoint": "convert",
+    "owns_options_error_report": true,
+    "streaming": true,
+    "seek_required": true
+  },
+  "defaults": {
+    "runnable": true,
+    "strategy": "pcm-exact",
+    "backend": "native-portable",
+    "options": {
+      "metadata": "common-text",
+      "strict_header_consistency": true,
+      "buffer_size": 65536,
+      "max_metadata_bytes": 1048576,
+      "max_channels": 256
+    },
+    "policy": "strict"
+  },
+  "strategies": [
+    {
+      "id": "pcm-exact",
+      "guarantees": [
+        "PCM frame and channel order is unchanged",
+        "Eight-bit signedness and multi-byte endianness are converted deterministically",
+        "Declared valid sample bits are retained",
+        "AIFF 80-bit sample rates are encoded exactly for integer WAV sample rates"
+      ],
+      "tradeoffs": [
+        "Unsupported metadata is not serialized",
+        "Classic AIFF output is limited by 32-bit chunk sizes"
+      ]
+    }
+  ],
+  "backends": [
+    {
+      "id": "native-portable",
+      "tier": "native-portable",
+      "default": true,
+      "dependencies": []
+    }
+  ],
+  "validation": {
+    "specifications": ["RIFF WAVE", "WAVE_FORMAT_EXTENSIBLE", "Audio Interchange File Format"],
+    "conformance": ["tests/conversion.rs"],
+    "differential": [],
+    "properties": [
+      "Generated AIFF is independently parsed before sample comparison",
+      "FORM and chunk sizes include required even-byte padding",
+      "Fragmented readers produce the same PCM sequence"
+    ],
+    "regression": [
+      "Unsigned 8-bit PCM becomes signed AIFF",
+      "16/24/32-bit samples become big-endian",
+      "Extensible valid bits can compact a wider container",
+      "fmt chunks after data chunks are discovered",
+      "Multiple aligned data chunks concatenate in source order"
+    ],
+    "fuzz": ["Planned: chunk graph, size arithmetic, extensible format and metadata fuzz campaigns"],
+    "benchmarks": ["Planned: multi-channel and multi-gigabyte streaming corpus"]
+  },
+  "security": {
+    "accepts_untrusted_input": true,
+    "limits": [
+      "buffer_size is bounded to 16 MiB",
+      "mapped metadata defaults to a 1 MiB limit",
+      "channels default to a maximum of 256",
+      "All sizes, offsets, frames and output limits use checked arithmetic"
+    ],
+    "known_risks": [
+      "Seek or output I/O errors may occur after the AIFF header is written",
+      "The static Adapter buffers forward-only protocol input to provide a seekable reader"
+    ]
+  }
+}
+
