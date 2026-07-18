@@ -76,6 +76,7 @@ These are source observations, not a count of unique canonical formats.
 - Explicit classic-container boundaries for RF64/BW64, RIFX, compressed/float WAV, 32-bit frame counts and AIFF FORM/SSND sizes.
 - Static Adapter accounts for its seekable input buffer together with Capsule working memory and enforces the output budget.
 - Standalone behavior tests cover PCM widths, metadata, chunk graph, malformed headers, fragmented reads and Kernel default invocation.
+- GitHub CI passes 12 standalone behavior tests, copy-out build after Adapter deletion, and Kernel default invocation.
 
 ## Intentionally absent
 
@@ -87,7 +88,7 @@ These are source observations, not a count of unique canonical formats.
 
 ## Next milestone
 
-Complete the three-Capsule reference gate in CI, then start the high-value independent library group:
+The three-Capsule reference gate is complete. Start the high-value independent library group:
 
 1. Harden `utf16-to-utf8`, `bmp-to-png` and `wav-pcm-to-aiff` with corpus manifests, fuzz targets and reproducible benchmark reports.
 2. Implement `utf32-to-utf8` as the next zero-dependency representation Capsule.
