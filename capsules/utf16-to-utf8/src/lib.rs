@@ -117,7 +117,11 @@ struct DecodeState {
     output_bytes: u64,
 }
 
-fn write_char<W: Write>(output: &mut W, value: char, state: &mut DecodeState) -> Result<(), Error> {
+fn write_char<W: Write + ?Sized>(
+    output: &mut W,
+    value: char,
+    state: &mut DecodeState,
+) -> Result<(), Error> {
     let mut encoded = [0_u8; 4];
     let bytes = value.encode_utf8(&mut encoded).as_bytes();
     output.write_all(bytes)?;
@@ -126,13 +130,16 @@ fn write_char<W: Write>(output: &mut W, value: char, state: &mut DecodeState) ->
     Ok(())
 }
 
-fn write_replacement<W: Write>(output: &mut W, state: &mut DecodeState) -> Result<(), Error> {
+fn write_replacement<W: Write + ?Sized>(
+    output: &mut W,
+    state: &mut DecodeState,
+) -> Result<(), Error> {
     write_char(output, REPLACEMENT, state)?;
     state.replacement_count += 1;
     Ok(())
 }
 
-fn process_unit<W: Write>(
+fn process_unit<W: Write + ?Sized>(
     unit: u16,
     unit_index: u64,
     policy: InvalidSequencePolicy,
@@ -185,7 +192,7 @@ fn decode_unit(bytes: [u8; 2], order: ByteOrder) -> u16 {
     }
 }
 
-fn read_initial_pair<R: Read>(input: &mut R) -> Result<(Option<[u8; 2]>, u64), Error> {
+fn read_initial_pair<R: Read + ?Sized>(input: &mut R) -> Result<(Option<[u8; 2]>, u64), Error> {
     let mut pair = [0_u8; 2];
     let mut count = 0;
     while count < 2 {
@@ -203,7 +210,7 @@ fn read_initial_pair<R: Read>(input: &mut R) -> Result<(Option<[u8; 2]>, u64), E
     }
 }
 
-pub fn convert<R: Read, W: Write>(
+pub fn convert<R: Read + ?Sized, W: Write + ?Sized>(
     input: &mut R,
     output: &mut W,
     options: &Options,
