@@ -74,6 +74,14 @@ fn bmp_4_indexed() -> Vec<u8> {
     bmp
 }
 
+fn bmp_1_indexed() -> Vec<u8> {
+    let mut bmp = bmp_header(8, 1, 1, 0, 4, 2, 0);
+    bmp.extend_from_slice(&[0, 0, 0, 0]);
+    bmp.extend_from_slice(&[255, 255, 255, 0]);
+    bmp.extend_from_slice(&[0b1010_1010, 0, 0, 0]);
+    bmp
+}
+
 fn bmp_32_bi_rgb() -> Vec<u8> {
     let mut bmp = bmp_header(1, 1, 32, 0, 4, 0, 0);
     bmp.extend_from_slice(&[10, 20, 30, 40]);
@@ -94,23 +102,27 @@ fn bmp_16_bitfields() -> Vec<u8> {
 }
 
 fn bmp_rle8() -> Vec<u8> {
-    let commands = [
-        2, 3, // bottom row: blue, blue
-        0, 0, // EOL
-        0, 2, 1, 2, // absolute count two is reserved as DELTA, so encode separately below
-    ];
     let actual = [
         2, 3, 0, 0, // bottom row
         1, 1, 1, 2, 0, 0, // top row: red, green, EOL
         0, 1, // EOB
     ];
-    let _ = commands;
     let mut bmp = bmp_header(2, 2, 8, 1, actual.len() as u32, 4, 0);
     bmp.extend_from_slice(&[0, 0, 0, 0]);
     bmp.extend_from_slice(&[0, 0, 255, 0]);
     bmp.extend_from_slice(&[0, 255, 0, 0]);
     bmp.extend_from_slice(&[255, 0, 0, 0]);
     bmp.extend_from_slice(&actual);
+    bmp
+}
+
+fn bmp_rle4() -> Vec<u8> {
+    let commands = [4, 0x12, 0, 0, 0, 1];
+    let mut bmp = bmp_header(4, 1, 4, 2, commands.len() as u32, 3, 0);
+    bmp.extend_from_slice(&[0, 0, 0, 0]);
+    bmp.extend_from_slice(&[0, 0, 255, 0]);
+    bmp.extend_from_slice(&[0, 255, 0, 0]);
+    bmp.extend_from_slice(&commands);
     bmp
 }
 
@@ -206,6 +218,21 @@ fn adler32(bytes: &[u8]) -> u32 {
     (b << 16) | a
 }
 
+fn crc32(bytes: &[u8]) -> u32 {
+    let mut crc = u32::MAX;
+    for byte in bytes {
+        crc ^= *byte as u32;
+        for _ in 0..8 {
+            crc = if crc & 1 != 0 {
+                0xEDB88320 ^ (crc >> 1)
+            } else {
+                crc >> 1
+            };
+        }
+    }
+    crc ^ u32::MAX
+}
+
 fn inflate_zlib(stream: &[u8]) -> Vec<u8> {
     assert_eq!(((stream[0] as u16) * 256 + stream[1] as u16) % 31, 0);
     let expected_adler = u32::from_be_bytes(stream[stream.len() - 4..].try_into().unwrap());
@@ -278,6 +305,15 @@ fn decode_png(png: &[u8]) -> (u32, u32, usize, Vec<u8>, usize) {
         let length = u32::from_be_bytes(png[offset..offset + 4].try_into().unwrap()) as usize;
         let kind = &png[offset + 4..offset + 8];
         let data = &png[offset + 8..offset + 8 + length];
+        let expected_crc = u32::from_be_bytes(
+            png[offset + 8 + length..offset + 12 + length]
+                .try_into()
+                .unwrap(),
+        );
+        let mut crc_input = Vec::with_capacity(4 + length);
+        crc_input.extend_from_slice(kind);
+        crc_input.extend_from_slice(data);
+        assert_eq!(crc32(&crc_input), expected_crc);
         match kind {
             b"IHDR" => {
                 width = u32::from_be_bytes(data[0..4].try_into().unwrap());
@@ -365,6 +401,17 @@ fn decodes_four_bit_palette() {
 }
 
 #[test]
+fn decodes_one_bit_palette_most_significant_bit_first() {
+    let (png, report) = run(bmp_1_indexed(), Options::default());
+    let (_, _, _, pixels, _) = decode_png(&png);
+    assert_eq!(report.palette_entries, 2);
+    for (index, pixel) in pixels.chunks_exact(3).enumerate() {
+        let expected = if index % 2 == 0 { [255, 255, 255] } else { [0, 0, 0] };
+        assert_eq!(pixel, expected);
+    }
+}
+
+#[test]
 fn unmarked_alpha_default_is_opaque_but_can_be_preserved() {
     let (opaque_png, opaque_report) = run(bmp_32_bi_rgb(), Options::default());
     let (_, _, channels, pixels, _) = decode_png(&opaque_png);
@@ -396,6 +443,36 @@ fn decodes_rle8_and_restores_top_down_order() {
     let (_, _, _, pixels, _) = decode_png(&png);
     assert_eq!(pixels, [255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 255]);
     assert_eq!(report.source_compression, "BI_RLE8");
+}
+
+#[test]
+fn decodes_rle4_encoded_runs() {
+    let (png, report) = run(bmp_rle4(), Options::default());
+    let (_, _, _, pixels, _) = decode_png(&png);
+    assert_eq!(
+        pixels,
+        [255, 0, 0, 0, 255, 0, 255, 0, 0, 0, 255, 0]
+    );
+    assert_eq!(report.source_compression, "BI_RLE4");
+}
+
+#[test]
+fn every_explicit_png_filter_round_trips_pixels() {
+    let expected = [255, 0, 0, 0, 255, 0, 0, 0, 255, 255, 255, 255];
+    for filter in [
+        FilterStrategy::Sub,
+        FilterStrategy::Up,
+        FilterStrategy::Average,
+        FilterStrategy::Paeth,
+    ] {
+        let options = Options {
+            filter,
+            ..Options::default()
+        };
+        let (png, _) = run(bmp_24_bottom_up(), options);
+        let (_, _, _, pixels, _) = decode_png(&png);
+        assert_eq!(pixels, expected);
+    }
 }
 
 #[test]
@@ -431,4 +508,3 @@ fn rejects_invalid_signature() {
     let error = convert(&mut input, &mut output, &Options::default()).unwrap_err();
     assert!(matches!(error, Error::InvalidSignature));
 }
-
