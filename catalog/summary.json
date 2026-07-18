@@ -1,0 +1,20 @@
+{
+  "catalog_sha256": "51d31eab299d58dd24ced0d44c3eeb22e56787bb1b4f8a6227775f1a2696255f",
+  "distinct_extensions": 4036,
+  "distinct_external_identifiers": 12175,
+  "distinct_media_type_labels": 3972,
+  "interpretation": "Counts are source observations. They include overlap and must not be reported as a count of unique canonical file formats.",
+  "observation_count": 9020,
+  "records_with_heuristic_facets": 4352,
+  "records_with_relations": 2224,
+  "records_with_signatures": 3207,
+  "snapshot_id": "everythingx-source-baseline-2026-07-19",
+  "source_counts": {
+    "freedesktop": 1038,
+    "iana": 2319,
+    "linguist": 815,
+    "loc": 596,
+    "pronom": 2557,
+    "tika": 1695
+  }
+}
