@@ -1,0 +1,59 @@
+{
+  "adapter_id": "adapter:bmp-to-png-static",
+  "version": "0.1.0",
+  "capsule": {
+    "id": "capsule:bmp-to-png",
+    "version_requirement": "^0.1.0"
+  },
+  "protocol": {
+    "name": "everythingx-adapter-protocol",
+    "version_requirement": "0.1"
+  },
+  "transport": {
+    "kind": "static-rust",
+    "entrypoint": "BmpToPngAdapter"
+  },
+  "capabilities": [
+    {
+      "capability_id": "capability:bmp-to-png/pixel-exact/native-portable",
+      "capsule_entrypoint": "convert",
+      "strategy": "pixel-exact",
+      "backend": "native-portable",
+      "inputs": ["exfmt:image:bmp-family"],
+      "outputs": ["exfmt:image:png"],
+      "preconditions": ["Input is a finite supported Windows BMP byte stream"],
+      "effects": ["Output is a valid RGB8 or RGBA8 PNG", "BMP row order and channel layout are normalized"],
+      "invariants": ["Pixel grid dimensions", "Top-down pixel order", "Accepted channel values"],
+      "computability": "semantic_lossless",
+      "loss": {
+        "payload": "none for accepted pixel data",
+        "structure": "normalized",
+        "metadata": "bounded"
+      },
+      "default_options": {
+        "filter": "adaptive",
+        "compression": "fixed-rle",
+        "unmarked_alpha": "opaque",
+        "idat_chunk_size": 65536,
+        "max_pixels": 100000000,
+        "strict_declared_file_size": true
+      },
+      "defaults_are_runnable": true,
+      "execution": {
+        "streaming": false,
+        "seek_required": false,
+        "cost_evidence": []
+      },
+      "report_mapping": {
+        "unknown_fields_are_preserved": true,
+        "rules": [
+          "dimensions, bit depth and compression map to capsule_report",
+          "input and output byte counts map to measurements",
+          "palette and BMP metadata normalization map to loss dimensions",
+          "the static Adapter buffers input to provide the Capsule's seekable reader"
+        ]
+      }
+    }
+  ]
+}
+

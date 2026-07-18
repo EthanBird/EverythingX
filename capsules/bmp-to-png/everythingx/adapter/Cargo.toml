@@ -1,0 +1,16 @@
+[package]
+name = "everythingx-adapter-bmp-to-png"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
+bmp-to-png = { path = "../.." }
+everythingx-protocol = { path = "../../../../kernel/ex-protocol" }
+
+[dev-dependencies]
+everythingx-kernel = { path = "../../../../kernel/ex-kernel" }
+

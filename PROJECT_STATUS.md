@@ -45,7 +45,7 @@ These are source observations, not a count of unique canonical formats.
 - CI proof that the copied Capsule builds after deleting EverythingX integration
 - Revised governance, ADR and development roadmap
 
-## First implementation slice
+## Implemented Capsules
 
 - `capsules/utf16-to-utf8`: zero-dependency, streaming standalone Capsule.
 - Runnable defaults: BOM auto-detection, BOM-less little-endian, strict malformed-sequence rejection, no UTF-8 BOM, 64 KiB buffer.
@@ -53,6 +53,16 @@ These are source observations, not a count of unique canonical formats.
 - `kernel/ex-protocol`: handshake, capability, request/result, budget, loss and provenance types.
 - `kernel/ex-kernel`: Adapter registration, default validation, direct discovery and direct invocation.
 - End-to-end test: Kernel invokes the Capsule through Adapter using no caller-supplied options.
+
+### `bmp-to-png` 0.1 implementation
+
+- Zero-dependency Windows BMP parser and PNG encoder.
+- 1/4/8-bit palettes, 16/32-bit bitfields, 24/32-bit pixels, top-down and bottom-up rows.
+- BI_RGB, BI_BITFIELDS, BI_ALPHABITFIELDS, BI_RLE4 and BI_RLE8 input paths.
+- Native PNG filters, chunked IDAT, CRC-32, Adler-32, stored Deflate and fixed-Huffman/RLE Deflate.
+- Runnable defaults: adaptive filter, fixed-RLE compression, undeclared alpha normalized to opaque, 64 KiB IDAT chunks and 100-million-pixel limit.
+- Test-side PNG inflater and unfilter implementation verifies emitted pixels without a third-party codec.
+- Static Adapter buffers the input to bridge the Kernel's forward-only reader to the Capsule's seekable API.
 
 ## Intentionally absent
 
@@ -64,9 +74,8 @@ These are source observations, not a count of unique canonical formats.
 
 ## Next milestone
 
-Complete the remaining independent reference Capsules:
+Complete the remaining independent reference Capsule:
 
-1. `bmp-to-png`
-2. `wav-pcm-to-aiff`
+1. `wav-pcm-to-aiff`
 
-In parallel, harden the current protocol and Kernel from real Adapter feedback without adding multi-step planning.
+Before starting it, complete GitHub CI validation of `bmp-to-png` and use any real Adapter feedback to harden the current protocol without adding multi-step planning.

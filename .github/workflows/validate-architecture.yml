@@ -18,10 +18,10 @@ jobs:
         run: python3 tools/validate_repository.py
 
       - name: Check Capsule dependency boundaries
-        run: python3 tools/check_capsule_independence.py capsules/_template capsules/utf16-to-utf8
+        run: python3 tools/check_capsule_independence.py capsules/_template capsules/utf16-to-utf8 capsules/bmp-to-png
 
       - name: Prove Capsules build after copy-out and Adapter deletion
-        run: python3 tools/check_capsule_independence.py --cargo capsules/_template capsules/utf16-to-utf8
+        run: python3 tools/check_capsule_independence.py --cargo capsules/_template capsules/utf16-to-utf8 capsules/bmp-to-png
 
       - name: Test thin Kernel and protocol
         run: cargo test --locked --manifest-path kernel/Cargo.toml
@@ -31,3 +31,6 @@ jobs:
 
       - name: Test UTF-16 Adapter through Kernel defaults
         run: cargo test --manifest-path capsules/utf16-to-utf8/everythingx/adapter/Cargo.toml
+
+      - name: Test BMP Adapter through Kernel defaults
+        run: cargo test --manifest-path capsules/bmp-to-png/everythingx/adapter/Cargo.toml

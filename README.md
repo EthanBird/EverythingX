@@ -100,10 +100,11 @@ tools/          数据同步、目录构建和一致性校验
 8. `docs/09-universe-scale-registry.md`
 9. `docs/examples/heic-to-jpeg.md`
 10. `docs/06-development-roadmap.md`
+11. `docs/10-capsule-family-priority.md`
 
 ## 当前阶段
 
-现在不开发桌面端、CLI 或路径规划器。第一个独立 `utf16-to-utf8` Capsule 与只支持注册、默认验证和直接调用的薄 Kernel 已开始实现；接下来用 `bmp-to-png`、`wav-pcm-to-aiff` 继续反向校正协议。只有当独立转换库的数量、质量和证据密度达到门槛后，才开发转换图。
+现在不开发桌面端、CLI 或路径规划器。零依赖 `utf16-to-utf8` 已完成第一轮实现；`bmp-to-png` 已进入生产实现，包含自研 BMP parser、PNG encoder、PNG filters、CRC-32、Adler-32 与两种 Deflate backend。薄 Kernel 仍只支持注册、默认验证和直接调用；接下来以 `wav-pcm-to-aiff` 继续反向校正协议。只有当独立转换库的数量、质量和证据密度达到门槛后，才开发转换图。
 
 运行数据校验：
 

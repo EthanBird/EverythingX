@@ -1,0 +1,112 @@
+{
+  "capsule_id": "capsule:bmp-to-png",
+  "version": "0.1.0",
+  "name": "BMP to PNG",
+  "summary": "Zero-dependency conversion of supported Windows BMP rasters to streamed RGB/RGBA PNG.",
+  "license": {
+    "expression": "PolyForm-Noncommercial-1.0.0",
+    "file": "LICENSE",
+    "commercial_authorization_required": true
+  },
+  "repository": "https://github.com/EthanBird/EverythingX/tree/main/capsules/bmp-to-png",
+  "independence": {
+    "standalone_cargo_build": true,
+    "everythingx_optional": true,
+    "external_path_dependencies": false,
+    "copy_out_tested": true
+  },
+  "conversion": {
+    "source": ["exfmt:image:bmp-family"],
+    "target": ["exfmt:image:png"],
+    "arity": {
+      "inputs": {"min": 1, "max": 1},
+      "outputs": {"min": 1, "max": 1}
+    },
+    "scope": [
+      "Windows DIB headers from BITMAPINFOHEADER through bounded extended headers",
+      "1/4/8-bit indexed, 16-bit, 24-bit and 32-bit BMP raster data",
+      "BI_RGB, BI_BITFIELDS, BI_ALPHABITFIELDS, BI_RLE4 and BI_RLE8",
+      "Top-down and bottom-up uncompressed row order"
+    ],
+    "out_of_scope": [
+      "OS/2 bitmap headers",
+      "BI_JPEG and BI_PNG embedded payloads",
+      "ICC profile and general BMP metadata migration"
+    ]
+  },
+  "api": {
+    "language": "rust",
+    "crate": "bmp-to-png",
+    "entrypoint": "convert",
+    "owns_options_error_report": true,
+    "streaming": true,
+    "seek_required": true
+  },
+  "defaults": {
+    "runnable": true,
+    "strategy": "pixel-exact",
+    "backend": "native-portable",
+    "options": {
+      "filter": "adaptive",
+      "compression": "fixed-rle",
+      "unmarked_alpha": "opaque",
+      "idat_chunk_size": 65536,
+      "max_pixels": 100000000,
+      "strict_declared_file_size": true
+    },
+    "policy": "balanced"
+  },
+  "strategies": [
+    {
+      "id": "pixel-exact",
+      "guarantees": [
+        "Accepted BMP pixels are emitted in the same top-down spatial order",
+        "Declared RGB and alpha channel values are mapped deterministically to eight-bit PNG channels",
+        "PNG chunks, CRC-32, zlib framing and Adler-32 are emitted natively"
+      ],
+      "tradeoffs": [
+        "Palette representation, BMP padding and row orientation are normalized",
+        "BMP metadata is not migrated in version 0.1"
+      ]
+    }
+  ],
+  "backends": [
+    {
+      "id": "native-portable",
+      "tier": "native-portable",
+      "default": true,
+      "dependencies": []
+    }
+  ],
+  "validation": {
+    "specifications": ["Microsoft Windows bitmap structures", "PNG 1.2", "RFC 1950", "RFC 1951"],
+    "conformance": ["tests/conversion.rs"],
+    "differential": [],
+    "properties": [
+      "Test PNG output is independently inflated and unfiltered before pixel comparison",
+      "Both native Deflate strategies produce one valid zlib stream across arbitrary IDAT chunk boundaries"
+    ],
+    "regression": [
+      "Bottom-up rows become top-down PNG scanlines",
+      "Unmarked 32-bit alpha is opaque by default",
+      "RGB565 bitfields scale channel endpoints exactly",
+      "RLE8 decoding preserves row order"
+    ],
+    "fuzz": ["Planned: header, palette, bitfield and RLE command fuzz campaigns"],
+    "benchmarks": ["Planned: entropy and row-filter corpus across both compression strategies"]
+  },
+  "security": {
+    "accepts_untrusted_input": true,
+    "limits": [
+      "max_pixels defaults to 100 million",
+      "DIB headers are bounded to 4096 bytes",
+      "IDAT chunks are bounded to 16 MiB",
+      "All dimensions, offsets and allocations use checked arithmetic"
+    ],
+    "known_risks": [
+      "Seek or output I/O errors may occur after partial PNG output",
+      "RLE input allocates one decoded palette index per pixel"
+    ]
+  }
+}
+
