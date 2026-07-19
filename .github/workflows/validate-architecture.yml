@@ -41,8 +41,14 @@ jobs:
       - name: Prove all-Capsule performance harness is current
         run: python3 tools/build_performance_harness.py --check
 
+      - name: Prove Capsule-local graph-edge weights are current
+        run: python3 tools/sync_edge_weights.py --check
+
       - name: Test performance scoring rules
         run: python3 tools/test_benchmark_scoring.py
+
+      - name: Test Capsule-local graph-edge weight rules
+        run: python3 tools/test_edge_weights.py
 
       - name: Check Capsule dependency boundaries
         run: python3 tools/check_capsule_independence.py

@@ -40,6 +40,9 @@ jobs:
       - name: Prove generated and evidenced PNG Wave B batch is current
         run: python3 tools/scaffold_png_wave_b.py --check
 
+      - name: Prove Capsule-local graph-edge weights are current
+        run: python3 tools/sync_edge_weights.py --check
+
       - name: Commit generated catalog when changed
         run: |
           git config user.name "github-actions[bot]"

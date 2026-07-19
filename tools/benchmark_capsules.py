@@ -216,8 +216,15 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--raw-input", type=Path, help="Score previously captured EXBENCH rows instead of running Cargo.")
     parser.add_argument("--output", type=Path)
+    parser.add_argument(
+        "--publish-baseline",
+        action="store_true",
+        help="Write the controlled registry baseline and regenerate every Capsule edge-weight.json.",
+    )
     parser.add_argument("--print-report", action="store_true")
     args = parser.parse_args()
+    if args.output and args.publish_baseline:
+        parser.error("--output and --publish-baseline are mutually exclusive")
     if args.raw_input:
         raw = args.raw_input.read_text(encoding="utf-8")
     else:
@@ -225,6 +232,28 @@ def main() -> int:
         sys.stdout.write("\n".join(line for line in raw.splitlines() if line.startswith("EXBENCH\t")) + "\n")
     report = build_report(raw)
     rendered = json.dumps(report, ensure_ascii=False, indent=2) + "\n"
+    if args.publish_baseline:
+        environment = report["environment"]
+        if (
+            not environment.get("commit_sha")
+            or not environment.get("github_run_id")
+            or environment.get("github_runner_image") == "local-or-unknown"
+        ):
+            raise ValueError(
+                "--publish-baseline requires a controlled GitHub runner with GITHUB_SHA, "
+                "GITHUB_RUN_ID and ImageOS"
+            )
+        baseline = ROOT / "registry" / "performance" / "baseline.json"
+        baseline.write_text(rendered, encoding="utf-8")
+        from sync_edge_weights import build_documents, serialized
+
+        documents = build_documents()
+        for path, document in documents.items():
+            path.write_text(serialized(document), encoding="utf-8")
+        print(
+            f"published baseline and {len(documents)} Capsule edge-weight files for "
+            f"{report['summary']['capabilities']} capabilities"
+        )
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(rendered, encoding="utf-8")

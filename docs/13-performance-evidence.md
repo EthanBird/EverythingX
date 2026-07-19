@@ -2,7 +2,7 @@
 
 ## 1. 目的
 
-性能不是 Capsule 的一个永恒常数。它是算法版本、策略、backend、输入规模与特征、编译器、CPU、OS 和测量方法共同决定的观察值。EverythingX 因而保存“绑定环境的性能证据”，不在 manifest 中手写一个脱离上下文的速度等级。
+性能不是 Capsule 的一个永恒常数。它是算法版本、策略、backend、输入规模与特征、编译器、CPU、OS 和测量方法共同决定的观察值。EverythingX 因而保存“绑定环境的性能证据”，并由受控基线生成 Capsule 自带的统一权重配置；禁止在 manifest 或权重文件中手填一个脱离上下文的速度等级。
 
 Planner 面对能力边时使用以下顺序：
 
@@ -93,7 +93,36 @@ score = 100 × exp(Σ weightᵢ × ln(max(componentᵢ, 1) / 100))
 
 几何平均使一个极差分量不能被另一个分量完全掩盖。分数只能在相同 `profile_id`、harness hash 和环境类别中比较。Planner 应优先使用原始成本模型；总分是 UI 摘要和等价边的次级排序依据。
 
-## 6. 可复现性与覆盖门槛
+## 6. Capsule 自带的统一图边权重
+
+`registry/performance/baseline.json` 是受控测量的归档源；`tools/sync_edge_weights.py`
+按 Capsule 和 capability 拆分该基线，在每个生产 Capsule 根目录生成
+`edge-weight.json`。因此把一个 Capsule 复制出 EverythingX 仓库后，性能向量仍与其
+源码、默认 strategy/backend 和证据身份一起存在。
+
+每条 capability 的统一配置包含：
+
+```text
+profile_id / harness_sha256 / environment fingerprint
+fixed_latency_micros
+nanoseconds_per_input_byte
+peak_memory_bytes_per_input_byte
+output_bytes_per_input_byte
+performance_score_0_to_100
+load_0_to_100                 # 100 - performance score；越高负荷越大
+small / large 原始观测
+```
+
+`load_0_to_100` 是便于 UI 和同 profile 等价边排序的派生标量，不是唯一权重。
+Planner 读取 `registry/support-matrix.json` 中 capability 的 `edge_weight` 引用后，必须
+按具体输入 `N` 计算延迟、峰值内存和输出大小三维向量。语义损失和硬约束不属于这个
+性能向量，也不能被更低负荷覆盖。
+
+`schemas/edge-weight.schema.json` 固定配置形状。生成器还验证 baseline 的 Capsule ID、
+Capability ID、strategy、backend、source format 与 Adapter 完全一致；104 个文件中
+共有 105 条权重，因为 `utf16-to-utf8` 的两个策略是两条不同图边。
+
+## 7. 可复现性与覆盖门槛
 
 `tools/build_performance_harness.py` 递归发现所有生产 Adapter，生成 benchmark crate 的依赖与注册清单。CI 拒绝生成结果漂移，因此新增 Capsule 不可能默默逃过性能评估。
 
@@ -107,7 +136,10 @@ score = 100 × exp(Σ weightᵢ × ln(max(componentᵢ, 1) / 100))
 
 当前门槛是全部 104 个生产 Capsule、105 个 AdapterCapability 必须参与；UTF-16 Capsule 的 strict 与 replace-invalid 策略分别测量。受控基线的整体大输入吞吐中位数为 1,361.282 MiB/s，范围为 26.616–3,650.848 MiB/s；20 条 Raster Wave A 边为 129.723–290.495 MiB/s，20 条 PNG Wave B 能力为 26.616–91.577 MiB/s。
 
-## 7. 基线更新规则
+CI 同时执行 `tools/sync_edge_weights.py --check` 与权重单元测试；基线、Adapter、
+Capsule 版本或生成规则只要有一个变化却未重建 Capsule 配置，提交就会失败。
+
+## 8. 基线更新规则
 
 - 正确性测试必须先于 benchmark 通过；
 - 基线只能从受控 CI profile 生成，不接受开发机手填数字；
@@ -116,7 +148,16 @@ score = 100 × exp(Σ weightᵢ × ln(max(componentᵢ, 1) / 100))
 - 修改 fixtures、样本次数、评分公式或测量边界必须更换 profile ID；
 - 性能优化不能改变能力边声明的语义、不变量或损失等级。
 
-## 8. 下一轮 Capsule 计划
+固定更新顺序：先通过正确性测试，再从受控 profile 生成并审核 baseline，然后运行
+`python3 tools/sync_edge_weights.py` 和 `python3 tools/build_support_matrix.py`，最后运行
+`python3 tools/validate_repository.py`。Capsule 权重是可复现的发布产物，不是第二份
+人工维护的数据源。
+
+受控 GitHub runner 可以使用 `python3 tools/benchmark_capsules.py --publish-baseline`
+一次完成测量、中央基线写入和全部 Capsule 权重重建；该选项会拒绝缺少 commit、run
+和 runner image 身份的本地环境。审核已有 baseline 时仍可单独运行同步命令。
+
+## 9. 下一轮 Capsule 计划
 
 八种 integer PCM 容器的 56 条有向直连边和 PNG Wave B 已经闭合；按当前开发优先级，音频 Wave B 继续暂停，下一轮进入仍未覆盖的常见图像格式：
 
@@ -126,9 +167,9 @@ ICO/CUR ↔ PNG/BMP（含多尺寸成员选择与聚合）
 JPEG baseline/progressive ↔ PNG
 TIFF profile families ↔ PNG
 WebP lossy/lossless/animation ↔ PNG
-AVIF/HEIF item/sequence ↔ PNG
+AVIF/HEIF/HEIC item/sequence ↔ PNG
 ```
 
-每个 codec 必须先声明 native/dependency backend 决策和可验证 profile，动画与多成员格式必须使用集合/时序算子，不能由单图 `convert` 静默丢弃。FLAC 的 20-Capsule 计划保留到图像阶段之后。
+每个 codec 必须先声明 native/dependency backend 决策和可验证 profile，动画与多成员格式必须使用集合/时序算子，不能由单图 `convert` 静默丢弃。HEIF/HEIC 已拆成 H0/H1/H2 共 58 个明确 Capsule，见 `operators/image/heif-heic-program.json` 与 `docs/16-heif-heic-program.md`。FLAC 的 20-Capsule 计划保留到图像阶段之后。
 
 八组双向 codec 边产生 16 个 Capsule，封装互转产生 2 个，验证与 metadata 规范化各 1 个，总计 20。FLAC decoder/encoder、CRC、Rice coding、subframe 与 frame scanner 必须是 Capsule 内完整可复制的 Rust 实现；开发期可以由生成器同步经过验证的源码，但不能增加 EverythingX 运行时依赖。所有新能力继续自动进入功能、copy-out 与性能评估。

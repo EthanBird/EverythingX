@@ -141,11 +141,16 @@ sqlite-schema-to-sql
 
 ## Phase 5｜HEIC→JPEG Gold Capsule（分阶段 3–9 个月）
 
+当前已把单一 gold 示例展开为 `operators/image/heif-heic-program.json` 中的 58 个
+独立 Capsule：H0 原生容器图 20 个、H1 HEIC still pixel 20 个、H2 codec profile 与
+sequence 18 个。它们仍是计划边，不进入已支持矩阵。
+
 1. 自研 HEIF container/metadata 与完整损失报告；codec 先采用可替换 backend。
 2. 自研 color/chroma/bit-depth/alpha/HDR pipeline。
 3. 逐步实现 native HEVC still-image decoder 和 JPEG encoder。
 4. SIMD、tile、并行、YCbCr 快路径和内存优化。
 5. 多架构 conformance、differential、quality 和 benchmark 证据。
+6. 进入 production 前生成 Capsule 根目录 `edge-weight.json`，禁止 placeholder 权重。
 
 HEIC Capsule 是“独立、深度验证、专用直达算法”的黄金标准，不作为验证目录结构的第一个简单样例。
 

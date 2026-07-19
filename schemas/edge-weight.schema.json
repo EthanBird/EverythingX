@@ -1,0 +1,165 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://everythingx.dev/schema/edge-weight.schema.json",
+  "title": "EverythingX Capsule Edge Weight",
+  "description": "Environment-bound empirical graph-edge weights copied into an independently runnable Capsule.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema_version",
+    "meaning",
+    "capsule",
+    "profile",
+    "planner_contract",
+    "capabilities"
+  ],
+  "properties": {
+    "$schema": {"const": "https://everythingx.dev/schema/edge-weight.schema.json"},
+    "schema_version": {"const": "0.1.0"},
+    "meaning": {"type": "string", "minLength": 1},
+    "capsule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "repository_path"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^capsule:"},
+        "version": {"type": "string", "minLength": 1},
+        "repository_path": {"type": "string", "pattern": "^capsules/"}
+      }
+    },
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "profile_id",
+        "generated_at",
+        "source_report",
+        "scope",
+        "comparability",
+        "harness_sha256",
+        "environment_fingerprint_sha256",
+        "environment_class",
+        "evidence_commit_sha",
+        "evidence_run_id"
+      ],
+      "properties": {
+        "profile_id": {"type": "string", "pattern": "^exbench:"},
+        "generated_at": {"type": "string", "format": "date-time"},
+        "source_report": {"const": "registry/performance/baseline.json"},
+        "scope": {"type": "string", "minLength": 1},
+        "comparability": {"type": "string", "minLength": 1},
+        "harness_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "environment_fingerprint_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "environment_class": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["os", "architecture", "rustc", "github_runner_image"],
+          "properties": {
+            "os": {"type": "string"},
+            "architecture": {"type": "string"},
+            "rustc": {"type": "string"},
+            "github_runner_image": {"type": "string"}
+          }
+        },
+        "evidence_commit_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "evidence_run_id": {"type": "string", "minLength": 1}
+      }
+    },
+    "planner_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "input_variable", "selection_order", "path_composition"],
+      "properties": {
+        "kind": {"const": "environment-bound-empirical-vector"},
+        "input_variable": {"const": "N = input byte length"},
+        "selection_order": {
+          "type": "array",
+          "prefixItems": [
+            {"const": "semantic and resource hard constraints"},
+            {"const": "raw edge-weight vector at the concrete input size"},
+            {"const": "derived load only for same-profile equivalent-edge tie-breaking"}
+          ],
+          "items": false,
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "path_composition": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["latency", "peak_memory", "output_bytes"],
+          "properties": {
+            "latency": {"const": "sum sequential edge estimates"},
+            "peak_memory": {"const": "maximum live-set estimate; never blindly sum edge peaks"},
+            "output_bytes": {"const": "feed each edge estimate into the next edge input"}
+          }
+        }
+      }
+    },
+    "capabilities": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "capability_id",
+          "strategy",
+          "backend",
+          "inputs",
+          "outputs",
+          "edge_weight",
+          "observations",
+          "source_evidence"
+        ],
+        "properties": {
+          "capability_id": {"type": "string", "pattern": "^capability:"},
+          "strategy": {"type": "string", "minLength": 1},
+          "backend": {"type": "string", "minLength": 1},
+          "inputs": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+          "outputs": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+          "edge_weight": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "fixed_latency_micros",
+              "nanoseconds_per_input_byte",
+              "peak_memory_bytes_per_input_byte",
+              "output_bytes_per_input_byte",
+              "estimated_latency_micros",
+              "estimated_peak_memory_bytes",
+              "estimated_output_bytes",
+              "performance_score_0_to_100",
+              "load_0_to_100",
+              "load_direction"
+            ],
+            "properties": {
+              "kind": {"const": "empirical-multidimensional"},
+              "fixed_latency_micros": {"type": "number", "minimum": 0},
+              "nanoseconds_per_input_byte": {"type": "number", "minimum": 0},
+              "peak_memory_bytes_per_input_byte": {"type": "number", "minimum": 0},
+              "output_bytes_per_input_byte": {"type": "number", "minimum": 0},
+              "estimated_latency_micros": {"const": "fixed_latency_micros + nanoseconds_per_input_byte * N / 1000"},
+              "estimated_peak_memory_bytes": {"const": "peak_memory_bytes_per_input_byte * N"},
+              "estimated_output_bytes": {"const": "output_bytes_per_input_byte * N"},
+              "performance_score_0_to_100": {"type": "number", "minimum": 0, "maximum": 100},
+              "load_0_to_100": {"type": "number", "minimum": 0, "maximum": 100},
+              "load_direction": {"const": "higher-is-more-expensive"}
+            }
+          },
+          "observations": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["small", "large"],
+            "properties": {
+              "small": {"type": "object"},
+              "large": {"type": "object"}
+            }
+          },
+          "source_evidence": {"type": "string", "pattern": "^registry/performance/baseline\\.json#capability:"}
+        }
+      }
+    }
+  }
+}

@@ -107,11 +107,12 @@ tools/          数据同步、目录构建和一致性校验
 14. `docs/13-performance-evidence.md`
 15. `docs/14-image-operator-program.md`
 16. `docs/15-png-wave-b.md`
-17. `capsules/README.md`
+17. `docs/16-heif-heic-program.md`
+18. `capsules/README.md`
 
 ## 当前阶段
 
-现在不开发桌面端、CLI 或路径规划器。当前生产 Capsule 达到 104 个、Adapter 能力 105 条、真实逻辑格式对 91 个。图像族已经连续交付 Raster Wave A 与 PNG Wave B：BMP、TGA、QOI、PPM、PAM 五种载体的 20 条有向转换全部闭合；PNG 又补齐与五者之间缺失的 9 条边，并增加原生校验、规范化、裁剪、填充、翻转、旋转和 Alpha 运算 11 个独立 Capsule。当前有 30 条不同图像格式边和 11 个 PNG 自变换能力。音频台账与 58 条不同格式音频边保持不变，FLAC 计划后移。薄 Kernel 仍只负责注册、默认验证和直接调用，不拥有图像 codec 或强制共享 IR。
+现在不开发桌面端、CLI 或路径规划器。当前生产 Capsule 达到 104 个、Adapter 能力 105 条、真实逻辑格式对 91 个。图像族已经连续交付 Raster Wave A 与 PNG Wave B：BMP、TGA、QOI、PPM、PAM 五种载体的 20 条有向转换全部闭合；PNG 又补齐与五者之间缺失的 9 条边，并增加原生校验、规范化、裁剪、填充、翻转、旋转和 Alpha 运算 11 个独立 Capsule。当前有 30 条不同图像格式边和 11 个 PNG 自变换能力。图像研究台账现有 298 个表示、11,234 条有序 pair 位置；HEIF/HEIC 已拆成 H0/H1/H2 共 58 个具名 Capsule，但尚未冒充已支持。音频台账与 58 条不同格式音频边保持不变，FLAC 计划后移。薄 Kernel 仍只负责注册、默认验证和直接调用，不拥有图像 codec 或强制共享 IR。
 
 ## 当前实际支持的转换
 
@@ -223,7 +224,7 @@ PNG 同格式算子也属于真实图边，但为避免把格式对表写成 11 
 
 机器可读权威清单是 `registry/support-matrix.json`。任何 Capsule 或 Adapter 更新都必须运行 `python3 tools/build_support_matrix.py`；CI 会拒绝过期矩阵。计划中、研究中和不可计算的边统一保存在 `operators/`，不得写进已支持清单。
 
-全部生产 Capsule 还必须进入统一的端到端性能评估。`tools/benchmark_capsules.py` 通过 Kernel 默认调用测量每个能力的 small/large p50/p95、吞吐、输出比例和显式工作内存，并生成供 Planner 使用的线性成本模型与 0–100 派生分。当前受控基线已覆盖全部 104 个生产 Capsule 和 105 条能力，保存在 `registry/performance/baseline.json`。PNG Wave B 的 20 条新能力测得 26.616–91.577 MiB/s：PNG→8-bit 载体为 69.071–79.120 MiB/s，载体→PNG 为 34.527–42.347 MiB/s，PNG 变换为 26.616–30.234 MiB/s，严格校验为 91.577 MiB/s。CI 会拒绝能力边漏测或 evidence 链接失效。分数只能在相同 profile 和环境类别内用于等价边排序，硬约束、语义损失与原始成本模型始终优先。方法见 `docs/13-performance-evidence.md`。
+全部生产 Capsule 还必须进入统一的端到端性能评估。`tools/benchmark_capsules.py` 通过 Kernel 默认调用测量每个能力的 small/large p50/p95、吞吐、输出比例和显式工作内存，并生成供 Planner 使用的线性成本模型与 0–100 派生分。当前受控基线已覆盖全部 104 个生产 Capsule 和 105 条能力，保存在 `registry/performance/baseline.json`；`tools/sync_edge_weights.py` 又把这些证据生成到每个 Capsule 根目录的统一 `edge-weight.json`，支持矩阵直接引用它们。104 个权重文件覆盖 105 条边，包含按输入大小计算的延迟、峰值内存、输出比例和 `load_0_to_100`。PNG Wave B 的 20 条新能力测得 26.616–91.577 MiB/s：PNG→8-bit 载体为 69.071–79.120 MiB/s，载体→PNG 为 34.527–42.347 MiB/s，PNG 变换为 26.616–30.234 MiB/s，严格校验为 91.577 MiB/s。CI 会拒绝能力边漏测、evidence 链接失效或 Capsule 权重与基线分叉。派生负荷只能在相同 profile 和环境类别内用于等价边排序，硬约束、语义损失与原始成本向量始终优先。方法见 `docs/13-performance-evidence.md`。
 
 生产 Capsule 使用 `capsules/<domain>/<primary-object-ir>/<operator-role>/<capsule-name>` 层级；Schema 与 CI 会校验目录和 manifest 分类一致，并递归发现新 Capsule，因此扩展任意族类不需要继续维护手写路径列表。
 

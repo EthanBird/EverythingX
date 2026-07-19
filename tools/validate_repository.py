@@ -14,6 +14,8 @@ from build_support_matrix import build_matrix
 from build_audio_backlog import build_backlog
 from build_image_backlog import build_backlog as build_image_backlog
 from build_operator_universe import build_operator_universe
+from sync_edge_weights import build_documents as build_edge_weight_documents
+from sync_edge_weights import check_documents as check_edge_weight_documents
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -251,6 +253,19 @@ def main(allow_performance_baseline_lag: bool = False) -> int:
         if expected_evidence not in capability_cost_evidence.get(capability_id, []):
             raise ValueError(f"{capability_id} does not link its checked-in performance evidence")
 
+    edge_weight_documents = build_edge_weight_documents(
+        allow_baseline_lag=allow_performance_baseline_lag
+    )
+    edge_weight_errors = check_edge_weight_documents(edge_weight_documents)
+    if edge_weight_errors:
+        detail = "; ".join(edge_weight_errors[:10])
+        if len(edge_weight_errors) > 10:
+            detail += f"; and {len(edge_weight_errors) - 10} more"
+        raise ValueError(
+            "Capsule-local edge weights are missing or stale; "
+            f"run tools/sync_edge_weights.py ({detail})"
+        )
+
     print(
         json.dumps(
             {
@@ -263,6 +278,11 @@ def main(allow_performance_baseline_lag: bool = False) -> int:
                 "capabilities": len(capability_ids),
                 "benchmarked_production_capsules": len(measured_capsules),
                 "benchmarked_production_capabilities": len(measured_ids),
+                "capsule_edge_weight_files": len(edge_weight_documents),
+                "weighted_production_capabilities": sum(
+                    len(document["capabilities"])
+                    for document in edge_weight_documents.values()
+                ),
                 "supported_logical_pairs": support_matrix["summary"]["logical_source_target_pairs"],
                 "audio_representations": audio_backlog["summary"]["reviewed_representations"],
                 "audio_pair_candidates": audio_backlog["summary"]["ordered_pair_candidates"],

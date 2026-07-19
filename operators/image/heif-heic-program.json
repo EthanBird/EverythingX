@@ -1,0 +1,142 @@
+{
+  "schema_version": "0.1.0",
+  "date": "2026-07-19",
+  "status": "specified-not-yet-implemented",
+  "support_claim": false,
+  "meaning": "A closed, reviewable HEIF/HEIC construction program. Entries become supported edges only after an independent Capsule, Adapter, correctness evidence and Capsule-local edge weight exist.",
+  "format_model": {
+    "heif": "ISO BMFF-derived image container graph for a single image, collection or sequence; not a pixel codec.",
+    "heic": "An HEIF interoperability/profile family whose coded image items use HEVC; not merely a filename extension alias.",
+    "avif": "A separate AV1 Image File Format profile that reuses the same container-layer research without being called HEIC.",
+    "primary_object_irs": ["ir:container-graph", "ir:raster", "ir:timed-media"],
+    "computability_rule": "Container-graph operators may be exact without decoding pixels. Pixel conversions require a declared codec, item-selection, color, alpha, bit-depth, orientation, grid and sequence policy."
+  },
+  "standard_basis": [
+    {"name": "ISO/IEC 23008-12:2025", "role": "HEIF image file format and codec brands", "url": "https://www.iso.org/standard/89035.html"},
+    {"name": "ISO/IEC 23000-22:2025", "role": "MIAF interoperability constraints", "url": "https://www.iso.org/standard/87576.html"},
+    {"name": "AV1 Image File Format", "role": "AVIF profile sharing the container layer", "url": "https://aomediacodec.github.io/av1-avif/"},
+    {"name": "libheif", "role": "differential/reference codec backend and corpus oracle", "url": "https://github.com/strukturag/libheif"}
+  ],
+  "backend_policy": {
+    "container_graph": {
+      "default": "native-portable",
+      "runtime_dependencies": [],
+      "owned_primitives": ["ISO BMFF box bounds", "meta item graph", "iloc extents", "iinf/infe", "pitm", "iprp/ipco/ipma", "iref", "idat/mdat", "irot/imir", "grid", "Exif/XMP links"]
+    },
+    "hevc_pixel_codec": {
+      "first_production_backend": "libheif-dynamic-reference",
+      "reason": "Full HEVC conformance is a separate codec-scale state space; a partial native decoder may not masquerade as common HEIC support.",
+      "native_target": "native-hevc-still",
+      "replacement_gate": "Differential corpus, conformance profile, color pipeline and quality evidence must pass before the native backend becomes default."
+    }
+  },
+  "runnable_defaults": {
+    "max_input_bytes": 536870912,
+    "max_boxes": 1000000,
+    "max_box_depth": 64,
+    "max_items": 100000,
+    "max_extents_per_item": 100000,
+    "max_pixels": 100000000,
+    "item_selection": "primary",
+    "collection_policy": "reject-unless-collection-operator",
+    "sequence_policy": "reject-unless-sequence-operator",
+    "alpha_policy": "reject-if-target-cannot-represent",
+    "hdr_policy": "reject-if-target-cannot-represent",
+    "orientation_policy": "bake-pixels-for-raster-output",
+    "metadata_policy": "preserve-supported-and-report-dropped",
+    "strict_trailing_data": true
+  },
+  "waves": [
+    {
+      "id": "H0-native-container-graph",
+      "status": "specified",
+      "default_backend": "native-portable",
+      "runtime_dependencies": [],
+      "capsule_count": 20,
+      "capsules": [
+        "identify-heif-profile",
+        "validate-heif-container",
+        "inspect-heif-item-graph",
+        "normalize-heif-container",
+        "list-heif-items",
+        "extract-heif-primary-item",
+        "extract-heif-item",
+        "extract-heif-thumbnail",
+        "extract-heif-alpha-item",
+        "extract-heif-depth-item",
+        "extract-heif-exif",
+        "extract-heif-xmp",
+        "strip-heif-metadata",
+        "set-heif-primary-item",
+        "split-heif-image-collection",
+        "aggregate-heif-image-collection",
+        "decompose-heif-grid",
+        "compose-heif-grid",
+        "rewrite-heif-rotation",
+        "rewrite-heif-mirror"
+      ],
+      "exit_gate": "All 20 crates copy out, build and test without EverythingX; malformed box, extent, reference-cycle, property-association and allocation-limit corpora pass."
+    },
+    {
+      "id": "H1-heic-still-pixels",
+      "status": "specified",
+      "default_backend": "libheif-dynamic-reference",
+      "capsule_count": 20,
+      "capsules": [
+        "heic-to-png",
+        "png-to-heic",
+        "heic-to-jpeg",
+        "jpeg-to-heic",
+        "heic-to-tiff",
+        "tiff-to-heic",
+        "heic-to-bmp",
+        "bmp-to-heic",
+        "heic-to-tga",
+        "tga-to-heic",
+        "heic-to-qoi",
+        "qoi-to-heic",
+        "heic-to-ppm",
+        "ppm-to-heic",
+        "heic-to-pam",
+        "pam-to-heic",
+        "validate-heic-hevc-item",
+        "extract-heic-hevc-item",
+        "heic-to-raw-rgba16",
+        "raw-rgba16-to-heic"
+      ],
+      "exit_gate": "Primary-image, alpha, HDR, 8/10/12-bit, chroma, range, color profile, orientation and grid policies are explicit; reference-backend differential tests and quality metrics pass."
+    },
+    {
+      "id": "H2-heif-codec-profiles-and-sequences",
+      "status": "backlog",
+      "default_backend": "per-codec-decision-record",
+      "capsule_count": 18,
+      "capsules": [
+        "heif-hevc-to-png",
+        "heif-avc-to-png",
+        "heif-vvc-to-png",
+        "heif-evc-to-png",
+        "heif-jpeg-to-png",
+        "heif-uncompressed-to-png",
+        "png-to-heif-hevc",
+        "png-to-heif-avc",
+        "png-to-heif-vvc",
+        "png-to-heif-evc",
+        "png-to-heif-jpeg",
+        "png-to-heif-uncompressed",
+        "split-heif-image-sequence",
+        "aggregate-heif-image-sequence",
+        "heif-sequence-to-apng",
+        "apng-to-heif-sequence",
+        "heif-sequence-to-image-set",
+        "image-set-to-heif-sequence"
+      ],
+      "exit_gate": "Codec profile and timed-media semantics are never collapsed into an unqualified HEIF-to-PNG single-image claim."
+    }
+  ],
+  "performance_rule": {
+    "placeholder_weights_forbidden": true,
+    "production_requirement": "Every implemented capability must be benchmarked by the controlled profile and receive a generated edge-weight.json in its Capsule root before support is claimed.",
+    "planner_use": "Use concrete-input latency, peak-memory and output-size estimates as the edge vector; derived load_0_to_100 is only a same-profile equivalent-edge tie-breaker."
+  }
+}

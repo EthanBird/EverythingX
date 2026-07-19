@@ -1,0 +1,84 @@
+{
+  "$schema": "https://everythingx.dev/schema/edge-weight.schema.json",
+  "schema_version": "0.1.0",
+  "meaning": "Environment-bound empirical graph-edge load for this standalone Capsule; semantic loss and hard constraints are evaluated separately.",
+  "capsule": {
+    "id": "capsule:wav-pcm-to-au-pcm",
+    "version": "0.1.0",
+    "repository_path": "capsules/audio/sampled-audio/direct/wav-pcm-to-au-pcm"
+  },
+  "profile": {
+    "profile_id": "exbench:ci-default-v1",
+    "generated_at": "2026-07-19T11:40:08.885069+00:00",
+    "source_report": "registry/performance/baseline.json",
+    "scope": "End-to-end Kernel default invocation including Adapter buffering and Capsule execution.",
+    "comparability": "Scores are comparable only when profile_id, harness_sha256 and environment class match.",
+    "harness_sha256": "d67d0cedd85a92f01a539d01960f16db8599105eb12b1c02b3c963c0e705ec83",
+    "environment_fingerprint_sha256": "eac84a5d059971b79353a04eafec5d3d346ce2c120494171ff58f471a7e4c91b",
+    "environment_class": {
+      "os": "Linux-6.17.0-1020-azure-x86_64-with-glibc2.39",
+      "architecture": "x86_64",
+      "rustc": "rustc 1.97.0 (2d8144b78 2026-07-07)",
+      "github_runner_image": "ubuntu24"
+    },
+    "evidence_commit_sha": "d6078d173ffb3e4f9ffe8e90655c8a60ce003f41",
+    "evidence_run_id": "29685419995"
+  },
+  "planner_contract": {
+    "kind": "environment-bound-empirical-vector",
+    "input_variable": "N = input byte length",
+    "selection_order": [
+      "semantic and resource hard constraints",
+      "raw edge-weight vector at the concrete input size",
+      "derived load only for same-profile equivalent-edge tie-breaking"
+    ],
+    "path_composition": {
+      "latency": "sum sequential edge estimates",
+      "peak_memory": "maximum live-set estimate; never blindly sum edge peaks",
+      "output_bytes": "feed each edge estimate into the next edge input"
+    }
+  },
+  "capabilities": [
+    {
+      "capability_id": "capability:wav-pcm-to-au-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "inputs": [
+        "exfmt:audio:wav-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:au-pcm"
+      ],
+      "edge_weight": {
+        "kind": "empirical-multidimensional",
+        "fixed_latency_micros": 3.804929,
+        "nanoseconds_per_input_byte": 0.699663469,
+        "peak_memory_bytes_per_input_byte": 1.016601388,
+        "output_bytes_per_input_byte": 0.999995232,
+        "estimated_latency_micros": "fixed_latency_micros + nanoseconds_per_input_byte * N / 1000",
+        "estimated_peak_memory_bytes": "peak_memory_bytes_per_input_byte * N",
+        "estimated_output_bytes": "output_bytes_per_input_byte * N",
+        "performance_score_0_to_100": 45.318,
+        "load_0_to_100": 54.682,
+        "load_direction": "higher-is-more-expensive"
+      },
+      "observations": {
+        "small": {
+          "input_bytes": 16428,
+          "output_bytes": 16408,
+          "p50_micros": 15.299,
+          "p95_micros": 17.764
+        },
+        "large": {
+          "input_bytes": 4194348,
+          "output_bytes": 4194328,
+          "p50_micros": 2938.437,
+          "p95_micros": 3080.302,
+          "throughput_mib_s": 1361.282,
+          "reported_peak_memory_bytes": 4263980
+        }
+      },
+      "source_evidence": "registry/performance/baseline.json#capability:wav-pcm-to-au-pcm/pcm-exact/native-portable"
+    }
+  ]
+}

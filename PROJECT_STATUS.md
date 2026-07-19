@@ -44,13 +44,15 @@ These are source observations, not a count of unique canonical formats.
 | Audio operator templates | 42 |
 | Generated ordered audio pair candidates | 8,672 |
 | Actually implemented distinct-format audio pairs | 58 |
-| Reviewed image representations | 295 |
+| Reviewed image representations | 298 |
 | Image operator templates | 68 |
-| Generated ordered image pair candidates | 10,838 |
+| Generated ordered image pair candidates | 11,234 |
 | Actually implemented distinct-format image pairs | 30 |
 | Implemented PNG same-format operator capabilities | 11 |
 | Capsules covered by performance harness | 104 |
 | Capability edges covered by performance harness | 105 |
+| Capsule-local edge-weight configurations | 104 files / 105 weighted edges |
+| Specified HEIF/HEIC Capsule program | 58 planned Capsules |
 
 `registry/support-matrix.json` is generated from real manifests and answers what works now. `operators/audio/backlog.json` is a research and implementation queue; its candidate count is not a feature count.
 
@@ -164,6 +166,8 @@ These are source observations, not a count of unique canonical formats.
 - Every capability is invoked through the Kernel with runnable defaults on deterministic small and large valid inputs.
 - Evidence records p50/p95 latency, throughput, output ratio and Capsule-reported working memory together with compiler, environment, commit and harness identity.
 - Planner-facing records expose a size-sensitive raw cost model; a calibrated 0–100 geometric score is retained only for same-profile ranking and UI summaries.
+- Every production Capsule now carries a generated root `edge-weight.json`; 104 files contain all 105 capability vectors and an inverse `load_0_to_100` scalar, with profile, harness and environment identity.
+- `registry/support-matrix.json` points from every implemented capability to its Capsule-local weight; CI rejects stale, missing, unexpected or hand-diverged weight files.
 - CI first runs functional, copy-out and Adapter tests, then rejects missing benchmark coverage or failed benchmark invocations.
 - The current controlled `ubuntu-24.04`/x86-64 baseline covers 104 Capsules and 105 capabilities: median large-workload throughput is 1,361.282 MiB/s; observed range is 26.616–3,650.848 MiB/s and calibrated score range is 11.135–59.411.
 - The 20 new Raster Wave A edges measure 129.723–290.495 MiB/s; their 3.75–4.67 memory ratios make profile-specialized streaming the next evidence-backed optimization target.
@@ -183,6 +187,12 @@ Image is the active implementation family; audio Wave B remains recorded but pau
 
 1. Harden all 104 production Capsules with corpus manifests, fuzz targets and reproducible benchmark reports.
 2. Add profile-specialized PNG streaming fast paths where the measured source/target order permits bounded rows instead of complete RGBA16/output buffers.
-3. Move through GIF and ICO first, then JPEG, TIFF, WebP and AVIF/HEIF with an explicit native/dependency backend decision per codec.
+3. Move through GIF and ICO first, then JPEG, TIFF and WebP; execute the recorded 20-Capsule native HEIF container wave and 20-Capsule HEIC still-image wave with explicit backend decisions.
 4. Add animation-aware frame algebra rather than silently flattening GIF/APNG/WebP animation.
 5. Resume the recorded 20-Capsule FLAC family after the requested image phase.
+
+HEIF/HEIC is no longer one vague future bullet. `operators/image/heif-heic-program.json`
+defines H0/H1/H2 as 58 named independent Capsules with conservative runnable defaults,
+native container ownership, a replaceable reference codec backend and a no-placeholder
+performance-weight gate. None is listed as currently supported until implementation and
+evidence are complete.

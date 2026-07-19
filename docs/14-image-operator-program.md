@@ -26,7 +26,7 @@ values. These operations must not share one unqualified `convert` promise.
 
 ## 2. Open-world representation ledger
 
-`operators/image/representations.json` currently reviews 295 representations in
+`operators/image/representations.json` currently reviews 298 representations in
 nine domains. It deliberately distinguishes:
 
 - codec bitstream from container profile;
@@ -45,7 +45,7 @@ The 68 operator templates include identification, validation, repair, pairwise
 conversion, decoding/encoding, member and frame algebra, spatial transforms,
 color and alpha operations, raw development, compositing, rasterization,
 vectorization, restoration, analysis and OCR. The generated backlog contains
-10,838 ordered pair positions. Every position begins with unknown computability;
+11,234 ordered pair positions. Every position begins with unknown computability;
 being present in the backlog is never a support claim.
 
 ## 3. Raster computability predicate
@@ -151,7 +151,7 @@ The next ordered program is:
    animation/selection semantics;
 2. baseline/progressive JPEG and TIFF profile families, with color and metadata
    contracts separated from pixel-code-value claims;
-3. WebP lossy/lossless/animation and AVIF/HEIF item/sequence graphs;
+3. WebP lossy/lossless/animation and AVIF/HEIF/HEIC item/sequence graphs;
 4. SVG and PDF rasterization bridges as object-graph render operations, never
    mislabeled as carrier-only conversions;
 5. camera raw development only after calibration, demosaic and color-transform
@@ -161,3 +161,11 @@ Each codec receives a native-versus-dependency decision record. “Zero dependen
 does not permit a partial decoder to masquerade as common-format support; where
 the codec state space is too large for the current native proof, a dependency
 backend remains preferable to a false support claim.
+
+HEIF is now explicitly expanded into HEVC, HEIC, AVC, VVC, EVC, JPEG,
+uncompressed and AVIF-related representations rather than one ambiguous file
+extension. The machine-readable H0/H1/H2 construction program specifies 58
+independent Capsules: 20 native container-graph operators, 20 HEIC still-image
+pixel edges and 18 additional codec-profile/sequence operators. This is a plan,
+not an implemented-support claim; details and runnable defaults are in
+`operators/image/heif-heic-program.json` and `docs/16-heif-heic-program.md`.

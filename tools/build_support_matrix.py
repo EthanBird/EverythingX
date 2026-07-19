@@ -35,6 +35,8 @@ def build_matrix() -> dict[str, Any]:
         adapter_path = manifest_path.parent / "everythingx" / "adapter.json"
         adapter = load_json(adapter_path) if adapter_path.is_file() else None
         capsule_capabilities: list[str] = []
+        repository_path = str(manifest_path.parent.relative_to(ROOT))
+        edge_weight_file = f"{repository_path}/edge-weight.json"
 
         if adapter is not None:
             for capability in adapter.get("capabilities", []):
@@ -59,6 +61,7 @@ def build_matrix() -> dict[str, Any]:
                         "streaming": capability["execution"]["streaming"],
                         "seek_required": capability["execution"]["seek_required"],
                         "cost_evidence": capability["execution"]["cost_evidence"],
+                        "edge_weight": f"{edge_weight_file}#{capability_id}",
                     }
                 )
 
@@ -73,7 +76,8 @@ def build_matrix() -> dict[str, Any]:
                 "standalone": manifest["independence"]["standalone_cargo_build"],
                 "copy_out_tested": manifest["independence"]["copy_out_tested"],
                 "taxonomy": manifest["taxonomy"],
-                "repository_path": str(manifest_path.parent.relative_to(ROOT)),
+                "repository_path": repository_path,
+                "edge_weight_file": edge_weight_file,
                 "capability_ids": sorted(capsule_capabilities),
             }
         )
@@ -85,8 +89,13 @@ def build_matrix() -> dict[str, Any]:
     ]
     return {
         "schema_version": "0.1.0",
-        "meaning": "Implemented conversion support derived from non-template Capsule and Adapter manifests.",
-        "update_rule": "Any Capsule or Adapter capability change must regenerate this file with tools/build_support_matrix.py.",
+        "meaning": "Implemented conversion support derived from non-template Capsule and Adapter manifests, with direct references to Capsule-local empirical graph-edge weights.",
+        "update_rule": "Any Capsule, Adapter capability or performance baseline change must run tools/sync_edge_weights.py and tools/build_support_matrix.py.",
+        "edge_weight_contract": {
+            "schema": "schemas/edge-weight.schema.json",
+            "profile_source": "registry/performance/baseline.json",
+            "planner_rule": "Resolve capability.edge_weight, apply hard semantic constraints first, then estimate the raw cost vector for the concrete input size.",
+        },
         "summary": {
             "standalone_capsules": len(capsules),
             "adapter_capabilities": len(capabilities),

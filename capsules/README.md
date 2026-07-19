@@ -13,8 +13,9 @@ representation operation.
 
 The directory is an index, not a dependency boundary. Each leaf remains a
 standalone Rust crate with its own manifest, API, defaults, tests, validation
-record, licence and optional `everythingx/` Adapter. Copying the leaf out of
-this repository and deleting its Adapter must leave a working crate.
+record, licence, generated `edge-weight.json` and optional `everythingx/`
+Adapter. Copying the leaf out of this repository and deleting its Adapter must
+leave a working crate with its latest environment-bound performance vector.
 
 ## Levels
 
@@ -32,6 +33,11 @@ this repository and deleting its Adapter must leave a working crate.
 primary IR and role agree with the first three directory levels. Tooling must
 discover manifests recursively; adding a new Capsule must not require editing
 a hard-coded CI path list.
+
+`edge-weight.json` is generated from the controlled performance baseline by
+`python3 tools/sync_edge_weights.py`; it must never be hand-tuned. One file may
+contain multiple capability weights when a Capsule exposes more than one
+strategy/backend edge. CI verifies exact coverage and freshness.
 
 `_template` is intentionally outside the production taxonomy and is excluded
 from the implemented support matrix.

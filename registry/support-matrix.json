@@ -1,7 +1,12 @@
 {
   "schema_version": "0.1.0",
-  "meaning": "Implemented conversion support derived from non-template Capsule and Adapter manifests.",
-  "update_rule": "Any Capsule or Adapter capability change must regenerate this file with tools/build_support_matrix.py.",
+  "meaning": "Implemented conversion support derived from non-template Capsule and Adapter manifests, with direct references to Capsule-local empirical graph-edge weights.",
+  "update_rule": "Any Capsule, Adapter capability or performance baseline change must run tools/sync_edge_weights.py and tools/build_support_matrix.py.",
+  "edge_weight_contract": {
+    "schema": "schemas/edge-weight.schema.json",
+    "profile_source": "registry/performance/baseline.json",
+    "planner_rule": "Resolve capability.edge_weight, apply hard semantic constraints first, then estimate the raw cost vector for the concrete input size."
+  },
   "summary": {
     "standalone_capsules": 104,
     "adapter_capabilities": 105,
@@ -406,6 +411,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/aiff-pcm-to-au-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/aiff-pcm-to-au-pcm/edge-weight.json",
       "capability_ids": [
         "capability:aiff-pcm-to-au-pcm/pcm-exact/native-portable"
       ]
@@ -442,6 +448,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/aiff-pcm-to-bw64-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/aiff-pcm-to-bw64-pcm/edge-weight.json",
       "capability_ids": [
         "capability:aiff-pcm-to-bw64-pcm/pcm-exact/native-portable"
       ]
@@ -478,6 +485,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/aiff-pcm-to-bwf-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/aiff-pcm-to-bwf-pcm/edge-weight.json",
       "capability_ids": [
         "capability:aiff-pcm-to-bwf-pcm/pcm-exact/native-portable"
       ]
@@ -514,6 +522,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/aiff-pcm-to-caf-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/aiff-pcm-to-caf-pcm/edge-weight.json",
       "capability_ids": [
         "capability:aiff-pcm-to-caf-pcm/pcm-exact/native-portable"
       ]
@@ -550,6 +559,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/aiff-pcm-to-rf64-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/aiff-pcm-to-rf64-pcm/edge-weight.json",
       "capability_ids": [
         "capability:aiff-pcm-to-rf64-pcm/pcm-exact/native-portable"
       ]
@@ -586,6 +596,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/aiff-pcm-to-wav-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/aiff-pcm-to-wav-pcm/edge-weight.json",
       "capability_ids": [
         "capability:aiff-pcm-to-wav-pcm/pcm-exact/native-portable"
       ]
@@ -622,6 +633,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/aiff-pcm-to-wave64-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/aiff-pcm-to-wave64-pcm/edge-weight.json",
       "capability_ids": [
         "capability:aiff-pcm-to-wave64-pcm/pcm-exact/native-portable"
       ]
@@ -658,6 +670,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/au-pcm-to-aiff-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/au-pcm-to-aiff-pcm/edge-weight.json",
       "capability_ids": [
         "capability:au-pcm-to-aiff-pcm/pcm-exact/native-portable"
       ]
@@ -694,6 +707,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/au-pcm-to-bw64-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/au-pcm-to-bw64-pcm/edge-weight.json",
       "capability_ids": [
         "capability:au-pcm-to-bw64-pcm/pcm-exact/native-portable"
       ]
@@ -730,6 +744,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/au-pcm-to-bwf-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/au-pcm-to-bwf-pcm/edge-weight.json",
       "capability_ids": [
         "capability:au-pcm-to-bwf-pcm/pcm-exact/native-portable"
       ]
@@ -766,6 +781,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/au-pcm-to-caf-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/au-pcm-to-caf-pcm/edge-weight.json",
       "capability_ids": [
         "capability:au-pcm-to-caf-pcm/pcm-exact/native-portable"
       ]
@@ -802,6 +818,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/au-pcm-to-rf64-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/au-pcm-to-rf64-pcm/edge-weight.json",
       "capability_ids": [
         "capability:au-pcm-to-rf64-pcm/pcm-exact/native-portable"
       ]
@@ -838,6 +855,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/au-pcm-to-wav-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/au-pcm-to-wav-pcm/edge-weight.json",
       "capability_ids": [
         "capability:au-pcm-to-wav-pcm/pcm-exact/native-portable"
       ]
@@ -874,6 +892,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/au-pcm-to-wave64-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/au-pcm-to-wave64-pcm/edge-weight.json",
       "capability_ids": [
         "capability:au-pcm-to-wave64-pcm/pcm-exact/native-portable"
       ]
@@ -910,6 +929,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/bw64-pcm-to-aiff-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/bw64-pcm-to-aiff-pcm/edge-weight.json",
       "capability_ids": [
         "capability:bw64-pcm-to-aiff-pcm/pcm-exact/native-portable"
       ]
@@ -946,6 +966,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/bw64-pcm-to-au-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/bw64-pcm-to-au-pcm/edge-weight.json",
       "capability_ids": [
         "capability:bw64-pcm-to-au-pcm/pcm-exact/native-portable"
       ]
@@ -982,6 +1003,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/bw64-pcm-to-bwf-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/bw64-pcm-to-bwf-pcm/edge-weight.json",
       "capability_ids": [
         "capability:bw64-pcm-to-bwf-pcm/pcm-exact/native-portable"
       ]
@@ -1018,6 +1040,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/bw64-pcm-to-caf-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/bw64-pcm-to-caf-pcm/edge-weight.json",
       "capability_ids": [
         "capability:bw64-pcm-to-caf-pcm/pcm-exact/native-portable"
       ]
@@ -1054,6 +1077,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/bw64-pcm-to-rf64-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/bw64-pcm-to-rf64-pcm/edge-weight.json",
       "capability_ids": [
         "capability:bw64-pcm-to-rf64-pcm/pcm-exact/native-portable"
       ]
@@ -1090,6 +1114,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/bw64-pcm-to-wav-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/bw64-pcm-to-wav-pcm/edge-weight.json",
       "capability_ids": [
         "capability:bw64-pcm-to-wav-pcm/pcm-exact/native-portable"
       ]
@@ -1126,6 +1151,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/bw64-pcm-to-wave64-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/bw64-pcm-to-wave64-pcm/edge-weight.json",
       "capability_ids": [
         "capability:bw64-pcm-to-wave64-pcm/pcm-exact/native-portable"
       ]
@@ -1162,6 +1188,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/bwf-pcm-to-aiff-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/bwf-pcm-to-aiff-pcm/edge-weight.json",
       "capability_ids": [
         "capability:bwf-pcm-to-aiff-pcm/pcm-exact/native-portable"
       ]
@@ -1198,6 +1225,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/bwf-pcm-to-au-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/bwf-pcm-to-au-pcm/edge-weight.json",
       "capability_ids": [
         "capability:bwf-pcm-to-au-pcm/pcm-exact/native-portable"
       ]
@@ -1234,6 +1262,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/bwf-pcm-to-bw64-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/bwf-pcm-to-bw64-pcm/edge-weight.json",
       "capability_ids": [
         "capability:bwf-pcm-to-bw64-pcm/pcm-exact/native-portable"
       ]
@@ -1270,6 +1299,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/bwf-pcm-to-caf-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/bwf-pcm-to-caf-pcm/edge-weight.json",
       "capability_ids": [
         "capability:bwf-pcm-to-caf-pcm/pcm-exact/native-portable"
       ]
@@ -1306,6 +1336,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/bwf-pcm-to-rf64-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/bwf-pcm-to-rf64-pcm/edge-weight.json",
       "capability_ids": [
         "capability:bwf-pcm-to-rf64-pcm/pcm-exact/native-portable"
       ]
@@ -1342,6 +1373,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/bwf-pcm-to-wav-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/bwf-pcm-to-wav-pcm/edge-weight.json",
       "capability_ids": [
         "capability:bwf-pcm-to-wav-pcm/pcm-exact/native-portable"
       ]
@@ -1378,6 +1410,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/bwf-pcm-to-wave64-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/bwf-pcm-to-wave64-pcm/edge-weight.json",
       "capability_ids": [
         "capability:bwf-pcm-to-wave64-pcm/pcm-exact/native-portable"
       ]
@@ -1414,6 +1447,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/caf-pcm-to-aiff-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/caf-pcm-to-aiff-pcm/edge-weight.json",
       "capability_ids": [
         "capability:caf-pcm-to-aiff-pcm/pcm-exact/native-portable"
       ]
@@ -1450,6 +1484,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/caf-pcm-to-au-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/caf-pcm-to-au-pcm/edge-weight.json",
       "capability_ids": [
         "capability:caf-pcm-to-au-pcm/pcm-exact/native-portable"
       ]
@@ -1486,6 +1521,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/caf-pcm-to-bw64-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/caf-pcm-to-bw64-pcm/edge-weight.json",
       "capability_ids": [
         "capability:caf-pcm-to-bw64-pcm/pcm-exact/native-portable"
       ]
@@ -1522,6 +1558,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/caf-pcm-to-bwf-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/caf-pcm-to-bwf-pcm/edge-weight.json",
       "capability_ids": [
         "capability:caf-pcm-to-bwf-pcm/pcm-exact/native-portable"
       ]
@@ -1558,6 +1595,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/caf-pcm-to-rf64-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/caf-pcm-to-rf64-pcm/edge-weight.json",
       "capability_ids": [
         "capability:caf-pcm-to-rf64-pcm/pcm-exact/native-portable"
       ]
@@ -1594,6 +1632,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/caf-pcm-to-wav-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/caf-pcm-to-wav-pcm/edge-weight.json",
       "capability_ids": [
         "capability:caf-pcm-to-wav-pcm/pcm-exact/native-portable"
       ]
@@ -1630,6 +1669,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/caf-pcm-to-wave64-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/caf-pcm-to-wave64-pcm/edge-weight.json",
       "capability_ids": [
         "capability:caf-pcm-to-wave64-pcm/pcm-exact/native-portable"
       ]
@@ -1666,6 +1706,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/raw-pcm-to-wav-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/raw-pcm-to-wav-pcm/edge-weight.json",
       "capability_ids": [
         "capability:raw-pcm-to-wav-pcm/pcm-exact/native-portable"
       ]
@@ -1702,6 +1743,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/rf64-pcm-to-aiff-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/rf64-pcm-to-aiff-pcm/edge-weight.json",
       "capability_ids": [
         "capability:rf64-pcm-to-aiff-pcm/pcm-exact/native-portable"
       ]
@@ -1738,6 +1780,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/rf64-pcm-to-au-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/rf64-pcm-to-au-pcm/edge-weight.json",
       "capability_ids": [
         "capability:rf64-pcm-to-au-pcm/pcm-exact/native-portable"
       ]
@@ -1774,6 +1817,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/rf64-pcm-to-bw64-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/rf64-pcm-to-bw64-pcm/edge-weight.json",
       "capability_ids": [
         "capability:rf64-pcm-to-bw64-pcm/pcm-exact/native-portable"
       ]
@@ -1810,6 +1854,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/rf64-pcm-to-bwf-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/rf64-pcm-to-bwf-pcm/edge-weight.json",
       "capability_ids": [
         "capability:rf64-pcm-to-bwf-pcm/pcm-exact/native-portable"
       ]
@@ -1846,6 +1891,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/rf64-pcm-to-caf-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/rf64-pcm-to-caf-pcm/edge-weight.json",
       "capability_ids": [
         "capability:rf64-pcm-to-caf-pcm/pcm-exact/native-portable"
       ]
@@ -1882,6 +1928,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/rf64-pcm-to-wav-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/rf64-pcm-to-wav-pcm/edge-weight.json",
       "capability_ids": [
         "capability:rf64-pcm-to-wav-pcm/pcm-exact/native-portable"
       ]
@@ -1918,6 +1965,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/rf64-pcm-to-wave64-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/rf64-pcm-to-wave64-pcm/edge-weight.json",
       "capability_ids": [
         "capability:rf64-pcm-to-wave64-pcm/pcm-exact/native-portable"
       ]
@@ -1954,6 +2002,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/wav-pcm-to-aiff",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/wav-pcm-to-aiff/edge-weight.json",
       "capability_ids": [
         "capability:wav-pcm-to-aiff/pcm-exact/native-portable"
       ]
@@ -1990,6 +2039,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/wav-pcm-to-au-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/wav-pcm-to-au-pcm/edge-weight.json",
       "capability_ids": [
         "capability:wav-pcm-to-au-pcm/pcm-exact/native-portable"
       ]
@@ -2026,6 +2076,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/wav-pcm-to-bw64-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/wav-pcm-to-bw64-pcm/edge-weight.json",
       "capability_ids": [
         "capability:wav-pcm-to-bw64-pcm/pcm-exact/native-portable"
       ]
@@ -2062,6 +2113,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/wav-pcm-to-bwf-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/wav-pcm-to-bwf-pcm/edge-weight.json",
       "capability_ids": [
         "capability:wav-pcm-to-bwf-pcm/pcm-exact/native-portable"
       ]
@@ -2098,6 +2150,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/wav-pcm-to-caf-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/wav-pcm-to-caf-pcm/edge-weight.json",
       "capability_ids": [
         "capability:wav-pcm-to-caf-pcm/pcm-exact/native-portable"
       ]
@@ -2134,6 +2187,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/wav-pcm-to-raw-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/wav-pcm-to-raw-pcm/edge-weight.json",
       "capability_ids": [
         "capability:wav-pcm-to-raw-pcm/pcm-exact/native-portable"
       ]
@@ -2170,6 +2224,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/wav-pcm-to-rf64-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/wav-pcm-to-rf64-pcm/edge-weight.json",
       "capability_ids": [
         "capability:wav-pcm-to-rf64-pcm/pcm-exact/native-portable"
       ]
@@ -2206,6 +2261,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/wav-pcm-to-wave64-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/wav-pcm-to-wave64-pcm/edge-weight.json",
       "capability_ids": [
         "capability:wav-pcm-to-wave64-pcm/pcm-exact/native-portable"
       ]
@@ -2242,6 +2298,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/wave64-pcm-to-aiff-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/wave64-pcm-to-aiff-pcm/edge-weight.json",
       "capability_ids": [
         "capability:wave64-pcm-to-aiff-pcm/pcm-exact/native-portable"
       ]
@@ -2278,6 +2335,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/wave64-pcm-to-au-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/wave64-pcm-to-au-pcm/edge-weight.json",
       "capability_ids": [
         "capability:wave64-pcm-to-au-pcm/pcm-exact/native-portable"
       ]
@@ -2314,6 +2372,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/wave64-pcm-to-bw64-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/wave64-pcm-to-bw64-pcm/edge-weight.json",
       "capability_ids": [
         "capability:wave64-pcm-to-bw64-pcm/pcm-exact/native-portable"
       ]
@@ -2350,6 +2409,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/wave64-pcm-to-bwf-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/wave64-pcm-to-bwf-pcm/edge-weight.json",
       "capability_ids": [
         "capability:wave64-pcm-to-bwf-pcm/pcm-exact/native-portable"
       ]
@@ -2386,6 +2446,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/wave64-pcm-to-caf-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/wave64-pcm-to-caf-pcm/edge-weight.json",
       "capability_ids": [
         "capability:wave64-pcm-to-caf-pcm/pcm-exact/native-portable"
       ]
@@ -2422,6 +2483,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/wave64-pcm-to-rf64-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/wave64-pcm-to-rf64-pcm/edge-weight.json",
       "capability_ids": [
         "capability:wave64-pcm-to-rf64-pcm/pcm-exact/native-portable"
       ]
@@ -2458,6 +2520,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/audio/sampled-audio/direct/wave64-pcm-to-wav-pcm",
+      "edge_weight_file": "capsules/audio/sampled-audio/direct/wave64-pcm-to-wav-pcm/edge-weight.json",
       "capability_ids": [
         "capability:wave64-pcm-to-wav-pcm/pcm-exact/native-portable"
       ]
@@ -2494,6 +2557,7 @@
         "operator_role": "transform"
       },
       "repository_path": "capsules/audio/sampled-audio/transform/raw-pcm-channel-map",
+      "edge_weight_file": "capsules/audio/sampled-audio/transform/raw-pcm-channel-map/edge-weight.json",
       "capability_ids": [
         "capability:raw-pcm-channel-map/frame-exact/native-portable"
       ]
@@ -2530,6 +2594,7 @@
         "operator_role": "transform"
       },
       "repository_path": "capsules/audio/sampled-audio/transform/raw-pcm-endian-signedness-normalize",
+      "edge_weight_file": "capsules/audio/sampled-audio/transform/raw-pcm-endian-signedness-normalize/edge-weight.json",
       "capability_ids": [
         "capability:raw-pcm-endian-signedness-normalize/frame-exact/native-portable"
       ]
@@ -2566,6 +2631,7 @@
         "operator_role": "transform"
       },
       "repository_path": "capsules/audio/sampled-audio/transform/raw-pcm-reverse",
+      "edge_weight_file": "capsules/audio/sampled-audio/transform/raw-pcm-reverse/edge-weight.json",
       "capability_ids": [
         "capability:raw-pcm-reverse/frame-exact/native-portable"
       ]
@@ -2602,6 +2668,7 @@
         "operator_role": "transform"
       },
       "repository_path": "capsules/audio/sampled-audio/transform/raw-pcm-trim",
+      "edge_weight_file": "capsules/audio/sampled-audio/transform/raw-pcm-trim/edge-weight.json",
       "capability_ids": [
         "capability:raw-pcm-trim/frame-exact/native-portable"
       ]
@@ -2638,6 +2705,7 @@
         "operator_role": "analyze"
       },
       "repository_path": "capsules/image/raster/analyze/validate-png",
+      "edge_weight_file": "capsules/image/raster/analyze/validate-png/edge-weight.json",
       "capability_ids": [
         "capability:validate-png/png-native-canonical/native-portable"
       ]
@@ -2674,6 +2742,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/image/raster/direct/bmp-to-pam",
+      "edge_weight_file": "capsules/image/raster/direct/bmp-to-pam/edge-weight.json",
       "capability_ids": [
         "capability:bmp-to-pam/rgba8-code-value-exact/native-portable"
       ]
@@ -2710,6 +2779,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/image/raster/direct/bmp-to-png",
+      "edge_weight_file": "capsules/image/raster/direct/bmp-to-png/edge-weight.json",
       "capability_ids": [
         "capability:bmp-to-png/pixel-exact/native-portable"
       ]
@@ -2746,6 +2816,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/image/raster/direct/bmp-to-ppm",
+      "edge_weight_file": "capsules/image/raster/direct/bmp-to-ppm/edge-weight.json",
       "capability_ids": [
         "capability:bmp-to-ppm/rgba8-code-value-exact/native-portable"
       ]
@@ -2782,6 +2853,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/image/raster/direct/bmp-to-qoi",
+      "edge_weight_file": "capsules/image/raster/direct/bmp-to-qoi/edge-weight.json",
       "capability_ids": [
         "capability:bmp-to-qoi/rgba8-code-value-exact/native-portable"
       ]
@@ -2818,6 +2890,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/image/raster/direct/bmp-to-tga",
+      "edge_weight_file": "capsules/image/raster/direct/bmp-to-tga/edge-weight.json",
       "capability_ids": [
         "capability:bmp-to-tga/rgba8-code-value-exact/native-portable"
       ]
@@ -2854,6 +2927,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/image/raster/direct/pam-to-bmp",
+      "edge_weight_file": "capsules/image/raster/direct/pam-to-bmp/edge-weight.json",
       "capability_ids": [
         "capability:pam-to-bmp/rgba8-code-value-exact/native-portable"
       ]
@@ -2890,6 +2964,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/image/raster/direct/pam-to-png",
+      "edge_weight_file": "capsules/image/raster/direct/pam-to-png/edge-weight.json",
       "capability_ids": [
         "capability:pam-to-png/rgba8-code-value-exact/native-portable"
       ]
@@ -2926,6 +3001,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/image/raster/direct/pam-to-ppm",
+      "edge_weight_file": "capsules/image/raster/direct/pam-to-ppm/edge-weight.json",
       "capability_ids": [
         "capability:pam-to-ppm/rgba8-code-value-exact/native-portable"
       ]
@@ -2962,6 +3038,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/image/raster/direct/pam-to-qoi",
+      "edge_weight_file": "capsules/image/raster/direct/pam-to-qoi/edge-weight.json",
       "capability_ids": [
         "capability:pam-to-qoi/rgba8-code-value-exact/native-portable"
       ]
@@ -2998,6 +3075,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/image/raster/direct/pam-to-tga",
+      "edge_weight_file": "capsules/image/raster/direct/pam-to-tga/edge-weight.json",
       "capability_ids": [
         "capability:pam-to-tga/rgba8-code-value-exact/native-portable"
       ]
@@ -3034,6 +3112,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/image/raster/direct/png-to-bmp",
+      "edge_weight_file": "capsules/image/raster/direct/png-to-bmp/edge-weight.json",
       "capability_ids": [
         "capability:png-to-bmp/rgba8-code-value-exact/native-portable"
       ]
@@ -3070,6 +3149,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/image/raster/direct/png-to-pam",
+      "edge_weight_file": "capsules/image/raster/direct/png-to-pam/edge-weight.json",
       "capability_ids": [
         "capability:png-to-pam/rgba8-code-value-exact/native-portable"
       ]
@@ -3106,6 +3186,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/image/raster/direct/png-to-ppm",
+      "edge_weight_file": "capsules/image/raster/direct/png-to-ppm/edge-weight.json",
       "capability_ids": [
         "capability:png-to-ppm/rgba8-code-value-exact/native-portable"
       ]
@@ -3142,6 +3223,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/image/raster/direct/png-to-qoi",
+      "edge_weight_file": "capsules/image/raster/direct/png-to-qoi/edge-weight.json",
       "capability_ids": [
         "capability:png-to-qoi/rgba8-code-value-exact/native-portable"
       ]
@@ -3178,6 +3260,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/image/raster/direct/png-to-tga",
+      "edge_weight_file": "capsules/image/raster/direct/png-to-tga/edge-weight.json",
       "capability_ids": [
         "capability:png-to-tga/rgba8-code-value-exact/native-portable"
       ]
@@ -3214,6 +3297,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/image/raster/direct/ppm-to-bmp",
+      "edge_weight_file": "capsules/image/raster/direct/ppm-to-bmp/edge-weight.json",
       "capability_ids": [
         "capability:ppm-to-bmp/rgba8-code-value-exact/native-portable"
       ]
@@ -3250,6 +3334,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/image/raster/direct/ppm-to-pam",
+      "edge_weight_file": "capsules/image/raster/direct/ppm-to-pam/edge-weight.json",
       "capability_ids": [
         "capability:ppm-to-pam/rgba8-code-value-exact/native-portable"
       ]
@@ -3286,6 +3371,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/image/raster/direct/ppm-to-png",
+      "edge_weight_file": "capsules/image/raster/direct/ppm-to-png/edge-weight.json",
       "capability_ids": [
         "capability:ppm-to-png/rgba8-code-value-exact/native-portable"
       ]
@@ -3322,6 +3408,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/image/raster/direct/ppm-to-qoi",
+      "edge_weight_file": "capsules/image/raster/direct/ppm-to-qoi/edge-weight.json",
       "capability_ids": [
         "capability:ppm-to-qoi/rgba8-code-value-exact/native-portable"
       ]
@@ -3358,6 +3445,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/image/raster/direct/ppm-to-tga",
+      "edge_weight_file": "capsules/image/raster/direct/ppm-to-tga/edge-weight.json",
       "capability_ids": [
         "capability:ppm-to-tga/rgba8-code-value-exact/native-portable"
       ]
@@ -3394,6 +3482,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/image/raster/direct/qoi-to-bmp",
+      "edge_weight_file": "capsules/image/raster/direct/qoi-to-bmp/edge-weight.json",
       "capability_ids": [
         "capability:qoi-to-bmp/rgba8-code-value-exact/native-portable"
       ]
@@ -3430,6 +3519,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/image/raster/direct/qoi-to-pam",
+      "edge_weight_file": "capsules/image/raster/direct/qoi-to-pam/edge-weight.json",
       "capability_ids": [
         "capability:qoi-to-pam/rgba8-code-value-exact/native-portable"
       ]
@@ -3466,6 +3556,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/image/raster/direct/qoi-to-png",
+      "edge_weight_file": "capsules/image/raster/direct/qoi-to-png/edge-weight.json",
       "capability_ids": [
         "capability:qoi-to-png/rgba8-code-value-exact/native-portable"
       ]
@@ -3502,6 +3593,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/image/raster/direct/qoi-to-ppm",
+      "edge_weight_file": "capsules/image/raster/direct/qoi-to-ppm/edge-weight.json",
       "capability_ids": [
         "capability:qoi-to-ppm/rgba8-code-value-exact/native-portable"
       ]
@@ -3538,6 +3630,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/image/raster/direct/qoi-to-tga",
+      "edge_weight_file": "capsules/image/raster/direct/qoi-to-tga/edge-weight.json",
       "capability_ids": [
         "capability:qoi-to-tga/rgba8-code-value-exact/native-portable"
       ]
@@ -3574,6 +3667,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/image/raster/direct/tga-to-bmp",
+      "edge_weight_file": "capsules/image/raster/direct/tga-to-bmp/edge-weight.json",
       "capability_ids": [
         "capability:tga-to-bmp/rgba8-code-value-exact/native-portable"
       ]
@@ -3610,6 +3704,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/image/raster/direct/tga-to-pam",
+      "edge_weight_file": "capsules/image/raster/direct/tga-to-pam/edge-weight.json",
       "capability_ids": [
         "capability:tga-to-pam/rgba8-code-value-exact/native-portable"
       ]
@@ -3646,6 +3741,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/image/raster/direct/tga-to-png",
+      "edge_weight_file": "capsules/image/raster/direct/tga-to-png/edge-weight.json",
       "capability_ids": [
         "capability:tga-to-png/rgba8-code-value-exact/native-portable"
       ]
@@ -3682,6 +3778,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/image/raster/direct/tga-to-ppm",
+      "edge_weight_file": "capsules/image/raster/direct/tga-to-ppm/edge-weight.json",
       "capability_ids": [
         "capability:tga-to-ppm/rgba8-code-value-exact/native-portable"
       ]
@@ -3718,6 +3815,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/image/raster/direct/tga-to-qoi",
+      "edge_weight_file": "capsules/image/raster/direct/tga-to-qoi/edge-weight.json",
       "capability_ids": [
         "capability:tga-to-qoi/rgba8-code-value-exact/native-portable"
       ]
@@ -3754,6 +3852,7 @@
         "operator_role": "structural"
       },
       "repository_path": "capsules/image/raster/structural/normalize-png",
+      "edge_weight_file": "capsules/image/raster/structural/normalize-png/edge-weight.json",
       "capability_ids": [
         "capability:normalize-png/png-native-canonical/native-portable"
       ]
@@ -3790,6 +3889,7 @@
         "operator_role": "transform"
       },
       "repository_path": "capsules/image/raster/transform/png-alpha-premultiply",
+      "edge_weight_file": "capsules/image/raster/transform/png-alpha-premultiply/edge-weight.json",
       "capability_ids": [
         "capability:png-alpha-premultiply/png-native-canonical/native-portable"
       ]
@@ -3826,6 +3926,7 @@
         "operator_role": "transform"
       },
       "repository_path": "capsules/image/raster/transform/png-alpha-unpremultiply",
+      "edge_weight_file": "capsules/image/raster/transform/png-alpha-unpremultiply/edge-weight.json",
       "capability_ids": [
         "capability:png-alpha-unpremultiply/png-native-canonical/native-portable"
       ]
@@ -3862,6 +3963,7 @@
         "operator_role": "transform"
       },
       "repository_path": "capsules/image/raster/transform/png-crop",
+      "edge_weight_file": "capsules/image/raster/transform/png-crop/edge-weight.json",
       "capability_ids": [
         "capability:png-crop/png-native-canonical/native-portable"
       ]
@@ -3898,6 +4000,7 @@
         "operator_role": "transform"
       },
       "repository_path": "capsules/image/raster/transform/png-flip-horizontal",
+      "edge_weight_file": "capsules/image/raster/transform/png-flip-horizontal/edge-weight.json",
       "capability_ids": [
         "capability:png-flip-horizontal/png-native-canonical/native-portable"
       ]
@@ -3934,6 +4037,7 @@
         "operator_role": "transform"
       },
       "repository_path": "capsules/image/raster/transform/png-flip-vertical",
+      "edge_weight_file": "capsules/image/raster/transform/png-flip-vertical/edge-weight.json",
       "capability_ids": [
         "capability:png-flip-vertical/png-native-canonical/native-portable"
       ]
@@ -3970,6 +4074,7 @@
         "operator_role": "transform"
       },
       "repository_path": "capsules/image/raster/transform/png-pad",
+      "edge_weight_file": "capsules/image/raster/transform/png-pad/edge-weight.json",
       "capability_ids": [
         "capability:png-pad/png-native-canonical/native-portable"
       ]
@@ -4006,6 +4111,7 @@
         "operator_role": "transform"
       },
       "repository_path": "capsules/image/raster/transform/png-rotate-180",
+      "edge_weight_file": "capsules/image/raster/transform/png-rotate-180/edge-weight.json",
       "capability_ids": [
         "capability:png-rotate-180/png-native-canonical/native-portable"
       ]
@@ -4042,6 +4148,7 @@
         "operator_role": "transform"
       },
       "repository_path": "capsules/image/raster/transform/png-rotate-270",
+      "edge_weight_file": "capsules/image/raster/transform/png-rotate-270/edge-weight.json",
       "capability_ids": [
         "capability:png-rotate-270/png-native-canonical/native-portable"
       ]
@@ -4078,6 +4185,7 @@
         "operator_role": "transform"
       },
       "repository_path": "capsules/image/raster/transform/png-rotate-90",
+      "edge_weight_file": "capsules/image/raster/transform/png-rotate-90/edge-weight.json",
       "capability_ids": [
         "capability:png-rotate-90/png-native-canonical/native-portable"
       ]
@@ -4114,6 +4222,7 @@
         "operator_role": "direct"
       },
       "repository_path": "capsules/text/byte-coding/direct/utf16-to-utf8",
+      "edge_weight_file": "capsules/text/byte-coding/direct/utf16-to-utf8/edge-weight.json",
       "capability_ids": [
         "capability:utf16-to-utf8/replace-invalid/native-portable",
         "capability:utf16-to-utf8/strict/native-portable"
@@ -4144,7 +4253,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:aiff-pcm-to-au-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/aiff-pcm-to-au-pcm/edge-weight.json#capability:aiff-pcm-to-au-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:aiff-pcm-to-bw64-pcm/pcm-exact/native-portable",
@@ -4169,7 +4279,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:aiff-pcm-to-bw64-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/aiff-pcm-to-bw64-pcm/edge-weight.json#capability:aiff-pcm-to-bw64-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:aiff-pcm-to-bwf-pcm/pcm-exact/native-portable",
@@ -4194,7 +4305,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:aiff-pcm-to-bwf-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/aiff-pcm-to-bwf-pcm/edge-weight.json#capability:aiff-pcm-to-bwf-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:aiff-pcm-to-caf-pcm/pcm-exact/native-portable",
@@ -4219,7 +4331,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:aiff-pcm-to-caf-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/aiff-pcm-to-caf-pcm/edge-weight.json#capability:aiff-pcm-to-caf-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:aiff-pcm-to-rf64-pcm/pcm-exact/native-portable",
@@ -4244,7 +4357,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:aiff-pcm-to-rf64-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/aiff-pcm-to-rf64-pcm/edge-weight.json#capability:aiff-pcm-to-rf64-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:aiff-pcm-to-wav-pcm/pcm-exact/native-portable",
@@ -4269,7 +4383,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:aiff-pcm-to-wav-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/aiff-pcm-to-wav-pcm/edge-weight.json#capability:aiff-pcm-to-wav-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:aiff-pcm-to-wave64-pcm/pcm-exact/native-portable",
@@ -4294,7 +4409,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:aiff-pcm-to-wave64-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/aiff-pcm-to-wave64-pcm/edge-weight.json#capability:aiff-pcm-to-wave64-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:au-pcm-to-aiff-pcm/pcm-exact/native-portable",
@@ -4319,7 +4435,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:au-pcm-to-aiff-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/au-pcm-to-aiff-pcm/edge-weight.json#capability:au-pcm-to-aiff-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:au-pcm-to-bw64-pcm/pcm-exact/native-portable",
@@ -4344,7 +4461,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:au-pcm-to-bw64-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/au-pcm-to-bw64-pcm/edge-weight.json#capability:au-pcm-to-bw64-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:au-pcm-to-bwf-pcm/pcm-exact/native-portable",
@@ -4369,7 +4487,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:au-pcm-to-bwf-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/au-pcm-to-bwf-pcm/edge-weight.json#capability:au-pcm-to-bwf-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:au-pcm-to-caf-pcm/pcm-exact/native-portable",
@@ -4394,7 +4513,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:au-pcm-to-caf-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/au-pcm-to-caf-pcm/edge-weight.json#capability:au-pcm-to-caf-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:au-pcm-to-rf64-pcm/pcm-exact/native-portable",
@@ -4419,7 +4539,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:au-pcm-to-rf64-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/au-pcm-to-rf64-pcm/edge-weight.json#capability:au-pcm-to-rf64-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:au-pcm-to-wav-pcm/pcm-exact/native-portable",
@@ -4444,7 +4565,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:au-pcm-to-wav-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/au-pcm-to-wav-pcm/edge-weight.json#capability:au-pcm-to-wav-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:au-pcm-to-wave64-pcm/pcm-exact/native-portable",
@@ -4469,7 +4591,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:au-pcm-to-wave64-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/au-pcm-to-wave64-pcm/edge-weight.json#capability:au-pcm-to-wave64-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:bmp-to-pam/rgba8-code-value-exact/native-portable",
@@ -4495,7 +4618,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:bmp-to-pam/rgba8-code-value-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/direct/bmp-to-pam/edge-weight.json#capability:bmp-to-pam/rgba8-code-value-exact/native-portable"
     },
     {
       "capability_id": "capability:bmp-to-png/pixel-exact/native-portable",
@@ -4519,7 +4643,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:bmp-to-png/pixel-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/direct/bmp-to-png/edge-weight.json#capability:bmp-to-png/pixel-exact/native-portable"
     },
     {
       "capability_id": "capability:bmp-to-ppm/rgba8-code-value-exact/native-portable",
@@ -4545,7 +4670,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:bmp-to-ppm/rgba8-code-value-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/direct/bmp-to-ppm/edge-weight.json#capability:bmp-to-ppm/rgba8-code-value-exact/native-portable"
     },
     {
       "capability_id": "capability:bmp-to-qoi/rgba8-code-value-exact/native-portable",
@@ -4571,7 +4697,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:bmp-to-qoi/rgba8-code-value-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/direct/bmp-to-qoi/edge-weight.json#capability:bmp-to-qoi/rgba8-code-value-exact/native-portable"
     },
     {
       "capability_id": "capability:bmp-to-tga/rgba8-code-value-exact/native-portable",
@@ -4597,7 +4724,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:bmp-to-tga/rgba8-code-value-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/direct/bmp-to-tga/edge-weight.json#capability:bmp-to-tga/rgba8-code-value-exact/native-portable"
     },
     {
       "capability_id": "capability:bw64-pcm-to-aiff-pcm/pcm-exact/native-portable",
@@ -4622,7 +4750,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:bw64-pcm-to-aiff-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/bw64-pcm-to-aiff-pcm/edge-weight.json#capability:bw64-pcm-to-aiff-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:bw64-pcm-to-au-pcm/pcm-exact/native-portable",
@@ -4647,7 +4776,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:bw64-pcm-to-au-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/bw64-pcm-to-au-pcm/edge-weight.json#capability:bw64-pcm-to-au-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:bw64-pcm-to-bwf-pcm/pcm-exact/native-portable",
@@ -4672,7 +4802,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:bw64-pcm-to-bwf-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/bw64-pcm-to-bwf-pcm/edge-weight.json#capability:bw64-pcm-to-bwf-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:bw64-pcm-to-caf-pcm/pcm-exact/native-portable",
@@ -4697,7 +4828,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:bw64-pcm-to-caf-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/bw64-pcm-to-caf-pcm/edge-weight.json#capability:bw64-pcm-to-caf-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:bw64-pcm-to-rf64-pcm/pcm-exact/native-portable",
@@ -4722,7 +4854,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:bw64-pcm-to-rf64-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/bw64-pcm-to-rf64-pcm/edge-weight.json#capability:bw64-pcm-to-rf64-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:bw64-pcm-to-wav-pcm/pcm-exact/native-portable",
@@ -4747,7 +4880,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:bw64-pcm-to-wav-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/bw64-pcm-to-wav-pcm/edge-weight.json#capability:bw64-pcm-to-wav-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:bw64-pcm-to-wave64-pcm/pcm-exact/native-portable",
@@ -4772,7 +4906,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:bw64-pcm-to-wave64-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/bw64-pcm-to-wave64-pcm/edge-weight.json#capability:bw64-pcm-to-wave64-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:bwf-pcm-to-aiff-pcm/pcm-exact/native-portable",
@@ -4797,7 +4932,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:bwf-pcm-to-aiff-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/bwf-pcm-to-aiff-pcm/edge-weight.json#capability:bwf-pcm-to-aiff-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:bwf-pcm-to-au-pcm/pcm-exact/native-portable",
@@ -4822,7 +4958,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:bwf-pcm-to-au-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/bwf-pcm-to-au-pcm/edge-weight.json#capability:bwf-pcm-to-au-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:bwf-pcm-to-bw64-pcm/pcm-exact/native-portable",
@@ -4847,7 +4984,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:bwf-pcm-to-bw64-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/bwf-pcm-to-bw64-pcm/edge-weight.json#capability:bwf-pcm-to-bw64-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:bwf-pcm-to-caf-pcm/pcm-exact/native-portable",
@@ -4872,7 +5010,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:bwf-pcm-to-caf-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/bwf-pcm-to-caf-pcm/edge-weight.json#capability:bwf-pcm-to-caf-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:bwf-pcm-to-rf64-pcm/pcm-exact/native-portable",
@@ -4897,7 +5036,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:bwf-pcm-to-rf64-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/bwf-pcm-to-rf64-pcm/edge-weight.json#capability:bwf-pcm-to-rf64-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:bwf-pcm-to-wav-pcm/pcm-exact/native-portable",
@@ -4922,7 +5062,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:bwf-pcm-to-wav-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/bwf-pcm-to-wav-pcm/edge-weight.json#capability:bwf-pcm-to-wav-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:bwf-pcm-to-wave64-pcm/pcm-exact/native-portable",
@@ -4947,7 +5088,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:bwf-pcm-to-wave64-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/bwf-pcm-to-wave64-pcm/edge-weight.json#capability:bwf-pcm-to-wave64-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:caf-pcm-to-aiff-pcm/pcm-exact/native-portable",
@@ -4972,7 +5114,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:caf-pcm-to-aiff-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/caf-pcm-to-aiff-pcm/edge-weight.json#capability:caf-pcm-to-aiff-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:caf-pcm-to-au-pcm/pcm-exact/native-portable",
@@ -4997,7 +5140,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:caf-pcm-to-au-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/caf-pcm-to-au-pcm/edge-weight.json#capability:caf-pcm-to-au-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:caf-pcm-to-bw64-pcm/pcm-exact/native-portable",
@@ -5022,7 +5166,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:caf-pcm-to-bw64-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/caf-pcm-to-bw64-pcm/edge-weight.json#capability:caf-pcm-to-bw64-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:caf-pcm-to-bwf-pcm/pcm-exact/native-portable",
@@ -5047,7 +5192,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:caf-pcm-to-bwf-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/caf-pcm-to-bwf-pcm/edge-weight.json#capability:caf-pcm-to-bwf-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:caf-pcm-to-rf64-pcm/pcm-exact/native-portable",
@@ -5072,7 +5218,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:caf-pcm-to-rf64-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/caf-pcm-to-rf64-pcm/edge-weight.json#capability:caf-pcm-to-rf64-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:caf-pcm-to-wav-pcm/pcm-exact/native-portable",
@@ -5097,7 +5244,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:caf-pcm-to-wav-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/caf-pcm-to-wav-pcm/edge-weight.json#capability:caf-pcm-to-wav-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:caf-pcm-to-wave64-pcm/pcm-exact/native-portable",
@@ -5122,7 +5270,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:caf-pcm-to-wave64-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/caf-pcm-to-wave64-pcm/edge-weight.json#capability:caf-pcm-to-wave64-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:normalize-png/png-native-canonical/native-portable",
@@ -5148,7 +5297,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:normalize-png/png-native-canonical/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/structural/normalize-png/edge-weight.json#capability:normalize-png/png-native-canonical/native-portable"
     },
     {
       "capability_id": "capability:pam-to-bmp/rgba8-code-value-exact/native-portable",
@@ -5174,7 +5324,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:pam-to-bmp/rgba8-code-value-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/direct/pam-to-bmp/edge-weight.json#capability:pam-to-bmp/rgba8-code-value-exact/native-portable"
     },
     {
       "capability_id": "capability:pam-to-png/rgba8-code-value-exact/native-portable",
@@ -5200,7 +5351,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:pam-to-png/rgba8-code-value-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/direct/pam-to-png/edge-weight.json#capability:pam-to-png/rgba8-code-value-exact/native-portable"
     },
     {
       "capability_id": "capability:pam-to-ppm/rgba8-code-value-exact/native-portable",
@@ -5226,7 +5378,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:pam-to-ppm/rgba8-code-value-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/direct/pam-to-ppm/edge-weight.json#capability:pam-to-ppm/rgba8-code-value-exact/native-portable"
     },
     {
       "capability_id": "capability:pam-to-qoi/rgba8-code-value-exact/native-portable",
@@ -5252,7 +5405,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:pam-to-qoi/rgba8-code-value-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/direct/pam-to-qoi/edge-weight.json#capability:pam-to-qoi/rgba8-code-value-exact/native-portable"
     },
     {
       "capability_id": "capability:pam-to-tga/rgba8-code-value-exact/native-portable",
@@ -5278,7 +5432,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:pam-to-tga/rgba8-code-value-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/direct/pam-to-tga/edge-weight.json#capability:pam-to-tga/rgba8-code-value-exact/native-portable"
     },
     {
       "capability_id": "capability:png-alpha-premultiply/png-native-canonical/native-portable",
@@ -5304,7 +5459,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:png-alpha-premultiply/png-native-canonical/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/transform/png-alpha-premultiply/edge-weight.json#capability:png-alpha-premultiply/png-native-canonical/native-portable"
     },
     {
       "capability_id": "capability:png-alpha-unpremultiply/png-native-canonical/native-portable",
@@ -5330,7 +5486,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:png-alpha-unpremultiply/png-native-canonical/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/transform/png-alpha-unpremultiply/edge-weight.json#capability:png-alpha-unpremultiply/png-native-canonical/native-portable"
     },
     {
       "capability_id": "capability:png-crop/png-native-canonical/native-portable",
@@ -5356,7 +5513,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:png-crop/png-native-canonical/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/transform/png-crop/edge-weight.json#capability:png-crop/png-native-canonical/native-portable"
     },
     {
       "capability_id": "capability:png-flip-horizontal/png-native-canonical/native-portable",
@@ -5382,7 +5540,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:png-flip-horizontal/png-native-canonical/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/transform/png-flip-horizontal/edge-weight.json#capability:png-flip-horizontal/png-native-canonical/native-portable"
     },
     {
       "capability_id": "capability:png-flip-vertical/png-native-canonical/native-portable",
@@ -5408,7 +5567,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:png-flip-vertical/png-native-canonical/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/transform/png-flip-vertical/edge-weight.json#capability:png-flip-vertical/png-native-canonical/native-portable"
     },
     {
       "capability_id": "capability:png-pad/png-native-canonical/native-portable",
@@ -5434,7 +5594,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:png-pad/png-native-canonical/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/transform/png-pad/edge-weight.json#capability:png-pad/png-native-canonical/native-portable"
     },
     {
       "capability_id": "capability:png-rotate-180/png-native-canonical/native-portable",
@@ -5460,7 +5621,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:png-rotate-180/png-native-canonical/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/transform/png-rotate-180/edge-weight.json#capability:png-rotate-180/png-native-canonical/native-portable"
     },
     {
       "capability_id": "capability:png-rotate-270/png-native-canonical/native-portable",
@@ -5486,7 +5648,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:png-rotate-270/png-native-canonical/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/transform/png-rotate-270/edge-weight.json#capability:png-rotate-270/png-native-canonical/native-portable"
     },
     {
       "capability_id": "capability:png-rotate-90/png-native-canonical/native-portable",
@@ -5512,7 +5675,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:png-rotate-90/png-native-canonical/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/transform/png-rotate-90/edge-weight.json#capability:png-rotate-90/png-native-canonical/native-portable"
     },
     {
       "capability_id": "capability:png-to-bmp/rgba8-code-value-exact/native-portable",
@@ -5538,7 +5702,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:png-to-bmp/rgba8-code-value-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/direct/png-to-bmp/edge-weight.json#capability:png-to-bmp/rgba8-code-value-exact/native-portable"
     },
     {
       "capability_id": "capability:png-to-pam/rgba8-code-value-exact/native-portable",
@@ -5564,7 +5729,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:png-to-pam/rgba8-code-value-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/direct/png-to-pam/edge-weight.json#capability:png-to-pam/rgba8-code-value-exact/native-portable"
     },
     {
       "capability_id": "capability:png-to-ppm/rgba8-code-value-exact/native-portable",
@@ -5590,7 +5756,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:png-to-ppm/rgba8-code-value-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/direct/png-to-ppm/edge-weight.json#capability:png-to-ppm/rgba8-code-value-exact/native-portable"
     },
     {
       "capability_id": "capability:png-to-qoi/rgba8-code-value-exact/native-portable",
@@ -5616,7 +5783,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:png-to-qoi/rgba8-code-value-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/direct/png-to-qoi/edge-weight.json#capability:png-to-qoi/rgba8-code-value-exact/native-portable"
     },
     {
       "capability_id": "capability:png-to-tga/rgba8-code-value-exact/native-portable",
@@ -5642,7 +5810,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:png-to-tga/rgba8-code-value-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/direct/png-to-tga/edge-weight.json#capability:png-to-tga/rgba8-code-value-exact/native-portable"
     },
     {
       "capability_id": "capability:ppm-to-bmp/rgba8-code-value-exact/native-portable",
@@ -5668,7 +5837,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:ppm-to-bmp/rgba8-code-value-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/direct/ppm-to-bmp/edge-weight.json#capability:ppm-to-bmp/rgba8-code-value-exact/native-portable"
     },
     {
       "capability_id": "capability:ppm-to-pam/rgba8-code-value-exact/native-portable",
@@ -5694,7 +5864,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:ppm-to-pam/rgba8-code-value-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/direct/ppm-to-pam/edge-weight.json#capability:ppm-to-pam/rgba8-code-value-exact/native-portable"
     },
     {
       "capability_id": "capability:ppm-to-png/rgba8-code-value-exact/native-portable",
@@ -5720,7 +5891,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:ppm-to-png/rgba8-code-value-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/direct/ppm-to-png/edge-weight.json#capability:ppm-to-png/rgba8-code-value-exact/native-portable"
     },
     {
       "capability_id": "capability:ppm-to-qoi/rgba8-code-value-exact/native-portable",
@@ -5746,7 +5918,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:ppm-to-qoi/rgba8-code-value-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/direct/ppm-to-qoi/edge-weight.json#capability:ppm-to-qoi/rgba8-code-value-exact/native-portable"
     },
     {
       "capability_id": "capability:ppm-to-tga/rgba8-code-value-exact/native-portable",
@@ -5772,7 +5945,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:ppm-to-tga/rgba8-code-value-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/direct/ppm-to-tga/edge-weight.json#capability:ppm-to-tga/rgba8-code-value-exact/native-portable"
     },
     {
       "capability_id": "capability:qoi-to-bmp/rgba8-code-value-exact/native-portable",
@@ -5798,7 +5972,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:qoi-to-bmp/rgba8-code-value-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/direct/qoi-to-bmp/edge-weight.json#capability:qoi-to-bmp/rgba8-code-value-exact/native-portable"
     },
     {
       "capability_id": "capability:qoi-to-pam/rgba8-code-value-exact/native-portable",
@@ -5824,7 +5999,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:qoi-to-pam/rgba8-code-value-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/direct/qoi-to-pam/edge-weight.json#capability:qoi-to-pam/rgba8-code-value-exact/native-portable"
     },
     {
       "capability_id": "capability:qoi-to-png/rgba8-code-value-exact/native-portable",
@@ -5850,7 +6026,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:qoi-to-png/rgba8-code-value-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/direct/qoi-to-png/edge-weight.json#capability:qoi-to-png/rgba8-code-value-exact/native-portable"
     },
     {
       "capability_id": "capability:qoi-to-ppm/rgba8-code-value-exact/native-portable",
@@ -5876,7 +6053,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:qoi-to-ppm/rgba8-code-value-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/direct/qoi-to-ppm/edge-weight.json#capability:qoi-to-ppm/rgba8-code-value-exact/native-portable"
     },
     {
       "capability_id": "capability:qoi-to-tga/rgba8-code-value-exact/native-portable",
@@ -5902,7 +6080,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:qoi-to-tga/rgba8-code-value-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/direct/qoi-to-tga/edge-weight.json#capability:qoi-to-tga/rgba8-code-value-exact/native-portable"
     },
     {
       "capability_id": "capability:raw-pcm-channel-map/frame-exact/native-portable",
@@ -5927,7 +6106,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:raw-pcm-channel-map/frame-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/transform/raw-pcm-channel-map/edge-weight.json#capability:raw-pcm-channel-map/frame-exact/native-portable"
     },
     {
       "capability_id": "capability:raw-pcm-endian-signedness-normalize/frame-exact/native-portable",
@@ -5952,7 +6132,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:raw-pcm-endian-signedness-normalize/frame-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/transform/raw-pcm-endian-signedness-normalize/edge-weight.json#capability:raw-pcm-endian-signedness-normalize/frame-exact/native-portable"
     },
     {
       "capability_id": "capability:raw-pcm-reverse/frame-exact/native-portable",
@@ -5977,7 +6158,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:raw-pcm-reverse/frame-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/transform/raw-pcm-reverse/edge-weight.json#capability:raw-pcm-reverse/frame-exact/native-portable"
     },
     {
       "capability_id": "capability:raw-pcm-to-wav-pcm/pcm-exact/native-portable",
@@ -6002,7 +6184,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:raw-pcm-to-wav-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/raw-pcm-to-wav-pcm/edge-weight.json#capability:raw-pcm-to-wav-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:raw-pcm-trim/frame-exact/native-portable",
@@ -6027,7 +6210,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:raw-pcm-trim/frame-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/transform/raw-pcm-trim/edge-weight.json#capability:raw-pcm-trim/frame-exact/native-portable"
     },
     {
       "capability_id": "capability:rf64-pcm-to-aiff-pcm/pcm-exact/native-portable",
@@ -6052,7 +6236,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:rf64-pcm-to-aiff-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/rf64-pcm-to-aiff-pcm/edge-weight.json#capability:rf64-pcm-to-aiff-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:rf64-pcm-to-au-pcm/pcm-exact/native-portable",
@@ -6077,7 +6262,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:rf64-pcm-to-au-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/rf64-pcm-to-au-pcm/edge-weight.json#capability:rf64-pcm-to-au-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:rf64-pcm-to-bw64-pcm/pcm-exact/native-portable",
@@ -6102,7 +6288,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:rf64-pcm-to-bw64-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/rf64-pcm-to-bw64-pcm/edge-weight.json#capability:rf64-pcm-to-bw64-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:rf64-pcm-to-bwf-pcm/pcm-exact/native-portable",
@@ -6127,7 +6314,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:rf64-pcm-to-bwf-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/rf64-pcm-to-bwf-pcm/edge-weight.json#capability:rf64-pcm-to-bwf-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:rf64-pcm-to-caf-pcm/pcm-exact/native-portable",
@@ -6152,7 +6340,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:rf64-pcm-to-caf-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/rf64-pcm-to-caf-pcm/edge-weight.json#capability:rf64-pcm-to-caf-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:rf64-pcm-to-wav-pcm/pcm-exact/native-portable",
@@ -6177,7 +6366,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:rf64-pcm-to-wav-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/rf64-pcm-to-wav-pcm/edge-weight.json#capability:rf64-pcm-to-wav-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:rf64-pcm-to-wave64-pcm/pcm-exact/native-portable",
@@ -6202,7 +6392,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:rf64-pcm-to-wave64-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/rf64-pcm-to-wave64-pcm/edge-weight.json#capability:rf64-pcm-to-wave64-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:tga-to-bmp/rgba8-code-value-exact/native-portable",
@@ -6228,7 +6419,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:tga-to-bmp/rgba8-code-value-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/direct/tga-to-bmp/edge-weight.json#capability:tga-to-bmp/rgba8-code-value-exact/native-portable"
     },
     {
       "capability_id": "capability:tga-to-pam/rgba8-code-value-exact/native-portable",
@@ -6254,7 +6446,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:tga-to-pam/rgba8-code-value-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/direct/tga-to-pam/edge-weight.json#capability:tga-to-pam/rgba8-code-value-exact/native-portable"
     },
     {
       "capability_id": "capability:tga-to-png/rgba8-code-value-exact/native-portable",
@@ -6280,7 +6473,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:tga-to-png/rgba8-code-value-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/direct/tga-to-png/edge-weight.json#capability:tga-to-png/rgba8-code-value-exact/native-portable"
     },
     {
       "capability_id": "capability:tga-to-ppm/rgba8-code-value-exact/native-portable",
@@ -6306,7 +6500,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:tga-to-ppm/rgba8-code-value-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/direct/tga-to-ppm/edge-weight.json#capability:tga-to-ppm/rgba8-code-value-exact/native-portable"
     },
     {
       "capability_id": "capability:tga-to-qoi/rgba8-code-value-exact/native-portable",
@@ -6332,7 +6527,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:tga-to-qoi/rgba8-code-value-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/direct/tga-to-qoi/edge-weight.json#capability:tga-to-qoi/rgba8-code-value-exact/native-portable"
     },
     {
       "capability_id": "capability:utf16-to-utf8/replace-invalid/native-portable",
@@ -6355,7 +6551,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:utf16-to-utf8/replace-invalid/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/text/byte-coding/direct/utf16-to-utf8/edge-weight.json#capability:utf16-to-utf8/replace-invalid/native-portable"
     },
     {
       "capability_id": "capability:utf16-to-utf8/strict/native-portable",
@@ -6378,7 +6575,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:utf16-to-utf8/strict/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/text/byte-coding/direct/utf16-to-utf8/edge-weight.json#capability:utf16-to-utf8/strict/native-portable"
     },
     {
       "capability_id": "capability:validate-png/png-native-canonical/native-portable",
@@ -6404,7 +6602,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:validate-png/png-native-canonical/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/image/raster/analyze/validate-png/edge-weight.json#capability:validate-png/png-native-canonical/native-portable"
     },
     {
       "capability_id": "capability:wav-pcm-to-aiff/pcm-exact/native-portable",
@@ -6429,7 +6628,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:wav-pcm-to-aiff/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/wav-pcm-to-aiff/edge-weight.json#capability:wav-pcm-to-aiff/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:wav-pcm-to-au-pcm/pcm-exact/native-portable",
@@ -6454,7 +6654,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:wav-pcm-to-au-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/wav-pcm-to-au-pcm/edge-weight.json#capability:wav-pcm-to-au-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:wav-pcm-to-bw64-pcm/pcm-exact/native-portable",
@@ -6479,7 +6680,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:wav-pcm-to-bw64-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/wav-pcm-to-bw64-pcm/edge-weight.json#capability:wav-pcm-to-bw64-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:wav-pcm-to-bwf-pcm/pcm-exact/native-portable",
@@ -6504,7 +6706,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:wav-pcm-to-bwf-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/wav-pcm-to-bwf-pcm/edge-weight.json#capability:wav-pcm-to-bwf-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:wav-pcm-to-caf-pcm/pcm-exact/native-portable",
@@ -6529,7 +6732,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:wav-pcm-to-caf-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/wav-pcm-to-caf-pcm/edge-weight.json#capability:wav-pcm-to-caf-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:wav-pcm-to-raw-pcm/pcm-exact/native-portable",
@@ -6554,7 +6758,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:wav-pcm-to-raw-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/wav-pcm-to-raw-pcm/edge-weight.json#capability:wav-pcm-to-raw-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:wav-pcm-to-rf64-pcm/pcm-exact/native-portable",
@@ -6579,7 +6784,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:wav-pcm-to-rf64-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/wav-pcm-to-rf64-pcm/edge-weight.json#capability:wav-pcm-to-rf64-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:wav-pcm-to-wave64-pcm/pcm-exact/native-portable",
@@ -6604,7 +6810,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:wav-pcm-to-wave64-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/wav-pcm-to-wave64-pcm/edge-weight.json#capability:wav-pcm-to-wave64-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:wave64-pcm-to-aiff-pcm/pcm-exact/native-portable",
@@ -6629,7 +6836,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:wave64-pcm-to-aiff-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/wave64-pcm-to-aiff-pcm/edge-weight.json#capability:wave64-pcm-to-aiff-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:wave64-pcm-to-au-pcm/pcm-exact/native-portable",
@@ -6654,7 +6862,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:wave64-pcm-to-au-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/wave64-pcm-to-au-pcm/edge-weight.json#capability:wave64-pcm-to-au-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:wave64-pcm-to-bw64-pcm/pcm-exact/native-portable",
@@ -6679,7 +6888,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:wave64-pcm-to-bw64-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/wave64-pcm-to-bw64-pcm/edge-weight.json#capability:wave64-pcm-to-bw64-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:wave64-pcm-to-bwf-pcm/pcm-exact/native-portable",
@@ -6704,7 +6914,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:wave64-pcm-to-bwf-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/wave64-pcm-to-bwf-pcm/edge-weight.json#capability:wave64-pcm-to-bwf-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:wave64-pcm-to-caf-pcm/pcm-exact/native-portable",
@@ -6729,7 +6940,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:wave64-pcm-to-caf-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/wave64-pcm-to-caf-pcm/edge-weight.json#capability:wave64-pcm-to-caf-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:wave64-pcm-to-rf64-pcm/pcm-exact/native-portable",
@@ -6754,7 +6966,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:wave64-pcm-to-rf64-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/wave64-pcm-to-rf64-pcm/edge-weight.json#capability:wave64-pcm-to-rf64-pcm/pcm-exact/native-portable"
     },
     {
       "capability_id": "capability:wave64-pcm-to-wav-pcm/pcm-exact/native-portable",
@@ -6779,7 +6992,8 @@
       "seek_required": false,
       "cost_evidence": [
         "registry/performance/baseline.json#capability:wave64-pcm-to-wav-pcm/pcm-exact/native-portable"
-      ]
+      ],
+      "edge_weight": "capsules/audio/sampled-audio/direct/wave64-pcm-to-wav-pcm/edge-weight.json#capability:wave64-pcm-to-wav-pcm/pcm-exact/native-portable"
     }
   ]
 }

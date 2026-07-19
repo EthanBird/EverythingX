@@ -5,16 +5,16 @@
   "regeneration_rule": "Run python3 tools/build_image_backlog.py after changing the image representation universe or support matrix.",
   "summary": {
     "observed_image_media_type_labels": 276,
-    "reviewed_representations": 295,
+    "reviewed_representations": 298,
     "operator_templates": 68,
-    "ordered_pair_candidates": 10838,
+    "ordered_pair_candidates": 11234,
     "implemented_pair_candidates": 31
   },
   "domain_counts": {
     "general-raster-still": {
       "object_ir": "ir:raster",
-      "representations": 65,
-      "ordered_pair_candidates": 4160
+      "representations": 68,
+      "ordered_pair_candidates": 4556
     },
     "camera-raw-and-capture": {
       "object_ir": "ir:raster",
@@ -2621,6 +2621,9 @@
         "imagefmt:avif",
         "imagefmt:heif-avc",
         "imagefmt:heif-vvc",
+        "imagefmt:heif-evc",
+        "imagefmt:heif-jpeg",
+        "imagefmt:heif-uncompressed",
         "imagefmt:tiff-classic",
         "imagefmt:bigtiff",
         "imagefmt:cog",
@@ -2667,8 +2670,8 @@
         "computability": "unknown",
         "implementation_status": "not-implemented"
       },
-      "ordered_pair_candidates": 4160,
-      "materialized_sha256": "c563cd50082b1a48cc9b595e896fca1eb0d00c5f1231c44e150653c25141dd22"
+      "ordered_pair_candidates": 4556,
+      "materialized_sha256": "a1b347e24ce054552e7d5b1ecb1a59eb0445d84aa8fe9a9c83f018b537395956"
     },
     {
       "domain": "camera-raw-and-capture",
