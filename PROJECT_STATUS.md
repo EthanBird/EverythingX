@@ -44,6 +44,8 @@ These are source observations, not a count of unique canonical formats.
 | Audio operator templates | 42 |
 | Generated ordered audio pair candidates | 8,672 |
 | Actually implemented distinct-format audio pairs | 36 |
+| Capsules covered by performance harness | 42 |
+| Capability edges covered by performance harness | 43 |
 
 `registry/support-matrix.json` is generated from real manifests and answers what works now. `operators/audio/backlog.json` is a research and implementation queue; its candidate count is not a feature count.
 
@@ -125,6 +127,14 @@ These are source observations, not a count of unique canonical formats.
 - Every Capsule retains its own complete source, manifest, defaults, lockfile, license, tests, fuzz target and benchmark target, with no external runtime or path dependency.
 - The batch adds 80 core unit tests and 20 Kernel/Adapter default-invocation tests.
 
+### Performance evidence 0.1
+
+- One generated release-mode harness recursively covers all 42 production Capsules and all 43 Adapter capabilities.
+- Every capability is invoked through the Kernel with runnable defaults on deterministic small and large valid inputs.
+- Evidence records p50/p95 latency, throughput, output ratio and Capsule-reported working memory together with compiler, environment, commit and harness identity.
+- Planner-facing records expose a size-sensitive raw cost model; a calibrated 0–100 geometric score is retained only for same-profile ranking and UI summaries.
+- CI first runs functional, copy-out and Adapter tests, then rejects missing benchmark coverage or failed benchmark invocations.
+
 ## Intentionally absent
 
 - No claim that the first Capsule has completed fuzz and benchmark campaigns yet.
@@ -138,6 +148,7 @@ These are source observations, not a count of unique canonical formats.
 The three-Capsule reference gate is complete. Audio is the active implementation family:
 
 1. Harden all 42 production Capsules with corpus manifests, fuzz targets and reproducible benchmark reports.
-2. Close the remaining PCM Wave A multi-input/output work: channel split/aggregate and concatenate, which first requires an n:m Adapter transport contract.
-3. Continue through lossless codecs, container/essence operations, lossy codecs, signal transforms, musical events, sessions, banks and spatial audio according to `docs/12-audio-operator-program.md`.
-4. Do not switch to isolated Text/Table operators until the active audio wave has reached its declared closure gate.
+2. Implement the next 22-Capsule batch: the remaining ten non-WAV PCM mesh directions plus twelve AIFF↔CAF/AU/RF64/BW64/Wave64/BWF directions, completing all 56 directed edges among eight PCM containers.
+3. Close the remaining PCM Wave A multi-input/output work: channel split/aggregate and concatenate, which first requires an n:m Adapter transport contract.
+4. Continue through lossless codecs, container/essence operations, lossy codecs, signal transforms, musical events, sessions, banks and spatial audio according to `docs/12-audio-operator-program.md`.
+5. Do not switch to isolated Text/Table operators until the active audio wave has reached its declared closure gate.

@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://everythingx.dev/schema/performance-report.schema.json",
+  "title": "EverythingX Capability Performance Evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "profile_id", "generated_at", "scope", "comparability", "environment", "method", "summary", "capabilities"],
+  "properties": {
+    "schema_version": {"type": "string"},
+    "profile_id": {"type": "string", "pattern": "^exbench:"},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "scope": {"type": "string"},
+    "comparability": {"type": "string"},
+    "environment": {"type": "object"},
+    "method": {"type": "object"},
+    "summary": {
+      "type": "object",
+      "required": ["capsules", "capabilities"],
+      "properties": {
+        "capsules": {"type": "integer", "minimum": 1},
+        "capabilities": {"type": "integer", "minimum": 1}
+      }
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["capsule_id", "capability_id", "strategy", "backend", "source_format", "workloads", "cost_model", "score"],
+        "properties": {
+          "capsule_id": {"type": "string", "pattern": "^capsule:"},
+          "capability_id": {"type": "string", "pattern": "^capability:"},
+          "strategy": {"type": "string"},
+          "backend": {"type": "string"},
+          "source_format": {"type": "string"},
+          "workloads": {"type": "object"},
+          "cost_model": {
+            "type": "object",
+            "required": ["fixed_latency_micros", "nanoseconds_per_input_byte", "peak_memory_bytes_per_input_byte", "output_bytes_per_input_byte"],
+            "properties": {
+              "fixed_latency_micros": {"type": "number", "minimum": 0},
+              "nanoseconds_per_input_byte": {"type": "number", "minimum": 0},
+              "peak_memory_bytes_per_input_byte": {"type": "number", "minimum": 0},
+              "output_bytes_per_input_byte": {"type": "number", "minimum": 0}
+            }
+          },
+          "score": {
+            "type": "object",
+            "required": ["overall_0_to_100", "components_0_to_100", "use"],
+            "properties": {
+              "overall_0_to_100": {"type": "number", "minimum": 0, "maximum": 100},
+              "components_0_to_100": {"type": "object"},
+              "use": {"type": "string"}
+            }
+          }
+        }
+      }
+    }
+  }
+}

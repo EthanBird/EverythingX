@@ -104,7 +104,8 @@ tools/          数据同步、目录构建和一致性校验
 11. `docs/10-capsule-family-priority.md`
 12. `docs/11-object-ir-and-operator-universe.md`
 13. `docs/12-audio-operator-program.md`
-14. `capsules/README.md`
+14. `docs/13-performance-evidence.md`
+15. `capsules/README.md`
 
 ## 当前阶段
 
@@ -160,6 +161,8 @@ tools/          数据同步、目录构建和一致性校验
 | parameterized raw PCM | normalized endian/signedness raw PCM | `raw-pcm-endian-signedness-normalize` | frame-exact |
 
 机器可读权威清单是 `registry/support-matrix.json`。任何 Capsule 或 Adapter 更新都必须运行 `python3 tools/build_support_matrix.py`；CI 会拒绝过期矩阵。计划中、研究中和不可计算的边统一保存在 `operators/`，不得写进已支持清单。
+
+全部生产 Capsule 还必须进入统一的端到端性能评估。`tools/benchmark_capsules.py` 通过 Kernel 默认调用测量每个能力的 small/large p50/p95、吞吐、输出比例和显式工作内存，并生成供 Planner 使用的线性成本模型与 0–100 派生分。分数只能在相同 profile 和环境类别内用于等价边排序，硬约束、语义损失与原始成本模型始终优先。方法见 `docs/13-performance-evidence.md`。
 
 生产 Capsule 使用 `capsules/<domain>/<primary-object-ir>/<operator-role>/<capsule-name>` 层级；Schema 与 CI 会校验目录和 manifest 分类一致，并递归发现新 Capsule，因此扩展任意族类不需要继续维护手写路径列表。
 

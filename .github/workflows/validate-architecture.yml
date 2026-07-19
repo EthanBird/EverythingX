@@ -29,6 +29,12 @@ jobs:
       - name: Prove generated PCM Wave A batch is current
         run: python3 tools/scaffold_pcm_wave_a.py --check
 
+      - name: Prove all-Capsule performance harness is current
+        run: python3 tools/build_performance_harness.py --check
+
+      - name: Test performance scoring rules
+        run: python3 tools/test_benchmark_scoring.py
+
       - name: Check Capsule dependency boundaries
         run: python3 tools/check_capsule_independence.py
 
@@ -40,3 +46,6 @@ jobs:
 
       - name: Discover and test every Adapter through Kernel defaults
         run: python3 tools/test_adapters.py
+
+      - name: Benchmark and score every production Capsule capability
+        run: python3 tools/benchmark_capsules.py --output /tmp/everythingx-performance.json --print-report

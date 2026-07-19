@@ -1,0 +1,51 @@
+[package]
+name = "everythingx-capability-bench"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+everythingx-kernel = { path = "../../kernel/ex-kernel" }
+everythingx-protocol = { path = "../../kernel/ex-protocol" }
+adapter_000 = { package = "everythingx-adapter-aiff-pcm-to-wav-pcm", path = "../../capsules/audio/sampled-audio/direct/aiff-pcm-to-wav-pcm/everythingx/adapter" }
+adapter_001 = { package = "everythingx-adapter-au-pcm-to-bw64-pcm", path = "../../capsules/audio/sampled-audio/direct/au-pcm-to-bw64-pcm/everythingx/adapter" }
+adapter_002 = { package = "everythingx-adapter-au-pcm-to-bwf-pcm", path = "../../capsules/audio/sampled-audio/direct/au-pcm-to-bwf-pcm/everythingx/adapter" }
+adapter_003 = { package = "everythingx-adapter-au-pcm-to-caf-pcm", path = "../../capsules/audio/sampled-audio/direct/au-pcm-to-caf-pcm/everythingx/adapter" }
+adapter_004 = { package = "everythingx-adapter-au-pcm-to-rf64-pcm", path = "../../capsules/audio/sampled-audio/direct/au-pcm-to-rf64-pcm/everythingx/adapter" }
+adapter_005 = { package = "everythingx-adapter-au-pcm-to-wav-pcm", path = "../../capsules/audio/sampled-audio/direct/au-pcm-to-wav-pcm/everythingx/adapter" }
+adapter_006 = { package = "everythingx-adapter-au-pcm-to-wave64-pcm", path = "../../capsules/audio/sampled-audio/direct/au-pcm-to-wave64-pcm/everythingx/adapter" }
+adapter_007 = { package = "everythingx-adapter-bw64-pcm-to-au-pcm", path = "../../capsules/audio/sampled-audio/direct/bw64-pcm-to-au-pcm/everythingx/adapter" }
+adapter_008 = { package = "everythingx-adapter-bw64-pcm-to-caf-pcm", path = "../../capsules/audio/sampled-audio/direct/bw64-pcm-to-caf-pcm/everythingx/adapter" }
+adapter_009 = { package = "everythingx-adapter-bw64-pcm-to-rf64-pcm", path = "../../capsules/audio/sampled-audio/direct/bw64-pcm-to-rf64-pcm/everythingx/adapter" }
+adapter_010 = { package = "everythingx-adapter-bw64-pcm-to-wav-pcm", path = "../../capsules/audio/sampled-audio/direct/bw64-pcm-to-wav-pcm/everythingx/adapter" }
+adapter_011 = { package = "everythingx-adapter-bwf-pcm-to-au-pcm", path = "../../capsules/audio/sampled-audio/direct/bwf-pcm-to-au-pcm/everythingx/adapter" }
+adapter_012 = { package = "everythingx-adapter-bwf-pcm-to-caf-pcm", path = "../../capsules/audio/sampled-audio/direct/bwf-pcm-to-caf-pcm/everythingx/adapter" }
+adapter_013 = { package = "everythingx-adapter-bwf-pcm-to-wav-pcm", path = "../../capsules/audio/sampled-audio/direct/bwf-pcm-to-wav-pcm/everythingx/adapter" }
+adapter_014 = { package = "everythingx-adapter-caf-pcm-to-au-pcm", path = "../../capsules/audio/sampled-audio/direct/caf-pcm-to-au-pcm/everythingx/adapter" }
+adapter_015 = { package = "everythingx-adapter-caf-pcm-to-bw64-pcm", path = "../../capsules/audio/sampled-audio/direct/caf-pcm-to-bw64-pcm/everythingx/adapter" }
+adapter_016 = { package = "everythingx-adapter-caf-pcm-to-bwf-pcm", path = "../../capsules/audio/sampled-audio/direct/caf-pcm-to-bwf-pcm/everythingx/adapter" }
+adapter_017 = { package = "everythingx-adapter-caf-pcm-to-rf64-pcm", path = "../../capsules/audio/sampled-audio/direct/caf-pcm-to-rf64-pcm/everythingx/adapter" }
+adapter_018 = { package = "everythingx-adapter-caf-pcm-to-wav-pcm", path = "../../capsules/audio/sampled-audio/direct/caf-pcm-to-wav-pcm/everythingx/adapter" }
+adapter_019 = { package = "everythingx-adapter-caf-pcm-to-wave64-pcm", path = "../../capsules/audio/sampled-audio/direct/caf-pcm-to-wave64-pcm/everythingx/adapter" }
+adapter_020 = { package = "everythingx-adapter-raw-pcm-to-wav-pcm", path = "../../capsules/audio/sampled-audio/direct/raw-pcm-to-wav-pcm/everythingx/adapter" }
+adapter_021 = { package = "everythingx-adapter-rf64-pcm-to-au-pcm", path = "../../capsules/audio/sampled-audio/direct/rf64-pcm-to-au-pcm/everythingx/adapter" }
+adapter_022 = { package = "everythingx-adapter-rf64-pcm-to-bw64-pcm", path = "../../capsules/audio/sampled-audio/direct/rf64-pcm-to-bw64-pcm/everythingx/adapter" }
+adapter_023 = { package = "everythingx-adapter-rf64-pcm-to-caf-pcm", path = "../../capsules/audio/sampled-audio/direct/rf64-pcm-to-caf-pcm/everythingx/adapter" }
+adapter_024 = { package = "everythingx-adapter-rf64-pcm-to-wav-pcm", path = "../../capsules/audio/sampled-audio/direct/rf64-pcm-to-wav-pcm/everythingx/adapter" }
+adapter_025 = { package = "everythingx-adapter-wav-pcm-to-aiff", path = "../../capsules/audio/sampled-audio/direct/wav-pcm-to-aiff/everythingx/adapter" }
+adapter_026 = { package = "everythingx-adapter-wav-pcm-to-au-pcm", path = "../../capsules/audio/sampled-audio/direct/wav-pcm-to-au-pcm/everythingx/adapter" }
+adapter_027 = { package = "everythingx-adapter-wav-pcm-to-bw64-pcm", path = "../../capsules/audio/sampled-audio/direct/wav-pcm-to-bw64-pcm/everythingx/adapter" }
+adapter_028 = { package = "everythingx-adapter-wav-pcm-to-bwf-pcm", path = "../../capsules/audio/sampled-audio/direct/wav-pcm-to-bwf-pcm/everythingx/adapter" }
+adapter_029 = { package = "everythingx-adapter-wav-pcm-to-caf-pcm", path = "../../capsules/audio/sampled-audio/direct/wav-pcm-to-caf-pcm/everythingx/adapter" }
+adapter_030 = { package = "everythingx-adapter-wav-pcm-to-raw-pcm", path = "../../capsules/audio/sampled-audio/direct/wav-pcm-to-raw-pcm/everythingx/adapter" }
+adapter_031 = { package = "everythingx-adapter-wav-pcm-to-rf64-pcm", path = "../../capsules/audio/sampled-audio/direct/wav-pcm-to-rf64-pcm/everythingx/adapter" }
+adapter_032 = { package = "everythingx-adapter-wav-pcm-to-wave64-pcm", path = "../../capsules/audio/sampled-audio/direct/wav-pcm-to-wave64-pcm/everythingx/adapter" }
+adapter_033 = { package = "everythingx-adapter-wave64-pcm-to-au-pcm", path = "../../capsules/audio/sampled-audio/direct/wave64-pcm-to-au-pcm/everythingx/adapter" }
+adapter_034 = { package = "everythingx-adapter-wave64-pcm-to-caf-pcm", path = "../../capsules/audio/sampled-audio/direct/wave64-pcm-to-caf-pcm/everythingx/adapter" }
+adapter_035 = { package = "everythingx-adapter-wave64-pcm-to-wav-pcm", path = "../../capsules/audio/sampled-audio/direct/wave64-pcm-to-wav-pcm/everythingx/adapter" }
+adapter_036 = { package = "everythingx-adapter-raw-pcm-channel-map", path = "../../capsules/audio/sampled-audio/transform/raw-pcm-channel-map/everythingx/adapter" }
+adapter_037 = { package = "everythingx-adapter-raw-pcm-endian-signedness-normalize", path = "../../capsules/audio/sampled-audio/transform/raw-pcm-endian-signedness-normalize/everythingx/adapter" }
+adapter_038 = { package = "everythingx-adapter-raw-pcm-reverse", path = "../../capsules/audio/sampled-audio/transform/raw-pcm-reverse/everythingx/adapter" }
+adapter_039 = { package = "everythingx-adapter-raw-pcm-trim", path = "../../capsules/audio/sampled-audio/transform/raw-pcm-trim/everythingx/adapter" }
+adapter_040 = { package = "everythingx-adapter-bmp-to-png", path = "../../capsules/image/raster/direct/bmp-to-png/everythingx/adapter" }
+adapter_041 = { package = "everythingx-adapter-utf16-to-utf8", path = "../../capsules/text/byte-coding/direct/utf16-to-utf8/everythingx/adapter" }
