@@ -1,0 +1,48 @@
+name: Measure Rust build footprint
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/measure-build-footprint.yml"
+      - "tools/measure_build_footprint.py"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: measure-rust-build-footprint
+  cancel-in-progress: false
+
+jobs:
+  measure:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install stable Rust with the minimal profile
+        run: |
+          rustup toolchain install stable --profile minimal
+          rustup default stable
+          rustc -Vv
+          cargo -V
+
+      - name: Measure cold, warm and standalone build footprints
+        run: |
+          python3 tools/measure_build_footprint.py \
+            --json benchmarks/build-footprint/latest.json \
+            --markdown benchmarks/build-footprint/latest.md
+
+      - name: Commit reproducible build report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add benchmarks/build-footprint/latest.json benchmarks/build-footprint/latest.md
+          if git diff --cached --quiet; then
+            echo "Build footprint report is unchanged."
+          else
+            git commit -m "Record Rust build footprint"
+            git push
+          fi
