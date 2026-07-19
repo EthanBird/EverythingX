@@ -109,7 +109,7 @@ tools/          数据同步、目录构建和一致性校验
 
 ## 当前阶段
 
-现在不开发桌面端、CLI 或路径规划器。架构参考 Capsule 与 PCM interchange 前两轮已完成，当前生产 Capsule 达到 42 个。最新批次一次增加 20 个非 WAV 容器直连 Capsule，使 CAF、AU、RF64、BW64、Wave64、BWF 之间不必强制绕行 WAV；连同上一轮的 12 个 WAV 双向容器 Capsule 和 4 个 raw PCM 变换，批量生成、独立交付的 Wave A 实现达到 36 个。开发节奏固定为“先完成族级格式空间与全量算子 backlog，再批量实现并测试整个算子簇”。首版施工层有 31 个 Object IR、153 个算子动词、4,743 个 IR×算子研究位置和 310 个族级研究单元。音频当前归类 172 个表示、42 类操作模板和 8,672 条有序候选边，其中 36 条不同格式音频边已有实现。薄 Kernel 仍只负责注册、默认验证和直接调用。
+现在不开发桌面端、CLI 或路径规划器。当前生产 Capsule 达到 64 个。最新批次一次增加 22 个直连 Capsule：补齐 RF64、BW64、Wave64、BWF 之间剩余方向，并完成 AIFF 与 CAF、AU、RF64、BW64、Wave64、BWF 的双向转换。WAV、AIFF、CAF、AU、RF64、BW64、Wave64、BWF 八种 integer PCM 容器现在形成全部 56 条有向直连边；批量生成、独立交付的 Wave A 实现达到 58 个。开发节奏固定为“先完成族级格式空间与全量算子 backlog，再批量实现并测试整个算子簇”。首版施工层有 31 个 Object IR、153 个算子动词、4,743 个 IR×算子研究位置和 310 个族级研究单元。音频当前归类 172 个表示、42 类操作模板和 8,672 条有序候选边，其中 58 条不同格式音频边已有实现。薄 Kernel 仍只负责注册、默认验证和直接调用。
 
 ## 当前实际支持的转换
 
@@ -155,6 +155,28 @@ tools/          数据同步、目录构建和一致性校验
 | Broadcast WAVE PCM | Sun AU/SND PCM | `bwf-pcm-to-au-pcm` | pcm-exact |
 | RF64 PCM | BW64 PCM | `rf64-pcm-to-bw64-pcm` | pcm-exact |
 | BW64 PCM | RF64 PCM | `bw64-pcm-to-rf64-pcm` | pcm-exact |
+| RF64 PCM | Sony Wave64 PCM | `rf64-pcm-to-wave64-pcm` | pcm-exact |
+| Sony Wave64 PCM | RF64 PCM | `wave64-pcm-to-rf64-pcm` | pcm-exact |
+| RF64 PCM | Broadcast WAVE PCM | `rf64-pcm-to-bwf-pcm` | pcm-exact |
+| Broadcast WAVE PCM | RF64 PCM | `bwf-pcm-to-rf64-pcm` | pcm-exact |
+| BW64 PCM | Sony Wave64 PCM | `bw64-pcm-to-wave64-pcm` | pcm-exact |
+| Sony Wave64 PCM | BW64 PCM | `wave64-pcm-to-bw64-pcm` | pcm-exact |
+| BW64 PCM | Broadcast WAVE PCM | `bw64-pcm-to-bwf-pcm` | pcm-exact |
+| Broadcast WAVE PCM | BW64 PCM | `bwf-pcm-to-bw64-pcm` | pcm-exact |
+| Sony Wave64 PCM | Broadcast WAVE PCM | `wave64-pcm-to-bwf-pcm` | pcm-exact |
+| Broadcast WAVE PCM | Sony Wave64 PCM | `bwf-pcm-to-wave64-pcm` | pcm-exact |
+| classic AIFF PCM | Core Audio Format PCM | `aiff-pcm-to-caf-pcm` | pcm-exact |
+| Core Audio Format PCM | classic AIFF PCM | `caf-pcm-to-aiff-pcm` | pcm-exact |
+| classic AIFF PCM | Sun AU/SND PCM | `aiff-pcm-to-au-pcm` | pcm-exact |
+| Sun AU/SND PCM | classic AIFF PCM | `au-pcm-to-aiff-pcm` | pcm-exact |
+| classic AIFF PCM | RF64 PCM | `aiff-pcm-to-rf64-pcm` | pcm-exact |
+| RF64 PCM | classic AIFF PCM | `rf64-pcm-to-aiff-pcm` | pcm-exact |
+| classic AIFF PCM | BW64 PCM | `aiff-pcm-to-bw64-pcm` | pcm-exact |
+| BW64 PCM | classic AIFF PCM | `bw64-pcm-to-aiff-pcm` | pcm-exact |
+| classic AIFF PCM | Sony Wave64 PCM | `aiff-pcm-to-wave64-pcm` | pcm-exact |
+| Sony Wave64 PCM | classic AIFF PCM | `wave64-pcm-to-aiff-pcm` | pcm-exact |
+| classic AIFF PCM | Broadcast WAVE PCM | `aiff-pcm-to-bwf-pcm` | pcm-exact |
+| Broadcast WAVE PCM | classic AIFF PCM | `bwf-pcm-to-aiff-pcm` | pcm-exact |
 | parameterized raw PCM | trimmed raw PCM | `raw-pcm-trim` | frame-exact |
 | parameterized raw PCM | frame-reversed raw PCM | `raw-pcm-reverse` | frame-exact |
 | parameterized raw PCM | projected/reordered raw PCM channels | `raw-pcm-channel-map` | frame-exact |
@@ -162,7 +184,7 @@ tools/          数据同步、目录构建和一致性校验
 
 机器可读权威清单是 `registry/support-matrix.json`。任何 Capsule 或 Adapter 更新都必须运行 `python3 tools/build_support_matrix.py`；CI 会拒绝过期矩阵。计划中、研究中和不可计算的边统一保存在 `operators/`，不得写进已支持清单。
 
-全部生产 Capsule 还必须进入统一的端到端性能评估。`tools/benchmark_capsules.py` 通过 Kernel 默认调用测量每个能力的 small/large p50/p95、吞吐、输出比例和显式工作内存，并生成供 Planner 使用的线性成本模型与 0–100 派生分。首份受控基线已覆盖全部 42 个生产 Capsule 和 43 条能力，保存在 `registry/performance/baseline.json`；CI 会拒绝能力边漏测或 evidence 链接失效。分数只能在相同 profile 和环境类别内用于等价边排序，硬约束、语义损失与原始成本模型始终优先。方法见 `docs/13-performance-evidence.md`。
+全部生产 Capsule 还必须进入统一的端到端性能评估。`tools/benchmark_capsules.py` 通过 Kernel 默认调用测量每个能力的 small/large p50/p95、吞吐、输出比例和显式工作内存，并生成供 Planner 使用的线性成本模型与 0–100 派生分。当前受控基线已覆盖全部 64 个生产 Capsule 和 65 条能力，保存在 `registry/performance/baseline.json`；CI 会拒绝能力边漏测或 evidence 链接失效。分数只能在相同 profile 和环境类别内用于等价边排序，硬约束、语义损失与原始成本模型始终优先。方法见 `docs/13-performance-evidence.md`。
 
 生产 Capsule 使用 `capsules/<domain>/<primary-object-ir>/<operator-role>/<capsule-name>` 层级；Schema 与 CI 会校验目录和 manifest 分类一致，并递归发现新 Capsule，因此扩展任意族类不需要继续维护手写路径列表。
 

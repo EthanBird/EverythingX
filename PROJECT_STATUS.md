@@ -35,17 +35,17 @@ These are source observations, not a count of unique canonical formats.
 
 | Metric | Count |
 |---|---:|
-| Actually implemented standalone Capsules | 42 |
-| Actually implemented Adapter capabilities | 43 |
-| Actually implemented logical format pairs | 39 |
+| Actually implemented standalone Capsules | 64 |
+| Actually implemented Adapter capabilities | 65 |
+| Actually implemented logical format pairs | 61 |
 | Object IR × operator-kind research positions | 4,743 |
 | Semantic-family × operator-family research cells | 310 |
 | Reviewed audio representations | 172 |
 | Audio operator templates | 42 |
 | Generated ordered audio pair candidates | 8,672 |
-| Actually implemented distinct-format audio pairs | 36 |
-| Capsules covered by performance harness | 42 |
-| Capability edges covered by performance harness | 43 |
+| Actually implemented distinct-format audio pairs | 58 |
+| Capsules covered by performance harness | 64 |
+| Capability edges covered by performance harness | 65 |
 
 `registry/support-matrix.json` is generated from real manifests and answers what works now. `operators/audio/backlog.json` is a research and implementation queue; its candidate count is not a feature count.
 
@@ -127,19 +127,27 @@ These are source observations, not a count of unique canonical formats.
 - Every Capsule retains its own complete source, manifest, defaults, lockfile, license, tests, fuzz target and benchmark target, with no external runtime or path dependency.
 - The batch adds 80 core unit tests and 20 Kernel/Adapter default-invocation tests.
 
+### PCM complete container mesh batch 0.4 — 22 Capsules
+
+- Ten directed Capsules complete RF64↔Wave64, RF64↔BWF, BW64↔Wave64, BW64↔BWF and Wave64↔BWF.
+- Twelve directed Capsules complete AIFF↔CAF, AIFF↔AU, AIFF↔RF64, AIFF↔BW64, AIFF↔Wave64 and AIFF↔BWF.
+- The standalone implementation now parses and writes classic FORM/AIFF, COMM, SSND, integer 80-bit sample rates and signed big-endian PCM without a WAV intermediary.
+- Eight integer PCM containers now form a complete directed graph of 56 direct Capsule edges.
+- The batch adds 88 core unit tests and 22 Kernel/Adapter default-invocation tests; all 64 production Capsules pass copy-out testing.
+
 ### Performance evidence 0.1
 
-- One generated release-mode harness recursively covers all 42 production Capsules and all 43 Adapter capabilities.
+- One generated release-mode harness recursively covers all 64 production Capsules and all 65 Adapter capabilities.
 - Every capability is invoked through the Kernel with runnable defaults on deterministic small and large valid inputs.
 - Evidence records p50/p95 latency, throughput, output ratio and Capsule-reported working memory together with compiler, environment, commit and harness identity.
 - Planner-facing records expose a size-sensitive raw cost model; a calibrated 0–100 geometric score is retained only for same-profile ranking and UI summaries.
 - CI first runs functional, copy-out and Adapter tests, then rejects missing benchmark coverage or failed benchmark invocations.
-- The first controlled `ubuntu-24.04`/x86-64 baseline covers 42 Capsules and 43 capabilities: median large-workload throughput is 2,750.649 MiB/s; observed range is 27.912–3,702.017 MiB/s and calibrated score range is 14.190–58.040.
-- The measured low-throughput priorities are the current native BMP→PNG implementation (27.912 MiB/s), UTF-16→UTF-8 strategies (about 159 MiB/s) and raw PCM reverse (217.572 MiB/s); these values are evidence for optimization work, not correctness or quality rankings.
+- The current controlled `ubuntu-24.04`/x86-64 baseline covers 64 Capsules and 65 capabilities: median large-workload throughput is 2,210.839 MiB/s; observed range is 27.833–3,632.887 MiB/s and calibrated score range is 14.415–58.476.
+- AIFF↔AU reaches about 3.56–3.63 GiB/s because both use big-endian signed PCM; AIFF↔little-endian containers measures about 1.24–1.44 GiB/s because samples require byte-order transformation.
 
 ## Intentionally absent
 
-- No claim that the first Capsule has completed fuzz and benchmark campaigns yet.
+- No claim that fuzz, differential testing or broad real-world corpus campaigns are complete yet.
 - No `ex-core` framework that converter libraries must implement.
 - No mandatory shared IR.
 - No CLI, desktop application or multi-step Planner.
@@ -149,8 +157,8 @@ These are source observations, not a count of unique canonical formats.
 
 The three-Capsule reference gate is complete. Audio is the active implementation family:
 
-1. Harden all 42 production Capsules with corpus manifests, fuzz targets and reproducible benchmark reports.
-2. Implement the next 22-Capsule batch: the remaining ten non-WAV PCM mesh directions plus twelve AIFF↔CAF/AU/RF64/BW64/Wave64/BWF directions, completing all 56 directed edges among eight PCM containers.
+1. Harden all 64 production Capsules with corpus manifests, fuzz targets and reproducible benchmark reports.
+2. Start Wave B with a 20-Capsule FLAC family: eight PCM containers↔native FLAC (16), native FLAC↔Ogg FLAC (2), FLAC validation (1) and FLAC metadata normalization (1).
 3. Close the remaining PCM Wave A multi-input/output work: channel split/aggregate and concatenate, which first requires an n:m Adapter transport contract.
-4. Continue through lossless codecs, container/essence operations, lossy codecs, signal transforms, musical events, sessions, banks and spatial audio according to `docs/12-audio-operator-program.md`.
+4. Continue through ALAC, WavPack, APE, TTA and TAK after the FLAC implementation reaches conformance and performance gates.
 5. Do not switch to isolated Text/Table operators until the active audio wave has reached its declared closure gate.

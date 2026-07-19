@@ -115,7 +115,7 @@
       "Planned: source chunk graph, size and fragmented-reader campaigns"
     ],
     "benchmarks": [
-      "Pending controlled exbench baseline"
+      "registry/performance/baseline.json#capability:bw64-pcm-to-bwf-pcm/pcm-exact/native-portable"
     ]
   },
   "security": {

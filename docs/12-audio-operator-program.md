@@ -143,11 +143,29 @@ Wave A.2 继续填充不经 WAV 中转的 PCM 容器直连网：
 
 这一批 20 个有向 Capsule 均直接读取源容器并直接写出目标容器，不把 WAV 当作隐藏的中间文件；每个 Capsule 包含 4 个核心单元测试与 1 个 Adapter 默认调用测试。
 
+Wave A.3 完成八种 integer PCM 容器的有向直连闭环：
+
+```text
+[done] rf64-pcm-to-wave64-pcm   [done] wave64-pcm-to-rf64-pcm
+[done] rf64-pcm-to-bwf-pcm      [done] bwf-pcm-to-rf64-pcm
+[done] bw64-pcm-to-wave64-pcm   [done] wave64-pcm-to-bw64-pcm
+[done] bw64-pcm-to-bwf-pcm      [done] bwf-pcm-to-bw64-pcm
+[done] wave64-pcm-to-bwf-pcm    [done] bwf-pcm-to-wave64-pcm
+[done] aiff-pcm-to-caf-pcm      [done] caf-pcm-to-aiff-pcm
+[done] aiff-pcm-to-au-pcm       [done] au-pcm-to-aiff-pcm
+[done] aiff-pcm-to-rf64-pcm     [done] rf64-pcm-to-aiff-pcm
+[done] aiff-pcm-to-bw64-pcm     [done] bw64-pcm-to-aiff-pcm
+[done] aiff-pcm-to-wave64-pcm   [done] wave64-pcm-to-aiff-pcm
+[done] aiff-pcm-to-bwf-pcm      [done] bwf-pcm-to-aiff-pcm
+```
+
+至此 WAV、AIFF、CAF、AU、RF64、BW64、Wave64、BWF 的 `8 × 7 = 56` 条有向边均有独立直达 Capsule。Wave A 尚未完成的是 `1:n` / `n:1` 的 channel split、aggregate 和 concatenate，它们需要先扩展 Adapter transport，而不是伪装成单输入单输出转换。
+
 这些仍是彼此独立的 Rust libraries；共享知识可以来自规范与测试向量，不能通过仓库外 path dependency 破坏 copy-out 独立性。
 
 ### Wave B｜Lossless codec 闭环
 
-以 FLAC 为第一套完整自研 codec，再扩展 ALAC、WavPack、APE、TTA、TAK：
+以 FLAC 为第一套完整自研 codec。下一批固定为 20 个 Capsule：八种 PCM 容器与 native FLAC 的 16 条双向边、native FLAC↔Ogg FLAC 两条封装边、FLAC validate 与 metadata normalize；再扩展 ALAC、WavPack、APE、TTA、TAK：
 
 ```text
 wav/aiff/caf/raw PCM ↔ FLAC

@@ -1,7 +1,7 @@
 {
   "schema_version": "0.1.0",
   "profile_id": "exbench:ci-default-v1",
-  "generated_at": "2026-07-19T09:05:29.419847+00:00",
+  "generated_at": "2026-07-19T09:56:14.512654+00:00",
   "scope": "End-to-end Kernel default invocation including Adapter buffering and Capsule execution.",
   "comparability": "Scores are comparable only when profile_id, harness_sha256 and environment class match.",
   "environment": {
@@ -10,11 +10,11 @@
     "python": "3.12.3",
     "rustc": "rustc 1.97.0 (2d8144b78 2026-07-07)\nbinary: rustc\ncommit-hash: 2d8144b7880597b6e6d3dfd63a9a9efae3f533d3\ncommit-date: 2026-07-07\nhost: x86_64-unknown-linux-gnu\nrelease: 1.97.0\nLLVM version: 22.1.6",
     "github_runner_image": "ubuntu24",
-    "github_run_id": "29680914177",
-    "commit_sha": "14f0ae516729259cfd569b5ddd4166531d75a56c"
+    "github_run_id": "29682379710",
+    "commit_sha": "8977cb019d599d91f69ff9935dd563a59098ab89"
   },
   "method": {
-    "harness_sha256": "602b39e5ae457cb8512d41a2a5c26936e9c0e6974a8b3ddef3eb6f28f2cf1d24",
+    "harness_sha256": "d4c676bee7a65093271bf2cae47f87c64c60e337253b51766ade17e21a88ca64",
     "fixture_profile": "deterministic synthetic valid inputs; 16 KiB small and approximately 4 MiB large",
     "warmup_iterations": 2,
     "small_samples": 11,
@@ -26,17 +26,212 @@
     "calibration": {
       "operation": "4 MiB Vec clone",
       "input_bytes": 4194304,
-      "p50_micros": 154.599,
-      "p95_micros": 176.881,
-      "throughput_mib_s": 25873.389
+      "p50_micros": 164.168,
+      "p95_micros": 193.173,
+      "throughput_mib_s": 24365.284
     },
     "score_formula": "geometric_mean(throughput^.55, latency^.20, memory^.15, stability^.10), calibrated to same-run Vec clone"
   },
   "summary": {
-    "capabilities": 43,
-    "capsules": 42
+    "capabilities": 65,
+    "capsules": 64
   },
   "capabilities": [
+    {
+      "capsule_id": "capsule:aiff-pcm-to-au-pcm",
+      "capability_id": "capability:aiff-pcm-to-au-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:aiff-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16438,
+          "output_bytes": 16408,
+          "p50_micros": 8.566,
+          "p95_micros": 9.568
+        },
+        "large": {
+          "input_bytes": 4194358,
+          "output_bytes": 4194328,
+          "p50_micros": 1101.067,
+          "p95_micros": 1209.461,
+          "throughput_mib_s": 3632.887,
+          "reported_peak_memory_bytes": 4263990
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 4.267562,
+        "nanoseconds_per_input_byte": 0.261493997,
+        "peak_memory_bytes_per_input_byte": 1.016601349,
+        "output_bytes_per_input_byte": 0.999992848
+      },
+      "score": {
+        "overall_0_to_100": 58.454,
+        "components_0_to_100": {
+          "throughput": 38.614,
+          "latency": 99.151,
+          "memory": 98.367,
+          "stability": 91.038
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:aiff-pcm-to-bw64-pcm",
+      "capability_id": "capability:aiff-pcm-to-bw64-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:aiff-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16438,
+          "output_bytes": 16464,
+          "p50_micros": 14.568,
+          "p95_micros": 16.25
+        },
+        "large": {
+          "input_bytes": 4194358,
+          "output_bytes": 4194384,
+          "p50_micros": 2963.194,
+          "p95_micros": 3018.238,
+          "throughput_mib_s": 1349.912,
+          "reported_peak_memory_bytes": 4263990
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 2.96665,
+        "nanoseconds_per_input_byte": 0.705764112,
+        "peak_memory_bytes_per_input_byte": 1.016601349,
+        "output_bytes_per_input_byte": 1.000006199
+      },
+      "score": {
+        "overall_0_to_100": 44.807,
+        "components_0_to_100": {
+          "throughput": 23.538,
+          "latency": 98.564,
+          "memory": 98.367,
+          "stability": 98.176
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:aiff-pcm-to-bwf-pcm",
+      "capability_id": "capability:aiff-pcm-to-bwf-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:aiff-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16438,
+          "output_bytes": 17038,
+          "p50_micros": 14.957,
+          "p95_micros": 16.621
+        },
+        "large": {
+          "input_bytes": 4194358,
+          "output_bytes": 4194958,
+          "p50_micros": 2860.341,
+          "p95_micros": 2934.51,
+          "throughput_mib_s": 1398.453,
+          "reported_peak_memory_bytes": 4263990
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 3.761855,
+        "nanoseconds_per_input_byte": 0.681052773,
+        "peak_memory_bytes_per_input_byte": 1.016601349,
+        "output_bytes_per_input_byte": 1.000143049
+      },
+      "score": {
+        "overall_0_to_100": 45.208,
+        "components_0_to_100": {
+          "throughput": 23.957,
+          "latency": 98.526,
+          "memory": 98.367,
+          "stability": 97.473
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:aiff-pcm-to-caf-pcm",
+      "capability_id": "capability:aiff-pcm-to-caf-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:aiff-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16438,
+          "output_bytes": 16452,
+          "p50_micros": 14.567,
+          "p95_micros": 16.421
+        },
+        "large": {
+          "input_bytes": 4194358,
+          "output_bytes": 4194372,
+          "p50_micros": 2936.765,
+          "p95_micros": 3071.768,
+          "throughput_mib_s": 1362.06,
+          "reported_peak_memory_bytes": 4263990
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 3.06963,
+        "nanoseconds_per_input_byte": 0.699438477,
+        "peak_memory_bytes_per_input_byte": 1.016601349,
+        "output_bytes_per_input_byte": 1.000003338
+      },
+      "score": {
+        "overall_0_to_100": 44.798,
+        "components_0_to_100": {
+          "throughput": 23.644,
+          "latency": 98.564,
+          "memory": 98.367,
+          "stability": 95.605
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:aiff-pcm-to-rf64-pcm",
+      "capability_id": "capability:aiff-pcm-to-rf64-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:aiff-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16438,
+          "output_bytes": 16464,
+          "p50_micros": 15.8,
+          "p95_micros": 16.441
+        },
+        "large": {
+          "input_bytes": 4194358,
+          "output_bytes": 4194384,
+          "p50_micros": 3216.18,
+          "p95_micros": 3243.862,
+          "throughput_mib_s": 1243.727,
+          "reported_peak_memory_bytes": 4263990
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 3.208125,
+        "nanoseconds_per_input_byte": 0.766022327,
+        "peak_memory_bytes_per_input_byte": 1.016601349,
+        "output_bytes_per_input_byte": 1.000006199
+      },
+      "score": {
+        "overall_0_to_100": 43.841,
+        "components_0_to_100": {
+          "throughput": 22.593,
+          "latency": 98.445,
+          "memory": 98.367,
+          "stability": 99.147
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
     {
       "capsule_id": "capsule:aiff-pcm-to-wav-pcm",
       "capability_id": "capability:aiff-pcm-to-wav-pcm/pcm-exact/native-portable",
@@ -47,31 +242,109 @@
         "small": {
           "input_bytes": 16438,
           "output_bytes": 16428,
-          "p50_micros": 27.101,
-          "p95_micros": 28.444
+          "p50_micros": 26.89,
+          "p95_micros": 30.307
         },
         "large": {
           "input_bytes": 4194358,
           "output_bytes": 4194348,
-          "p50_micros": 5692.785,
-          "p95_micros": 5746.365,
-          "throughput_mib_s": 702.653,
+          "p50_micros": 5897.515,
+          "p95_micros": 5992.954,
+          "throughput_mib_s": 678.261,
           "reported_peak_memory_bytes": 4259894
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 4.809402,
-        "nanoseconds_per_input_byte": 1.356101601,
+        "fixed_latency_micros": 3.792063,
+        "nanoseconds_per_input_byte": 1.405154957,
         "peak_memory_bytes_per_input_byte": 1.015624799,
         "output_bytes_per_input_byte": 0.999997616
       },
       "score": {
-        "overall_0_to_100": 36.777,
+        "overall_0_to_100": 37.005,
         "components_0_to_100": {
-          "throughput": 16.479,
-          "latency": 97.361,
+          "throughput": 16.684,
+          "latency": 97.381,
           "memory": 98.462,
-          "stability": 99.068
+          "stability": 98.407
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:aiff-pcm-to-wave64-pcm",
+      "capability_id": "capability:aiff-pcm-to-wave64-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:aiff-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16438,
+          "output_bytes": 16488,
+          "p50_micros": 16.06,
+          "p95_micros": 16.671
+        },
+        "large": {
+          "input_bytes": 4194358,
+          "output_bytes": 4194408,
+          "p50_micros": 3223.513,
+          "p95_micros": 3291.792,
+          "throughput_mib_s": 1240.898,
+          "reported_peak_memory_bytes": 4263990
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 3.440296,
+        "nanoseconds_per_input_byte": 0.767715275,
+        "peak_memory_bytes_per_input_byte": 1.016601349,
+        "output_bytes_per_input_byte": 1.000011921
+      },
+      "score": {
+        "overall_0_to_100": 43.757,
+        "components_0_to_100": {
+          "throughput": 22.567,
+          "latency": 98.419,
+          "memory": 98.367,
+          "stability": 97.926
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:au-pcm-to-aiff-pcm",
+      "capability_id": "capability:au-pcm-to-aiff-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:au-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16408,
+          "output_bytes": 16438,
+          "p50_micros": 7.705,
+          "p95_micros": 8.426
+        },
+        "large": {
+          "input_bytes": 4194328,
+          "output_bytes": 4194358,
+          "p50_micros": 1123.27,
+          "p95_micros": 1165.629,
+          "throughput_mib_s": 3561.052,
+          "reported_peak_memory_bytes": 4263960
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 3.323827,
+        "nanoseconds_per_input_byte": 0.267014447,
+        "peak_memory_bytes_per_input_byte": 1.016601468,
+        "output_bytes_per_input_byte": 1.000007153
+      },
+      "score": {
+        "overall_0_to_100": 58.476,
+        "components_0_to_100": {
+          "throughput": 38.23,
+          "latency": 99.235,
+          "memory": 98.367,
+          "stability": 96.366
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -86,31 +359,31 @@
         "small": {
           "input_bytes": 16408,
           "output_bytes": 16464,
-          "p50_micros": 15.689,
-          "p95_micros": 16.431
+          "p50_micros": 14.126,
+          "p95_micros": 16.08
         },
         "large": {
           "input_bytes": 4194328,
           "output_bytes": 4194384,
-          "p50_micros": 3216.22,
-          "p95_micros": 3222.381,
-          "throughput_mib_s": 1243.703,
+          "p50_micros": 2771.504,
+          "p95_micros": 2797.734,
+          "throughput_mib_s": 1443.268,
           "reported_peak_memory_bytes": 4263960
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 3.119513,
-        "nanoseconds_per_input_byte": 0.766058469,
+        "fixed_latency_micros": 3.296913,
+        "nanoseconds_per_input_byte": 0.659988224,
         "peak_memory_bytes_per_input_byte": 1.016601468,
         "output_bytes_per_input_byte": 1.000013351
       },
       "score": {
-        "overall_0_to_100": 43.152,
+        "overall_0_to_100": 45.683,
         "components_0_to_100": {
-          "throughput": 21.925,
-          "latency": 98.455,
+          "throughput": 24.338,
+          "latency": 98.607,
           "memory": 98.367,
-          "stability": 99.809
+          "stability": 99.062
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -125,31 +398,31 @@
         "small": {
           "input_bytes": 16408,
           "output_bytes": 17038,
-          "p50_micros": 14.286,
-          "p95_micros": 15.219
+          "p50_micros": 14.317,
+          "p95_micros": 16.06
         },
         "large": {
           "input_bytes": 4194328,
           "output_bytes": 4194958,
-          "p50_micros": 2897.503,
-          "p95_micros": 2980.068,
-          "throughput_mib_s": 1380.507,
+          "p50_micros": 2777.005,
+          "p95_micros": 2851.846,
+          "throughput_mib_s": 1440.409,
           "reported_peak_memory_bytes": 4263960
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 2.962704,
-        "nanoseconds_per_input_byte": 0.690108236,
+        "fixed_latency_micros": 3.467059,
+        "nanoseconds_per_input_byte": 0.661259191,
         "peak_memory_bytes_per_input_byte": 1.016601468,
         "output_bytes_per_input_byte": 1.000150203
       },
       "score": {
-        "overall_0_to_100": 44.305,
+        "overall_0_to_100": 45.578,
         "components_0_to_100": {
-          "throughput": 23.099,
-          "latency": 98.592,
+          "throughput": 24.314,
+          "latency": 98.589,
           "memory": 98.367,
-          "stability": 97.229
+          "stability": 97.376
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -164,31 +437,31 @@
         "small": {
           "input_bytes": 16408,
           "output_bytes": 16452,
-          "p50_micros": 15.93,
-          "p95_micros": 16.661
+          "p50_micros": 14.347,
+          "p95_micros": 15.68
         },
         "large": {
           "input_bytes": 4194328,
           "output_bytes": 4194372,
-          "p50_micros": 3217.693,
-          "p95_micros": 3253.029,
-          "throughput_mib_s": 1243.134,
+          "p50_micros": 2805.548,
+          "p95_micros": 2864.509,
+          "throughput_mib_s": 1425.755,
           "reported_peak_memory_bytes": 4263960
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 3.355674,
-        "nanoseconds_per_input_byte": 0.766353353,
+        "fixed_latency_micros": 3.38508,
+        "nanoseconds_per_input_byte": 0.668083879,
         "peak_memory_bytes_per_input_byte": 1.016601468,
         "output_bytes_per_input_byte": 1.00001049
       },
       "score": {
-        "overall_0_to_100": 43.106,
+        "overall_0_to_100": 45.476,
         "components_0_to_100": {
-          "throughput": 21.92,
-          "latency": 98.432,
+          "throughput": 24.19,
+          "latency": 98.586,
           "memory": 98.367,
-          "stability": 98.914
+          "stability": 97.942
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -203,31 +476,31 @@
         "small": {
           "input_bytes": 16408,
           "output_bytes": 16464,
-          "p50_micros": 15.709,
-          "p95_micros": 16.15
+          "p50_micros": 14.648,
+          "p95_micros": 16.341
         },
         "large": {
           "input_bytes": 4194328,
           "output_bytes": 4194384,
-          "p50_micros": 3180.423,
-          "p95_micros": 3188.046,
-          "throughput_mib_s": 1257.702,
+          "p50_micros": 2765.994,
+          "p95_micros": 2781.624,
+          "throughput_mib_s": 1446.143,
           "reported_peak_memory_bytes": 4263960
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 3.280177,
-        "nanoseconds_per_input_byte": 0.757485543,
+        "fixed_latency_micros": 3.842603,
+        "nanoseconds_per_input_byte": 0.658544443,
         "peak_memory_bytes_per_input_byte": 1.016601468,
         "output_bytes_per_input_byte": 1.000013351
       },
       "score": {
-        "overall_0_to_100": 43.283,
+        "overall_0_to_100": 45.721,
         "components_0_to_100": {
-          "throughput": 22.048,
-          "latency": 98.453,
+          "throughput": 24.362,
+          "latency": 98.556,
           "memory": 98.367,
-          "stability": 99.761
+          "stability": 99.438
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -242,31 +515,31 @@
         "small": {
           "input_bytes": 16408,
           "output_bytes": 16428,
-          "p50_micros": 14.537,
-          "p95_micros": 16.01
+          "p50_micros": 14.667,
+          "p95_micros": 16.451
         },
         "large": {
           "input_bytes": 4194328,
           "output_bytes": 4194348,
-          "p50_micros": 2856.075,
-          "p95_micros": 2889.679,
-          "throughput_mib_s": 1400.531,
+          "p50_micros": 2755.324,
+          "p95_micros": 2817.662,
+          "throughput_mib_s": 1451.743,
           "reported_peak_memory_bytes": 4263960
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 3.377391,
-        "nanoseconds_per_input_byte": 0.680132219,
+        "fixed_latency_micros": 3.903582,
+        "nanoseconds_per_input_byte": 0.655985993,
         "peak_memory_bytes_per_input_byte": 1.016601468,
         "output_bytes_per_input_byte": 1.000004768
       },
       "score": {
-        "overall_0_to_100": 44.551,
+        "overall_0_to_100": 45.693,
         "components_0_to_100": {
-          "throughput": 23.266,
-          "latency": 98.567,
+          "throughput": 24.41,
+          "latency": 98.555,
           "memory": 98.367,
-          "stability": 98.837
+          "stability": 97.788
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -281,31 +554,31 @@
         "small": {
           "input_bytes": 16408,
           "output_bytes": 16488,
-          "p50_micros": 14.518,
-          "p95_micros": 15.379
+          "p50_micros": 14.778,
+          "p95_micros": 16.33
         },
         "large": {
           "input_bytes": 4194328,
           "output_bytes": 4194408,
-          "p50_micros": 2844.423,
-          "p95_micros": 2848.942,
-          "throughput_mib_s": 1406.269,
+          "p50_micros": 2793.486,
+          "p95_micros": 2849.481,
+          "throughput_mib_s": 1431.911,
           "reported_peak_memory_bytes": 4263960
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 3.404077,
-        "nanoseconds_per_input_byte": 0.677347819,
+        "fixed_latency_micros": 3.865144,
+        "nanoseconds_per_input_byte": 0.665093635,
         "peak_memory_bytes_per_input_byte": 1.016601468,
         "output_bytes_per_input_byte": 1.000019073
       },
       "score": {
-        "overall_0_to_100": 44.647,
+        "overall_0_to_100": 45.531,
         "components_0_to_100": {
-          "throughput": 23.314,
-          "latency": 98.569,
+          "throughput": 24.242,
+          "latency": 98.544,
           "memory": 98.367,
-          "stability": 99.841
+          "stability": 98.035
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -320,31 +593,70 @@
         "small": {
           "input_bytes": 12342,
           "output_bytes": 12766,
-          "p50_micros": 440.946,
-          "p95_micros": 450.283
+          "p50_micros": 440.778,
+          "p95_micros": 452.861
         },
         "large": {
           "input_bytes": 3145782,
           "output_bytes": 3234917,
-          "p50_micros": 107482.317,
-          "p95_micros": 108339.531,
-          "throughput_mib_s": 27.912,
+          "p50_micros": 107789.02,
+          "p95_micros": 108658.622,
+          "throughput_mib_s": 27.833,
           "reported_peak_memory_bytes": 74752
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 19.331225,
-        "nanoseconds_per_input_byte": 34.160976754,
+        "fixed_latency_micros": 17.954521,
+        "nanoseconds_per_input_byte": 34.258910973,
         "peak_memory_bytes_per_input_byte": 0.023762613,
         "output_bytes_per_input_byte": 1.028334767
       },
       "score": {
-        "overall_0_to_100": 14.19,
+        "overall_0_to_100": 14.415,
         "components_0_to_100": {
-          "throughput": 3.284,
-          "latency": 69.399,
+          "throughput": 3.38,
+          "latency": 69.407,
           "memory": 100,
-          "stability": 99.209
+          "stability": 99.2
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:bw64-pcm-to-aiff-pcm",
+      "capability_id": "capability:bw64-pcm-to-aiff-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:bw64-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16464,
+          "output_bytes": 16438,
+          "p50_micros": 14.718,
+          "p95_micros": 16.491
+        },
+        "large": {
+          "input_bytes": 4194384,
+          "output_bytes": 4194358,
+          "p50_micros": 2786.192,
+          "p95_micros": 2801.672,
+          "throughput_mib_s": 1435.679,
+          "reported_peak_memory_bytes": 4264016
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 3.796406,
+        "nanoseconds_per_input_byte": 0.663362152,
+        "peak_memory_bytes_per_input_byte": 1.016601246,
+        "output_bytes_per_input_byte": 0.999993801
+      },
+      "score": {
+        "overall_0_to_100": 45.63,
+        "components_0_to_100": {
+          "throughput": 24.274,
+          "latency": 98.55,
+          "memory": 98.367,
+          "stability": 99.447
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -359,31 +671,70 @@
         "small": {
           "input_bytes": 16464,
           "output_bytes": 16408,
-          "p50_micros": 14.517,
-          "p95_micros": 24.916
+          "p50_micros": 14.808,
+          "p95_micros": 15.58
         },
         "large": {
           "input_bytes": 4194384,
           "output_bytes": 4194328,
-          "p50_micros": 2827.813,
-          "p95_micros": 2887.364,
-          "throughput_mib_s": 1414.548,
+          "p50_micros": 2783.578,
+          "p95_micros": 2858.188,
+          "throughput_mib_s": 1437.027,
           "reported_peak_memory_bytes": 4264016
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 3.430597,
-        "nanoseconds_per_input_byte": 0.673372396,
+        "fixed_latency_micros": 3.897061,
+        "nanoseconds_per_input_byte": 0.662714939,
         "peak_memory_bytes_per_input_byte": 1.016601246,
         "output_bytes_per_input_byte": 0.999986649
       },
       "score": {
-        "overall_0_to_100": 44.633,
+        "overall_0_to_100": 45.545,
         "components_0_to_100": {
-          "throughput": 23.382,
-          "latency": 98.569,
+          "throughput": 24.285,
+          "latency": 98.541,
           "memory": 98.367,
-          "stability": 97.938
+          "stability": 97.39
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:bw64-pcm-to-bwf-pcm",
+      "capability_id": "capability:bw64-pcm-to-bwf-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:bw64-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16464,
+          "output_bytes": 17038,
+          "p50_micros": 8.686,
+          "p95_micros": 9.448
+        },
+        "large": {
+          "input_bytes": 4194384,
+          "output_bytes": 4194958,
+          "p50_micros": 1189.012,
+          "p95_micros": 1196.377,
+          "throughput_mib_s": 3364.202,
+          "reported_peak_memory_bytes": 4264016
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 4.034669,
+        "nanoseconds_per_input_byte": 0.282515223,
+        "peak_memory_bytes_per_input_byte": 1.016601246,
+        "output_bytes_per_input_byte": 1.00013685
+      },
+      "score": {
+        "overall_0_to_100": 57.735,
+        "components_0_to_100": {
+          "throughput": 37.158,
+          "latency": 99.139,
+          "memory": 98.367,
+          "stability": 99.384
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -398,31 +749,31 @@
         "small": {
           "input_bytes": 16464,
           "output_bytes": 16452,
-          "p50_micros": 8.476,
-          "p95_micros": 8.987
+          "p50_micros": 8.536,
+          "p95_micros": 9.317
         },
         "large": {
           "input_bytes": 4194384,
           "output_bytes": 4194372,
-          "p50_micros": 1150.333,
-          "p95_micros": 1158.028,
-          "throughput_mib_s": 3477.32,
+          "p50_micros": 1175.848,
+          "p95_micros": 1202.087,
+          "throughput_mib_s": 3401.865,
           "reported_peak_memory_bytes": 4264016
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 3.976265,
-        "nanoseconds_per_input_byte": 0.273307531,
+        "fixed_latency_micros": 3.935954,
+        "nanoseconds_per_input_byte": 0.279400276,
         "peak_memory_bytes_per_input_byte": 1.016601246,
         "output_bytes_per_input_byte": 0.999997139
       },
       "score": {
-        "overall_0_to_100": 57.308,
+        "overall_0_to_100": 57.822,
         "components_0_to_100": {
-          "throughput": 36.66,
-          "latency": 99.16,
+          "throughput": 37.366,
+          "latency": 99.154,
           "memory": 98.367,
-          "stability": 99.336
+          "stability": 97.817
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -437,31 +788,31 @@
         "small": {
           "input_bytes": 16464,
           "output_bytes": 16464,
-          "p50_micros": 8.536,
-          "p95_micros": 8.907
+          "p50_micros": 8.586,
+          "p95_micros": 9.087
         },
         "large": {
           "input_bytes": 4194384,
           "output_bytes": 4194384,
-          "p50_micros": 1137.639,
-          "p95_micros": 1152.978,
-          "throughput_mib_s": 3516.121,
+          "p50_micros": 1154.468,
+          "p95_micros": 1189.944,
+          "throughput_mib_s": 3464.865,
           "reported_peak_memory_bytes": 4264016
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 4.086525,
-        "nanoseconds_per_input_byte": 0.270254816,
+        "fixed_latency_micros": 4.070403,
+        "nanoseconds_per_input_byte": 0.274270929,
         "peak_memory_bytes_per_input_byte": 1.016601246,
         "output_bytes_per_input_byte": 1
       },
       "score": {
-        "overall_0_to_100": 57.443,
+        "overall_0_to_100": 58.066,
         "components_0_to_100": {
-          "throughput": 36.864,
-          "latency": 99.154,
+          "throughput": 37.71,
+          "latency": 99.149,
           "memory": 98.367,
-          "stability": 98.67
+          "stability": 97.019
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -476,31 +827,109 @@
         "small": {
           "input_bytes": 16464,
           "output_bytes": 16428,
-          "p50_micros": 8.396,
-          "p95_micros": 8.976
+          "p50_micros": 8.587,
+          "p95_micros": 9.097
         },
         "large": {
           "input_bytes": 4194384,
           "output_bytes": 4194348,
-          "p50_micros": 1167.224,
-          "p95_micros": 1214.523,
-          "throughput_mib_s": 3427,
+          "p50_micros": 1165.038,
+          "p95_micros": 1186.748,
+          "throughput_mib_s": 3433.43,
           "reported_peak_memory_bytes": 4264016
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 3.829387,
-        "nanoseconds_per_input_byte": 0.2773696,
+        "fixed_latency_micros": 4.029754,
+        "nanoseconds_per_input_byte": 0.276800657,
         "peak_memory_bytes_per_input_byte": 1.016601246,
         "output_bytes_per_input_byte": 0.999991417
       },
       "score": {
-        "overall_0_to_100": 56.891,
+        "overall_0_to_100": 57.989,
         "components_0_to_100": {
-          "throughput": 36.394,
-          "latency": 99.167,
+          "throughput": 37.539,
+          "latency": 99.149,
           "memory": 98.367,
-          "stability": 96.106
+          "stability": 98.171
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:bw64-pcm-to-wave64-pcm",
+      "capability_id": "capability:bw64-pcm-to-wave64-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:bw64-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16464,
+          "output_bytes": 16488,
+          "p50_micros": 8.767,
+          "p95_micros": 9.818
+        },
+        "large": {
+          "input_bytes": 4194384,
+          "output_bytes": 4194408,
+          "p50_micros": 1165.849,
+          "p95_micros": 1212.977,
+          "throughput_mib_s": 3431.041,
+          "reported_peak_memory_bytes": 4264016
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 4.207267,
+        "nanoseconds_per_input_byte": 0.276951689,
+        "peak_memory_bytes_per_input_byte": 1.016601246,
+        "output_bytes_per_input_byte": 1.000005722
+      },
+      "score": {
+        "overall_0_to_100": 57.853,
+        "components_0_to_100": {
+          "throughput": 37.526,
+          "latency": 99.131,
+          "memory": 98.367,
+          "stability": 96.115
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:bwf-pcm-to-aiff-pcm",
+      "capability_id": "capability:bwf-pcm-to-aiff-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:bwf-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 17038,
+          "output_bytes": 16438,
+          "p50_micros": 15.369,
+          "p95_micros": 32.241
+        },
+        "large": {
+          "input_bytes": 4194958,
+          "output_bytes": 4194358,
+          "p50_micros": 2863.427,
+          "p95_micros": 2890.918,
+          "throughput_mib_s": 1397.145,
+          "reported_peak_memory_bytes": 4264590
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 3.754318,
+        "nanoseconds_per_input_byte": 0.681692804,
+        "peak_memory_bytes_per_input_byte": 1.016598974,
+        "output_bytes_per_input_byte": 0.999856971
+      },
+      "score": {
+        "overall_0_to_100": 45.265,
+        "components_0_to_100": {
+          "throughput": 23.946,
+          "latency": 98.486,
+          "memory": 98.367,
+          "stability": 99.049
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -515,31 +944,70 @@
         "small": {
           "input_bytes": 17038,
           "output_bytes": 16408,
-          "p50_micros": 15.949,
-          "p95_micros": 16.421
+          "p50_micros": 14.748,
+          "p95_micros": 16.681
         },
         "large": {
           "input_bytes": 4194958,
           "output_bytes": 4194328,
-          "p50_micros": 3165.204,
-          "p95_micros": 3200.14,
-          "throughput_mib_s": 1263.939,
+          "p50_micros": 2849.652,
+          "p95_micros": 2900.446,
+          "throughput_mib_s": 1403.899,
           "reported_peak_memory_bytes": 4264590
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 3.106005,
-        "nanoseconds_per_input_byte": 0.753785376,
+        "fixed_latency_micros": 3.186961,
+        "nanoseconds_per_input_byte": 0.678544347,
         "peak_memory_bytes_per_input_byte": 1.016598974,
         "output_bytes_per_input_byte": 0.99984982
       },
       "score": {
-        "overall_0_to_100": 43.303,
+        "overall_0_to_100": 45.294,
         "components_0_to_100": {
-          "throughput": 22.102,
-          "latency": 98.43,
+          "throughput": 24.004,
+          "latency": 98.547,
           "memory": 98.367,
-          "stability": 98.908
+          "stability": 98.249
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:bwf-pcm-to-bw64-pcm",
+      "capability_id": "capability:bwf-pcm-to-bw64-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:bwf-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 17038,
+          "output_bytes": 16464,
+          "p50_micros": 8.596,
+          "p95_micros": 9.367
+        },
+        "large": {
+          "input_bytes": 4194958,
+          "output_bytes": 4194384,
+          "p50_micros": 1174.486,
+          "p95_micros": 1225.08,
+          "throughput_mib_s": 3406.276,
+          "reported_peak_memory_bytes": 4264590
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 3.841377,
+        "nanoseconds_per_input_byte": 0.279059915,
+        "peak_memory_bytes_per_input_byte": 1.016598974,
+        "output_bytes_per_input_byte": 0.999863169
+      },
+      "score": {
+        "overall_0_to_100": 57.725,
+        "components_0_to_100": {
+          "throughput": 37.39,
+          "latency": 99.148,
+          "memory": 98.367,
+          "stability": 95.87
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -554,31 +1022,70 @@
         "small": {
           "input_bytes": 17038,
           "output_bytes": 16452,
-          "p50_micros": 8.676,
-          "p95_micros": 8.887
+          "p50_micros": 8.546,
+          "p95_micros": 9.338
         },
         "large": {
           "input_bytes": 4194958,
           "output_bytes": 4194372,
-          "p50_micros": 1150.753,
-          "p95_micros": 1196.81,
-          "throughput_mib_s": 3476.527,
+          "p50_micros": 1190.175,
+          "p95_micros": 1245.389,
+          "throughput_mib_s": 3361.374,
           "reported_peak_memory_bytes": 4264590
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 4.018489,
-        "nanoseconds_per_input_byte": 0.273360189,
+        "fixed_latency_micros": 3.727192,
+        "nanoseconds_per_input_byte": 0.282827101,
         "peak_memory_bytes_per_input_byte": 1.016598974,
         "output_bytes_per_input_byte": 0.999860308
       },
       "score": {
-        "overall_0_to_100": 57.115,
+        "overall_0_to_100": 57.498,
         "components_0_to_100": {
-          "throughput": 36.656,
-          "latency": 99.14,
+          "throughput": 37.143,
+          "latency": 99.153,
           "memory": 98.367,
-          "stability": 96.152
+          "stability": 95.567
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:bwf-pcm-to-rf64-pcm",
+      "capability_id": "capability:bwf-pcm-to-rf64-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:bwf-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 17038,
+          "output_bytes": 16464,
+          "p50_micros": 8.506,
+          "p95_micros": 9.288
+        },
+        "large": {
+          "input_bytes": 4194958,
+          "output_bytes": 4194384,
+          "p50_micros": 1180.076,
+          "p95_micros": 1193.632,
+          "throughput_mib_s": 3390.141,
+          "reported_peak_memory_bytes": 4264590
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 3.728214,
+        "nanoseconds_per_input_byte": 0.280419443,
+        "peak_memory_bytes_per_input_byte": 1.016598974,
+        "output_bytes_per_input_byte": 0.999863169
+      },
+      "score": {
+        "overall_0_to_100": 57.829,
+        "components_0_to_100": {
+          "throughput": 37.301,
+          "latency": 99.157,
+          "memory": 98.367,
+          "stability": 98.864
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -593,31 +1100,109 @@
         "small": {
           "input_bytes": 17038,
           "output_bytes": 16428,
-          "p50_micros": 8.376,
-          "p95_micros": 9.086
+          "p50_micros": 8.566,
+          "p95_micros": 11.17
         },
         "large": {
           "input_bytes": 4194958,
           "output_bytes": 4194348,
-          "p50_micros": 1168.808,
-          "p95_micros": 1188.023,
-          "throughput_mib_s": 3422.824,
+          "p50_micros": 1173.304,
+          "p95_micros": 1198.17,
+          "throughput_mib_s": 3409.708,
           "reported_peak_memory_bytes": 4264590
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 3.643635,
-        "nanoseconds_per_input_byte": 0.277753523,
+        "fixed_latency_micros": 3.816075,
+        "nanoseconds_per_input_byte": 0.27878418,
         "peak_memory_bytes_per_input_byte": 1.016598974,
         "output_bytes_per_input_byte": 0.999854587
       },
       "score": {
-        "overall_0_to_100": 57.005,
+        "overall_0_to_100": 57.864,
         "components_0_to_100": {
-          "throughput": 36.372,
-          "latency": 99.169,
+          "throughput": 37.409,
+          "latency": 99.151,
           "memory": 98.367,
-          "stability": 98.383
+          "stability": 97.925
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:bwf-pcm-to-wave64-pcm",
+      "capability_id": "capability:bwf-pcm-to-wave64-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:bwf-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 17038,
+          "output_bytes": 16488,
+          "p50_micros": 8.787,
+          "p95_micros": 9.768
+        },
+        "large": {
+          "input_bytes": 4194958,
+          "output_bytes": 4194408,
+          "p50_micros": 1163.926,
+          "p95_micros": 1189.233,
+          "throughput_mib_s": 3437.18,
+          "reported_peak_memory_bytes": 4264590
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 4.076221,
+        "nanoseconds_per_input_byte": 0.276486625,
+        "peak_memory_bytes_per_input_byte": 1.016598974,
+        "output_bytes_per_input_byte": 0.99986889
+      },
+      "score": {
+        "overall_0_to_100": 57.987,
+        "components_0_to_100": {
+          "throughput": 37.559,
+          "latency": 99.129,
+          "memory": 98.367,
+          "stability": 97.872
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:caf-pcm-to-aiff-pcm",
+      "capability_id": "capability:caf-pcm-to-aiff-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:caf-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16452,
+          "output_bytes": 16438,
+          "p50_micros": 14.677,
+          "p95_micros": 16.691
+        },
+        "large": {
+          "input_bytes": 4194372,
+          "output_bytes": 4194358,
+          "p50_micros": 2858.458,
+          "p95_micros": 3022.276,
+          "throughput_mib_s": 1399.379,
+          "reported_peak_memory_bytes": 4264004
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 3.478632,
+        "nanoseconds_per_input_byte": 0.680669089,
+        "peak_memory_bytes_per_input_byte": 1.016601293,
+        "output_bytes_per_input_byte": 0.999996662
+      },
+      "score": {
+        "overall_0_to_100": 45.083,
+        "components_0_to_100": {
+          "throughput": 23.965,
+          "latency": 98.554,
+          "memory": 98.367,
+          "stability": 94.58
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -632,31 +1217,31 @@
         "small": {
           "input_bytes": 16452,
           "output_bytes": 16408,
-          "p50_micros": 14.547,
-          "p95_micros": 15.799
+          "p50_micros": 14.747,
+          "p95_micros": 16.441
         },
         "large": {
           "input_bytes": 4194372,
           "output_bytes": 4194328,
-          "p50_micros": 2819.497,
-          "p95_micros": 2894.086,
-          "throughput_mib_s": 1418.716,
+          "p50_micros": 2864.92,
+          "p95_micros": 2891.33,
+          "throughput_mib_s": 1396.222,
           "reported_peak_memory_bytes": 4264004
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 3.501543,
-        "nanoseconds_per_input_byte": 0.671374751,
+        "fixed_latency_micros": 3.523461,
+        "nanoseconds_per_input_byte": 0.682199037,
         "peak_memory_bytes_per_input_byte": 1.016601293,
         "output_bytes_per_input_byte": 0.99998951
       },
       "score": {
-        "overall_0_to_100": 44.645,
+        "overall_0_to_100": 45.264,
         "components_0_to_100": {
-          "throughput": 23.416,
-          "latency": 98.566,
+          "throughput": 23.938,
+          "latency": 98.547,
           "memory": 98.367,
-          "stability": 97.423
+          "stability": 99.087
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -671,31 +1256,31 @@
         "small": {
           "input_bytes": 16452,
           "output_bytes": 16464,
-          "p50_micros": 8.525,
-          "p95_micros": 19.627
+          "p50_micros": 8.656,
+          "p95_micros": 9.599
         },
         "large": {
           "input_bytes": 4194372,
           "output_bytes": 4194384,
-          "p50_micros": 1140.434,
-          "p95_micros": 1143.621,
-          "throughput_mib_s": 3507.494,
+          "p50_micros": 1153.185,
+          "p95_micros": 1159.017,
+          "throughput_mib_s": 3468.71,
           "reported_peak_memory_bytes": 4264004
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 4.067718,
-        "nanoseconds_per_input_byte": 0.270926442,
+        "fixed_latency_micros": 4.149023,
+        "nanoseconds_per_input_byte": 0.273947084,
         "peak_memory_bytes_per_input_byte": 1.016601293,
         "output_bytes_per_input_byte": 1.000002861
       },
       "score": {
-        "overall_0_to_100": 57.466,
+        "overall_0_to_100": 58.23,
         "components_0_to_100": {
-          "throughput": 36.819,
-          "latency": 99.155,
+          "throughput": 37.731,
+          "latency": 99.142,
           "memory": 98.367,
-          "stability": 99.721
+          "stability": 99.497
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -710,31 +1295,31 @@
         "small": {
           "input_bytes": 16452,
           "output_bytes": 17038,
-          "p50_micros": 8.676,
-          "p95_micros": 8.926
+          "p50_micros": 8.456,
+          "p95_micros": 9.448
         },
         "large": {
           "input_bytes": 4194372,
           "output_bytes": 4194958,
-          "p50_micros": 1142.458,
-          "p95_micros": 1175.831,
-          "throughput_mib_s": 3501.28,
+          "p50_micros": 1160.871,
+          "p95_micros": 1177.672,
+          "throughput_mib_s": 3445.744,
           "reported_peak_memory_bytes": 4264004
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 4.211343,
-        "nanoseconds_per_input_byte": 0.271374751,
+        "fixed_latency_micros": 3.917969,
+        "nanoseconds_per_input_byte": 0.275834626,
         "peak_memory_bytes_per_input_byte": 1.016601293,
         "output_bytes_per_input_byte": 1.000139711
       },
       "score": {
-        "overall_0_to_100": 57.287,
+        "overall_0_to_100": 58.071,
         "components_0_to_100": {
-          "throughput": 36.786,
-          "latency": 99.14,
+          "throughput": 37.606,
+          "latency": 99.161,
           "memory": 98.367,
-          "stability": 97.162
+          "stability": 98.573
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -749,31 +1334,31 @@
         "small": {
           "input_bytes": 16452,
           "output_bytes": 16464,
-          "p50_micros": 8.356,
-          "p95_micros": 8.636
+          "p50_micros": 8.556,
+          "p95_micros": 9.187
         },
         "large": {
           "input_bytes": 4194372,
           "output_bytes": 4194384,
-          "p50_micros": 1137.479,
-          "p95_micros": 1204.454,
-          "throughput_mib_s": 3516.605,
+          "p50_micros": 1176.93,
+          "p95_micros": 1205.654,
+          "throughput_mib_s": 3398.728,
           "reported_peak_memory_bytes": 4264004
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 3.909689,
-        "nanoseconds_per_input_byte": 0.270259603,
+        "fixed_latency_micros": 3.955125,
+        "nanoseconds_per_input_byte": 0.279654469,
         "peak_memory_bytes_per_input_byte": 1.016601293,
         "output_bytes_per_input_byte": 1.000002861
       },
       "score": {
-        "overall_0_to_100": 57.196,
+        "overall_0_to_100": 57.795,
         "components_0_to_100": {
-          "throughput": 36.867,
-          "latency": 99.171,
+          "throughput": 37.348,
+          "latency": 99.152,
           "memory": 98.367,
-          "stability": 94.439
+          "stability": 97.618
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -788,31 +1373,31 @@
         "small": {
           "input_bytes": 16452,
           "output_bytes": 16428,
-          "p50_micros": 8.426,
-          "p95_micros": 19.567
+          "p50_micros": 8.737,
+          "p95_micros": 9.187
         },
         "large": {
           "input_bytes": 4194372,
           "output_bytes": 4194348,
-          "p50_micros": 1161.163,
-          "p95_micros": 1171.412,
-          "throughput_mib_s": 3444.878,
+          "p50_micros": 1180.226,
+          "p95_micros": 1216.615,
+          "throughput_mib_s": 3389.236,
           "reported_peak_memory_bytes": 4264004
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 3.886701,
-        "nanoseconds_per_input_byte": 0.275911698,
+        "fixed_latency_micros": 4.123858,
+        "nanoseconds_per_input_byte": 0.280400056,
         "peak_memory_bytes_per_input_byte": 1.016601293,
         "output_bytes_per_input_byte": 0.999994278
       },
       "score": {
-        "overall_0_to_100": 57.149,
+        "overall_0_to_100": 57.712,
         "components_0_to_100": {
-          "throughput": 36.489,
-          "latency": 99.164,
+          "throughput": 37.296,
+          "latency": 99.134,
           "memory": 98.367,
-          "stability": 99.125
+          "stability": 97.009
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -827,31 +1412,31 @@
         "small": {
           "input_bytes": 16452,
           "output_bytes": 16488,
-          "p50_micros": 8.386,
-          "p95_micros": 8.636
+          "p50_micros": 8.737,
+          "p95_micros": 12.343
         },
         "large": {
           "input_bytes": 4194372,
           "output_bytes": 4194408,
-          "p50_micros": 1156.685,
-          "p95_micros": 1245.441,
-          "throughput_mib_s": 3458.215,
+          "p50_micros": 1167.452,
+          "p95_micros": 1181.949,
+          "throughput_mib_s": 3426.321,
           "reported_peak_memory_bytes": 4264004
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 3.864177,
-        "nanoseconds_per_input_byte": 0.274849447,
+        "fixed_latency_micros": 4.17416,
+        "nanoseconds_per_input_byte": 0.277342553,
         "peak_memory_bytes_per_input_byte": 1.016601293,
         "output_bytes_per_input_byte": 1.000008583
       },
       "score": {
-        "overall_0_to_100": 56.838,
+        "overall_0_to_100": 57.99,
         "components_0_to_100": {
-          "throughput": 36.559,
-          "latency": 99.168,
+          "throughput": 37.5,
+          "latency": 99.134,
           "memory": 98.367,
-          "stability": 92.874
+          "stability": 98.773
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -866,31 +1451,31 @@
         "small": {
           "input_bytes": 16384,
           "output_bytes": 16384,
-          "p50_micros": 52.358,
-          "p95_micros": 62.978
+          "p50_micros": 52.419,
+          "p95_micros": 75.352
         },
         "large": {
           "input_bytes": 4194304,
           "output_bytes": 4194304,
-          "p50_micros": 10343.93,
-          "p95_micros": 10357.436,
-          "throughput_mib_s": 386.7,
+          "p50_micros": 12760.253,
+          "p95_micros": 12798.284,
+          "throughput_mib_s": 313.473,
           "reported_peak_memory_bytes": 4325376
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 11.998894,
-        "nanoseconds_per_input_byte": 2.463324334,
+        "fixed_latency_micros": 2.584357,
+        "nanoseconds_per_input_byte": 3.041665231,
         "peak_memory_bytes_per_input_byte": 1.03125,
         "output_bytes_per_input_byte": 1
       },
       "score": {
-        "overall_0_to_100": 31.01,
+        "overall_0_to_100": 29.752,
         "components_0_to_100": {
-          "throughput": 12.225,
-          "latency": 95.025,
+          "throughput": 11.343,
+          "latency": 95.019,
           "memory": 96.97,
-          "stability": 99.87
+          "stability": 99.703
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -905,31 +1490,31 @@
         "small": {
           "input_bytes": 16384,
           "output_bytes": 16384,
-          "p50_micros": 38.122,
-          "p95_micros": 38.863
+          "p50_micros": 38.312,
+          "p95_micros": 38.993
         },
         "large": {
           "input_bytes": 4194304,
           "output_bytes": 4194304,
-          "p50_micros": 6725.909,
-          "p95_micros": 6780.791,
-          "throughput_mib_s": 594.715,
+          "p50_micros": 9140.064,
+          "p95_micros": 9147.989,
+          "throughput_mib_s": 437.634,
           "reported_peak_memory_bytes": 4325376
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 11.895384,
-        "nanoseconds_per_input_byte": 1.600745586,
+        "fixed_latency_micros": 2.618855,
+        "nanoseconds_per_input_byte": 2.178536688,
         "peak_memory_bytes_per_input_byte": 1.03125,
         "output_bytes_per_input_byte": 1
       },
       "score": {
-        "overall_0_to_100": 34.978,
+        "overall_0_to_100": 32.707,
         "components_0_to_100": {
-          "throughput": 15.161,
-          "latency": 96.328,
+          "throughput": 13.402,
+          "latency": 96.31,
           "memory": 96.97,
-          "stability": 99.191
+          "stability": 99.913
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -944,31 +1529,31 @@
         "small": {
           "input_bytes": 16384,
           "output_bytes": 16384,
-          "p50_micros": 81.613,
-          "p95_micros": 92.233
+          "p50_micros": 84.398,
+          "p95_micros": 151.805
         },
         "large": {
           "input_bytes": 4194304,
           "output_bytes": 4194304,
-          "p50_micros": 18384.709,
-          "p95_micros": 18545.58,
-          "throughput_mib_s": 217.572,
+          "p50_micros": 20269.785,
+          "p95_micros": 20294.892,
+          "throughput_mib_s": 197.338,
           "reported_peak_memory_bytes": 4325376
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 9.836153,
-        "nanoseconds_per_input_byte": 4.380911075,
+        "fixed_latency_micros": 5.23962,
+        "nanoseconds_per_input_byte": 4.831444116,
         "peak_memory_bytes_per_input_byte": 1.03125,
         "output_bytes_per_input_byte": 1
       },
       "score": {
-        "overall_0_to_100": 26.309,
+        "overall_0_to_100": 26.045,
         "components_0_to_100": {
-          "throughput": 9.17,
-          "latency": 92.455,
+          "throughput": 9,
+          "latency": 92.217,
           "memory": 96.97,
-          "stability": 99.133
+          "stability": 99.876
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -983,31 +1568,31 @@
         "small": {
           "input_bytes": 16384,
           "output_bytes": 16428,
-          "p50_micros": 15.038,
-          "p95_micros": 26.089
+          "p50_micros": 15.499,
+          "p95_micros": 16.301
         },
         "large": {
           "input_bytes": 4194304,
           "output_bytes": 4194348,
-          "p50_micros": 1080.492,
-          "p95_micros": 1125.046,
-          "throughput_mib_s": 3702.017,
+          "p50_micros": 2846.936,
+          "p95_micros": 2873.727,
+          "throughput_mib_s": 1405.019,
           "reported_peak_memory_bytes": 4259840
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 10.859749,
-        "nanoseconds_per_input_byte": 0.255020201,
+        "fixed_latency_micros": 4.395325,
+        "nanoseconds_per_input_byte": 0.677714509,
         "peak_memory_bytes_per_input_byte": 1.015625,
         "output_bytes_per_input_byte": 1.00001049
       },
       "score": {
-        "overall_0_to_100": 58.04,
+        "overall_0_to_100": 45.342,
         "components_0_to_100": {
-          "throughput": 37.826,
-          "latency": 98.518,
+          "throughput": 24.013,
+          "latency": 98.474,
           "memory": 98.462,
-          "stability": 96.04
+          "stability": 99.068
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -1022,31 +1607,70 @@
         "small": {
           "input_bytes": 16384,
           "output_bytes": 16384,
-          "p50_micros": 18.003,
-          "p95_micros": 28.934
+          "p50_micros": 18.395,
+          "p95_micros": 19.056
         },
         "large": {
           "input_bytes": 4194304,
           "output_bytes": 4194304,
-          "p50_micros": 1454.202,
-          "p95_micros": 1512.39,
-          "throughput_mib_s": 2750.649,
+          "p50_micros": 3926.473,
+          "p95_micros": 3943.536,
+          "throughput_mib_s": 1018.726,
           "reported_peak_memory_bytes": 4325376
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 12.370847,
-        "nanoseconds_per_input_byte": 0.343759335,
+        "fixed_latency_micros": 3.069204,
+        "nanoseconds_per_input_byte": 0.935412358,
         "peak_memory_bytes_per_input_byte": 1.03125,
         "output_bytes_per_input_byte": 1
       },
       "score": {
-        "overall_0_to_100": 53.34,
+        "overall_0_to_100": 41.407,
         "components_0_to_100": {
-          "throughput": 32.606,
-          "latency": 98.232,
+          "throughput": 20.448,
+          "latency": 98.194,
           "memory": 96.97,
-          "stability": 96.153
+          "stability": 99.567
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:rf64-pcm-to-aiff-pcm",
+      "capability_id": "capability:rf64-pcm-to-aiff-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:rf64-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16464,
+          "output_bytes": 16438,
+          "p50_micros": 14.908,
+          "p95_micros": 25.518
+        },
+        "large": {
+          "input_bytes": 4194384,
+          "output_bytes": 4194358,
+          "p50_micros": 2863.157,
+          "p95_micros": 2902.05,
+          "throughput_mib_s": 1397.086,
+          "reported_peak_memory_bytes": 4264016
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 3.683857,
+        "nanoseconds_per_input_byte": 0.681738521,
+        "peak_memory_bytes_per_input_byte": 1.016601246,
+        "output_bytes_per_input_byte": 0.999993801
+      },
+      "score": {
+        "overall_0_to_100": 45.251,
+        "components_0_to_100": {
+          "throughput": 23.946,
+          "latency": 98.531,
+          "memory": 98.367,
+          "stability": 98.66
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -1061,31 +1685,31 @@
         "small": {
           "input_bytes": 16464,
           "output_bytes": 16408,
-          "p50_micros": 15.99,
-          "p95_micros": 16.561
+          "p50_micros": 14.748,
+          "p95_micros": 16.801
         },
         "large": {
           "input_bytes": 4194384,
           "output_bytes": 4194328,
-          "p50_micros": 3160.796,
-          "p95_micros": 3207.343,
-          "throughput_mib_s": 1265.528,
+          "p50_micros": 2919.302,
+          "p95_micros": 2963.766,
+          "throughput_mib_s": 1370.217,
           "reported_peak_memory_bytes": 4264016
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 3.59721,
-        "nanoseconds_per_input_byte": 0.752720492,
+        "fixed_latency_micros": 3.301975,
+        "nanoseconds_per_input_byte": 0.695215322,
         "peak_memory_bytes_per_input_byte": 1.016601246,
         "output_bytes_per_input_byte": 0.999986649
       },
       "score": {
-        "overall_0_to_100": 43.302,
+        "overall_0_to_100": 45.004,
         "components_0_to_100": {
-          "throughput": 22.116,
-          "latency": 98.426,
+          "throughput": 23.714,
+          "latency": 98.547,
           "memory": 98.367,
-          "stability": 98.549
+          "stability": 98.5
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -1100,31 +1724,70 @@
         "small": {
           "input_bytes": 16464,
           "output_bytes": 16464,
-          "p50_micros": 8.536,
-          "p95_micros": 8.827
+          "p50_micros": 8.707,
+          "p95_micros": 9.328
         },
         "large": {
           "input_bytes": 4194384,
           "output_bytes": 4194384,
-          "p50_micros": 1141.507,
-          "p95_micros": 1158.95,
-          "throughput_mib_s": 3504.207,
+          "p50_micros": 1159.949,
+          "p95_micros": 1188.893,
+          "throughput_mib_s": 3448.493,
           "reported_peak_memory_bytes": 4264016
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 4.071282,
-        "nanoseconds_per_input_byte": 0.271180635,
+        "fixed_latency_micros": 4.170281,
+        "nanoseconds_per_input_byte": 0.275553864,
         "peak_memory_bytes_per_input_byte": 1.016601246,
         "output_bytes_per_input_byte": 1
       },
       "score": {
-        "overall_0_to_100": 57.38,
+        "overall_0_to_100": 58.022,
         "components_0_to_100": {
-          "throughput": 36.802,
-          "latency": 99.154,
+          "throughput": 37.621,
+          "latency": 99.137,
           "memory": 98.367,
-          "stability": 98.495
+          "stability": 97.565
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:rf64-pcm-to-bwf-pcm",
+      "capability_id": "capability:rf64-pcm-to-bwf-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:rf64-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16464,
+          "output_bytes": 17038,
+          "p50_micros": 9.046,
+          "p95_micros": 9.909
+        },
+        "large": {
+          "input_bytes": 4194384,
+          "output_bytes": 4194958,
+          "p50_micros": 1153.586,
+          "p95_micros": 1164.667,
+          "throughput_mib_s": 3467.515,
+          "reported_peak_memory_bytes": 4264016
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 4.535692,
+        "nanoseconds_per_input_byte": 0.273949717,
+        "peak_memory_bytes_per_input_byte": 1.016601246,
+        "output_bytes_per_input_byte": 1.00013685
+      },
+      "score": {
+        "overall_0_to_100": 58.193,
+        "components_0_to_100": {
+          "throughput": 37.724,
+          "latency": 99.104,
+          "memory": 98.367,
+          "stability": 99.049
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -1139,31 +1802,31 @@
         "small": {
           "input_bytes": 16464,
           "output_bytes": 16452,
-          "p50_micros": 8.516,
-          "p95_micros": 19.867
+          "p50_micros": 8.326,
+          "p95_micros": 9.889
         },
         "large": {
           "input_bytes": 4194384,
           "output_bytes": 4194372,
-          "p50_micros": 1155.282,
-          "p95_micros": 1164.84,
-          "throughput_mib_s": 3462.424,
+          "p50_micros": 1156.822,
+          "p95_micros": 1224.49,
+          "throughput_mib_s": 3457.815,
           "reported_peak_memory_bytes": 4264016
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 3.99692,
-        "nanoseconds_per_input_byte": 0.274482518,
+        "fixed_latency_micros": 3.800102,
+        "nanoseconds_per_input_byte": 0.274896599,
         "peak_memory_bytes_per_input_byte": 1.016601246,
         "output_bytes_per_input_byte": 0.999997139
       },
       "score": {
-        "overall_0_to_100": 57.231,
+        "overall_0_to_100": 57.882,
         "components_0_to_100": {
-          "throughput": 36.582,
-          "latency": 99.156,
+          "throughput": 37.672,
+          "latency": 99.174,
           "memory": 98.367,
-          "stability": 99.179
+          "stability": 94.474
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -1178,31 +1841,70 @@
         "small": {
           "input_bytes": 16464,
           "output_bytes": 16428,
-          "p50_micros": 8.807,
-          "p95_micros": 9.859
+          "p50_micros": 8.736,
+          "p95_micros": 9.217
         },
         "large": {
           "input_bytes": 4194384,
           "output_bytes": 4194348,
-          "p50_micros": 1172.584,
-          "p95_micros": 1177.003,
-          "throughput_mib_s": 3411.335,
+          "p50_micros": 1187.531,
+          "p95_micros": 1203.209,
+          "throughput_mib_s": 3368.397,
           "reported_peak_memory_bytes": 4264016
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 4.220884,
-        "nanoseconds_per_input_byte": 0.278554161,
+        "fixed_latency_micros": 4.090703,
+        "nanoseconds_per_input_byte": 0.282148773,
         "peak_memory_bytes_per_input_byte": 1.016601246,
         "output_bytes_per_input_byte": 0.999991417
       },
       "score": {
-        "overall_0_to_100": 57.019,
+        "overall_0_to_100": 57.714,
         "components_0_to_100": {
-          "throughput": 36.311,
-          "latency": 99.127,
+          "throughput": 37.181,
+          "latency": 99.134,
           "memory": 98.367,
-          "stability": 99.625
+          "stability": 98.697
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:rf64-pcm-to-wave64-pcm",
+      "capability_id": "capability:rf64-pcm-to-wave64-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:rf64-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16464,
+          "output_bytes": 16488,
+          "p50_micros": 8.986,
+          "p95_micros": 12.553
+        },
+        "large": {
+          "input_bytes": 4194384,
+          "output_bytes": 4194408,
+          "p50_micros": 1181.759,
+          "p95_micros": 1202.248,
+          "throughput_mib_s": 3384.849,
+          "reported_peak_memory_bytes": 4264016
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 4.364434,
+        "nanoseconds_per_input_byte": 0.280707385,
+        "peak_memory_bytes_per_input_byte": 1.016601246,
+        "output_bytes_per_input_byte": 1.000005722
+      },
+      "score": {
+        "overall_0_to_100": 57.765,
+        "components_0_to_100": {
+          "throughput": 37.272,
+          "latency": 99.109,
+          "memory": 98.367,
+          "stability": 98.296
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -1217,31 +1919,31 @@
         "small": {
           "input_bytes": 16384,
           "output_bytes": 8191,
-          "p50_micros": 101.931,
-          "p95_micros": 112.431
+          "p50_micros": 104.085,
+          "p95_micros": 115.177
         },
         "large": {
           "input_bytes": 4194304,
           "output_bytes": 2097151,
-          "p50_micros": 25133.57,
-          "p95_micros": 25245.07,
-          "throughput_mib_s": 159.15,
+          "p50_micros": 26038.427,
+          "p95_micros": 26053.547,
+          "throughput_mib_s": 153.619,
           "reported_peak_memory_bytes": 0
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 3.76771,
-        "nanoseconds_per_input_byte": 5.991411755,
+        "fixed_latency_micros": 2.381698,
+        "nanoseconds_per_input_byte": 6.207476926,
         "peak_memory_bytes_per_input_byte": 0,
         "output_bytes_per_input_byte": 0.499999762
       },
       "score": {
-        "overall_0_to_100": 24.173,
+        "overall_0_to_100": 24.338,
         "components_0_to_100": {
-          "throughput": 7.843,
-          "latency": 90.75,
+          "throughput": 7.94,
+          "latency": 90.573,
           "memory": 100,
-          "stability": 99.558
+          "stability": 99.942
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -1256,31 +1958,31 @@
         "small": {
           "input_bytes": 16384,
           "output_bytes": 8191,
-          "p50_micros": 102.201,
-          "p95_micros": 112.13
+          "p50_micros": 104.226,
+          "p95_micros": 124.974
         },
         "large": {
           "input_bytes": 4194304,
           "output_bytes": 2097151,
-          "p50_micros": 25065.894,
-          "p95_micros": 25468.909,
-          "throughput_mib_s": 159.579,
+          "p50_micros": 26040.823,
+          "p95_micros": 26147.513,
+          "throughput_mib_s": 153.605,
           "reported_peak_memory_bytes": 0
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 4.304165,
-        "nanoseconds_per_input_byte": 5.975148639,
+        "fixed_latency_micros": 2.513855,
+        "nanoseconds_per_input_byte": 6.208016669,
         "peak_memory_bytes_per_input_byte": 0,
         "output_bytes_per_input_byte": 0.499999762
       },
       "score": {
-        "overall_0_to_100": 24.162,
+        "overall_0_to_100": 24.328,
         "components_0_to_100": {
-          "throughput": 7.853,
-          "latency": 90.728,
+          "throughput": 7.94,
+          "latency": 90.561,
           "memory": 100,
-          "stability": 98.418
+          "stability": 99.592
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -1295,31 +1997,31 @@
         "small": {
           "input_bytes": 16428,
           "output_bytes": 16438,
-          "p50_micros": 40.035,
-          "p95_micros": 40.756
+          "p50_micros": 37.14,
+          "p95_micros": 53.801
         },
         "large": {
           "input_bytes": 4194348,
           "output_bytes": 4194358,
-          "p50_micros": 7498.254,
-          "p95_micros": 7537.448,
-          "throughput_mib_s": 533.463,
+          "p50_micros": 6945.383,
+          "p95_micros": 7081.648,
+          "throughput_mib_s": 575.928,
           "reported_peak_memory_bytes": 4325420
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 10.708536,
-        "nanoseconds_per_input_byte": 1.785151224,
+        "fixed_latency_micros": 9.976096,
+        "nanoseconds_per_input_byte": 1.653512513,
         "peak_memory_bytes_per_input_byte": 1.031249672,
         "output_bytes_per_input_byte": 1.000002384
       },
       "score": {
-        "overall_0_to_100": 33.945,
+        "overall_0_to_100": 35.215,
         "components_0_to_100": {
-          "throughput": 14.359,
-          "latency": 96.151,
+          "throughput": 15.374,
+          "latency": 96.419,
           "memory": 96.97,
-          "stability": 99.48
+          "stability": 98.076
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -1334,31 +2036,31 @@
         "small": {
           "input_bytes": 16428,
           "output_bytes": 16408,
-          "p50_micros": 14.858,
-          "p95_micros": 27.512
+          "p50_micros": 15.289,
+          "p95_micros": 33.102
         },
         "large": {
           "input_bytes": 4194348,
           "output_bytes": 4194328,
-          "p50_micros": 2848.812,
-          "p95_micros": 2867.928,
-          "throughput_mib_s": 1404.109,
+          "p50_micros": 2852.196,
+          "p95_micros": 2878.555,
+          "throughput_mib_s": 1402.443,
           "reported_peak_memory_bytes": 4263980
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 3.714609,
-        "nanoseconds_per_input_byte": 0.678316962,
+        "fixed_latency_micros": 4.133997,
+        "nanoseconds_per_input_byte": 0.679023773,
         "peak_memory_bytes_per_input_byte": 1.016601388,
         "output_bytes_per_input_byte": 0.999995232
       },
       "score": {
-        "overall_0_to_100": 44.602,
+        "overall_0_to_100": 45.315,
         "components_0_to_100": {
-          "throughput": 23.296,
-          "latency": 98.536,
+          "throughput": 23.991,
+          "latency": 98.494,
           "memory": 98.367,
-          "stability": 99.333
+          "stability": 99.084
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -1373,31 +2075,31 @@
         "small": {
           "input_bytes": 16428,
           "output_bytes": 16464,
-          "p50_micros": 8.556,
-          "p95_micros": 9.177
+          "p50_micros": 8.787,
+          "p95_micros": 9.738
         },
         "large": {
           "input_bytes": 4194348,
           "output_bytes": 4194384,
-          "p50_micros": 1135.996,
-          "p95_micros": 1156.765,
-          "throughput_mib_s": 3521.176,
+          "p50_micros": 1186.829,
+          "p95_micros": 1235.109,
+          "throughput_mib_s": 3370.361,
           "reported_peak_memory_bytes": 4263980
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 4.122793,
-        "nanoseconds_per_input_byte": 0.269856771,
+        "fixed_latency_micros": 4.154821,
+        "nanoseconds_per_input_byte": 0.281968539,
         "peak_memory_bytes_per_input_byte": 1.016601388,
         "output_bytes_per_input_byte": 1.000008583
       },
       "score": {
-        "overall_0_to_100": 57.439,
+        "overall_0_to_100": 57.568,
         "components_0_to_100": {
-          "throughput": 36.891,
-          "latency": 99.152,
+          "throughput": 37.192,
+          "latency": 99.129,
           "memory": 98.367,
-          "stability": 98.205
+          "stability": 96.091
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -1412,31 +2114,31 @@
         "small": {
           "input_bytes": 16428,
           "output_bytes": 17038,
-          "p50_micros": 8.796,
-          "p95_micros": 19.888
+          "p50_micros": 8.817,
+          "p95_micros": 9.528
         },
         "large": {
           "input_bytes": 4194348,
           "output_bytes": 4194958,
-          "p50_micros": 1141.386,
-          "p95_micros": 1245.852,
-          "throughput_mib_s": 3504.548,
+          "p50_micros": 1162.433,
+          "p95_micros": 1189.875,
+          "throughput_mib_s": 3441.095,
           "reported_peak_memory_bytes": 4263980
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 4.342543,
-        "nanoseconds_per_input_byte": 0.271089442,
+        "fixed_latency_micros": 4.280866,
+        "nanoseconds_per_input_byte": 0.276122089,
         "peak_memory_bytes_per_input_byte": 1.016601388,
         "output_bytes_per_input_byte": 1.000145434
       },
       "score": {
-        "overall_0_to_100": 56.964,
+        "overall_0_to_100": 57.994,
         "components_0_to_100": {
-          "throughput": 36.804,
-          "latency": 99.128,
+          "throughput": 37.581,
+          "latency": 99.126,
           "memory": 98.367,
-          "stability": 91.615
+          "stability": 97.694
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -1451,31 +2153,31 @@
         "small": {
           "input_bytes": 16428,
           "output_bytes": 16452,
-          "p50_micros": 8.677,
-          "p95_micros": 9.077
+          "p50_micros": 8.757,
+          "p95_micros": 9.227
         },
         "large": {
           "input_bytes": 4194348,
           "output_bytes": 4194372,
-          "p50_micros": 1153.599,
-          "p95_micros": 1165.842,
-          "throughput_mib_s": 3467.446,
+          "p50_micros": 1158.846,
+          "p95_micros": 1192.951,
+          "throughput_mib_s": 3451.746,
           "reported_peak_memory_bytes": 4263980
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 4.175052,
-        "nanoseconds_per_input_byte": 0.27404115,
+        "fixed_latency_micros": 4.234735,
+        "nanoseconds_per_input_byte": 0.275277889,
         "peak_memory_bytes_per_input_byte": 1.016601388,
         "output_bytes_per_input_byte": 1.000005722
       },
       "score": {
-        "overall_0_to_100": 57.238,
+        "overall_0_to_100": 58.011,
         "components_0_to_100": {
-          "throughput": 36.608,
-          "latency": 99.14,
+          "throughput": 37.639,
+          "latency": 99.132,
           "memory": 98.367,
-          "stability": 98.95
+          "stability": 97.141
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -1490,31 +2192,31 @@
         "small": {
           "input_bytes": 16428,
           "output_bytes": 16384,
-          "p50_micros": 9.087,
-          "p95_micros": 9.778
+          "p50_micros": 9.328,
+          "p95_micros": 25.868
         },
         "large": {
           "input_bytes": 4194348,
           "output_bytes": 4194304,
-          "p50_micros": 2503.956,
-          "p95_micros": 2540.706,
-          "throughput_mib_s": 1597.489,
+          "p50_micros": 1809.287,
+          "p95_micros": 1863.299,
+          "throughput_mib_s": 2210.839,
           "reported_peak_memory_bytes": 4263980
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 0,
-        "nanoseconds_per_input_byte": 0.597155762,
+        "fixed_latency_micros": 2.250381,
+        "nanoseconds_per_input_byte": 0.430826584,
         "peak_memory_bytes_per_input_byte": 1.016601388,
         "output_bytes_per_input_byte": 0.99998951
       },
       "score": {
-        "overall_0_to_100": 46.23,
+        "overall_0_to_100": 51.314,
         "components_0_to_100": {
-          "throughput": 24.848,
-          "latency": 99.099,
+          "throughput": 30.123,
+          "latency": 99.076,
           "memory": 98.367,
-          "stability": 98.554
+          "stability": 97.101
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -1529,31 +2231,31 @@
         "small": {
           "input_bytes": 16428,
           "output_bytes": 16464,
-          "p50_micros": 8.536,
-          "p95_micros": 9.007
+          "p50_micros": 8.797,
+          "p95_micros": 9.378
         },
         "large": {
           "input_bytes": 4194348,
           "output_bytes": 4194384,
-          "p50_micros": 1147.558,
-          "p95_micros": 1175.38,
-          "throughput_mib_s": 3485.699,
+          "p50_micros": 1162.703,
+          "p95_micros": 1199.222,
+          "throughput_mib_s": 3440.296,
           "reported_peak_memory_bytes": 4263980
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 4.057251,
-        "nanoseconds_per_input_byte": 0.272628964,
+        "fixed_latency_micros": 4.259726,
+        "nanoseconds_per_input_byte": 0.276191502,
         "peak_memory_bytes_per_input_byte": 1.016601388,
         "output_bytes_per_input_byte": 1.000008583
       },
       "score": {
-        "overall_0_to_100": 57.246,
+        "overall_0_to_100": 57.946,
         "components_0_to_100": {
-          "throughput": 36.704,
-          "latency": 99.154,
+          "throughput": 37.576,
+          "latency": 99.128,
           "memory": 98.367,
-          "stability": 97.633
+          "stability": 96.955
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -1568,31 +2270,70 @@
         "small": {
           "input_bytes": 16428,
           "output_bytes": 16488,
-          "p50_micros": 8.766,
-          "p95_micros": 9.027
+          "p50_micros": 8.797,
+          "p95_micros": 10.11
         },
         "large": {
           "input_bytes": 4194348,
           "output_bytes": 4194408,
-          "p50_micros": 1158.047,
-          "p95_micros": 1233.698,
-          "throughput_mib_s": 3454.127,
+          "p50_micros": 1157.464,
+          "p95_micros": 1189.253,
+          "throughput_mib_s": 3455.867,
           "reported_peak_memory_bytes": 4263980
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 4.246912,
-        "nanoseconds_per_input_byte": 0.275084492,
+        "fixed_latency_micros": 4.280326,
+        "nanoseconds_per_input_byte": 0.274937529,
         "peak_memory_bytes_per_input_byte": 1.016601388,
         "output_bytes_per_input_byte": 1.000014305
       },
       "score": {
-        "overall_0_to_100": 56.876,
+        "overall_0_to_100": 58.04,
         "components_0_to_100": {
-          "throughput": 36.538,
-          "latency": 99.131,
+          "throughput": 37.661,
+          "latency": 99.128,
           "memory": 98.367,
-          "stability": 93.868
+          "stability": 97.327
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:wave64-pcm-to-aiff-pcm",
+      "capability_id": "capability:wave64-pcm-to-aiff-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:wave64-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16488,
+          "output_bytes": 16438,
+          "p50_micros": 14.718,
+          "p95_micros": 16.752
+        },
+        "large": {
+          "input_bytes": 4194408,
+          "output_bytes": 4194358,
+          "p50_micros": 2843.72,
+          "p95_micros": 2915.415,
+          "throughput_mib_s": 1406.643,
+          "reported_peak_memory_bytes": 4264040
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 3.553453,
+        "nanoseconds_per_input_byte": 0.677131683,
+        "peak_memory_bytes_per_input_byte": 1.016601151,
+        "output_bytes_per_input_byte": 0.999988079
+      },
+      "score": {
+        "overall_0_to_100": 45.286,
+        "components_0_to_100": {
+          "throughput": 24.027,
+          "latency": 98.55,
+          "memory": 98.367,
+          "stability": 97.541
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -1607,31 +2348,109 @@
         "small": {
           "input_bytes": 16488,
           "output_bytes": 16408,
-          "p50_micros": 14.687,
-          "p95_micros": 15.188
+          "p50_micros": 14.658,
+          "p95_micros": 15.268
         },
         "large": {
           "input_bytes": 4194408,
           "output_bytes": 4194328,
-          "p50_micros": 2810.54,
-          "p95_micros": 2829.977,
-          "throughput_mib_s": 1423.249,
+          "p50_micros": 2842.839,
+          "p95_micros": 2881.641,
+          "throughput_mib_s": 1407.079,
           "reported_peak_memory_bytes": 4264040
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 3.653274,
-        "nanoseconds_per_input_byte": 0.669197352,
+        "fixed_latency_micros": 3.496693,
+        "nanoseconds_per_input_byte": 0.676935173,
         "peak_memory_bytes_per_input_byte": 1.016601151,
         "output_bytes_per_input_byte": 0.999980927
       },
       "score": {
-        "overall_0_to_100": 44.769,
+        "overall_0_to_100": 45.342,
         "components_0_to_100": {
-          "throughput": 23.454,
-          "latency": 98.553,
+          "throughput": 24.031,
+          "latency": 98.555,
           "memory": 98.367,
-          "stability": 99.313
+          "stability": 98.653
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:wave64-pcm-to-bw64-pcm",
+      "capability_id": "capability:wave64-pcm-to-bw64-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:wave64-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16488,
+          "output_bytes": 16464,
+          "p50_micros": 8.596,
+          "p95_micros": 9.347
+        },
+        "large": {
+          "input_bytes": 4194408,
+          "output_bytes": 4194384,
+          "p50_micros": 1171.881,
+          "p95_micros": 1183.924,
+          "throughput_mib_s": 3413.4,
+          "reported_peak_memory_bytes": 4264040
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 4.005141,
+        "nanoseconds_per_input_byte": 0.278436399,
+        "peak_memory_bytes_per_input_byte": 1.016601151,
+        "output_bytes_per_input_byte": 0.999994278
+      },
+      "score": {
+        "overall_0_to_100": 57.943,
+        "components_0_to_100": {
+          "throughput": 37.429,
+          "latency": 99.148,
+          "memory": 98.367,
+          "stability": 98.983
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:wave64-pcm-to-bwf-pcm",
+      "capability_id": "capability:wave64-pcm-to-bwf-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:wave64-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16488,
+          "output_bytes": 17038,
+          "p50_micros": 9.478,
+          "p95_micros": 28.613
+        },
+        "large": {
+          "input_bytes": 4194408,
+          "output_bytes": 4194958,
+          "p50_micros": 1167.071,
+          "p95_micros": 1215.653,
+          "throughput_mib_s": 3427.469,
+          "reported_peak_memory_bytes": 4264040
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 4.909604,
+        "nanoseconds_per_input_byte": 0.277073999,
+        "peak_memory_bytes_per_input_byte": 1.016601151,
+        "output_bytes_per_input_byte": 1.000131127
+      },
+      "score": {
+        "overall_0_to_100": 57.822,
+        "components_0_to_100": {
+          "throughput": 37.506,
+          "latency": 99.061,
+          "memory": 98.367,
+          "stability": 96.004
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -1646,31 +2465,70 @@
         "small": {
           "input_bytes": 16488,
           "output_bytes": 16452,
-          "p50_micros": 8.526,
-          "p95_micros": 9.037
+          "p50_micros": 8.757,
+          "p95_micros": 9.968
         },
         "large": {
           "input_bytes": 4194408,
           "output_bytes": 4194372,
-          "p50_micros": 1150.453,
-          "p95_micros": 1160.191,
-          "throughput_mib_s": 3476.977,
+          "p50_micros": 1180.457,
+          "p95_micros": 1248.925,
+          "throughput_mib_s": 3388.602,
           "reported_peak_memory_bytes": 4264040
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 4.019429,
-        "nanoseconds_per_input_byte": 0.273324286,
+        "fixed_latency_micros": 4.132931,
+        "nanoseconds_per_input_byte": 0.280450559,
         "peak_memory_bytes_per_input_byte": 1.016601151,
         "output_bytes_per_input_byte": 0.999991417
       },
       "score": {
-        "overall_0_to_100": 57.295,
+        "overall_0_to_100": 57.559,
         "components_0_to_100": {
-          "throughput": 36.658,
+          "throughput": 37.293,
+          "latency": 99.132,
+          "memory": 98.367,
+          "stability": 94.518
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:wave64-pcm-to-rf64-pcm",
+      "capability_id": "capability:wave64-pcm-to-rf64-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:wave64-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16488,
+          "output_bytes": 16464,
+          "p50_micros": 8.527,
+          "p95_micros": 9.578
+        },
+        "large": {
+          "input_bytes": 4194408,
+          "output_bytes": 4194384,
+          "p50_micros": 1169.897,
+          "p95_micros": 1253.544,
+          "throughput_mib_s": 3419.189,
+          "reported_peak_memory_bytes": 4264040
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 3.943698,
+        "nanoseconds_per_input_byte": 0.277978037,
+        "peak_memory_bytes_per_input_byte": 1.016601151,
+        "output_bytes_per_input_byte": 0.999994278
+      },
+      "score": {
+        "overall_0_to_100": 57.631,
+        "components_0_to_100": {
+          "throughput": 37.461,
           "latency": 99.155,
           "memory": 98.367,
-          "stability": 99.161
+          "stability": 93.327
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }
@@ -1685,31 +2543,31 @@
         "small": {
           "input_bytes": 16488,
           "output_bytes": 16428,
-          "p50_micros": 8.405,
-          "p95_micros": 8.907
+          "p50_micros": 8.706,
+          "p95_micros": 9.237
         },
         "large": {
           "input_bytes": 4194408,
           "output_bytes": 4194348,
-          "p50_micros": 1163.928,
-          "p95_micros": 1176.011,
-          "throughput_mib_s": 3436.724,
+          "p50_micros": 1202.789,
+          "p95_micros": 1265.126,
+          "throughput_mib_s": 3325.687,
           "reported_peak_memory_bytes": 4264040
         }
       },
       "cost_model": {
-        "fixed_latency_micros": 3.844773,
-        "nanoseconds_per_input_byte": 0.276578537,
+        "fixed_latency_micros": 3.993598,
+        "nanoseconds_per_input_byte": 0.28580801,
         "peak_memory_bytes_per_input_byte": 1.016601151,
         "output_bytes_per_input_byte": 0.999985695
       },
       "score": {
-        "overall_0_to_100": 57.103,
+        "overall_0_to_100": 57.297,
         "components_0_to_100": {
-          "throughput": 36.446,
-          "latency": 99.167,
+          "throughput": 36.945,
+          "latency": 99.137,
           "memory": 98.367,
-          "stability": 98.973
+          "stability": 95.073
         },
         "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
       }

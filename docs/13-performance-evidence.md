@@ -104,7 +104,7 @@ score = 100 × exp(Σ weightᵢ × ln(max(componentᵢ, 1) / 100))
 - 记录 Rust 编译器、OS、架构、commit、runner image、fixture/harness hash；
 - 输出机器可读原始成本与派生分。
 
-当前门槛是全部 42 个生产 Capsule、43 个 AdapterCapability 必须参与；UTF-16 Capsule 的 strict 与 replace-invalid 策略分别测量。
+当前门槛是全部 64 个生产 Capsule、65 个 AdapterCapability 必须参与；UTF-16 Capsule 的 strict 与 replace-invalid 策略分别测量。
 
 ## 7. 基线更新规则
 
@@ -117,16 +117,15 @@ score = 100 × exp(Σ weightᵢ × ln(max(componentᵢ, 1) / 100))
 
 ## 8. 下一轮 Capsule 计划
 
-下一轮一次实现 22 个 Capsule，闭合八种 integer PCM 容器的完整有向直连网：
+八种 integer PCM 容器的 56 条有向直连边已经闭合。下一轮进入 Wave B，一次规划 20 个 FLAC Capsule：
 
 ```text
-RF64 ↔ Wave64    RF64 ↔ BWF
-BW64 ↔ Wave64    BW64 ↔ BWF
-Wave64 ↔ BWF
-
-AIFF ↔ CAF       AIFF ↔ AU
-AIFF ↔ RF64      AIFF ↔ BW64
-AIFF ↔ Wave64    AIFF ↔ BWF
+WAV ↔ native FLAC        AIFF ↔ native FLAC
+CAF ↔ native FLAC        AU ↔ native FLAC
+RF64 ↔ native FLAC       BW64 ↔ native FLAC
+Wave64 ↔ native FLAC     BWF ↔ native FLAC
+native FLAC ↔ Ogg FLAC
+validate native FLAC     normalize FLAC metadata
 ```
 
-前五组产生 10 个方向，AIFF 六组产生 12 个方向，总计 22。完成后 WAV、AIFF、CAF、AU、RF64、BW64、Wave64、BWF 八个 PCM 容器之间的 56 条有向边全部具备独立 Capsule。每个新 Capsule 继续要求 4 个以上核心单测、Adapter 默认调用测试、copy-out 测试，并自动进入全量性能评估。
+八组双向 codec 边产生 16 个 Capsule，封装互转产生 2 个，验证与 metadata 规范化各 1 个，总计 20。FLAC decoder/encoder、CRC、Rice coding、subframe 与 frame scanner 必须是 Capsule 内完整可复制的 Rust 实现；开发期可以由生成器同步经过验证的源码，但不能增加 EverythingX 运行时依赖。所有新能力继续自动进入功能、copy-out 与性能评估。
