@@ -8,9 +8,8 @@ publish = false
 path = "src/lib.rs"
 
 [dependencies]
-everythingx-protocol = { path = "../../../../kernel/ex-protocol" }
+everythingx-protocol = { path = "../../../../../../../kernel/ex-protocol" }
 wav-pcm-to-aiff = { path = "../.." }
 
 [dev-dependencies]
-everythingx-kernel = { path = "../../../../kernel/ex-kernel" }
-
+everythingx-kernel = { path = "../../../../../../../kernel/ex-kernel" }

@@ -25,8 +25,9 @@ def build_matrix() -> dict[str, Any]:
     capabilities: list[dict[str, Any]] = []
     logical_pairs: set[tuple[str, str]] = set()
 
-    for manifest_path in sorted((ROOT / "capsules").glob("*/capsule.json")):
-        if manifest_path.parent.name.startswith("_"):
+    for manifest_path in sorted((ROOT / "capsules").rglob("capsule.json")):
+        relative_parts = manifest_path.relative_to(ROOT / "capsules").parts
+        if any(part.startswith("_") for part in relative_parts):
             continue
         manifest = load_json(manifest_path)
         capsule_id = manifest["capsule_id"]
@@ -70,6 +71,8 @@ def build_matrix() -> dict[str, Any]:
                 "arity": conversion["arity"],
                 "standalone": manifest["independence"]["standalone_cargo_build"],
                 "copy_out_tested": manifest["independence"]["copy_out_tested"],
+                "taxonomy": manifest["taxonomy"],
+                "repository_path": str(manifest_path.parent.relative_to(ROOT)),
                 "capability_ids": sorted(capsule_capabilities),
             }
         )

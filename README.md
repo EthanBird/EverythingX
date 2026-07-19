@@ -75,7 +75,7 @@ U(t) = authoritative registries
 ## 仓库结构
 
 ```text
-capsules/       独立转换库模板；复制出去仍能构建
+capsules/       按 domain/Object IR/operator role 分类的独立转换库；叶目录复制出去仍能构建
 kernel/         EverythingX 运行时边界，只负责控制面
 registry/       格式宇宙、Capsule 与 Adapter 的注册规则
 operators/      Object IR、算子基、族级格式空间与可重建候选 backlog
@@ -104,6 +104,7 @@ tools/          数据同步、目录构建和一致性校验
 11. `docs/10-capsule-family-priority.md`
 12. `docs/11-object-ir-and-operator-universe.md`
 13. `docs/12-audio-operator-program.md`
+14. `capsules/README.md`
 
 ## 当前阶段
 
@@ -120,6 +121,8 @@ tools/          数据同步、目录构建和一致性校验
 | RIFF/WAVE integer PCM | classic AIFF PCM | `wav-pcm-to-aiff` | pcm-exact |
 
 机器可读权威清单是 `registry/support-matrix.json`。任何 Capsule 或 Adapter 更新都必须运行 `python3 tools/build_support_matrix.py`；CI 会拒绝过期矩阵。计划中、研究中和不可计算的边统一保存在 `operators/`，不得写进已支持清单。
+
+生产 Capsule 使用 `capsules/<domain>/<primary-object-ir>/<operator-role>/<capsule-name>` 层级；Schema 与 CI 会校验目录和 manifest 分类一致，并递归发现新 Capsule，因此扩展任意族类不需要继续维护手写路径列表。
 
 运行数据校验：
 

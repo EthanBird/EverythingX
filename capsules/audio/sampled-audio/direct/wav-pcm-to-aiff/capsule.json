@@ -3,12 +3,19 @@
   "version": "0.1.0",
   "name": "WAV PCM to AIFF",
   "summary": "Zero-dependency streaming conversion of RIFF/WAVE integer PCM into classic AIFF.",
+  "taxonomy": {
+    "domain": "audio",
+    "primary_ir": "ir:sampled-audio",
+    "secondary_irs": ["ir:container-graph"],
+    "operator_kind": "convert",
+    "operator_role": "direct"
+  },
   "license": {
     "expression": "PolyForm-Noncommercial-1.0.0",
     "file": "LICENSE",
     "commercial_authorization_required": true
   },
-  "repository": "https://github.com/EthanBird/EverythingX/tree/main/capsules/wav-pcm-to-aiff",
+  "repository": "https://github.com/EthanBird/EverythingX/tree/main/capsules/audio/sampled-audio/direct/wav-pcm-to-aiff",
   "independence": {
     "standalone_cargo_build": true,
     "everythingx_optional": true,
@@ -113,4 +120,3 @@
     ]
   }
 }
-

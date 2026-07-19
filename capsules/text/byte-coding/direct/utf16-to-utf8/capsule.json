@@ -3,12 +3,19 @@
   "version": "0.1.0",
   "name": "UTF-16 to UTF-8",
   "summary": "Zero-dependency streaming conversion from UTF-16 byte streams to UTF-8.",
+  "taxonomy": {
+    "domain": "text",
+    "primary_ir": "ir:byte-coding",
+    "secondary_irs": ["ir:text"],
+    "operator_kind": "transcode",
+    "operator_role": "direct"
+  },
   "license": {
     "expression": "PolyForm-Noncommercial-1.0.0",
     "file": "LICENSE",
     "commercial_authorization_required": true
   },
-  "repository": "https://github.com/EthanBird/EverythingX/tree/main/capsules/utf16-to-utf8",
+  "repository": "https://github.com/EthanBird/EverythingX/tree/main/capsules/text/byte-coding/direct/utf16-to-utf8",
   "independence": {
     "standalone_cargo_build": true,
     "everythingx_optional": true,
@@ -85,4 +92,3 @@
     "known_risks": ["I/O errors may occur after partial output has been written"]
   }
 }
-

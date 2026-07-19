@@ -5,7 +5,7 @@
   "type": "object",
   "additionalProperties": false,
   "required": [
-    "capsule_id", "version", "name", "summary", "license",
+    "capsule_id", "version", "name", "summary", "taxonomy", "license",
     "independence", "conversion", "api", "defaults", "strategies",
     "backends", "validation", "security"
   ],
@@ -14,6 +14,24 @@
     "version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:[-+][0-9A-Za-z.-]+)?$"},
     "name": {"type": "string", "minLength": 1},
     "summary": {"type": "string", "minLength": 1},
+    "taxonomy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["domain", "primary_ir", "secondary_irs", "operator_kind", "operator_role"],
+      "properties": {
+        "domain": {"type": "string", "pattern": "^[a-z0-9-]+$"},
+        "primary_ir": {"type": "string", "pattern": "^ir:[a-z0-9-]+$"},
+        "secondary_irs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^ir:[a-z0-9-]+$"}
+        },
+        "operator_kind": {"type": "string", "pattern": "^[a-z0-9-]+$"},
+        "operator_role": {
+          "enum": ["direct", "decode", "encode", "transform", "split", "aggregate", "analyze", "bridge", "structural"]
+        }
+      }
+    },
     "license": {
       "type": "object",
       "required": ["expression", "file"],

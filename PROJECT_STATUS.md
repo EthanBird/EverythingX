@@ -64,10 +64,12 @@ These are source observations, not a count of unique canonical formats.
 - Generated 4,743 Object IR/operator research positions and 310 family research cells
 - Generated implemented-support matrix with CI freshness enforcement
 - Audio representation universe and complete ordered-pair research backlog
+- Recursive Capsule taxonomy by domain, primary Object IR and operator role
+- Automatic recursive discovery for manifests, copy-out tests and Adapter tests
 
 ## Implemented Capsules
 
-- `capsules/utf16-to-utf8`: zero-dependency, streaming standalone Capsule.
+- `capsules/text/byte-coding/direct/utf16-to-utf8`: zero-dependency, streaming standalone Capsule.
 - Runnable defaults: BOM auto-detection, BOM-less little-endian, strict malformed-sequence rejection, no UTF-8 BOM, 64 KiB buffer.
 - Strict and replace-invalid Adapter capabilities with explicit loss reporting.
 - `kernel/ex-protocol`: handshake, capability, request/result, budget, loss and provenance types.

@@ -3,12 +3,19 @@
   "version": "0.1.0",
   "name": "BMP to PNG",
   "summary": "Zero-dependency conversion of supported Windows BMP rasters to streamed RGB/RGBA PNG.",
+  "taxonomy": {
+    "domain": "image",
+    "primary_ir": "ir:raster",
+    "secondary_irs": ["ir:container-graph"],
+    "operator_kind": "convert",
+    "operator_role": "direct"
+  },
   "license": {
     "expression": "PolyForm-Noncommercial-1.0.0",
     "file": "LICENSE",
     "commercial_authorization_required": true
   },
-  "repository": "https://github.com/EthanBird/EverythingX/tree/main/capsules/bmp-to-png",
+  "repository": "https://github.com/EthanBird/EverythingX/tree/main/capsules/image/raster/direct/bmp-to-png",
   "independence": {
     "standalone_cargo_build": true,
     "everythingx_optional": true,
@@ -109,4 +116,3 @@
     ]
   }
 }
-

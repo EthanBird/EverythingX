@@ -106,13 +106,13 @@ def main() -> int:
     canonical_ids = ensure_unique(canonical, "format_id", "canonical/seed.ndjson")
 
     capsule_required = {
-        "capsule_id", "version", "name", "summary", "license", "independence",
+        "capsule_id", "version", "name", "summary", "taxonomy", "license", "independence",
         "conversion", "api", "defaults", "strategies", "backends", "validation", "security"
     }
     capsule_ids: set[str] = set()
     adapter_ids: set[str] = set()
     capability_ids: set[str] = set()
-    for path in sorted((ROOT / "capsules").glob("*/capsule.json")):
+    for path in sorted((ROOT / "capsules").rglob("capsule.json")):
         record = load_json(path)
         require_fields(record, capsule_required, str(path.relative_to(ROOT)))
         capsule_id = record.get("capsule_id", "")
@@ -121,6 +121,18 @@ def main() -> int:
         if capsule_id in capsule_ids:
             raise ValueError(f"{path}: duplicate capsule_id {capsule_id}")
         capsule_ids.add(capsule_id)
+        taxonomy = record.get("taxonomy", {})
+        relative_parts = path.parent.relative_to(ROOT / "capsules").parts
+        if not any(part.startswith("_") for part in relative_parts):
+            expected_prefix = (
+                taxonomy.get("domain"),
+                str(taxonomy.get("primary_ir", "")).removeprefix("ir:"),
+                taxonomy.get("operator_role"),
+            )
+            if relative_parts[:3] != expected_prefix:
+                raise ValueError(
+                    f"{path}: directory prefix {relative_parts[:3]} does not match taxonomy {expected_prefix}"
+                )
         independence = record.get("independence", {})
         if independence.get("standalone_cargo_build") is not True:
             raise ValueError(f"{path}: standalone_cargo_build must be true")

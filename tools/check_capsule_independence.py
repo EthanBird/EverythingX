@@ -121,7 +121,9 @@ def main() -> int:
     parser.add_argument("capsules", nargs="*", type=Path)
     parser.add_argument("--cargo", action="store_true", help="Copy out, delete everythingx/, and run cargo test --locked")
     args = parser.parse_args()
-    roots = args.capsules or sorted((ROOT / "capsules").glob("*"))
+    roots = args.capsules or sorted(
+        path.parent for path in (ROOT / "capsules").rglob("capsule.json")
+    )
     roots = [path.resolve() for path in roots if path.is_dir()]
     if not roots:
         print("No Capsule directories found.", file=sys.stderr)

@@ -23,6 +23,42 @@
   ],
   "capsules": [
     {
+      "capsule_id": "capsule:wav-pcm-to-aiff",
+      "version": "0.1.0",
+      "crate": "wav-pcm-to-aiff",
+      "inputs": [
+        "exfmt:audio:wav-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:aiff-pcm"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "audio",
+        "primary_ir": "ir:sampled-audio",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/audio/sampled-audio/direct/wav-pcm-to-aiff",
+      "capability_ids": [
+        "capability:wav-pcm-to-aiff/pcm-exact/native-portable"
+      ]
+    },
+    {
       "capsule_id": "capsule:bmp-to-png",
       "version": "0.1.0",
       "crate": "bmp-to-png",
@@ -44,6 +80,16 @@
       },
       "standalone": true,
       "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/image/raster/direct/bmp-to-png",
       "capability_ids": [
         "capability:bmp-to-png/pixel-exact/native-portable"
       ]
@@ -70,35 +116,19 @@
       },
       "standalone": true,
       "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "text",
+        "primary_ir": "ir:byte-coding",
+        "secondary_irs": [
+          "ir:text"
+        ],
+        "operator_kind": "transcode",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/text/byte-coding/direct/utf16-to-utf8",
       "capability_ids": [
         "capability:utf16-to-utf8/replace-invalid/native-portable",
         "capability:utf16-to-utf8/strict/native-portable"
-      ]
-    },
-    {
-      "capsule_id": "capsule:wav-pcm-to-aiff",
-      "version": "0.1.0",
-      "crate": "wav-pcm-to-aiff",
-      "inputs": [
-        "exfmt:audio:wav-pcm"
-      ],
-      "outputs": [
-        "exfmt:audio:aiff-pcm"
-      ],
-      "arity": {
-        "inputs": {
-          "min": 1,
-          "max": 1
-        },
-        "outputs": {
-          "min": 1,
-          "max": 1
-        }
-      },
-      "standalone": true,
-      "copy_out_tested": true,
-      "capability_ids": [
-        "capability:wav-pcm-to-aiff/pcm-exact/native-portable"
       ]
     }
   ],
