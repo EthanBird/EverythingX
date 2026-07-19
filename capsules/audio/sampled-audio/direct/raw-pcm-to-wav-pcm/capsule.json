@@ -99,7 +99,7 @@
       "Strict mode rejects partial frames"
     ],
     "fuzz": ["Planned: option, length, seek and fragmented-reader campaigns"],
-    "benchmarks": ["Planned: widths, byte orders and channel-count corpus"]
+    "benchmarks": ["registry/performance/baseline.json#capability:raw-pcm-to-wav-pcm/pcm-exact/native-portable"]
   },
   "security": {
     "accepts_untrusted_input": true,

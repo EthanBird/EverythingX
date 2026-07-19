@@ -170,7 +170,7 @@ def manifest(spec: Spec) -> str:
             ],
             "regression": ["Wrong signatures are rejected", "PCM frames remain aligned"],
             "fuzz": ["Planned: source chunk graph, size and fragmented-reader campaigns"],
-            "benchmarks": ["Planned: widths, channels and multi-gigabyte streaming corpus"],
+            "benchmarks": [f"registry/performance/baseline.json#capability:{spec.name}/pcm-exact/native-portable"],
         },
         "security": {
             "accepts_untrusted_input": True,
@@ -207,7 +207,7 @@ def adapter_manifest(spec: Spec) -> str:
             "loss": {"payload": "none", "temporal": "none", "structure": "normalized", "metadata": "unbounded"},
             "default_options": defaults,
             "defaults_are_runnable": True,
-            "execution": {"streaming": False, "seek_required": False, "cost_evidence": []},
+            "execution": {"streaming": False, "seek_required": False, "cost_evidence": [f"registry/performance/baseline.json#capability:{spec.name}/pcm-exact/native-portable"]},
             "report_mapping": {"unknown_fields_are_preserved": True, "rules": ["PCM facts map to capsule_report", "static Adapter buffers forward-only protocol input"]},
         }],
     }
@@ -366,7 +366,7 @@ def raw_manifest(spec: RawSpec) -> str:
             "properties": ["Partial frames are rejected", "Default and custom semantics are independently asserted"],
             "regression": ["Buffer limits are validated", "Frame/channel boundaries remain intact"],
             "fuzz": ["Planned: parameter, alignment, length and reader-fragmentation campaigns"],
-            "benchmarks": ["Planned: widths, channels and large-stream corpus"],
+            "benchmarks": [f"registry/performance/baseline.json#capability:{spec.name}/frame-exact/native-portable"],
         },
         "security": {
             "accepts_untrusted_input": True,
@@ -398,7 +398,7 @@ def raw_adapter_manifest(spec: RawSpec) -> str:
             "loss": {"payload": "none", "temporal": "normalized", "structure": "normalized", "metadata": "not-present"},
             "default_options": raw_defaults(spec),
             "defaults_are_runnable": True,
-            "execution": {"streaming": False, "seek_required": False, "cost_evidence": []},
+            "execution": {"streaming": False, "seek_required": False, "cost_evidence": [f"registry/performance/baseline.json#capability:{spec.name}/frame-exact/native-portable"]},
             "report_mapping": {"unknown_fields_are_preserved": True, "rules": ["Frame and channel counts map to capsule_report", "static Adapter buffers protocol input for seek"]},
         }],
     }

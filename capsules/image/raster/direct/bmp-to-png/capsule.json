@@ -100,7 +100,7 @@
       "RLE8 decoding preserves row order"
     ],
     "fuzz": ["Planned: header, palette, bitfield and RLE command fuzz campaigns"],
-    "benchmarks": ["Planned: entropy and row-filter corpus across both compression strategies"]
+    "benchmarks": ["registry/performance/baseline.json#capability:bmp-to-png/pixel-exact/native-portable"]
   },
   "security": {
     "accepts_untrusted_input": true,

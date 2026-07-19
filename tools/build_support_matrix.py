@@ -58,6 +58,7 @@ def build_matrix() -> dict[str, Any]:
                         "defaults_are_runnable": capability["defaults_are_runnable"],
                         "streaming": capability["execution"]["streaming"],
                         "seek_required": capability["execution"]["seek_required"],
+                        "cost_evidence": capability["execution"]["cost_evidence"],
                     }
                 )
 

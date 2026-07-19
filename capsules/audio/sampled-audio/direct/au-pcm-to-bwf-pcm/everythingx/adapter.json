@@ -53,7 +53,9 @@
       "execution": {
         "streaming": false,
         "seek_required": false,
-        "cost_evidence": []
+        "cost_evidence": [
+          "registry/performance/baseline.json#capability:au-pcm-to-bwf-pcm/pcm-exact/native-portable"
+        ]
       },
       "report_mapping": {
         "unknown_fields_are_preserved": true,

@@ -47,7 +47,7 @@
     "properties": ["Raw output length equals complete WAVE data frames", "Signedness rebasing and endian reversal preserve integer levels"],
     "regression": ["Unsigned WAVE 8-bit becomes signed raw by default", "Multiple data chunks concatenate", "Extensible subtype must be PCM"],
     "fuzz": ["Planned: RIFF graph, fmt, alignment and fragmented-reader campaigns"],
-    "benchmarks": ["Planned: widths, channels and chunk-layout corpus"]
+    "benchmarks": ["registry/performance/baseline.json#capability:wav-pcm-to-raw-pcm/pcm-exact/native-portable"]
   },
   "security": {
     "accepts_untrusted_input": true,

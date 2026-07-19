@@ -1,0 +1,1719 @@
+{
+  "schema_version": "0.1.0",
+  "profile_id": "exbench:ci-default-v1",
+  "generated_at": "2026-07-19T09:05:29.419847+00:00",
+  "scope": "End-to-end Kernel default invocation including Adapter buffering and Capsule execution.",
+  "comparability": "Scores are comparable only when profile_id, harness_sha256 and environment class match.",
+  "environment": {
+    "os": "Linux-6.17.0-1020-azure-x86_64-with-glibc2.39",
+    "architecture": "x86_64",
+    "python": "3.12.3",
+    "rustc": "rustc 1.97.0 (2d8144b78 2026-07-07)\nbinary: rustc\ncommit-hash: 2d8144b7880597b6e6d3dfd63a9a9efae3f533d3\ncommit-date: 2026-07-07\nhost: x86_64-unknown-linux-gnu\nrelease: 1.97.0\nLLVM version: 22.1.6",
+    "github_runner_image": "ubuntu24",
+    "github_run_id": "29680914177",
+    "commit_sha": "14f0ae516729259cfd569b5ddd4166531d75a56c"
+  },
+  "method": {
+    "harness_sha256": "602b39e5ae457cb8512d41a2a5c26936e9c0e6974a8b3ddef3eb6f28f2cf1d24",
+    "fixture_profile": "deterministic synthetic valid inputs; 16 KiB small and approximately 4 MiB large",
+    "warmup_iterations": 2,
+    "small_samples": 11,
+    "large_samples": 7,
+    "percentiles": [
+      50,
+      95
+    ],
+    "calibration": {
+      "operation": "4 MiB Vec clone",
+      "input_bytes": 4194304,
+      "p50_micros": 154.599,
+      "p95_micros": 176.881,
+      "throughput_mib_s": 25873.389
+    },
+    "score_formula": "geometric_mean(throughput^.55, latency^.20, memory^.15, stability^.10), calibrated to same-run Vec clone"
+  },
+  "summary": {
+    "capabilities": 43,
+    "capsules": 42
+  },
+  "capabilities": [
+    {
+      "capsule_id": "capsule:aiff-pcm-to-wav-pcm",
+      "capability_id": "capability:aiff-pcm-to-wav-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:aiff-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16438,
+          "output_bytes": 16428,
+          "p50_micros": 27.101,
+          "p95_micros": 28.444
+        },
+        "large": {
+          "input_bytes": 4194358,
+          "output_bytes": 4194348,
+          "p50_micros": 5692.785,
+          "p95_micros": 5746.365,
+          "throughput_mib_s": 702.653,
+          "reported_peak_memory_bytes": 4259894
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 4.809402,
+        "nanoseconds_per_input_byte": 1.356101601,
+        "peak_memory_bytes_per_input_byte": 1.015624799,
+        "output_bytes_per_input_byte": 0.999997616
+      },
+      "score": {
+        "overall_0_to_100": 36.777,
+        "components_0_to_100": {
+          "throughput": 16.479,
+          "latency": 97.361,
+          "memory": 98.462,
+          "stability": 99.068
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:au-pcm-to-bw64-pcm",
+      "capability_id": "capability:au-pcm-to-bw64-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:au-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16408,
+          "output_bytes": 16464,
+          "p50_micros": 15.689,
+          "p95_micros": 16.431
+        },
+        "large": {
+          "input_bytes": 4194328,
+          "output_bytes": 4194384,
+          "p50_micros": 3216.22,
+          "p95_micros": 3222.381,
+          "throughput_mib_s": 1243.703,
+          "reported_peak_memory_bytes": 4263960
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 3.119513,
+        "nanoseconds_per_input_byte": 0.766058469,
+        "peak_memory_bytes_per_input_byte": 1.016601468,
+        "output_bytes_per_input_byte": 1.000013351
+      },
+      "score": {
+        "overall_0_to_100": 43.152,
+        "components_0_to_100": {
+          "throughput": 21.925,
+          "latency": 98.455,
+          "memory": 98.367,
+          "stability": 99.809
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:au-pcm-to-bwf-pcm",
+      "capability_id": "capability:au-pcm-to-bwf-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:au-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16408,
+          "output_bytes": 17038,
+          "p50_micros": 14.286,
+          "p95_micros": 15.219
+        },
+        "large": {
+          "input_bytes": 4194328,
+          "output_bytes": 4194958,
+          "p50_micros": 2897.503,
+          "p95_micros": 2980.068,
+          "throughput_mib_s": 1380.507,
+          "reported_peak_memory_bytes": 4263960
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 2.962704,
+        "nanoseconds_per_input_byte": 0.690108236,
+        "peak_memory_bytes_per_input_byte": 1.016601468,
+        "output_bytes_per_input_byte": 1.000150203
+      },
+      "score": {
+        "overall_0_to_100": 44.305,
+        "components_0_to_100": {
+          "throughput": 23.099,
+          "latency": 98.592,
+          "memory": 98.367,
+          "stability": 97.229
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:au-pcm-to-caf-pcm",
+      "capability_id": "capability:au-pcm-to-caf-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:au-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16408,
+          "output_bytes": 16452,
+          "p50_micros": 15.93,
+          "p95_micros": 16.661
+        },
+        "large": {
+          "input_bytes": 4194328,
+          "output_bytes": 4194372,
+          "p50_micros": 3217.693,
+          "p95_micros": 3253.029,
+          "throughput_mib_s": 1243.134,
+          "reported_peak_memory_bytes": 4263960
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 3.355674,
+        "nanoseconds_per_input_byte": 0.766353353,
+        "peak_memory_bytes_per_input_byte": 1.016601468,
+        "output_bytes_per_input_byte": 1.00001049
+      },
+      "score": {
+        "overall_0_to_100": 43.106,
+        "components_0_to_100": {
+          "throughput": 21.92,
+          "latency": 98.432,
+          "memory": 98.367,
+          "stability": 98.914
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:au-pcm-to-rf64-pcm",
+      "capability_id": "capability:au-pcm-to-rf64-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:au-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16408,
+          "output_bytes": 16464,
+          "p50_micros": 15.709,
+          "p95_micros": 16.15
+        },
+        "large": {
+          "input_bytes": 4194328,
+          "output_bytes": 4194384,
+          "p50_micros": 3180.423,
+          "p95_micros": 3188.046,
+          "throughput_mib_s": 1257.702,
+          "reported_peak_memory_bytes": 4263960
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 3.280177,
+        "nanoseconds_per_input_byte": 0.757485543,
+        "peak_memory_bytes_per_input_byte": 1.016601468,
+        "output_bytes_per_input_byte": 1.000013351
+      },
+      "score": {
+        "overall_0_to_100": 43.283,
+        "components_0_to_100": {
+          "throughput": 22.048,
+          "latency": 98.453,
+          "memory": 98.367,
+          "stability": 99.761
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:au-pcm-to-wav-pcm",
+      "capability_id": "capability:au-pcm-to-wav-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:au-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16408,
+          "output_bytes": 16428,
+          "p50_micros": 14.537,
+          "p95_micros": 16.01
+        },
+        "large": {
+          "input_bytes": 4194328,
+          "output_bytes": 4194348,
+          "p50_micros": 2856.075,
+          "p95_micros": 2889.679,
+          "throughput_mib_s": 1400.531,
+          "reported_peak_memory_bytes": 4263960
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 3.377391,
+        "nanoseconds_per_input_byte": 0.680132219,
+        "peak_memory_bytes_per_input_byte": 1.016601468,
+        "output_bytes_per_input_byte": 1.000004768
+      },
+      "score": {
+        "overall_0_to_100": 44.551,
+        "components_0_to_100": {
+          "throughput": 23.266,
+          "latency": 98.567,
+          "memory": 98.367,
+          "stability": 98.837
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:au-pcm-to-wave64-pcm",
+      "capability_id": "capability:au-pcm-to-wave64-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:au-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16408,
+          "output_bytes": 16488,
+          "p50_micros": 14.518,
+          "p95_micros": 15.379
+        },
+        "large": {
+          "input_bytes": 4194328,
+          "output_bytes": 4194408,
+          "p50_micros": 2844.423,
+          "p95_micros": 2848.942,
+          "throughput_mib_s": 1406.269,
+          "reported_peak_memory_bytes": 4263960
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 3.404077,
+        "nanoseconds_per_input_byte": 0.677347819,
+        "peak_memory_bytes_per_input_byte": 1.016601468,
+        "output_bytes_per_input_byte": 1.000019073
+      },
+      "score": {
+        "overall_0_to_100": 44.647,
+        "components_0_to_100": {
+          "throughput": 23.314,
+          "latency": 98.569,
+          "memory": 98.367,
+          "stability": 99.841
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:bmp-to-png",
+      "capability_id": "capability:bmp-to-png/pixel-exact/native-portable",
+      "strategy": "pixel-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:image:bmp-family",
+      "workloads": {
+        "small": {
+          "input_bytes": 12342,
+          "output_bytes": 12766,
+          "p50_micros": 440.946,
+          "p95_micros": 450.283
+        },
+        "large": {
+          "input_bytes": 3145782,
+          "output_bytes": 3234917,
+          "p50_micros": 107482.317,
+          "p95_micros": 108339.531,
+          "throughput_mib_s": 27.912,
+          "reported_peak_memory_bytes": 74752
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 19.331225,
+        "nanoseconds_per_input_byte": 34.160976754,
+        "peak_memory_bytes_per_input_byte": 0.023762613,
+        "output_bytes_per_input_byte": 1.028334767
+      },
+      "score": {
+        "overall_0_to_100": 14.19,
+        "components_0_to_100": {
+          "throughput": 3.284,
+          "latency": 69.399,
+          "memory": 100,
+          "stability": 99.209
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:bw64-pcm-to-au-pcm",
+      "capability_id": "capability:bw64-pcm-to-au-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:bw64-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16464,
+          "output_bytes": 16408,
+          "p50_micros": 14.517,
+          "p95_micros": 24.916
+        },
+        "large": {
+          "input_bytes": 4194384,
+          "output_bytes": 4194328,
+          "p50_micros": 2827.813,
+          "p95_micros": 2887.364,
+          "throughput_mib_s": 1414.548,
+          "reported_peak_memory_bytes": 4264016
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 3.430597,
+        "nanoseconds_per_input_byte": 0.673372396,
+        "peak_memory_bytes_per_input_byte": 1.016601246,
+        "output_bytes_per_input_byte": 0.999986649
+      },
+      "score": {
+        "overall_0_to_100": 44.633,
+        "components_0_to_100": {
+          "throughput": 23.382,
+          "latency": 98.569,
+          "memory": 98.367,
+          "stability": 97.938
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:bw64-pcm-to-caf-pcm",
+      "capability_id": "capability:bw64-pcm-to-caf-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:bw64-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16464,
+          "output_bytes": 16452,
+          "p50_micros": 8.476,
+          "p95_micros": 8.987
+        },
+        "large": {
+          "input_bytes": 4194384,
+          "output_bytes": 4194372,
+          "p50_micros": 1150.333,
+          "p95_micros": 1158.028,
+          "throughput_mib_s": 3477.32,
+          "reported_peak_memory_bytes": 4264016
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 3.976265,
+        "nanoseconds_per_input_byte": 0.273307531,
+        "peak_memory_bytes_per_input_byte": 1.016601246,
+        "output_bytes_per_input_byte": 0.999997139
+      },
+      "score": {
+        "overall_0_to_100": 57.308,
+        "components_0_to_100": {
+          "throughput": 36.66,
+          "latency": 99.16,
+          "memory": 98.367,
+          "stability": 99.336
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:bw64-pcm-to-rf64-pcm",
+      "capability_id": "capability:bw64-pcm-to-rf64-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:bw64-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16464,
+          "output_bytes": 16464,
+          "p50_micros": 8.536,
+          "p95_micros": 8.907
+        },
+        "large": {
+          "input_bytes": 4194384,
+          "output_bytes": 4194384,
+          "p50_micros": 1137.639,
+          "p95_micros": 1152.978,
+          "throughput_mib_s": 3516.121,
+          "reported_peak_memory_bytes": 4264016
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 4.086525,
+        "nanoseconds_per_input_byte": 0.270254816,
+        "peak_memory_bytes_per_input_byte": 1.016601246,
+        "output_bytes_per_input_byte": 1
+      },
+      "score": {
+        "overall_0_to_100": 57.443,
+        "components_0_to_100": {
+          "throughput": 36.864,
+          "latency": 99.154,
+          "memory": 98.367,
+          "stability": 98.67
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:bw64-pcm-to-wav-pcm",
+      "capability_id": "capability:bw64-pcm-to-wav-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:bw64-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16464,
+          "output_bytes": 16428,
+          "p50_micros": 8.396,
+          "p95_micros": 8.976
+        },
+        "large": {
+          "input_bytes": 4194384,
+          "output_bytes": 4194348,
+          "p50_micros": 1167.224,
+          "p95_micros": 1214.523,
+          "throughput_mib_s": 3427,
+          "reported_peak_memory_bytes": 4264016
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 3.829387,
+        "nanoseconds_per_input_byte": 0.2773696,
+        "peak_memory_bytes_per_input_byte": 1.016601246,
+        "output_bytes_per_input_byte": 0.999991417
+      },
+      "score": {
+        "overall_0_to_100": 56.891,
+        "components_0_to_100": {
+          "throughput": 36.394,
+          "latency": 99.167,
+          "memory": 98.367,
+          "stability": 96.106
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:bwf-pcm-to-au-pcm",
+      "capability_id": "capability:bwf-pcm-to-au-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:bwf-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 17038,
+          "output_bytes": 16408,
+          "p50_micros": 15.949,
+          "p95_micros": 16.421
+        },
+        "large": {
+          "input_bytes": 4194958,
+          "output_bytes": 4194328,
+          "p50_micros": 3165.204,
+          "p95_micros": 3200.14,
+          "throughput_mib_s": 1263.939,
+          "reported_peak_memory_bytes": 4264590
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 3.106005,
+        "nanoseconds_per_input_byte": 0.753785376,
+        "peak_memory_bytes_per_input_byte": 1.016598974,
+        "output_bytes_per_input_byte": 0.99984982
+      },
+      "score": {
+        "overall_0_to_100": 43.303,
+        "components_0_to_100": {
+          "throughput": 22.102,
+          "latency": 98.43,
+          "memory": 98.367,
+          "stability": 98.908
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:bwf-pcm-to-caf-pcm",
+      "capability_id": "capability:bwf-pcm-to-caf-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:bwf-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 17038,
+          "output_bytes": 16452,
+          "p50_micros": 8.676,
+          "p95_micros": 8.887
+        },
+        "large": {
+          "input_bytes": 4194958,
+          "output_bytes": 4194372,
+          "p50_micros": 1150.753,
+          "p95_micros": 1196.81,
+          "throughput_mib_s": 3476.527,
+          "reported_peak_memory_bytes": 4264590
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 4.018489,
+        "nanoseconds_per_input_byte": 0.273360189,
+        "peak_memory_bytes_per_input_byte": 1.016598974,
+        "output_bytes_per_input_byte": 0.999860308
+      },
+      "score": {
+        "overall_0_to_100": 57.115,
+        "components_0_to_100": {
+          "throughput": 36.656,
+          "latency": 99.14,
+          "memory": 98.367,
+          "stability": 96.152
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:bwf-pcm-to-wav-pcm",
+      "capability_id": "capability:bwf-pcm-to-wav-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:bwf-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 17038,
+          "output_bytes": 16428,
+          "p50_micros": 8.376,
+          "p95_micros": 9.086
+        },
+        "large": {
+          "input_bytes": 4194958,
+          "output_bytes": 4194348,
+          "p50_micros": 1168.808,
+          "p95_micros": 1188.023,
+          "throughput_mib_s": 3422.824,
+          "reported_peak_memory_bytes": 4264590
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 3.643635,
+        "nanoseconds_per_input_byte": 0.277753523,
+        "peak_memory_bytes_per_input_byte": 1.016598974,
+        "output_bytes_per_input_byte": 0.999854587
+      },
+      "score": {
+        "overall_0_to_100": 57.005,
+        "components_0_to_100": {
+          "throughput": 36.372,
+          "latency": 99.169,
+          "memory": 98.367,
+          "stability": 98.383
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:caf-pcm-to-au-pcm",
+      "capability_id": "capability:caf-pcm-to-au-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:caf-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16452,
+          "output_bytes": 16408,
+          "p50_micros": 14.547,
+          "p95_micros": 15.799
+        },
+        "large": {
+          "input_bytes": 4194372,
+          "output_bytes": 4194328,
+          "p50_micros": 2819.497,
+          "p95_micros": 2894.086,
+          "throughput_mib_s": 1418.716,
+          "reported_peak_memory_bytes": 4264004
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 3.501543,
+        "nanoseconds_per_input_byte": 0.671374751,
+        "peak_memory_bytes_per_input_byte": 1.016601293,
+        "output_bytes_per_input_byte": 0.99998951
+      },
+      "score": {
+        "overall_0_to_100": 44.645,
+        "components_0_to_100": {
+          "throughput": 23.416,
+          "latency": 98.566,
+          "memory": 98.367,
+          "stability": 97.423
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:caf-pcm-to-bw64-pcm",
+      "capability_id": "capability:caf-pcm-to-bw64-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:caf-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16452,
+          "output_bytes": 16464,
+          "p50_micros": 8.525,
+          "p95_micros": 19.627
+        },
+        "large": {
+          "input_bytes": 4194372,
+          "output_bytes": 4194384,
+          "p50_micros": 1140.434,
+          "p95_micros": 1143.621,
+          "throughput_mib_s": 3507.494,
+          "reported_peak_memory_bytes": 4264004
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 4.067718,
+        "nanoseconds_per_input_byte": 0.270926442,
+        "peak_memory_bytes_per_input_byte": 1.016601293,
+        "output_bytes_per_input_byte": 1.000002861
+      },
+      "score": {
+        "overall_0_to_100": 57.466,
+        "components_0_to_100": {
+          "throughput": 36.819,
+          "latency": 99.155,
+          "memory": 98.367,
+          "stability": 99.721
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:caf-pcm-to-bwf-pcm",
+      "capability_id": "capability:caf-pcm-to-bwf-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:caf-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16452,
+          "output_bytes": 17038,
+          "p50_micros": 8.676,
+          "p95_micros": 8.926
+        },
+        "large": {
+          "input_bytes": 4194372,
+          "output_bytes": 4194958,
+          "p50_micros": 1142.458,
+          "p95_micros": 1175.831,
+          "throughput_mib_s": 3501.28,
+          "reported_peak_memory_bytes": 4264004
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 4.211343,
+        "nanoseconds_per_input_byte": 0.271374751,
+        "peak_memory_bytes_per_input_byte": 1.016601293,
+        "output_bytes_per_input_byte": 1.000139711
+      },
+      "score": {
+        "overall_0_to_100": 57.287,
+        "components_0_to_100": {
+          "throughput": 36.786,
+          "latency": 99.14,
+          "memory": 98.367,
+          "stability": 97.162
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:caf-pcm-to-rf64-pcm",
+      "capability_id": "capability:caf-pcm-to-rf64-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:caf-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16452,
+          "output_bytes": 16464,
+          "p50_micros": 8.356,
+          "p95_micros": 8.636
+        },
+        "large": {
+          "input_bytes": 4194372,
+          "output_bytes": 4194384,
+          "p50_micros": 1137.479,
+          "p95_micros": 1204.454,
+          "throughput_mib_s": 3516.605,
+          "reported_peak_memory_bytes": 4264004
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 3.909689,
+        "nanoseconds_per_input_byte": 0.270259603,
+        "peak_memory_bytes_per_input_byte": 1.016601293,
+        "output_bytes_per_input_byte": 1.000002861
+      },
+      "score": {
+        "overall_0_to_100": 57.196,
+        "components_0_to_100": {
+          "throughput": 36.867,
+          "latency": 99.171,
+          "memory": 98.367,
+          "stability": 94.439
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:caf-pcm-to-wav-pcm",
+      "capability_id": "capability:caf-pcm-to-wav-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:caf-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16452,
+          "output_bytes": 16428,
+          "p50_micros": 8.426,
+          "p95_micros": 19.567
+        },
+        "large": {
+          "input_bytes": 4194372,
+          "output_bytes": 4194348,
+          "p50_micros": 1161.163,
+          "p95_micros": 1171.412,
+          "throughput_mib_s": 3444.878,
+          "reported_peak_memory_bytes": 4264004
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 3.886701,
+        "nanoseconds_per_input_byte": 0.275911698,
+        "peak_memory_bytes_per_input_byte": 1.016601293,
+        "output_bytes_per_input_byte": 0.999994278
+      },
+      "score": {
+        "overall_0_to_100": 57.149,
+        "components_0_to_100": {
+          "throughput": 36.489,
+          "latency": 99.164,
+          "memory": 98.367,
+          "stability": 99.125
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:caf-pcm-to-wave64-pcm",
+      "capability_id": "capability:caf-pcm-to-wave64-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:caf-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16452,
+          "output_bytes": 16488,
+          "p50_micros": 8.386,
+          "p95_micros": 8.636
+        },
+        "large": {
+          "input_bytes": 4194372,
+          "output_bytes": 4194408,
+          "p50_micros": 1156.685,
+          "p95_micros": 1245.441,
+          "throughput_mib_s": 3458.215,
+          "reported_peak_memory_bytes": 4264004
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 3.864177,
+        "nanoseconds_per_input_byte": 0.274849447,
+        "peak_memory_bytes_per_input_byte": 1.016601293,
+        "output_bytes_per_input_byte": 1.000008583
+      },
+      "score": {
+        "overall_0_to_100": 56.838,
+        "components_0_to_100": {
+          "throughput": 36.559,
+          "latency": 99.168,
+          "memory": 98.367,
+          "stability": 92.874
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:raw-pcm-channel-map",
+      "capability_id": "capability:raw-pcm-channel-map/frame-exact/native-portable",
+      "strategy": "frame-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:raw-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16384,
+          "output_bytes": 16384,
+          "p50_micros": 52.358,
+          "p95_micros": 62.978
+        },
+        "large": {
+          "input_bytes": 4194304,
+          "output_bytes": 4194304,
+          "p50_micros": 10343.93,
+          "p95_micros": 10357.436,
+          "throughput_mib_s": 386.7,
+          "reported_peak_memory_bytes": 4325376
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 11.998894,
+        "nanoseconds_per_input_byte": 2.463324334,
+        "peak_memory_bytes_per_input_byte": 1.03125,
+        "output_bytes_per_input_byte": 1
+      },
+      "score": {
+        "overall_0_to_100": 31.01,
+        "components_0_to_100": {
+          "throughput": 12.225,
+          "latency": 95.025,
+          "memory": 96.97,
+          "stability": 99.87
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:raw-pcm-endian-signedness-normalize",
+      "capability_id": "capability:raw-pcm-endian-signedness-normalize/frame-exact/native-portable",
+      "strategy": "frame-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:raw-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16384,
+          "output_bytes": 16384,
+          "p50_micros": 38.122,
+          "p95_micros": 38.863
+        },
+        "large": {
+          "input_bytes": 4194304,
+          "output_bytes": 4194304,
+          "p50_micros": 6725.909,
+          "p95_micros": 6780.791,
+          "throughput_mib_s": 594.715,
+          "reported_peak_memory_bytes": 4325376
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 11.895384,
+        "nanoseconds_per_input_byte": 1.600745586,
+        "peak_memory_bytes_per_input_byte": 1.03125,
+        "output_bytes_per_input_byte": 1
+      },
+      "score": {
+        "overall_0_to_100": 34.978,
+        "components_0_to_100": {
+          "throughput": 15.161,
+          "latency": 96.328,
+          "memory": 96.97,
+          "stability": 99.191
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:raw-pcm-reverse",
+      "capability_id": "capability:raw-pcm-reverse/frame-exact/native-portable",
+      "strategy": "frame-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:raw-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16384,
+          "output_bytes": 16384,
+          "p50_micros": 81.613,
+          "p95_micros": 92.233
+        },
+        "large": {
+          "input_bytes": 4194304,
+          "output_bytes": 4194304,
+          "p50_micros": 18384.709,
+          "p95_micros": 18545.58,
+          "throughput_mib_s": 217.572,
+          "reported_peak_memory_bytes": 4325376
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 9.836153,
+        "nanoseconds_per_input_byte": 4.380911075,
+        "peak_memory_bytes_per_input_byte": 1.03125,
+        "output_bytes_per_input_byte": 1
+      },
+      "score": {
+        "overall_0_to_100": 26.309,
+        "components_0_to_100": {
+          "throughput": 9.17,
+          "latency": 92.455,
+          "memory": 96.97,
+          "stability": 99.133
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:raw-pcm-to-wav-pcm",
+      "capability_id": "capability:raw-pcm-to-wav-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:raw-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16384,
+          "output_bytes": 16428,
+          "p50_micros": 15.038,
+          "p95_micros": 26.089
+        },
+        "large": {
+          "input_bytes": 4194304,
+          "output_bytes": 4194348,
+          "p50_micros": 1080.492,
+          "p95_micros": 1125.046,
+          "throughput_mib_s": 3702.017,
+          "reported_peak_memory_bytes": 4259840
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 10.859749,
+        "nanoseconds_per_input_byte": 0.255020201,
+        "peak_memory_bytes_per_input_byte": 1.015625,
+        "output_bytes_per_input_byte": 1.00001049
+      },
+      "score": {
+        "overall_0_to_100": 58.04,
+        "components_0_to_100": {
+          "throughput": 37.826,
+          "latency": 98.518,
+          "memory": 98.462,
+          "stability": 96.04
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:raw-pcm-trim",
+      "capability_id": "capability:raw-pcm-trim/frame-exact/native-portable",
+      "strategy": "frame-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:raw-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16384,
+          "output_bytes": 16384,
+          "p50_micros": 18.003,
+          "p95_micros": 28.934
+        },
+        "large": {
+          "input_bytes": 4194304,
+          "output_bytes": 4194304,
+          "p50_micros": 1454.202,
+          "p95_micros": 1512.39,
+          "throughput_mib_s": 2750.649,
+          "reported_peak_memory_bytes": 4325376
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 12.370847,
+        "nanoseconds_per_input_byte": 0.343759335,
+        "peak_memory_bytes_per_input_byte": 1.03125,
+        "output_bytes_per_input_byte": 1
+      },
+      "score": {
+        "overall_0_to_100": 53.34,
+        "components_0_to_100": {
+          "throughput": 32.606,
+          "latency": 98.232,
+          "memory": 96.97,
+          "stability": 96.153
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:rf64-pcm-to-au-pcm",
+      "capability_id": "capability:rf64-pcm-to-au-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:rf64-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16464,
+          "output_bytes": 16408,
+          "p50_micros": 15.99,
+          "p95_micros": 16.561
+        },
+        "large": {
+          "input_bytes": 4194384,
+          "output_bytes": 4194328,
+          "p50_micros": 3160.796,
+          "p95_micros": 3207.343,
+          "throughput_mib_s": 1265.528,
+          "reported_peak_memory_bytes": 4264016
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 3.59721,
+        "nanoseconds_per_input_byte": 0.752720492,
+        "peak_memory_bytes_per_input_byte": 1.016601246,
+        "output_bytes_per_input_byte": 0.999986649
+      },
+      "score": {
+        "overall_0_to_100": 43.302,
+        "components_0_to_100": {
+          "throughput": 22.116,
+          "latency": 98.426,
+          "memory": 98.367,
+          "stability": 98.549
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:rf64-pcm-to-bw64-pcm",
+      "capability_id": "capability:rf64-pcm-to-bw64-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:rf64-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16464,
+          "output_bytes": 16464,
+          "p50_micros": 8.536,
+          "p95_micros": 8.827
+        },
+        "large": {
+          "input_bytes": 4194384,
+          "output_bytes": 4194384,
+          "p50_micros": 1141.507,
+          "p95_micros": 1158.95,
+          "throughput_mib_s": 3504.207,
+          "reported_peak_memory_bytes": 4264016
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 4.071282,
+        "nanoseconds_per_input_byte": 0.271180635,
+        "peak_memory_bytes_per_input_byte": 1.016601246,
+        "output_bytes_per_input_byte": 1
+      },
+      "score": {
+        "overall_0_to_100": 57.38,
+        "components_0_to_100": {
+          "throughput": 36.802,
+          "latency": 99.154,
+          "memory": 98.367,
+          "stability": 98.495
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:rf64-pcm-to-caf-pcm",
+      "capability_id": "capability:rf64-pcm-to-caf-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:rf64-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16464,
+          "output_bytes": 16452,
+          "p50_micros": 8.516,
+          "p95_micros": 19.867
+        },
+        "large": {
+          "input_bytes": 4194384,
+          "output_bytes": 4194372,
+          "p50_micros": 1155.282,
+          "p95_micros": 1164.84,
+          "throughput_mib_s": 3462.424,
+          "reported_peak_memory_bytes": 4264016
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 3.99692,
+        "nanoseconds_per_input_byte": 0.274482518,
+        "peak_memory_bytes_per_input_byte": 1.016601246,
+        "output_bytes_per_input_byte": 0.999997139
+      },
+      "score": {
+        "overall_0_to_100": 57.231,
+        "components_0_to_100": {
+          "throughput": 36.582,
+          "latency": 99.156,
+          "memory": 98.367,
+          "stability": 99.179
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:rf64-pcm-to-wav-pcm",
+      "capability_id": "capability:rf64-pcm-to-wav-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:rf64-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16464,
+          "output_bytes": 16428,
+          "p50_micros": 8.807,
+          "p95_micros": 9.859
+        },
+        "large": {
+          "input_bytes": 4194384,
+          "output_bytes": 4194348,
+          "p50_micros": 1172.584,
+          "p95_micros": 1177.003,
+          "throughput_mib_s": 3411.335,
+          "reported_peak_memory_bytes": 4264016
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 4.220884,
+        "nanoseconds_per_input_byte": 0.278554161,
+        "peak_memory_bytes_per_input_byte": 1.016601246,
+        "output_bytes_per_input_byte": 0.999991417
+      },
+      "score": {
+        "overall_0_to_100": 57.019,
+        "components_0_to_100": {
+          "throughput": 36.311,
+          "latency": 99.127,
+          "memory": 98.367,
+          "stability": 99.625
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:utf16-to-utf8",
+      "capability_id": "capability:utf16-to-utf8/replace-invalid/native-portable",
+      "strategy": "replace-invalid",
+      "backend": "native-portable",
+      "source_format": "exfmt:text:utf-16",
+      "workloads": {
+        "small": {
+          "input_bytes": 16384,
+          "output_bytes": 8191,
+          "p50_micros": 101.931,
+          "p95_micros": 112.431
+        },
+        "large": {
+          "input_bytes": 4194304,
+          "output_bytes": 2097151,
+          "p50_micros": 25133.57,
+          "p95_micros": 25245.07,
+          "throughput_mib_s": 159.15,
+          "reported_peak_memory_bytes": 0
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 3.76771,
+        "nanoseconds_per_input_byte": 5.991411755,
+        "peak_memory_bytes_per_input_byte": 0,
+        "output_bytes_per_input_byte": 0.499999762
+      },
+      "score": {
+        "overall_0_to_100": 24.173,
+        "components_0_to_100": {
+          "throughput": 7.843,
+          "latency": 90.75,
+          "memory": 100,
+          "stability": 99.558
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:utf16-to-utf8",
+      "capability_id": "capability:utf16-to-utf8/strict/native-portable",
+      "strategy": "strict",
+      "backend": "native-portable",
+      "source_format": "exfmt:text:utf-16",
+      "workloads": {
+        "small": {
+          "input_bytes": 16384,
+          "output_bytes": 8191,
+          "p50_micros": 102.201,
+          "p95_micros": 112.13
+        },
+        "large": {
+          "input_bytes": 4194304,
+          "output_bytes": 2097151,
+          "p50_micros": 25065.894,
+          "p95_micros": 25468.909,
+          "throughput_mib_s": 159.579,
+          "reported_peak_memory_bytes": 0
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 4.304165,
+        "nanoseconds_per_input_byte": 5.975148639,
+        "peak_memory_bytes_per_input_byte": 0,
+        "output_bytes_per_input_byte": 0.499999762
+      },
+      "score": {
+        "overall_0_to_100": 24.162,
+        "components_0_to_100": {
+          "throughput": 7.853,
+          "latency": 90.728,
+          "memory": 100,
+          "stability": 98.418
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:wav-pcm-to-aiff",
+      "capability_id": "capability:wav-pcm-to-aiff/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:wav-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16428,
+          "output_bytes": 16438,
+          "p50_micros": 40.035,
+          "p95_micros": 40.756
+        },
+        "large": {
+          "input_bytes": 4194348,
+          "output_bytes": 4194358,
+          "p50_micros": 7498.254,
+          "p95_micros": 7537.448,
+          "throughput_mib_s": 533.463,
+          "reported_peak_memory_bytes": 4325420
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 10.708536,
+        "nanoseconds_per_input_byte": 1.785151224,
+        "peak_memory_bytes_per_input_byte": 1.031249672,
+        "output_bytes_per_input_byte": 1.000002384
+      },
+      "score": {
+        "overall_0_to_100": 33.945,
+        "components_0_to_100": {
+          "throughput": 14.359,
+          "latency": 96.151,
+          "memory": 96.97,
+          "stability": 99.48
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:wav-pcm-to-au-pcm",
+      "capability_id": "capability:wav-pcm-to-au-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:wav-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16428,
+          "output_bytes": 16408,
+          "p50_micros": 14.858,
+          "p95_micros": 27.512
+        },
+        "large": {
+          "input_bytes": 4194348,
+          "output_bytes": 4194328,
+          "p50_micros": 2848.812,
+          "p95_micros": 2867.928,
+          "throughput_mib_s": 1404.109,
+          "reported_peak_memory_bytes": 4263980
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 3.714609,
+        "nanoseconds_per_input_byte": 0.678316962,
+        "peak_memory_bytes_per_input_byte": 1.016601388,
+        "output_bytes_per_input_byte": 0.999995232
+      },
+      "score": {
+        "overall_0_to_100": 44.602,
+        "components_0_to_100": {
+          "throughput": 23.296,
+          "latency": 98.536,
+          "memory": 98.367,
+          "stability": 99.333
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:wav-pcm-to-bw64-pcm",
+      "capability_id": "capability:wav-pcm-to-bw64-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:wav-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16428,
+          "output_bytes": 16464,
+          "p50_micros": 8.556,
+          "p95_micros": 9.177
+        },
+        "large": {
+          "input_bytes": 4194348,
+          "output_bytes": 4194384,
+          "p50_micros": 1135.996,
+          "p95_micros": 1156.765,
+          "throughput_mib_s": 3521.176,
+          "reported_peak_memory_bytes": 4263980
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 4.122793,
+        "nanoseconds_per_input_byte": 0.269856771,
+        "peak_memory_bytes_per_input_byte": 1.016601388,
+        "output_bytes_per_input_byte": 1.000008583
+      },
+      "score": {
+        "overall_0_to_100": 57.439,
+        "components_0_to_100": {
+          "throughput": 36.891,
+          "latency": 99.152,
+          "memory": 98.367,
+          "stability": 98.205
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:wav-pcm-to-bwf-pcm",
+      "capability_id": "capability:wav-pcm-to-bwf-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:wav-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16428,
+          "output_bytes": 17038,
+          "p50_micros": 8.796,
+          "p95_micros": 19.888
+        },
+        "large": {
+          "input_bytes": 4194348,
+          "output_bytes": 4194958,
+          "p50_micros": 1141.386,
+          "p95_micros": 1245.852,
+          "throughput_mib_s": 3504.548,
+          "reported_peak_memory_bytes": 4263980
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 4.342543,
+        "nanoseconds_per_input_byte": 0.271089442,
+        "peak_memory_bytes_per_input_byte": 1.016601388,
+        "output_bytes_per_input_byte": 1.000145434
+      },
+      "score": {
+        "overall_0_to_100": 56.964,
+        "components_0_to_100": {
+          "throughput": 36.804,
+          "latency": 99.128,
+          "memory": 98.367,
+          "stability": 91.615
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:wav-pcm-to-caf-pcm",
+      "capability_id": "capability:wav-pcm-to-caf-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:wav-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16428,
+          "output_bytes": 16452,
+          "p50_micros": 8.677,
+          "p95_micros": 9.077
+        },
+        "large": {
+          "input_bytes": 4194348,
+          "output_bytes": 4194372,
+          "p50_micros": 1153.599,
+          "p95_micros": 1165.842,
+          "throughput_mib_s": 3467.446,
+          "reported_peak_memory_bytes": 4263980
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 4.175052,
+        "nanoseconds_per_input_byte": 0.27404115,
+        "peak_memory_bytes_per_input_byte": 1.016601388,
+        "output_bytes_per_input_byte": 1.000005722
+      },
+      "score": {
+        "overall_0_to_100": 57.238,
+        "components_0_to_100": {
+          "throughput": 36.608,
+          "latency": 99.14,
+          "memory": 98.367,
+          "stability": 98.95
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:wav-pcm-to-raw-pcm",
+      "capability_id": "capability:wav-pcm-to-raw-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:wav-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16428,
+          "output_bytes": 16384,
+          "p50_micros": 9.087,
+          "p95_micros": 9.778
+        },
+        "large": {
+          "input_bytes": 4194348,
+          "output_bytes": 4194304,
+          "p50_micros": 2503.956,
+          "p95_micros": 2540.706,
+          "throughput_mib_s": 1597.489,
+          "reported_peak_memory_bytes": 4263980
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 0,
+        "nanoseconds_per_input_byte": 0.597155762,
+        "peak_memory_bytes_per_input_byte": 1.016601388,
+        "output_bytes_per_input_byte": 0.99998951
+      },
+      "score": {
+        "overall_0_to_100": 46.23,
+        "components_0_to_100": {
+          "throughput": 24.848,
+          "latency": 99.099,
+          "memory": 98.367,
+          "stability": 98.554
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:wav-pcm-to-rf64-pcm",
+      "capability_id": "capability:wav-pcm-to-rf64-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:wav-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16428,
+          "output_bytes": 16464,
+          "p50_micros": 8.536,
+          "p95_micros": 9.007
+        },
+        "large": {
+          "input_bytes": 4194348,
+          "output_bytes": 4194384,
+          "p50_micros": 1147.558,
+          "p95_micros": 1175.38,
+          "throughput_mib_s": 3485.699,
+          "reported_peak_memory_bytes": 4263980
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 4.057251,
+        "nanoseconds_per_input_byte": 0.272628964,
+        "peak_memory_bytes_per_input_byte": 1.016601388,
+        "output_bytes_per_input_byte": 1.000008583
+      },
+      "score": {
+        "overall_0_to_100": 57.246,
+        "components_0_to_100": {
+          "throughput": 36.704,
+          "latency": 99.154,
+          "memory": 98.367,
+          "stability": 97.633
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:wav-pcm-to-wave64-pcm",
+      "capability_id": "capability:wav-pcm-to-wave64-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:wav-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16428,
+          "output_bytes": 16488,
+          "p50_micros": 8.766,
+          "p95_micros": 9.027
+        },
+        "large": {
+          "input_bytes": 4194348,
+          "output_bytes": 4194408,
+          "p50_micros": 1158.047,
+          "p95_micros": 1233.698,
+          "throughput_mib_s": 3454.127,
+          "reported_peak_memory_bytes": 4263980
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 4.246912,
+        "nanoseconds_per_input_byte": 0.275084492,
+        "peak_memory_bytes_per_input_byte": 1.016601388,
+        "output_bytes_per_input_byte": 1.000014305
+      },
+      "score": {
+        "overall_0_to_100": 56.876,
+        "components_0_to_100": {
+          "throughput": 36.538,
+          "latency": 99.131,
+          "memory": 98.367,
+          "stability": 93.868
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:wave64-pcm-to-au-pcm",
+      "capability_id": "capability:wave64-pcm-to-au-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:wave64-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16488,
+          "output_bytes": 16408,
+          "p50_micros": 14.687,
+          "p95_micros": 15.188
+        },
+        "large": {
+          "input_bytes": 4194408,
+          "output_bytes": 4194328,
+          "p50_micros": 2810.54,
+          "p95_micros": 2829.977,
+          "throughput_mib_s": 1423.249,
+          "reported_peak_memory_bytes": 4264040
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 3.653274,
+        "nanoseconds_per_input_byte": 0.669197352,
+        "peak_memory_bytes_per_input_byte": 1.016601151,
+        "output_bytes_per_input_byte": 0.999980927
+      },
+      "score": {
+        "overall_0_to_100": 44.769,
+        "components_0_to_100": {
+          "throughput": 23.454,
+          "latency": 98.553,
+          "memory": 98.367,
+          "stability": 99.313
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:wave64-pcm-to-caf-pcm",
+      "capability_id": "capability:wave64-pcm-to-caf-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:wave64-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16488,
+          "output_bytes": 16452,
+          "p50_micros": 8.526,
+          "p95_micros": 9.037
+        },
+        "large": {
+          "input_bytes": 4194408,
+          "output_bytes": 4194372,
+          "p50_micros": 1150.453,
+          "p95_micros": 1160.191,
+          "throughput_mib_s": 3476.977,
+          "reported_peak_memory_bytes": 4264040
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 4.019429,
+        "nanoseconds_per_input_byte": 0.273324286,
+        "peak_memory_bytes_per_input_byte": 1.016601151,
+        "output_bytes_per_input_byte": 0.999991417
+      },
+      "score": {
+        "overall_0_to_100": 57.295,
+        "components_0_to_100": {
+          "throughput": 36.658,
+          "latency": 99.155,
+          "memory": 98.367,
+          "stability": 99.161
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    },
+    {
+      "capsule_id": "capsule:wave64-pcm-to-wav-pcm",
+      "capability_id": "capability:wave64-pcm-to-wav-pcm/pcm-exact/native-portable",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "source_format": "exfmt:audio:wave64-pcm",
+      "workloads": {
+        "small": {
+          "input_bytes": 16488,
+          "output_bytes": 16428,
+          "p50_micros": 8.405,
+          "p95_micros": 8.907
+        },
+        "large": {
+          "input_bytes": 4194408,
+          "output_bytes": 4194348,
+          "p50_micros": 1163.928,
+          "p95_micros": 1176.011,
+          "throughput_mib_s": 3436.724,
+          "reported_peak_memory_bytes": 4264040
+        }
+      },
+      "cost_model": {
+        "fixed_latency_micros": 3.844773,
+        "nanoseconds_per_input_byte": 0.276578537,
+        "peak_memory_bytes_per_input_byte": 1.016601151,
+        "output_bytes_per_input_byte": 0.999985695
+      },
+      "score": {
+        "overall_0_to_100": 57.103,
+        "components_0_to_100": {
+          "throughput": 36.446,
+          "latency": 99.167,
+          "memory": 98.367,
+          "stability": 98.973
+        },
+        "use": "Same-profile ranking and tie-breaking only; graph search should prefer the raw cost model."
+      }
+    }
+  ]
+}
+

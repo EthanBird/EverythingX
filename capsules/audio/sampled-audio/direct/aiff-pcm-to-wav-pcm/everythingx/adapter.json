@@ -10,7 +10,7 @@
     "effects": ["Output is RIFF/WAVE integer PCM"], "invariants": ["Sample rate", "Frame count", "Channel count", "PCM sample sequence"],
     "computability": "semantic_lossless", "loss": {"payload": "none", "temporal": "none", "structure": "normalized", "metadata": "bounded"},
     "default_options": {"metadata": "common-text", "strict_header_consistency": true, "buffer_size": 65536, "max_metadata_bytes": 1048576, "max_channels": 256},
-    "defaults_are_runnable": true, "execution": {"streaming": false, "seek_required": false, "cost_evidence": []},
+    "defaults_are_runnable": true, "execution": {"streaming": false, "seek_required": false, "cost_evidence": ["registry/performance/baseline.json#capability:aiff-pcm-to-wav-pcm/pcm-exact/native-portable"]},
     "report_mapping": {"unknown_fields_are_preserved": true, "rules": ["PCM facts and counts map to capsule_report", "metadata preservation maps to bounded loss", "static Adapter buffers protocol input for seek"]}
   }]
 }

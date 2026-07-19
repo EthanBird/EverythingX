@@ -115,7 +115,7 @@
       "Planned: source chunk graph, size and fragmented-reader campaigns"
     ],
     "benchmarks": [
-      "Planned: widths, channels and multi-gigabyte streaming corpus"
+      "registry/performance/baseline.json#capability:caf-pcm-to-au-pcm/pcm-exact/native-portable"
     ]
   },
   "security": {

@@ -134,6 +134,8 @@ These are source observations, not a count of unique canonical formats.
 - Evidence records p50/p95 latency, throughput, output ratio and Capsule-reported working memory together with compiler, environment, commit and harness identity.
 - Planner-facing records expose a size-sensitive raw cost model; a calibrated 0–100 geometric score is retained only for same-profile ranking and UI summaries.
 - CI first runs functional, copy-out and Adapter tests, then rejects missing benchmark coverage or failed benchmark invocations.
+- The first controlled `ubuntu-24.04`/x86-64 baseline covers 42 Capsules and 43 capabilities: median large-workload throughput is 2,750.649 MiB/s; observed range is 27.912–3,702.017 MiB/s and calibrated score range is 14.190–58.040.
+- The measured low-throughput priorities are the current native BMP→PNG implementation (27.912 MiB/s), UTF-16→UTF-8 strategies (about 159 MiB/s) and raw PCM reverse (217.572 MiB/s); these values are evidence for optimization work, not correctness or quality rankings.
 
 ## Intentionally absent
 

@@ -104,7 +104,7 @@
       "Multiple aligned data chunks concatenate in source order"
     ],
     "fuzz": ["Planned: chunk graph, size arithmetic, extensible format and metadata fuzz campaigns"],
-    "benchmarks": ["Planned: multi-channel and multi-gigabyte streaming corpus"]
+    "benchmarks": ["registry/performance/baseline.json#capability:wav-pcm-to-aiff/pcm-exact/native-portable"]
   },
   "security": {
     "accepts_untrusted_input": true,

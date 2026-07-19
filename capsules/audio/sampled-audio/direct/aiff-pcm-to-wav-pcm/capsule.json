@@ -25,7 +25,7 @@
     "specifications": ["Audio Interchange File Format", "RIFF WAVE", "WAVE_FORMAT_EXTENSIBLE"], "conformance": ["tests/conversion.rs"], "differential": [],
     "properties": ["Frame and channel order are preserved", "AIFF big-endian signed samples map to WAVE conventions", "RIFF and chunk sizes include even-byte padding"],
     "regression": ["Signed 8-bit AIFF becomes unsigned WAVE", "16/24/32-bit samples become little-endian", "Text metadata maps to LIST/INFO", "Strict frame mismatch is rejected"],
-    "fuzz": ["Planned: FORM graph, COMM, SSND, rate and metadata campaigns"], "benchmarks": ["Planned: widths, channels and multi-gigabyte streaming corpus"]
+    "fuzz": ["Planned: FORM graph, COMM, SSND, rate and metadata campaigns"], "benchmarks": ["registry/performance/baseline.json#capability:aiff-pcm-to-wav-pcm/pcm-exact/native-portable"]
   },
   "security": {"accepts_untrusted_input": true, "limits": ["buffer_size is bounded to 16 MiB", "mapped metadata defaults to 1 MiB", "channels default to a maximum of 256", "all offsets and output sizes are checked"], "known_risks": ["Seek or output I/O errors may occur after the WAVE header is written", "static Adapter buffers forward-only protocol input"]}
 }

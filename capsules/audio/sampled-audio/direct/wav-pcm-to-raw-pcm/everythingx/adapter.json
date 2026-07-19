@@ -18,7 +18,7 @@
     "loss": {"payload": "none", "temporal": "none", "structure": "discarded", "metadata": "discarded"},
     "default_options": {"output_endianness": "little", "output_encoding": "signed", "strict_header_consistency": true, "buffer_size": 65536, "max_channels": 256},
     "defaults_are_runnable": true,
-    "execution": {"streaming": false, "seek_required": false, "cost_evidence": []},
+    "execution": {"streaming": false, "seek_required": false, "cost_evidence": ["registry/performance/baseline.json#capability:wav-pcm-to-raw-pcm/pcm-exact/native-portable"]},
     "report_mapping": {"unknown_fields_are_preserved": true, "rules": ["Raw interpretation parameters map to capsule_report", "static Adapter buffers protocol input for seek"]}
   }]
 }

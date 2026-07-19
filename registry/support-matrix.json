@@ -1701,7 +1701,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:aiff-pcm-to-wav-pcm/pcm-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:au-pcm-to-bw64-pcm/pcm-exact/native-portable",
@@ -1723,7 +1726,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:au-pcm-to-bw64-pcm/pcm-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:au-pcm-to-bwf-pcm/pcm-exact/native-portable",
@@ -1745,7 +1751,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:au-pcm-to-bwf-pcm/pcm-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:au-pcm-to-caf-pcm/pcm-exact/native-portable",
@@ -1767,7 +1776,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:au-pcm-to-caf-pcm/pcm-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:au-pcm-to-rf64-pcm/pcm-exact/native-portable",
@@ -1789,7 +1801,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:au-pcm-to-rf64-pcm/pcm-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:au-pcm-to-wav-pcm/pcm-exact/native-portable",
@@ -1811,7 +1826,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:au-pcm-to-wav-pcm/pcm-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:au-pcm-to-wave64-pcm/pcm-exact/native-portable",
@@ -1833,7 +1851,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:au-pcm-to-wave64-pcm/pcm-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:bmp-to-png/pixel-exact/native-portable",
@@ -1854,7 +1875,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:bmp-to-png/pixel-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:bw64-pcm-to-au-pcm/pcm-exact/native-portable",
@@ -1876,7 +1900,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:bw64-pcm-to-au-pcm/pcm-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:bw64-pcm-to-caf-pcm/pcm-exact/native-portable",
@@ -1898,7 +1925,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:bw64-pcm-to-caf-pcm/pcm-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:bw64-pcm-to-rf64-pcm/pcm-exact/native-portable",
@@ -1920,7 +1950,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:bw64-pcm-to-rf64-pcm/pcm-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:bw64-pcm-to-wav-pcm/pcm-exact/native-portable",
@@ -1942,7 +1975,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:bw64-pcm-to-wav-pcm/pcm-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:bwf-pcm-to-au-pcm/pcm-exact/native-portable",
@@ -1964,7 +2000,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:bwf-pcm-to-au-pcm/pcm-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:bwf-pcm-to-caf-pcm/pcm-exact/native-portable",
@@ -1986,7 +2025,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:bwf-pcm-to-caf-pcm/pcm-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:bwf-pcm-to-wav-pcm/pcm-exact/native-portable",
@@ -2008,7 +2050,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:bwf-pcm-to-wav-pcm/pcm-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:caf-pcm-to-au-pcm/pcm-exact/native-portable",
@@ -2030,7 +2075,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:caf-pcm-to-au-pcm/pcm-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:caf-pcm-to-bw64-pcm/pcm-exact/native-portable",
@@ -2052,7 +2100,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:caf-pcm-to-bw64-pcm/pcm-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:caf-pcm-to-bwf-pcm/pcm-exact/native-portable",
@@ -2074,7 +2125,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:caf-pcm-to-bwf-pcm/pcm-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:caf-pcm-to-rf64-pcm/pcm-exact/native-portable",
@@ -2096,7 +2150,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:caf-pcm-to-rf64-pcm/pcm-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:caf-pcm-to-wav-pcm/pcm-exact/native-portable",
@@ -2118,7 +2175,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:caf-pcm-to-wav-pcm/pcm-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:caf-pcm-to-wave64-pcm/pcm-exact/native-portable",
@@ -2140,7 +2200,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:caf-pcm-to-wave64-pcm/pcm-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:raw-pcm-channel-map/frame-exact/native-portable",
@@ -2162,7 +2225,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:raw-pcm-channel-map/frame-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:raw-pcm-endian-signedness-normalize/frame-exact/native-portable",
@@ -2184,7 +2250,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:raw-pcm-endian-signedness-normalize/frame-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:raw-pcm-reverse/frame-exact/native-portable",
@@ -2206,7 +2275,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:raw-pcm-reverse/frame-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:raw-pcm-to-wav-pcm/pcm-exact/native-portable",
@@ -2228,7 +2300,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:raw-pcm-to-wav-pcm/pcm-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:raw-pcm-trim/frame-exact/native-portable",
@@ -2250,7 +2325,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:raw-pcm-trim/frame-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:rf64-pcm-to-au-pcm/pcm-exact/native-portable",
@@ -2272,7 +2350,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:rf64-pcm-to-au-pcm/pcm-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:rf64-pcm-to-bw64-pcm/pcm-exact/native-portable",
@@ -2294,7 +2375,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:rf64-pcm-to-bw64-pcm/pcm-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:rf64-pcm-to-caf-pcm/pcm-exact/native-portable",
@@ -2316,7 +2400,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:rf64-pcm-to-caf-pcm/pcm-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:rf64-pcm-to-wav-pcm/pcm-exact/native-portable",
@@ -2338,7 +2425,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:rf64-pcm-to-wav-pcm/pcm-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:utf16-to-utf8/replace-invalid/native-portable",
@@ -2358,7 +2448,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": true,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:utf16-to-utf8/replace-invalid/native-portable"
+      ]
     },
     {
       "capability_id": "capability:utf16-to-utf8/strict/native-portable",
@@ -2378,7 +2471,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": true,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:utf16-to-utf8/strict/native-portable"
+      ]
     },
     {
       "capability_id": "capability:wav-pcm-to-aiff/pcm-exact/native-portable",
@@ -2400,7 +2496,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:wav-pcm-to-aiff/pcm-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:wav-pcm-to-au-pcm/pcm-exact/native-portable",
@@ -2422,7 +2521,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:wav-pcm-to-au-pcm/pcm-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:wav-pcm-to-bw64-pcm/pcm-exact/native-portable",
@@ -2444,7 +2546,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:wav-pcm-to-bw64-pcm/pcm-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:wav-pcm-to-bwf-pcm/pcm-exact/native-portable",
@@ -2466,7 +2571,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:wav-pcm-to-bwf-pcm/pcm-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:wav-pcm-to-caf-pcm/pcm-exact/native-portable",
@@ -2488,7 +2596,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:wav-pcm-to-caf-pcm/pcm-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:wav-pcm-to-raw-pcm/pcm-exact/native-portable",
@@ -2510,7 +2621,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:wav-pcm-to-raw-pcm/pcm-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:wav-pcm-to-rf64-pcm/pcm-exact/native-portable",
@@ -2532,7 +2646,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:wav-pcm-to-rf64-pcm/pcm-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:wav-pcm-to-wave64-pcm/pcm-exact/native-portable",
@@ -2554,7 +2671,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:wav-pcm-to-wave64-pcm/pcm-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:wave64-pcm-to-au-pcm/pcm-exact/native-portable",
@@ -2576,7 +2696,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:wave64-pcm-to-au-pcm/pcm-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:wave64-pcm-to-caf-pcm/pcm-exact/native-portable",
@@ -2598,7 +2721,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:wave64-pcm-to-caf-pcm/pcm-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:wave64-pcm-to-wav-pcm/pcm-exact/native-portable",
@@ -2620,7 +2746,10 @@
       },
       "defaults_are_runnable": true,
       "streaming": false,
-      "seek_required": false
+      "seek_required": false,
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:wave64-pcm-to-wav-pcm/pcm-exact/native-portable"
+      ]
     }
   ]
 }

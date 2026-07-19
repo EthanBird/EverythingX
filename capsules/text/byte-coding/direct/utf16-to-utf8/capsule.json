@@ -84,7 +84,7 @@
     "properties": ["Valid UTF-16 decodes to the same Unicode scalar sequence as Rust char encoding"],
     "regression": ["Single-byte Read chunks preserve code-unit boundaries"],
     "fuzz": ["Planned: arbitrary byte streams and reader chunk boundaries"],
-    "benchmarks": ["Planned: ASCII-heavy, BMP-heavy and supplementary-plane corpora"]
+    "benchmarks": ["registry/performance/baseline.json#capability:utf16-to-utf8/strict/native-portable", "registry/performance/baseline.json#capability:utf16-to-utf8/replace-invalid/native-portable"]
   },
   "security": {
     "accepts_untrusted_input": true,

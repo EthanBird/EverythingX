@@ -40,7 +40,9 @@
       "execution": {
         "streaming": true,
         "seek_required": false,
-        "cost_evidence": []
+        "cost_evidence": [
+          "registry/performance/baseline.json#capability:utf16-to-utf8/strict/native-portable"
+        ]
       },
       "report_mapping": {
         "unknown_fields_are_preserved": true,
@@ -77,7 +79,9 @@
       "execution": {
         "streaming": true,
         "seek_required": false,
-        "cost_evidence": []
+        "cost_evidence": [
+          "registry/performance/baseline.json#capability:utf16-to-utf8/replace-invalid/native-portable"
+        ]
       },
       "report_mapping": {
         "unknown_fields_are_preserved": true,
@@ -86,4 +90,3 @@
     }
   ]
 }
-

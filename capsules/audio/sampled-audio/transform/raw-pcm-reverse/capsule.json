@@ -119,7 +119,7 @@
       "Planned: parameter, alignment, length and reader-fragmentation campaigns"
     ],
     "benchmarks": [
-      "Planned: widths, channels and large-stream corpus"
+      "registry/performance/baseline.json#capability:raw-pcm-reverse/frame-exact/native-portable"
     ]
   },
   "security": {

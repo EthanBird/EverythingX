@@ -110,8 +110,11 @@ def main() -> int:
         "conversion", "api", "defaults", "strategies", "backends", "validation", "security"
     }
     capsule_ids: set[str] = set()
+    production_capsule_ids: set[str] = set()
     adapter_ids: set[str] = set()
     capability_ids: set[str] = set()
+    production_capability_ids: set[str] = set()
+    capability_cost_evidence: dict[str, list[str]] = {}
     for path in sorted((ROOT / "capsules").rglob("capsule.json")):
         record = load_json(path)
         require_fields(record, capsule_required, str(path.relative_to(ROOT)))
@@ -123,7 +126,9 @@ def main() -> int:
         capsule_ids.add(capsule_id)
         taxonomy = record.get("taxonomy", {})
         relative_parts = path.parent.relative_to(ROOT / "capsules").parts
-        if not any(part.startswith("_") for part in relative_parts):
+        is_production = not any(part.startswith("_") for part in relative_parts)
+        if is_production:
+            production_capsule_ids.add(capsule_id)
             expected_prefix = (
                 taxonomy.get("domain"),
                 str(taxonomy.get("primary_ir", "")).removeprefix("ir:"),
@@ -170,6 +175,9 @@ def main() -> int:
             if not capability_id.startswith("capability:") or capability_id in capability_ids:
                 raise ValueError(f"{adapter_path}: invalid or duplicate capability_id {capability_id}")
             capability_ids.add(capability_id)
+            if is_production:
+                production_capability_ids.add(capability_id)
+                capability_cost_evidence[capability_id] = capability.get("execution", {}).get("cost_evidence", [])
             if capability.get("defaults_are_runnable") is not True:
                 raise ValueError(f"{adapter_path}: {capability_id} defaults_are_runnable must be true")
             if capability.get("strategy") == defaults.get("strategy") and capability.get("backend") == defaults.get("backend"):
@@ -200,6 +208,35 @@ def main() -> int:
             "operators/backlog.json is stale; run tools/build_operator_universe.py"
         )
 
+    performance = load_json(ROOT / "registry" / "performance" / "baseline.json")
+    require_fields(
+        performance,
+        {"schema_version", "profile_id", "generated_at", "scope", "comparability", "environment", "method", "summary", "capabilities"},
+        "registry/performance/baseline.json",
+    )
+    performance_rows = performance["capabilities"]
+    measured_ids = ensure_unique(performance_rows, "capability_id", "registry/performance/baseline.json")
+    measured_capsules = {row.get("capsule_id") for row in performance_rows}
+    if measured_ids != production_capability_ids:
+        raise ValueError("performance baseline capability coverage does not match production Adapter capabilities")
+    if measured_capsules != production_capsule_ids:
+        raise ValueError("performance baseline Capsule coverage does not match production Capsules")
+    if performance.get("summary") != {"capabilities": len(measured_ids), "capsules": len(measured_capsules)}:
+        raise ValueError("performance baseline summary does not match measured records")
+    for row in performance_rows:
+        capability_id = row["capability_id"]
+        score = row.get("score", {}).get("overall_0_to_100")
+        if not isinstance(score, (int, float)) or not 0 <= score <= 100:
+            raise ValueError(f"performance baseline has invalid score for {capability_id}")
+        model = row.get("cost_model", {})
+        for field in ("fixed_latency_micros", "nanoseconds_per_input_byte", "peak_memory_bytes_per_input_byte", "output_bytes_per_input_byte"):
+            value = model.get(field)
+            if not isinstance(value, (int, float)) or value < 0:
+                raise ValueError(f"performance baseline has invalid {field} for {capability_id}")
+        expected_evidence = f"registry/performance/baseline.json#{capability_id}"
+        if expected_evidence not in capability_cost_evidence.get(capability_id, []):
+            raise ValueError(f"{capability_id} does not link its checked-in performance evidence")
+
     print(
         json.dumps(
             {
@@ -210,6 +247,8 @@ def main() -> int:
                 "capsule_manifests": len(capsule_ids),
                 "adapter_manifests": len(adapter_ids),
                 "capabilities": len(capability_ids),
+                "benchmarked_production_capsules": len(measured_capsules),
+                "benchmarked_production_capabilities": len(measured_ids),
                 "supported_logical_pairs": support_matrix["summary"]["logical_source_target_pairs"],
                 "audio_representations": audio_backlog["summary"]["reviewed_representations"],
                 "audio_pair_candidates": audio_backlog["summary"]["ordered_pair_candidates"],
