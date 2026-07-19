@@ -3,6 +3,13 @@
   "version": "0.0.0",
   "name": "Example byte-copy Capsule",
   "summary": "Architecture template only; copies bytes and demonstrates an EverythingX-independent API.",
+  "taxonomy": {
+    "domain": "template",
+    "primary_ir": "ir:artifact",
+    "secondary_irs": [],
+    "operator_kind": "convert",
+    "operator_role": "direct"
+  },
   "license": {
     "expression": "LicenseRef-EverythingX-Template",
     "file": "LICENSE",
