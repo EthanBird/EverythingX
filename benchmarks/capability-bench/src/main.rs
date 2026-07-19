@@ -187,6 +187,73 @@ fn bmp_fixture(large: bool) -> Vec<u8> {
     out
 }
 
+fn raster_dimensions(large: bool) -> (u32, u32) {
+    if large { (1024, 1024) } else { (64, 64) }
+}
+
+fn raster_rgb(x: u32, y: u32) -> [u8; 3] {
+    [
+        x.wrapping_mul(37).wrapping_add(y.wrapping_mul(11)) as u8,
+        x.wrapping_mul(3).wrapping_add(y.wrapping_mul(29)) as u8,
+        x.wrapping_mul(17).wrapping_add(y.wrapping_mul(5)) as u8,
+    ]
+}
+
+fn tga_fixture(large: bool) -> Vec<u8> {
+    let (width, height) = raster_dimensions(large);
+    let mut out = vec![0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    out.extend_from_slice(&(width as u16).to_le_bytes());
+    out.extend_from_slice(&(height as u16).to_le_bytes());
+    out.extend_from_slice(&[24, 0x20]);
+    for y in 0..height {
+        for x in 0..width {
+            let [r, g, b] = raster_rgb(x, y);
+            out.extend_from_slice(&[b, g, r]);
+        }
+    }
+    out.extend_from_slice(&[0; 8]);
+    out.extend_from_slice(b"TRUEVISION-XFILE.\0");
+    out
+}
+
+fn qoi_fixture(large: bool) -> Vec<u8> {
+    let (width, height) = raster_dimensions(large);
+    let mut out = b"qoif".to_vec();
+    out.extend_from_slice(&width.to_be_bytes());
+    out.extend_from_slice(&height.to_be_bytes());
+    out.extend_from_slice(&[3, 0]);
+    for y in 0..height {
+        for x in 0..width {
+            let [r, g, b] = raster_rgb(x, y);
+            out.extend_from_slice(&[0xfe, r, g, b]);
+        }
+    }
+    out.extend_from_slice(&[0, 0, 0, 0, 0, 0, 0, 1]);
+    out
+}
+
+fn ppm_fixture(large: bool) -> Vec<u8> {
+    let (width, height) = raster_dimensions(large);
+    let mut out = format!("P6\n{width} {height}\n255\n").into_bytes();
+    for y in 0..height {
+        for x in 0..width {
+            out.extend_from_slice(&raster_rgb(x, y));
+        }
+    }
+    out
+}
+
+fn pam_fixture(large: bool) -> Vec<u8> {
+    let (width, height) = raster_dimensions(large);
+    let mut out = format!("P7\nWIDTH {width}\nHEIGHT {height}\nDEPTH 3\nMAXVAL 255\nTUPLTYPE RGB\nENDHDR\n").into_bytes();
+    for y in 0..height {
+        for x in 0..width {
+            out.extend_from_slice(&raster_rgb(x, y));
+        }
+    }
+    out
+}
+
 fn utf16_fixture(payload_bytes: usize) -> Vec<u8> {
     let units = payload_bytes.max(4) / 2;
     let mut out = Vec::with_capacity(units * 2);
@@ -211,6 +278,10 @@ fn fixture(format: &str, large: bool) -> Vec<u8> {
         "exfmt:audio:wave64-pcm" => wave64_fixture(size),
         "exfmt:audio:aiff-pcm" => aiff_fixture(size),
         "exfmt:image:bmp-family" => bmp_fixture(large),
+        "exfmt:image:tga-raster" => tga_fixture(large),
+        "exfmt:image:qoi" => qoi_fixture(large),
+        "exfmt:image:ppm" => ppm_fixture(large),
+        "exfmt:image:pam" => pam_fixture(large),
         "exfmt:text:utf-16" => utf16_fixture(size),
         other => panic!("no benchmark fixture for {other}"),
     }

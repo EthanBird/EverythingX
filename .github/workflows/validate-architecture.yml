@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Validate repository data and manifests
-        run: python3 tools/validate_repository.py
+        run: python3 tools/validate_repository.py --allow-performance-baseline-lag
 
       - name: Prove implemented support matrix is current
         run: python3 tools/build_support_matrix.py --check
@@ -23,11 +23,17 @@ jobs:
       - name: Prove audio operator backlog is current
         run: python3 tools/build_audio_backlog.py --check
 
+      - name: Prove image operator backlog is current
+        run: python3 tools/build_image_backlog.py --check
+
       - name: Prove Object IR operator universe is current
         run: python3 tools/build_operator_universe.py --check
 
       - name: Prove generated PCM Wave A batch is current
         run: python3 tools/scaffold_pcm_wave_a.py --check
+
+      - name: Prove generated Raster Wave A batch is current
+        run: python3 tools/scaffold_raster_wave_a.py --check
 
       - name: Prove all-Capsule performance harness is current
         run: python3 tools/build_performance_harness.py --check

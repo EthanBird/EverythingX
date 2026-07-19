@@ -1,0 +1,74 @@
+{
+  "adapter_id": "adapter:ppm-to-bmp-static",
+  "version": "0.1.0",
+  "capsule": {
+    "id": "capsule:ppm-to-bmp",
+    "version_requirement": "^0.1.0"
+  },
+  "protocol": {
+    "name": "everythingx-adapter-protocol",
+    "version_requirement": "0.1"
+  },
+  "transport": {
+    "kind": "static-rust",
+    "entrypoint": "GeneratedRasterAdapter"
+  },
+  "capabilities": [
+    {
+      "capability_id": "capability:ppm-to-bmp/rgba8-code-value-exact/native-portable",
+      "capsule_entrypoint": "convert",
+      "strategy": "rgba8-code-value-exact",
+      "backend": "native-portable",
+      "inputs": [
+        "exfmt:image:ppm"
+      ],
+      "outputs": [
+        "exfmt:image:bmp-family"
+      ],
+      "preconditions": [
+        "Input belongs to the declared Wave A parser subset",
+        "PPM/PAM samples use MAXVAL 255 under defaults",
+        "RGB channel code values have compatible intended color semantics"
+      ],
+      "effects": [
+        "Output is a normalized Windows BMP raster single image"
+      ],
+      "invariants": [
+        "Width",
+        "Height",
+        "Pixel coordinates",
+        "Accepted RGB/RGBA8 code values"
+      ],
+      "computability": "conditional_exact",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "conditional"
+      },
+      "default_options": {
+        "allow_sample_scaling": false,
+        "max_input_bytes": 536870912,
+        "max_pixels": 100000000,
+        "ppm_alpha": "reject",
+        "preserve_unmarked_bmp_alpha": false,
+        "strict_trailing_data": true,
+        "tga_rle": true
+      },
+      "defaults_are_runnable": true,
+      "execution": {
+        "streaming": false,
+        "seek_required": false,
+        "cost_evidence": []
+      },
+      "report_mapping": {
+        "unknown_fields_are_preserved": true,
+        "rules": [
+          "Dimensions, channels and alpha facts map to capsule_report",
+          "static Adapter buffers protocol input and enforces output budget"
+        ]
+      }
+    }
+  ]
+}

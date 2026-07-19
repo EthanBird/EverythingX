@@ -12,6 +12,7 @@ from typing import Any
 
 from build_support_matrix import build_matrix
 from build_audio_backlog import build_backlog
+from build_image_backlog import build_backlog as build_image_backlog
 from build_operator_universe import build_operator_universe
 
 
@@ -203,6 +204,12 @@ def main(allow_performance_baseline_lag: bool = False) -> int:
             "operators/audio/backlog.json is stale; run tools/build_audio_backlog.py"
         )
 
+    image_backlog = load_json(ROOT / "operators" / "image" / "backlog.json")
+    if image_backlog != build_image_backlog():
+        raise ValueError(
+            "operators/image/backlog.json is stale; run tools/build_image_backlog.py"
+        )
+
     operator_backlog = load_json(ROOT / "operators" / "backlog.json")
     if operator_backlog != build_operator_universe():
         raise ValueError(
@@ -259,6 +266,8 @@ def main(allow_performance_baseline_lag: bool = False) -> int:
                 "supported_logical_pairs": support_matrix["summary"]["logical_source_target_pairs"],
                 "audio_representations": audio_backlog["summary"]["reviewed_representations"],
                 "audio_pair_candidates": audio_backlog["summary"]["ordered_pair_candidates"],
+                "image_representations": image_backlog["summary"]["reviewed_representations"],
+                "image_pair_candidates": image_backlog["summary"]["ordered_pair_candidates"],
                 "object_ir_operator_positions": operator_backlog["summary"]["object_ir_operator_positions"],
             },
             ensure_ascii=False,

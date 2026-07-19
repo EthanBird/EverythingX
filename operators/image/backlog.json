@@ -1,0 +1,2992 @@
+{
+  "schema_version": "0.1.0",
+  "generated_from": "operators/image/representations.json",
+  "meaning": "Complete ordered-pair research queue for this reviewed open-world image snapshot; candidate does not mean computable or implemented.",
+  "regeneration_rule": "Run python3 tools/build_image_backlog.py after changing the image representation universe or support matrix.",
+  "summary": {
+    "observed_image_media_type_labels": 276,
+    "reviewed_representations": 295,
+    "operator_templates": 68,
+    "ordered_pair_candidates": 10838,
+    "implemented_pair_candidates": 21
+  },
+  "domain_counts": {
+    "general-raster-still": {
+      "object_ir": "ir:raster",
+      "representations": 65,
+      "ordered_pair_candidates": 4160
+    },
+    "camera-raw-and-capture": {
+      "object_ir": "ir:raster",
+      "representations": 34,
+      "ordered_pair_candidates": 1122
+    },
+    "layered-authoring-and-project": {
+      "object_ir": "ir:object-graph",
+      "representations": 24,
+      "ordered_pair_candidates": 552
+    },
+    "texture-game-and-gpu": {
+      "object_ir": "ir:raster",
+      "representations": 34,
+      "ordered_pair_candidates": 1122
+    },
+    "scientific-medical-and-geospatial-raster": {
+      "object_ir": "ir:tensor",
+      "representations": 38,
+      "ordered_pair_candidates": 1406
+    },
+    "icon-cursor-font-and-device": {
+      "object_ir": "ir:raster",
+      "representations": 24,
+      "ordered_pair_candidates": 552
+    },
+    "vector-illustration-and-page-graphics": {
+      "object_ir": "ir:vector",
+      "representations": 32,
+      "ordered_pair_candidates": 992
+    },
+    "fax-print-prepress-and-legacy": {
+      "object_ir": "ir:raster",
+      "representations": 24,
+      "ordered_pair_candidates": 552
+    },
+    "animation-multi-image-and-pyramid": {
+      "object_ir": "ir:timed-media",
+      "representations": 20,
+      "ordered_pair_candidates": 380
+    }
+  },
+  "currently_implemented_image_pairs": [
+    {
+      "input": "imagefmt:bmp",
+      "output": "imagefmt:pam"
+    },
+    {
+      "input": "imagefmt:bmp",
+      "output": "imagefmt:png"
+    },
+    {
+      "input": "imagefmt:bmp",
+      "output": "imagefmt:ppm"
+    },
+    {
+      "input": "imagefmt:bmp",
+      "output": "imagefmt:qoi"
+    },
+    {
+      "input": "imagefmt:bmp",
+      "output": "imagefmt:tga"
+    },
+    {
+      "input": "imagefmt:pam",
+      "output": "imagefmt:bmp"
+    },
+    {
+      "input": "imagefmt:pam",
+      "output": "imagefmt:ppm"
+    },
+    {
+      "input": "imagefmt:pam",
+      "output": "imagefmt:qoi"
+    },
+    {
+      "input": "imagefmt:pam",
+      "output": "imagefmt:tga"
+    },
+    {
+      "input": "imagefmt:ppm",
+      "output": "imagefmt:bmp"
+    },
+    {
+      "input": "imagefmt:ppm",
+      "output": "imagefmt:pam"
+    },
+    {
+      "input": "imagefmt:ppm",
+      "output": "imagefmt:qoi"
+    },
+    {
+      "input": "imagefmt:ppm",
+      "output": "imagefmt:tga"
+    },
+    {
+      "input": "imagefmt:qoi",
+      "output": "imagefmt:bmp"
+    },
+    {
+      "input": "imagefmt:qoi",
+      "output": "imagefmt:pam"
+    },
+    {
+      "input": "imagefmt:qoi",
+      "output": "imagefmt:ppm"
+    },
+    {
+      "input": "imagefmt:qoi",
+      "output": "imagefmt:tga"
+    },
+    {
+      "input": "imagefmt:tga",
+      "output": "imagefmt:bmp"
+    },
+    {
+      "input": "imagefmt:tga",
+      "output": "imagefmt:pam"
+    },
+    {
+      "input": "imagefmt:tga",
+      "output": "imagefmt:ppm"
+    },
+    {
+      "input": "imagefmt:tga",
+      "output": "imagefmt:qoi"
+    }
+  ],
+  "observed_image_media_types": [
+    {
+      "media_type": "image/aces",
+      "source_record_ids": [
+        "src:iana:image/aces",
+        "src:tika:image/aces"
+      ]
+    },
+    {
+      "media_type": "image/apng",
+      "source_record_ids": [
+        "src:freedesktop:image/apng",
+        "src:iana:image/apng",
+        "src:loc:fdd000649",
+        "src:pronom:fmt/935"
+      ]
+    },
+    {
+      "media_type": "image/astc",
+      "source_record_ids": [
+        "src:freedesktop:image/astc"
+      ]
+    },
+    {
+      "media_type": "image/avci",
+      "source_record_ids": [
+        "src:freedesktop:image/avci",
+        "src:iana:image/avci"
+      ]
+    },
+    {
+      "media_type": "image/avcs",
+      "source_record_ids": [
+        "src:iana:image/avcs"
+      ]
+    },
+    {
+      "media_type": "image/avif",
+      "source_record_ids": [
+        "src:freedesktop:image/avif",
+        "src:iana:image/avif",
+        "src:loc:fdd000540",
+        "src:tika:image/avif"
+      ]
+    },
+    {
+      "media_type": "image/avif-sequence",
+      "source_record_ids": [
+        "src:freedesktop:image/avif"
+      ]
+    },
+    {
+      "media_type": "image/bmp",
+      "source_record_ids": [
+        "src:freedesktop:image/bmp",
+        "src:iana:image/bmp",
+        "src:pronom:fmt/114",
+        "src:pronom:fmt/115",
+        "src:pronom:fmt/116",
+        "src:pronom:fmt/117",
+        "src:pronom:fmt/118",
+        "src:pronom:fmt/119",
+        "src:pronom:x-fmt/270",
+        "src:tika:image/bmp"
+      ]
+    },
+    {
+      "media_type": "image/bmp;format=compressed",
+      "source_record_ids": [
+        "src:tika:image/bmp;format=compressed"
+      ]
+    },
+    {
+      "media_type": "image/cdr",
+      "source_record_ids": [
+        "src:freedesktop:application/vnd.corel-draw",
+        "src:tika:application/coreldraw"
+      ]
+    },
+    {
+      "media_type": "image/cgm",
+      "source_record_ids": [
+        "src:freedesktop:image/cgm",
+        "src:iana:image/cgm",
+        "src:loc:fdd000521",
+        "src:pronom:fmt/301",
+        "src:pronom:fmt/302",
+        "src:pronom:x-fmt/142",
+        "src:tika:image/cgm"
+      ]
+    },
+    {
+      "media_type": "image/cgm; version=1",
+      "source_record_ids": [
+        "src:pronom:fmt/303"
+      ]
+    },
+    {
+      "media_type": "image/cgm; version=2",
+      "source_record_ids": [
+        "src:pronom:fmt/304"
+      ]
+    },
+    {
+      "media_type": "image/cgm; version=3",
+      "source_record_ids": [
+        "src:pronom:fmt/305"
+      ]
+    },
+    {
+      "media_type": "image/cgm; version=4",
+      "source_record_ids": [
+        "src:pronom:fmt/306"
+      ]
+    },
+    {
+      "media_type": "image/dicom-rle",
+      "source_record_ids": [
+        "src:iana:image/dicom-rle"
+      ]
+    },
+    {
+      "media_type": "image/dng",
+      "source_record_ids": [
+        "src:pronom:fmt/152",
+        "src:pronom:fmt/1781",
+        "src:pronom:fmt/1841",
+        "src:pronom:fmt/1842",
+        "src:pronom:fmt/1943",
+        "src:pronom:fmt/436",
+        "src:pronom:fmt/437",
+        "src:pronom:fmt/438",
+        "src:pronom:fmt/730"
+      ]
+    },
+    {
+      "media_type": "image/dpx",
+      "source_record_ids": [
+        "src:freedesktop:image/dpx",
+        "src:iana:image/dpx",
+        "src:loc:fdd000178"
+      ]
+    },
+    {
+      "media_type": "image/emf",
+      "source_record_ids": [
+        "src:freedesktop:image/emf",
+        "src:iana:image/emf",
+        "src:iana:image/emf#2",
+        "src:pronom:fmt/344",
+        "src:pronom:fmt/345",
+        "src:pronom:x-fmt/153",
+        "src:tika:image/emf"
+      ]
+    },
+    {
+      "media_type": "image/example",
+      "source_record_ids": [
+        "src:iana:image/example",
+        "src:tika:image/example"
+      ]
+    },
+    {
+      "media_type": "image/fax-g3",
+      "source_record_ids": [
+        "src:freedesktop:image/g3fax"
+      ]
+    },
+    {
+      "media_type": "image/fits",
+      "source_record_ids": [
+        "src:freedesktop:application/fits",
+        "src:iana:image/fits",
+        "src:loc:fdd000317",
+        "src:pronom:x-fmt/383",
+        "src:tika:image/fits"
+      ]
+    },
+    {
+      "media_type": "image/flif",
+      "source_record_ids": [
+        "src:pronom:fmt/872"
+      ]
+    },
+    {
+      "media_type": "image/g3fax",
+      "source_record_ids": [
+        "src:freedesktop:image/g3fax",
+        "src:iana:image/g3fax",
+        "src:tika:image/g3fax"
+      ]
+    },
+    {
+      "media_type": "image/gif",
+      "source_record_ids": [
+        "src:freedesktop:image/gif",
+        "src:iana:image/gif",
+        "src:loc:fdd000133",
+        "src:pronom:fmt/3",
+        "src:pronom:fmt/4",
+        "src:tika:image/gif"
+      ]
+    },
+    {
+      "media_type": "image/heic",
+      "source_record_ids": [
+        "src:freedesktop:image/heif",
+        "src:iana:image/heic",
+        "src:loc:fdd000525",
+        "src:loc:fdd000526",
+        "src:tika:image/heic",
+        "src:tika:image/heic#2"
+      ]
+    },
+    {
+      "media_type": "image/heic-sequence",
+      "source_record_ids": [
+        "src:freedesktop:image/heif",
+        "src:iana:image/heic-sequence",
+        "src:loc:fdd000526",
+        "src:tika:image/heic-sequence",
+        "src:tika:image/heic-sequence#2"
+      ]
+    },
+    {
+      "media_type": "image/heif",
+      "source_record_ids": [
+        "src:freedesktop:image/heif",
+        "src:iana:image/heif",
+        "src:loc:fdd000525",
+        "src:pronom:fmt/1101",
+        "src:tika:image/heif",
+        "src:tika:image/heif#2"
+      ]
+    },
+    {
+      "media_type": "image/heif-sequence",
+      "source_record_ids": [
+        "src:freedesktop:image/heif",
+        "src:iana:image/heif-sequence",
+        "src:tika:image/heif-sequence",
+        "src:tika:image/heif-sequence#2"
+      ]
+    },
+    {
+      "media_type": "image/hej2k",
+      "source_record_ids": [
+        "src:freedesktop:image/hej2k",
+        "src:iana:image/hej2k"
+      ]
+    },
+    {
+      "media_type": "image/hevc",
+      "source_record_ids": [
+        "src:tika:image/heic"
+      ]
+    },
+    {
+      "media_type": "image/hevc-sequence",
+      "source_record_ids": [
+        "src:tika:image/heic-sequence"
+      ]
+    },
+    {
+      "media_type": "image/hsj2",
+      "source_record_ids": [
+        "src:iana:image/hsj2"
+      ]
+    },
+    {
+      "media_type": "image/icns",
+      "source_record_ids": [
+        "src:tika:image/icns"
+      ]
+    },
+    {
+      "media_type": "image/ico",
+      "source_record_ids": [
+        "src:freedesktop:image/vnd.microsoft.icon"
+      ]
+    },
+    {
+      "media_type": "image/icon",
+      "source_record_ids": [
+        "src:freedesktop:image/vnd.microsoft.icon"
+      ]
+    },
+    {
+      "media_type": "image/ief",
+      "source_record_ids": [
+        "src:freedesktop:image/ief",
+        "src:iana:image/ief",
+        "src:tika:image/ief"
+      ]
+    },
+    {
+      "media_type": "image/j2c",
+      "source_record_ids": [
+        "src:iana:image/j2c"
+      ]
+    },
+    {
+      "media_type": "image/jaii",
+      "source_record_ids": [
+        "src:iana:image/jaii"
+      ]
+    },
+    {
+      "media_type": "image/jais",
+      "source_record_ids": [
+        "src:iana:image/jais"
+      ]
+    },
+    {
+      "media_type": "image/jls",
+      "source_record_ids": [
+        "src:iana:image/jls"
+      ]
+    },
+    {
+      "media_type": "image/jp2",
+      "source_record_ids": [
+        "src:freedesktop:image/jp2",
+        "src:iana:image/jp2",
+        "src:loc:fdd000143",
+        "src:pronom:fmt/1794",
+        "src:pronom:x-fmt/392",
+        "src:tika:image/jp2"
+      ]
+    },
+    {
+      "media_type": "image/jpeg",
+      "source_record_ids": [
+        "src:freedesktop:image/jpeg",
+        "src:iana:image/jpeg",
+        "src:loc:fdd000018",
+        "src:loc:fdd000019",
+        "src:loc:fdd000619",
+        "src:pronom:fmt/112",
+        "src:pronom:fmt/113",
+        "src:pronom:fmt/1507",
+        "src:pronom:fmt/41",
+        "src:pronom:fmt/42",
+        "src:pronom:fmt/43",
+        "src:pronom:fmt/44",
+        "src:pronom:fmt/645",
+        "src:pronom:x-fmt/390",
+        "src:pronom:x-fmt/391",
+        "src:pronom:x-fmt/398",
+        "src:tika:image/jpeg"
+      ]
+    },
+    {
+      "media_type": "image/jpeg2000",
+      "source_record_ids": [
+        "src:freedesktop:image/jp2",
+        "src:loc:fdd000143"
+      ]
+    },
+    {
+      "media_type": "image/jpeg2000-image",
+      "source_record_ids": [
+        "src:freedesktop:image/jp2",
+        "src:loc:fdd000143"
+      ]
+    },
+    {
+      "media_type": "image/jph",
+      "source_record_ids": [
+        "src:iana:image/jph",
+        "src:loc:fdd000566",
+        "src:pronom:fmt/1964"
+      ]
+    },
+    {
+      "media_type": "image/jphc",
+      "source_record_ids": [
+        "src:iana:image/jphc"
+      ]
+    },
+    {
+      "media_type": "image/jpm",
+      "source_record_ids": [
+        "src:freedesktop:image/jpm",
+        "src:iana:image/jpm",
+        "src:loc:fdd000144",
+        "src:pronom:fmt/463",
+        "src:tika:image/jpm"
+      ]
+    },
+    {
+      "media_type": "image/jpx",
+      "source_record_ids": [
+        "src:freedesktop:image/jpx",
+        "src:iana:image/jpx",
+        "src:loc:fdd000154",
+        "src:pronom:fmt/151",
+        "src:tika:image/jpx"
+      ]
+    },
+    {
+      "media_type": "image/jxl",
+      "source_record_ids": [
+        "src:freedesktop:image/jxl",
+        "src:iana:image/jxl",
+        "src:loc:fdd000536",
+        "src:loc:fdd000538",
+        "src:pronom:fmt/1484",
+        "src:pronom:fmt/1485",
+        "src:tika:image/jxl"
+      ]
+    },
+    {
+      "media_type": "image/jxr",
+      "source_record_ids": [
+        "src:freedesktop:image/jxr",
+        "src:iana:image/jxr",
+        "src:loc:fdd000524",
+        "src:pronom:fmt/590"
+      ]
+    },
+    {
+      "media_type": "image/jxra",
+      "source_record_ids": [
+        "src:iana:image/jxra"
+      ]
+    },
+    {
+      "media_type": "image/jxrs",
+      "source_record_ids": [
+        "src:iana:image/jxrs"
+      ]
+    },
+    {
+      "media_type": "image/jxs",
+      "source_record_ids": [
+        "src:iana:image/jxs",
+        "src:loc:fdd000545",
+        "src:loc:fdd000546"
+      ]
+    },
+    {
+      "media_type": "image/jxsc",
+      "source_record_ids": [
+        "src:iana:image/jxsc"
+      ]
+    },
+    {
+      "media_type": "image/jxsi",
+      "source_record_ids": [
+        "src:iana:image/jxsi"
+      ]
+    },
+    {
+      "media_type": "image/jxss",
+      "source_record_ids": [
+        "src:iana:image/jxss"
+      ]
+    },
+    {
+      "media_type": "image/ktx",
+      "source_record_ids": [
+        "src:freedesktop:image/ktx",
+        "src:iana:image/ktx",
+        "src:pronom:fmt/970"
+      ]
+    },
+    {
+      "media_type": "image/ktx2",
+      "source_record_ids": [
+        "src:freedesktop:image/ktx2",
+        "src:iana:image/ktx2"
+      ]
+    },
+    {
+      "media_type": "image/mov",
+      "source_record_ids": [
+        "src:loc:fdd000052"
+      ]
+    },
+    {
+      "media_type": "image/naplps",
+      "source_record_ids": [
+        "src:iana:image/naplps",
+        "src:tika:image/naplps"
+      ]
+    },
+    {
+      "media_type": "image/nitf",
+      "source_record_ids": [
+        "src:tika:image/nitf"
+      ]
+    },
+    {
+      "media_type": "image/ntf",
+      "source_record_ids": [
+        "src:tika:image/nitf"
+      ]
+    },
+    {
+      "media_type": "image/openraster",
+      "source_record_ids": [
+        "src:freedesktop:image/openraster",
+        "src:pronom:fmt/998"
+      ]
+    },
+    {
+      "media_type": "image/pdf",
+      "source_record_ids": [
+        "src:freedesktop:application/pdf"
+      ]
+    },
+    {
+      "media_type": "image/photoshop",
+      "source_record_ids": [
+        "src:freedesktop:image/vnd.adobe.photoshop"
+      ]
+    },
+    {
+      "media_type": "image/pjpeg",
+      "source_record_ids": [
+        "src:freedesktop:image/jpeg"
+      ]
+    },
+    {
+      "media_type": "image/png",
+      "source_record_ids": [
+        "src:freedesktop:image/png",
+        "src:iana:image/png",
+        "src:loc:fdd000153",
+        "src:pronom:fmt/11",
+        "src:pronom:fmt/12",
+        "src:pronom:fmt/13",
+        "src:tika:image/png"
+      ]
+    },
+    {
+      "media_type": "image/prs.aimg",
+      "source_record_ids": [
+        "src:iana:image/prs.aimg"
+      ]
+    },
+    {
+      "media_type": "image/prs.btif",
+      "source_record_ids": [
+        "src:iana:image/prs.btif",
+        "src:tika:image/prs.btif"
+      ]
+    },
+    {
+      "media_type": "image/prs.pti",
+      "source_record_ids": [
+        "src:iana:image/prs.pti",
+        "src:tika:image/prs.pti"
+      ]
+    },
+    {
+      "media_type": "image/psd",
+      "source_record_ids": [
+        "src:freedesktop:image/vnd.adobe.photoshop"
+      ]
+    },
+    {
+      "media_type": "image/pwg-raster",
+      "source_record_ids": [
+        "src:iana:image/pwg-raster"
+      ]
+    },
+    {
+      "media_type": "image/qoi",
+      "source_record_ids": [
+        "src:freedesktop:image/qoi"
+      ]
+    },
+    {
+      "media_type": "image/rle",
+      "source_record_ids": [
+        "src:freedesktop:image/rle"
+      ]
+    },
+    {
+      "media_type": "image/svg+xml",
+      "source_record_ids": [
+        "src:freedesktop:image/svg+xml",
+        "src:iana:image/svg+xml",
+        "src:loc:fdd000020",
+        "src:loc:fdd000043",
+        "src:loc:fdd000515",
+        "src:loc:fdd000517",
+        "src:pronom:fmt/91",
+        "src:pronom:fmt/92",
+        "src:pronom:x-fmt/109",
+        "src:tika:image/svg+xml"
+      ]
+    },
+    {
+      "media_type": "image/svg+xml-compressed",
+      "source_record_ids": [
+        "src:freedesktop:image/svg+xml-compressed"
+      ]
+    },
+    {
+      "media_type": "image/t38",
+      "source_record_ids": [
+        "src:iana:image/t38",
+        "src:tika:image/t38"
+      ]
+    },
+    {
+      "media_type": "image/targa",
+      "source_record_ids": [
+        "src:freedesktop:image/x-tga"
+      ]
+    },
+    {
+      "media_type": "image/tga",
+      "source_record_ids": [
+        "src:freedesktop:image/x-tga"
+      ]
+    },
+    {
+      "media_type": "image/tiff",
+      "source_record_ids": [
+        "src:freedesktop:image/tiff",
+        "src:iana:image/tiff",
+        "src:loc:fdd000022",
+        "src:loc:fdd000145",
+        "src:loc:fdd000188",
+        "src:loc:fdd000279",
+        "src:loc:fdd000292",
+        "src:loc:fdd000328",
+        "src:loc:fdd000628",
+        "src:pronom:fmt/152",
+        "src:pronom:fmt/153",
+        "src:pronom:fmt/154",
+        "src:pronom:fmt/155",
+        "src:pronom:fmt/156",
+        "src:pronom:fmt/1841",
+        "src:pronom:fmt/1842",
+        "src:pronom:fmt/353",
+        "src:pronom:fmt/436",
+        "src:pronom:fmt/438",
+        "src:pronom:fmt/730",
+        "src:pronom:x-fmt/387",
+        "src:pronom:x-fmt/388",
+        "src:pronom:x-fmt/399",
+        "src:tika:image/tiff"
+      ]
+    },
+    {
+      "media_type": "image/tiff-fx",
+      "source_record_ids": [
+        "src:iana:image/tiff-fx",
+        "src:tika:image/tiff-fx"
+      ]
+    },
+    {
+      "media_type": "image/vnd-svf",
+      "source_record_ids": [
+        "src:pronom:fmt/933",
+        "src:pronom:fmt/934"
+      ]
+    },
+    {
+      "media_type": "image/vnd-wap-wbmp",
+      "source_record_ids": [
+        "src:pronom:fmt/497"
+      ]
+    },
+    {
+      "media_type": "image/vnd.adobe.photoshop",
+      "source_record_ids": [
+        "src:freedesktop:image/vnd.adobe.photoshop",
+        "src:iana:image/vnd.adobe.photoshop",
+        "src:loc:fdd000523",
+        "src:pronom:fmt/996",
+        "src:pronom:x-fmt/92",
+        "src:tika:image/vnd.adobe.photoshop"
+      ]
+    },
+    {
+      "media_type": "image/vnd.adobe.premiere",
+      "source_record_ids": [
+        "src:tika:image/vnd.adobe.premiere"
+      ]
+    },
+    {
+      "media_type": "image/vnd.airzip.accelerator.azv",
+      "source_record_ids": [
+        "src:iana:image/vnd.airzip.accelerator.azv"
+      ]
+    },
+    {
+      "media_type": "image/vnd.blockfact.facti",
+      "source_record_ids": [
+        "src:iana:image/vnd.blockfact.facti"
+      ]
+    },
+    {
+      "media_type": "image/vnd.clip",
+      "source_record_ids": [
+        "src:iana:image/vnd.clip"
+      ]
+    },
+    {
+      "media_type": "image/vnd.cns.inf2",
+      "source_record_ids": [
+        "src:iana:image/vnd.cns.inf2",
+        "src:tika:image/vnd.cns.inf2"
+      ]
+    },
+    {
+      "media_type": "image/vnd.dece.graphic",
+      "source_record_ids": [
+        "src:iana:image/vnd.dece.graphic"
+      ]
+    },
+    {
+      "media_type": "image/vnd.dgn",
+      "source_record_ids": [
+        "src:tika:image/vnd.dgn"
+      ]
+    },
+    {
+      "media_type": "image/vnd.dgn;ver=8",
+      "source_record_ids": [
+        "src:tika:image/vnd.dgn;version=8"
+      ]
+    },
+    {
+      "media_type": "image/vnd.dgn;version=7",
+      "source_record_ids": [
+        "src:tika:image/vnd.dgn;version=7"
+      ]
+    },
+    {
+      "media_type": "image/vnd.dgn;version=8",
+      "source_record_ids": [
+        "src:tika:image/vnd.dgn;version=8"
+      ]
+    },
+    {
+      "media_type": "image/vnd.djvu",
+      "source_record_ids": [
+        "src:freedesktop:image/vnd.djvu",
+        "src:iana:image/vnd.djvu",
+        "src:pronom:fmt/255",
+        "src:pronom:fmt/318",
+        "src:tika:image/vnd.djvu"
+      ]
+    },
+    {
+      "media_type": "image/vnd.djvu+multipage",
+      "source_record_ids": [
+        "src:freedesktop:image/vnd.djvu+multipage"
+      ]
+    },
+    {
+      "media_type": "image/vnd.dvb.subtitle",
+      "source_record_ids": [
+        "src:iana:image/vnd.dvb.subtitle",
+        "src:loc:fdd000573"
+      ]
+    },
+    {
+      "media_type": "image/vnd.dwf",
+      "source_record_ids": [
+        "src:pronom:x-fmt/49"
+      ]
+    },
+    {
+      "media_type": "image/vnd.dwg",
+      "source_record_ids": [
+        "src:freedesktop:image/vnd.dwg",
+        "src:iana:image/vnd.dwg",
+        "src:loc:fdd000445",
+        "src:pronom:fmt/1395",
+        "src:pronom:fmt/21",
+        "src:pronom:fmt/22",
+        "src:pronom:fmt/23",
+        "src:pronom:fmt/24",
+        "src:pronom:fmt/25",
+        "src:pronom:fmt/26",
+        "src:pronom:fmt/27",
+        "src:pronom:fmt/28",
+        "src:pronom:fmt/29",
+        "src:pronom:fmt/30",
+        "src:pronom:fmt/31",
+        "src:pronom:fmt/32",
+        "src:pronom:fmt/33",
+        "src:pronom:fmt/34",
+        "src:pronom:fmt/35",
+        "src:pronom:fmt/36",
+        "src:pronom:fmt/434",
+        "src:pronom:fmt/531",
+        "src:pronom:x-fmt/455",
+        "src:tika:image/vnd.dwg"
+      ]
+    },
+    {
+      "media_type": "image/vnd.dxb",
+      "source_record_ids": [
+        "src:tika:image/vnd.dxb"
+      ]
+    },
+    {
+      "media_type": "image/vnd.dxf",
+      "source_record_ids": [
+        "src:freedesktop:image/vnd.dxf",
+        "src:iana:image/vnd.dxf",
+        "src:loc:fdd000446",
+        "src:pronom:fmt/1389",
+        "src:pronom:fmt/1390",
+        "src:pronom:fmt/1391",
+        "src:pronom:fmt/1392",
+        "src:pronom:fmt/1393",
+        "src:pronom:fmt/1394",
+        "src:pronom:fmt/433",
+        "src:pronom:fmt/435",
+        "src:pronom:fmt/532",
+        "src:pronom:fmt/63",
+        "src:pronom:fmt/64",
+        "src:pronom:fmt/65",
+        "src:pronom:fmt/66",
+        "src:pronom:fmt/67",
+        "src:pronom:fmt/68",
+        "src:pronom:fmt/69",
+        "src:pronom:fmt/70",
+        "src:pronom:fmt/71",
+        "src:pronom:fmt/72",
+        "src:pronom:fmt/73",
+        "src:pronom:fmt/74",
+        "src:pronom:fmt/75",
+        "src:pronom:fmt/76",
+        "src:pronom:fmt/77",
+        "src:pronom:fmt/78",
+        "src:pronom:fmt/79",
+        "src:pronom:fmt/80",
+        "src:pronom:fmt/81",
+        "src:pronom:fmt/82",
+        "src:pronom:fmt/83",
+        "src:pronom:fmt/84",
+        "src:pronom:fmt/85",
+        "src:tika:image/vnd.dxf"
+      ]
+    },
+    {
+      "media_type": "image/vnd.dxf;format=ascii",
+      "source_record_ids": [
+        "src:tika:image/vnd.dxf;format=ascii"
+      ]
+    },
+    {
+      "media_type": "image/vnd.dxf;format=binary",
+      "source_record_ids": [
+        "src:tika:image/vnd.dxf;format=binary"
+      ]
+    },
+    {
+      "media_type": "image/vnd.fastbidsheet",
+      "source_record_ids": [
+        "src:iana:image/vnd.fastbidsheet",
+        "src:tika:image/vnd.fastbidsheet"
+      ]
+    },
+    {
+      "media_type": "image/vnd.fpx",
+      "source_record_ids": [
+        "src:freedesktop:image/vnd.fpx",
+        "src:iana:image/vnd.fpx",
+        "src:pronom:x-fmt/56",
+        "src:tika:image/vnd.fpx"
+      ]
+    },
+    {
+      "media_type": "image/vnd.fst",
+      "source_record_ids": [
+        "src:iana:image/vnd.fst",
+        "src:tika:image/vnd.fst"
+      ]
+    },
+    {
+      "media_type": "image/vnd.fujixerox.edmics-mmr",
+      "source_record_ids": [
+        "src:iana:image/vnd.fujixerox.edmics-mmr",
+        "src:tika:image/vnd.fujixerox.edmics-mmr"
+      ]
+    },
+    {
+      "media_type": "image/vnd.fujixerox.edmics-rlc",
+      "source_record_ids": [
+        "src:iana:image/vnd.fujixerox.edmics-rlc",
+        "src:tika:image/vnd.fujixerox.edmics-rlc"
+      ]
+    },
+    {
+      "media_type": "image/vnd.globalgraphics.pgb",
+      "source_record_ids": [
+        "src:iana:image/vnd.globalgraphics.pgb",
+        "src:tika:image/vnd.globalgraphics.pgb"
+      ]
+    },
+    {
+      "media_type": "image/vnd.microsoft.icon",
+      "source_record_ids": [
+        "src:freedesktop:image/vnd.microsoft.icon",
+        "src:iana:image/vnd.microsoft.icon",
+        "src:pronom:x-fmt/418",
+        "src:tika:image/vnd.microsoft.icon"
+      ]
+    },
+    {
+      "media_type": "image/vnd.mix",
+      "source_record_ids": [
+        "src:iana:image/vnd.mix",
+        "src:pronom:fmt/594",
+        "src:pronom:fmt/936",
+        "src:tika:image/vnd.mix"
+      ]
+    },
+    {
+      "media_type": "image/vnd.mozilla.apng",
+      "source_record_ids": [
+        "src:freedesktop:image/apng",
+        "src:iana:image/vnd.mozilla.apng"
+      ]
+    },
+    {
+      "media_type": "image/vnd.ms-dds",
+      "source_record_ids": [
+        "src:freedesktop:image/vnd.ms-dds"
+      ]
+    },
+    {
+      "media_type": "image/vnd.ms-modi",
+      "source_record_ids": [
+        "src:freedesktop:image/vnd.ms-modi",
+        "src:iana:image/vnd.ms-modi",
+        "src:pronom:fmt/881",
+        "src:tika:image/vnd.ms-modi"
+      ]
+    },
+    {
+      "media_type": "image/vnd.ms-photo",
+      "source_record_ids": [
+        "src:freedesktop:image/jxr",
+        "src:loc:fdd000243",
+        "src:loc:fdd000524"
+      ]
+    },
+    {
+      "media_type": "image/vnd.net-fpx",
+      "source_record_ids": [
+        "src:iana:image/vnd.net-fpx",
+        "src:tika:image/vnd.net-fpx"
+      ]
+    },
+    {
+      "media_type": "image/vnd.pco.b16",
+      "source_record_ids": [
+        "src:iana:image/vnd.pco.b16"
+      ]
+    },
+    {
+      "media_type": "image/vnd.radiance",
+      "source_record_ids": [
+        "src:freedesktop:image/vnd.radiance",
+        "src:iana:image/vnd.radiance",
+        "src:pronom:fmt/591",
+        "src:tika:image/vnd.radiance"
+      ]
+    },
+    {
+      "media_type": "image/vnd.rn-realpix",
+      "source_record_ids": [
+        "src:freedesktop:image/vnd.rn-realpix"
+      ]
+    },
+    {
+      "media_type": "image/vnd.sealed.png",
+      "source_record_ids": [
+        "src:iana:image/vnd.sealed.png",
+        "src:tika:image/vnd.sealed.png"
+      ]
+    },
+    {
+      "media_type": "image/vnd.sealedmedia.softseal.gif",
+      "source_record_ids": [
+        "src:iana:image/vnd.sealedmedia.softseal.gif",
+        "src:tika:image/vnd.sealedmedia.softseal.gif"
+      ]
+    },
+    {
+      "media_type": "image/vnd.sealedmedia.softseal.jpg",
+      "source_record_ids": [
+        "src:iana:image/vnd.sealedmedia.softseal.jpg",
+        "src:tika:image/vnd.sealedmedia.softseal.jpg"
+      ]
+    },
+    {
+      "media_type": "image/vnd.sld",
+      "source_record_ids": [
+        "src:iana:image/vnd.sld"
+      ]
+    },
+    {
+      "media_type": "image/vnd.svf",
+      "source_record_ids": [
+        "src:iana:image/vnd.svf",
+        "src:tika:image/vnd.svf"
+      ]
+    },
+    {
+      "media_type": "image/vnd.tencent.tap",
+      "source_record_ids": [
+        "src:iana:image/vnd.tencent.tap"
+      ]
+    },
+    {
+      "media_type": "image/vnd.valve.source.texture",
+      "source_record_ids": [
+        "src:iana:image/vnd.valve.source.texture",
+        "src:pronom:fmt/985"
+      ]
+    },
+    {
+      "media_type": "image/vnd.wap.wbmp",
+      "source_record_ids": [
+        "src:freedesktop:image/vnd.wap.wbmp",
+        "src:iana:image/vnd.wap.wbmp",
+        "src:tika:image/vnd.wap.wbmp"
+      ]
+    },
+    {
+      "media_type": "image/vnd.xiff",
+      "source_record_ids": [
+        "src:iana:image/vnd.xiff",
+        "src:pronom:fmt/1479",
+        "src:pronom:fmt/1480",
+        "src:tika:image/vnd.xiff"
+      ]
+    },
+    {
+      "media_type": "image/vnd.zbrush.dcx",
+      "source_record_ids": [
+        "src:tika:image/vnd.zbrush.dcx"
+      ]
+    },
+    {
+      "media_type": "image/vnd.zbrush.pcx",
+      "source_record_ids": [
+        "src:freedesktop:image/vnd.zbrush.pcx",
+        "src:iana:image/vnd.zbrush.pcx",
+        "src:pronom:fmt/86",
+        "src:pronom:fmt/87",
+        "src:pronom:fmt/88",
+        "src:pronom:fmt/89",
+        "src:pronom:fmt/90",
+        "src:tika:image/vnd.zbrush.pcx"
+      ]
+    },
+    {
+      "media_type": "image/webp",
+      "source_record_ids": [
+        "src:freedesktop:image/webp",
+        "src:iana:image/webp",
+        "src:loc:fdd000577",
+        "src:pronom:fmt/566",
+        "src:pronom:fmt/567",
+        "src:pronom:fmt/568",
+        "src:tika:image/webp"
+      ]
+    },
+    {
+      "media_type": "image/wmf",
+      "source_record_ids": [
+        "src:freedesktop:image/wmf",
+        "src:iana:image/wmf",
+        "src:iana:image/wmf#2",
+        "src:pronom:x-fmt/119",
+        "src:tika:image/wmf"
+      ]
+    },
+    {
+      "media_type": "image/x-3ds",
+      "source_record_ids": [
+        "src:freedesktop:image/x-3ds",
+        "src:tika:image/x-3ds"
+      ]
+    },
+    {
+      "media_type": "image/x-adobe-dng",
+      "source_record_ids": [
+        "src:freedesktop:image/x-adobe-dng"
+      ]
+    },
+    {
+      "media_type": "image/x-applix-graphics",
+      "source_record_ids": [
+        "src:freedesktop:image/x-applix-graphics"
+      ]
+    },
+    {
+      "media_type": "image/x-aseprite",
+      "source_record_ids": [
+        "src:freedesktop:image/x-aseprite"
+      ]
+    },
+    {
+      "media_type": "image/x-bmp",
+      "source_record_ids": [
+        "src:freedesktop:image/bmp",
+        "src:loc:fdd000189",
+        "src:tika:image/bmp"
+      ]
+    },
+    {
+      "media_type": "image/x-bpg",
+      "source_record_ids": [
+        "src:tika:image/x-bpg"
+      ]
+    },
+    {
+      "media_type": "image/x-bzeps",
+      "source_record_ids": [
+        "src:freedesktop:image/x-bzeps"
+      ]
+    },
+    {
+      "media_type": "image/x-canon-cr2",
+      "source_record_ids": [
+        "src:freedesktop:image/x-canon-cr2",
+        "src:tika:image/x-canon-cr2"
+      ]
+    },
+    {
+      "media_type": "image/x-canon-cr3",
+      "source_record_ids": [
+        "src:freedesktop:image/x-canon-cr3",
+        "src:tika:image/x-canon-cr3"
+      ]
+    },
+    {
+      "media_type": "image/x-canon-crw",
+      "source_record_ids": [
+        "src:freedesktop:image/x-canon-crw"
+      ]
+    },
+    {
+      "media_type": "image/x-cdr",
+      "source_record_ids": [
+        "src:freedesktop:application/vnd.corel-draw",
+        "src:tika:application/coreldraw"
+      ]
+    },
+    {
+      "media_type": "image/x-cmu-raster",
+      "source_record_ids": [
+        "src:freedesktop:image/x-cmu-raster",
+        "src:tika:image/x-cmu-raster"
+      ]
+    },
+    {
+      "media_type": "image/x-cmx",
+      "source_record_ids": [
+        "src:tika:image/x-cmx"
+      ]
+    },
+    {
+      "media_type": "image/x-compressed-xcf",
+      "source_record_ids": [
+        "src:freedesktop:image/x-compressed-xcf"
+      ]
+    },
+    {
+      "media_type": "image/x-dcraw",
+      "source_record_ids": [
+        "src:freedesktop:image/x-dcraw"
+      ]
+    },
+    {
+      "media_type": "image/x-dcx",
+      "source_record_ids": [
+        "src:pronom:x-fmt/348",
+        "src:tika:image/vnd.zbrush.dcx"
+      ]
+    },
+    {
+      "media_type": "image/x-dds",
+      "source_record_ids": [
+        "src:freedesktop:image/vnd.ms-dds"
+      ]
+    },
+    {
+      "media_type": "image/x-dib",
+      "source_record_ids": [
+        "src:freedesktop:image/x-dib"
+      ]
+    },
+    {
+      "media_type": "image/x-djvu",
+      "source_record_ids": [
+        "src:freedesktop:image/vnd.djvu",
+        "src:pronom:fmt/255",
+        "src:pronom:fmt/318"
+      ]
+    },
+    {
+      "media_type": "image/x-dpx",
+      "source_record_ids": [
+        "src:tika:image/x-dpx"
+      ]
+    },
+    {
+      "media_type": "image/x-dwf",
+      "source_record_ids": [
+        "src:pronom:x-fmt/49"
+      ]
+    },
+    {
+      "media_type": "image/x-dwg",
+      "source_record_ids": [
+        "src:tika:image/vnd.dwg"
+      ]
+    },
+    {
+      "media_type": "image/x-emf",
+      "source_record_ids": [
+        "src:freedesktop:image/emf",
+        "src:tika:image/emf"
+      ]
+    },
+    {
+      "media_type": "image/x-emf-compressed",
+      "source_record_ids": [
+        "src:tika:image/x-emf-compressed"
+      ]
+    },
+    {
+      "media_type": "image/x-eps",
+      "source_record_ids": [
+        "src:freedesktop:image/x-eps"
+      ]
+    },
+    {
+      "media_type": "image/x-epson-erf",
+      "source_record_ids": [
+        "src:freedesktop:image/x-epson-erf"
+      ]
+    },
+    {
+      "media_type": "image/x-exr",
+      "source_record_ids": [
+        "src:freedesktop:image/x-exr",
+        "src:loc:fdd000583",
+        "src:pronom:fmt/1001"
+      ]
+    },
+    {
+      "media_type": "image/x-farbfeld",
+      "source_record_ids": [
+        "src:freedesktop:image/x-farbfeld"
+      ]
+    },
+    {
+      "media_type": "image/x-fits",
+      "source_record_ids": [
+        "src:freedesktop:application/fits"
+      ]
+    },
+    {
+      "media_type": "image/x-fpx",
+      "source_record_ids": [
+        "src:freedesktop:image/vnd.fpx"
+      ]
+    },
+    {
+      "media_type": "image/x-freehand",
+      "source_record_ids": [
+        "src:tika:image/x-freehand"
+      ]
+    },
+    {
+      "media_type": "image/x-fuji-raf",
+      "source_record_ids": [
+        "src:freedesktop:image/x-fuji-raf"
+      ]
+    },
+    {
+      "media_type": "image/x-gimp-gbr",
+      "source_record_ids": [
+        "src:freedesktop:image/x-gimp-gbr"
+      ]
+    },
+    {
+      "media_type": "image/x-gimp-gih",
+      "source_record_ids": [
+        "src:freedesktop:image/x-gimp-gih"
+      ]
+    },
+    {
+      "media_type": "image/x-gimp-pat",
+      "source_record_ids": [
+        "src:freedesktop:image/x-gimp-pat"
+      ]
+    },
+    {
+      "media_type": "image/x-gzeps",
+      "source_record_ids": [
+        "src:freedesktop:image/x-gzeps"
+      ]
+    },
+    {
+      "media_type": "image/x-hasselblad-3fr",
+      "source_record_ids": [
+        "src:freedesktop:image/x-hasselblad-3fr"
+      ]
+    },
+    {
+      "media_type": "image/x-hasselblad-fff",
+      "source_record_ids": [
+        "src:freedesktop:image/x-hasselblad-fff"
+      ]
+    },
+    {
+      "media_type": "image/x-hdr",
+      "source_record_ids": [
+        "src:freedesktop:image/vnd.radiance"
+      ]
+    },
+    {
+      "media_type": "image/x-icb",
+      "source_record_ids": [
+        "src:freedesktop:image/x-tga"
+      ]
+    },
+    {
+      "media_type": "image/x-icns",
+      "source_record_ids": [
+        "src:freedesktop:image/x-icns"
+      ]
+    },
+    {
+      "media_type": "image/x-ico",
+      "source_record_ids": [
+        "src:freedesktop:image/vnd.microsoft.icon"
+      ]
+    },
+    {
+      "media_type": "image/x-icon",
+      "source_record_ids": [
+        "src:freedesktop:image/vnd.microsoft.icon",
+        "src:pronom:x-fmt/418",
+        "src:tika:image/vnd.microsoft.icon"
+      ]
+    },
+    {
+      "media_type": "image/x-iff",
+      "source_record_ids": [
+        "src:freedesktop:image/x-ilbm"
+      ]
+    },
+    {
+      "media_type": "image/x-ilbm",
+      "source_record_ids": [
+        "src:freedesktop:image/x-ilbm"
+      ]
+    },
+    {
+      "media_type": "image/x-jb2",
+      "source_record_ids": [
+        "src:tika:image/x-jbig2"
+      ]
+    },
+    {
+      "media_type": "image/x-jbig2",
+      "source_record_ids": [
+        "src:tika:image/x-jbig2"
+      ]
+    },
+    {
+      "media_type": "image/x-jng",
+      "source_record_ids": [
+        "src:freedesktop:image/x-jng",
+        "src:pronom:fmt/529"
+      ]
+    },
+    {
+      "media_type": "image/x-jp2-codestream",
+      "source_record_ids": [
+        "src:freedesktop:image/x-jp2-codestream",
+        "src:tika:image/x-jp2-codestream"
+      ]
+    },
+    {
+      "media_type": "image/x-jp2-container",
+      "source_record_ids": [
+        "src:tika:image/x-jp2-container"
+      ]
+    },
+    {
+      "media_type": "image/x-jpeg2000-image",
+      "source_record_ids": [
+        "src:freedesktop:image/jp2",
+        "src:loc:fdd000143"
+      ]
+    },
+    {
+      "media_type": "image/x-kiss-cel",
+      "source_record_ids": [
+        "src:freedesktop:image/x-kiss-cel"
+      ]
+    },
+    {
+      "media_type": "image/x-kodak-dcr",
+      "source_record_ids": [
+        "src:freedesktop:image/x-kodak-dcr"
+      ]
+    },
+    {
+      "media_type": "image/x-kodak-k25",
+      "source_record_ids": [
+        "src:freedesktop:image/x-kodak-k25"
+      ]
+    },
+    {
+      "media_type": "image/x-kodak-kdc",
+      "source_record_ids": [
+        "src:freedesktop:image/x-kodak-kdc"
+      ]
+    },
+    {
+      "media_type": "image/x-leaf-mos",
+      "source_record_ids": [
+        "src:freedesktop:image/x-leaf-mos"
+      ]
+    },
+    {
+      "media_type": "image/x-lwo",
+      "source_record_ids": [
+        "src:freedesktop:image/x-lwo"
+      ]
+    },
+    {
+      "media_type": "image/x-lws",
+      "source_record_ids": [
+        "src:freedesktop:image/x-lws"
+      ]
+    },
+    {
+      "media_type": "image/x-macpaint",
+      "source_record_ids": [
+        "src:freedesktop:image/x-macpaint"
+      ]
+    },
+    {
+      "media_type": "image/x-mamiya-mef",
+      "source_record_ids": [
+        "src:freedesktop:image/x-mamiya-mef"
+      ]
+    },
+    {
+      "media_type": "image/x-minolta-mdc",
+      "source_record_ids": [
+        "src:freedesktop:image/x-minolta-mdc"
+      ]
+    },
+    {
+      "media_type": "image/x-minolta-mrw",
+      "source_record_ids": [
+        "src:freedesktop:image/x-minolta-mrw",
+        "src:loc:fdd000241"
+      ]
+    },
+    {
+      "media_type": "image/x-mrsid-image",
+      "source_record_ids": [
+        "src:loc:fdd000031",
+        "src:loc:fdd000184"
+      ]
+    },
+    {
+      "media_type": "image/x-ms-bmp",
+      "source_record_ids": [
+        "src:freedesktop:image/bmp",
+        "src:loc:fdd000189",
+        "src:tika:image/bmp"
+      ]
+    },
+    {
+      "media_type": "image/x-msod",
+      "source_record_ids": [
+        "src:freedesktop:image/x-msod"
+      ]
+    },
+    {
+      "media_type": "image/x-niff",
+      "source_record_ids": [
+        "src:freedesktop:image/x-niff",
+        "src:tika:image/x-niff"
+      ]
+    },
+    {
+      "media_type": "image/x-nikon-nef",
+      "source_record_ids": [
+        "src:freedesktop:image/x-nikon-nef",
+        "src:loc:fdd000241"
+      ]
+    },
+    {
+      "media_type": "image/x-nikon-nrw",
+      "source_record_ids": [
+        "src:freedesktop:image/x-nikon-nrw"
+      ]
+    },
+    {
+      "media_type": "image/x-olympus-orf",
+      "source_record_ids": [
+        "src:freedesktop:image/x-olympus-orf",
+        "src:loc:fdd000241"
+      ]
+    },
+    {
+      "media_type": "image/x-os2-graphics; charset=binary",
+      "source_record_ids": [
+        "src:tika:image/x-os2-graphics; charset=binary"
+      ]
+    },
+    {
+      "media_type": "image/x-panasonic-raw",
+      "source_record_ids": [
+        "src:freedesktop:image/x-panasonic-rw"
+      ]
+    },
+    {
+      "media_type": "image/x-panasonic-raw2",
+      "source_record_ids": [
+        "src:freedesktop:image/x-panasonic-rw2"
+      ]
+    },
+    {
+      "media_type": "image/x-panasonic-rw",
+      "source_record_ids": [
+        "src:freedesktop:image/x-panasonic-rw"
+      ]
+    },
+    {
+      "media_type": "image/x-panasonic-rw2",
+      "source_record_ids": [
+        "src:freedesktop:image/x-panasonic-rw2"
+      ]
+    },
+    {
+      "media_type": "image/x-pc-paintbrush",
+      "source_record_ids": [
+        "src:tika:image/vnd.zbrush.pcx"
+      ]
+    },
+    {
+      "media_type": "image/x-pcx",
+      "source_record_ids": [
+        "src:freedesktop:image/vnd.zbrush.pcx",
+        "src:loc:fdd000585",
+        "src:tika:image/vnd.zbrush.pcx"
+      ]
+    },
+    {
+      "media_type": "image/x-pentax-pef",
+      "source_record_ids": [
+        "src:freedesktop:image/x-pentax-pef",
+        "src:loc:fdd000241"
+      ]
+    },
+    {
+      "media_type": "image/x-pfm",
+      "source_record_ids": [
+        "src:freedesktop:image/x-pfm"
+      ]
+    },
+    {
+      "media_type": "image/x-phaseone-iiq",
+      "source_record_ids": [
+        "src:freedesktop:image/x-phaseone-iiq"
+      ]
+    },
+    {
+      "media_type": "image/x-phm",
+      "source_record_ids": [
+        "src:freedesktop:image/x-phm"
+      ]
+    },
+    {
+      "media_type": "image/x-photo-cd",
+      "source_record_ids": [
+        "src:freedesktop:image/x-photo-cd"
+      ]
+    },
+    {
+      "media_type": "image/x-photoshop",
+      "source_record_ids": [
+        "src:freedesktop:image/vnd.adobe.photoshop"
+      ]
+    },
+    {
+      "media_type": "image/x-pict",
+      "source_record_ids": [
+        "src:freedesktop:image/x-pict",
+        "src:pronom:fmt/341",
+        "src:pronom:x-fmt/80",
+        "src:tika:image/x-pict"
+      ]
+    },
+    {
+      "media_type": "image/x-portable-anymap",
+      "source_record_ids": [
+        "src:freedesktop:image/x-portable-anymap",
+        "src:tika:image/x-portable-anymap"
+      ]
+    },
+    {
+      "media_type": "image/x-portable-arbitrarymap",
+      "source_record_ids": [
+        "src:tika:image/x-portable-arbitrarymap"
+      ]
+    },
+    {
+      "media_type": "image/x-portable-bitmap",
+      "source_record_ids": [
+        "src:freedesktop:image/x-portable-bitmap",
+        "src:pronom:x-fmt/164",
+        "src:tika:image/x-portable-bitmap"
+      ]
+    },
+    {
+      "media_type": "image/x-portable-graymap",
+      "source_record_ids": [
+        "src:freedesktop:image/x-portable-graymap",
+        "src:tika:image/x-portable-graymap"
+      ]
+    },
+    {
+      "media_type": "image/x-portable-pixmap",
+      "source_record_ids": [
+        "src:freedesktop:image/x-portable-pixmap",
+        "src:pronom:x-fmt/178",
+        "src:tika:image/x-portable-pixmap"
+      ]
+    },
+    {
+      "media_type": "image/x-psd",
+      "source_record_ids": [
+        "src:freedesktop:image/vnd.adobe.photoshop",
+        "src:tika:image/vnd.adobe.photoshop"
+      ]
+    },
+    {
+      "media_type": "image/x-pxr",
+      "source_record_ids": [
+        "src:freedesktop:image/x-pxr"
+      ]
+    },
+    {
+      "media_type": "image/x-quicktime",
+      "source_record_ids": [
+        "src:freedesktop:image/x-quicktime"
+      ]
+    },
+    {
+      "media_type": "image/x-raw-adobe",
+      "source_record_ids": [
+        "src:tika:image/x-raw-adobe"
+      ]
+    },
+    {
+      "media_type": "image/x-raw-canon",
+      "source_record_ids": [
+        "src:tika:image/x-raw-canon"
+      ]
+    },
+    {
+      "media_type": "image/x-raw-casio",
+      "source_record_ids": [
+        "src:tika:image/x-raw-casio"
+      ]
+    },
+    {
+      "media_type": "image/x-raw-epson",
+      "source_record_ids": [
+        "src:tika:image/x-raw-epson"
+      ]
+    },
+    {
+      "media_type": "image/x-raw-fuji",
+      "source_record_ids": [
+        "src:tika:image/x-raw-fuji"
+      ]
+    },
+    {
+      "media_type": "image/x-raw-hasselblad",
+      "source_record_ids": [
+        "src:tika:image/x-raw-hasselblad"
+      ]
+    },
+    {
+      "media_type": "image/x-raw-imacon",
+      "source_record_ids": [
+        "src:tika:image/x-raw-imacon"
+      ]
+    },
+    {
+      "media_type": "image/x-raw-kodak",
+      "source_record_ids": [
+        "src:tika:image/x-raw-kodak"
+      ]
+    },
+    {
+      "media_type": "image/x-raw-leaf",
+      "source_record_ids": [
+        "src:tika:image/x-raw-leaf"
+      ]
+    },
+    {
+      "media_type": "image/x-raw-logitech",
+      "source_record_ids": [
+        "src:tika:image/x-raw-logitech"
+      ]
+    },
+    {
+      "media_type": "image/x-raw-mamiya",
+      "source_record_ids": [
+        "src:tika:image/x-raw-mamiya"
+      ]
+    },
+    {
+      "media_type": "image/x-raw-minolta",
+      "source_record_ids": [
+        "src:tika:image/x-raw-minolta"
+      ]
+    },
+    {
+      "media_type": "image/x-raw-nikon",
+      "source_record_ids": [
+        "src:tika:image/x-raw-nikon"
+      ]
+    },
+    {
+      "media_type": "image/x-raw-olympus",
+      "source_record_ids": [
+        "src:tika:image/x-raw-olympus"
+      ]
+    },
+    {
+      "media_type": "image/x-raw-panasonic",
+      "source_record_ids": [
+        "src:tika:image/x-raw-panasonic"
+      ]
+    },
+    {
+      "media_type": "image/x-raw-pentax",
+      "source_record_ids": [
+        "src:tika:image/x-raw-pentax"
+      ]
+    },
+    {
+      "media_type": "image/x-raw-phaseone",
+      "source_record_ids": [
+        "src:tika:image/x-raw-phaseone"
+      ]
+    },
+    {
+      "media_type": "image/x-raw-rawzor",
+      "source_record_ids": [
+        "src:tika:image/x-raw-rawzor"
+      ]
+    },
+    {
+      "media_type": "image/x-raw-red",
+      "source_record_ids": [
+        "src:tika:image/x-raw-red"
+      ]
+    },
+    {
+      "media_type": "image/x-raw-sigma",
+      "source_record_ids": [
+        "src:tika:image/x-raw-sigma"
+      ]
+    },
+    {
+      "media_type": "image/x-raw-sony",
+      "source_record_ids": [
+        "src:tika:image/x-raw-sony"
+      ]
+    },
+    {
+      "media_type": "image/x-rgb",
+      "source_record_ids": [
+        "src:freedesktop:image/x-rgb",
+        "src:tika:image/x-rgb"
+      ]
+    },
+    {
+      "media_type": "image/x-samsung-srw",
+      "source_record_ids": [
+        "src:freedesktop:image/x-samsung-srw"
+      ]
+    },
+    {
+      "media_type": "image/x-sct",
+      "source_record_ids": [
+        "src:freedesktop:image/x-sct"
+      ]
+    },
+    {
+      "media_type": "image/x-sgi",
+      "source_record_ids": [
+        "src:freedesktop:image/x-sgi"
+      ]
+    },
+    {
+      "media_type": "image/x-sgi-bw",
+      "source_record_ids": [
+        "src:pronom:x-fmt/140"
+      ]
+    },
+    {
+      "media_type": "image/x-sigma-x3f",
+      "source_record_ids": [
+        "src:freedesktop:image/x-sigma-x3f"
+      ]
+    },
+    {
+      "media_type": "image/x-sinar-sti",
+      "source_record_ids": [
+        "src:freedesktop:image/x-sinar-sti"
+      ]
+    },
+    {
+      "media_type": "image/x-skencil",
+      "source_record_ids": [
+        "src:freedesktop:image/x-skencil"
+      ]
+    },
+    {
+      "media_type": "image/x-sld",
+      "source_record_ids": [
+        "src:pronom:x-fmt/105"
+      ]
+    },
+    {
+      "media_type": "image/x-sony-arw",
+      "source_record_ids": [
+        "src:freedesktop:image/x-sony-arw"
+      ]
+    },
+    {
+      "media_type": "image/x-sony-sr2",
+      "source_record_ids": [
+        "src:freedesktop:image/x-sony-sr2"
+      ]
+    },
+    {
+      "media_type": "image/x-sony-srf",
+      "source_record_ids": [
+        "src:freedesktop:image/x-sony-srf",
+        "src:loc:fdd000241"
+      ]
+    },
+    {
+      "media_type": "image/x-sun-raster",
+      "source_record_ids": [
+        "src:freedesktop:image/x-sun-raster",
+        "src:pronom:x-fmt/184"
+      ]
+    },
+    {
+      "media_type": "image/x-targa",
+      "source_record_ids": [
+        "src:freedesktop:image/x-tga",
+        "src:tika:image/x-tga"
+      ]
+    },
+    {
+      "media_type": "image/x-tga",
+      "source_record_ids": [
+        "src:freedesktop:image/x-tga",
+        "src:tika:image/x-tga"
+      ]
+    },
+    {
+      "media_type": "image/x-tiff-multipage",
+      "source_record_ids": [
+        "src:freedesktop:image/x-tiff-multipage"
+      ]
+    },
+    {
+      "media_type": "image/x-tim",
+      "source_record_ids": [
+        "src:freedesktop:image/x-tim"
+      ]
+    },
+    {
+      "media_type": "image/x-win-bitmap",
+      "source_record_ids": [
+        "src:freedesktop:image/x-win-bitmap",
+        "src:pronom:fmt/385"
+      ]
+    },
+    {
+      "media_type": "image/x-win-metafile",
+      "source_record_ids": [
+        "src:freedesktop:image/wmf"
+      ]
+    },
+    {
+      "media_type": "image/x-wmf",
+      "source_record_ids": [
+        "src:freedesktop:image/wmf",
+        "src:tika:image/wmf"
+      ]
+    },
+    {
+      "media_type": "image/x-xbitmap",
+      "source_record_ids": [
+        "src:freedesktop:image/x-xbitmap",
+        "src:pronom:x-fmt/207",
+        "src:pronom:x-fmt/299",
+        "src:tika:image/x-xbitmap"
+      ]
+    },
+    {
+      "media_type": "image/x-xcf",
+      "source_record_ids": [
+        "src:freedesktop:image/x-xcf",
+        "src:tika:image/x-xcf"
+      ]
+    },
+    {
+      "media_type": "image/x-xcursor",
+      "source_record_ids": [
+        "src:freedesktop:image/x-xcursor"
+      ]
+    },
+    {
+      "media_type": "image/x-xfig",
+      "source_record_ids": [
+        "src:freedesktop:image/x-xfig"
+      ]
+    },
+    {
+      "media_type": "image/x-xpixmap",
+      "source_record_ids": [
+        "src:freedesktop:image/x-xpixmap",
+        "src:pronom:x-fmt/208",
+        "src:tika:image/x-xpixmap"
+      ]
+    },
+    {
+      "media_type": "image/x-xpm",
+      "source_record_ids": [
+        "src:freedesktop:image/x-xpixmap"
+      ]
+    },
+    {
+      "media_type": "image/x-xwindowdump",
+      "source_record_ids": [
+        "src:freedesktop:image/x-xwindowdump",
+        "src:pronom:x-fmt/300",
+        "src:tika:image/x-xwindowdump"
+      ]
+    },
+    {
+      "media_type": "image/x.djvu",
+      "source_record_ids": [
+        "src:freedesktop:image/vnd.djvu"
+      ]
+    },
+    {
+      "media_type": "image/x.sf3",
+      "source_record_ids": [
+        "src:freedesktop:image/x.sf3"
+      ]
+    },
+    {
+      "media_type": "image/x.sf3-vector",
+      "source_record_ids": [
+        "src:freedesktop:image/x.sf3-vector"
+      ]
+    },
+    {
+      "media_type": "image/xcf",
+      "source_record_ids": [
+        "src:tika:image/x-xcf"
+      ]
+    }
+  ],
+  "operator_templates": [
+    {
+      "id": "image-identify",
+      "kind": "identify",
+      "applies_to": "all",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-probe",
+      "kind": "probe",
+      "applies_to": "all",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-validate",
+      "kind": "validate",
+      "applies_to": "all",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-repair",
+      "kind": "repair",
+      "applies_to": "container and syntax representations",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-normalize-container",
+      "kind": "normalize",
+      "applies_to": "container and syntax representations",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-canonicalize-metadata",
+      "kind": "canonicalize",
+      "applies_to": "metadata-bearing representations",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-pair-convert",
+      "kind": "convert",
+      "applies_to": "each ordered pair within a domain",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-decode-pixels",
+      "kind": "decode",
+      "applies_to": "compressed raster representations",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-encode-pixels",
+      "kind": "encode",
+      "applies_to": "raster target representations",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-remux",
+      "kind": "remux",
+      "applies_to": "compatible image containers",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-extract-member",
+      "kind": "extract",
+      "applies_to": "containers, projects and collections",
+      "arity": "1:n"
+    },
+    {
+      "id": "image-replace-member",
+      "kind": "replace-member",
+      "applies_to": "containers, projects and collections",
+      "arity": "n:1"
+    },
+    {
+      "id": "image-split-frames",
+      "kind": "split",
+      "applies_to": "animation and multi-image",
+      "arity": "1:n"
+    },
+    {
+      "id": "image-aggregate-frames",
+      "kind": "aggregate",
+      "applies_to": "animation and multi-image",
+      "arity": "n:1"
+    },
+    {
+      "id": "image-extract-layers",
+      "kind": "extract",
+      "applies_to": "layered authoring",
+      "arity": "1:n"
+    },
+    {
+      "id": "image-aggregate-layers",
+      "kind": "aggregate",
+      "applies_to": "layered authoring",
+      "arity": "n:1"
+    },
+    {
+      "id": "image-flatten-layers",
+      "kind": "render",
+      "applies_to": "layered authoring and vector",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-extract-channels",
+      "kind": "project",
+      "applies_to": "raster and tensor",
+      "arity": "1:n"
+    },
+    {
+      "id": "image-channel-map",
+      "kind": "map",
+      "applies_to": "raster and tensor",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-crop",
+      "kind": "project",
+      "applies_to": "spatial pixel or vector domains",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-pad-canvas",
+      "kind": "pad",
+      "applies_to": "spatial pixel or vector domains",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-resize",
+      "kind": "resample",
+      "applies_to": "raster",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-pyramid-build",
+      "kind": "aggregate",
+      "applies_to": "raster",
+      "arity": "1:n"
+    },
+    {
+      "id": "image-pyramid-extract",
+      "kind": "extract",
+      "applies_to": "tile pyramids",
+      "arity": "1:n"
+    },
+    {
+      "id": "image-tile",
+      "kind": "split",
+      "applies_to": "raster",
+      "arity": "1:n"
+    },
+    {
+      "id": "image-untile",
+      "kind": "aggregate",
+      "applies_to": "raster tiles",
+      "arity": "n:1"
+    },
+    {
+      "id": "image-rotate-orthogonal",
+      "kind": "reorder",
+      "applies_to": "raster and vector",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-rotate-arbitrary",
+      "kind": "resample",
+      "applies_to": "raster and vector",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-flip",
+      "kind": "reorder",
+      "applies_to": "raster and vector",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-transpose",
+      "kind": "reorder",
+      "applies_to": "raster and tensor",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-perspective-warp",
+      "kind": "map",
+      "applies_to": "raster and vector",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-register",
+      "kind": "register",
+      "applies_to": "raster, medical and scientific",
+      "arity": "n:1"
+    },
+    {
+      "id": "image-colorspace-convert",
+      "kind": "map",
+      "applies_to": "color-bearing representations",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-transfer-function",
+      "kind": "map",
+      "applies_to": "color-bearing representations",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-icc-assign",
+      "kind": "annotate",
+      "applies_to": "ICC-capable representations",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-icc-transform",
+      "kind": "map",
+      "applies_to": "color-bearing representations",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-white-balance",
+      "kind": "calibrate",
+      "applies_to": "camera raw and raster",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-demosaic",
+      "kind": "reconstruct",
+      "applies_to": "camera raw",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-develop-raw",
+      "kind": "render",
+      "applies_to": "camera raw",
+      "arity": "1:n"
+    },
+    {
+      "id": "image-tone-map",
+      "kind": "map",
+      "applies_to": "HDR raster",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-gain-map-generate",
+      "kind": "infer",
+      "applies_to": "HDR and SDR raster pairs",
+      "arity": "n:1"
+    },
+    {
+      "id": "image-gain-map-apply",
+      "kind": "render",
+      "applies_to": "gain-map representations",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-bit-depth",
+      "kind": "quantize",
+      "applies_to": "raster and tensor",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-dither",
+      "kind": "dither",
+      "applies_to": "raster",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-palette-quantize",
+      "kind": "quantize",
+      "applies_to": "raster",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-palette-expand",
+      "kind": "decode",
+      "applies_to": "indexed raster",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-alpha-premultiply",
+      "kind": "map",
+      "applies_to": "alpha raster",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-alpha-unpremultiply",
+      "kind": "map",
+      "applies_to": "alpha raster",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-alpha-extract",
+      "kind": "project",
+      "applies_to": "alpha raster",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-composite",
+      "kind": "merge",
+      "applies_to": "raster and layer graphs",
+      "arity": "n:1"
+    },
+    {
+      "id": "image-blend",
+      "kind": "merge",
+      "applies_to": "raster and layer graphs",
+      "arity": "n:1"
+    },
+    {
+      "id": "image-trim-transparent",
+      "kind": "crop",
+      "applies_to": "alpha raster",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-metadata-extract",
+      "kind": "extract",
+      "applies_to": "metadata-bearing representations",
+      "arity": "1:n"
+    },
+    {
+      "id": "image-metadata-map",
+      "kind": "ontology-map",
+      "applies_to": "metadata-bearing representations",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-strip-active-content",
+      "kind": "strip-active-content",
+      "applies_to": "active vector and project representations",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-rasterize-vector",
+      "kind": "rasterize",
+      "applies_to": "vector and page graphics",
+      "arity": "1:n"
+    },
+    {
+      "id": "image-vectorize-raster",
+      "kind": "vectorize",
+      "applies_to": "raster",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-edge-detect",
+      "kind": "detect",
+      "applies_to": "raster",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-segment",
+      "kind": "segment-semantically",
+      "applies_to": "raster and tensor",
+      "arity": "1:n"
+    },
+    {
+      "id": "image-denoise",
+      "kind": "denoise",
+      "applies_to": "raster and camera raw",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-deblur",
+      "kind": "restore",
+      "applies_to": "raster",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-inpaint",
+      "kind": "inpaint",
+      "applies_to": "raster",
+      "arity": "n:1"
+    },
+    {
+      "id": "image-super-resolve",
+      "kind": "super-resolve",
+      "applies_to": "raster",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-histogram",
+      "kind": "measure",
+      "applies_to": "raster and tensor",
+      "arity": "1:n"
+    },
+    {
+      "id": "image-perceptual-hash",
+      "kind": "fingerprint",
+      "applies_to": "visual representations",
+      "arity": "1:1"
+    },
+    {
+      "id": "image-difference",
+      "kind": "diff",
+      "applies_to": "commensurable visual representations",
+      "arity": "n:1"
+    },
+    {
+      "id": "image-quality-measure",
+      "kind": "measure",
+      "applies_to": "commensurable visual representations",
+      "arity": "n:1"
+    },
+    {
+      "id": "image-ocr",
+      "kind": "ocr",
+      "applies_to": "document-like raster",
+      "arity": "1:n"
+    }
+  ],
+  "pair_candidate_sets": [
+    {
+      "domain": "general-raster-still",
+      "object_ir": "ir:raster",
+      "representation_ids": [
+        "imagefmt:bmp",
+        "imagefmt:tga",
+        "imagefmt:qoi",
+        "imagefmt:ppm",
+        "imagefmt:pam",
+        "imagefmt:pbm",
+        "imagefmt:pgm",
+        "imagefmt:pfm",
+        "imagefmt:farbfeld",
+        "imagefmt:png",
+        "imagefmt:mng-still",
+        "imagefmt:jng",
+        "imagefmt:jpeg-baseline",
+        "imagefmt:jpeg-progressive",
+        "imagefmt:jpeg-lossless",
+        "imagefmt:jpeg-ls",
+        "imagefmt:jpeg-2000-jp2",
+        "imagefmt:jpeg-2000-j2k",
+        "imagefmt:jpeg-2000-jpx",
+        "imagefmt:jpeg-xr",
+        "imagefmt:jpeg-xl",
+        "imagefmt:webp-lossless",
+        "imagefmt:webp-lossy",
+        "imagefmt:heif-hevc",
+        "imagefmt:heic",
+        "imagefmt:avif",
+        "imagefmt:heif-avc",
+        "imagefmt:heif-vvc",
+        "imagefmt:tiff-classic",
+        "imagefmt:bigtiff",
+        "imagefmt:cog",
+        "imagefmt:gif87a-still",
+        "imagefmt:gif89a-still",
+        "imagefmt:flif",
+        "imagefmt:bpg",
+        "imagefmt:brunsli",
+        "imagefmt:lepton",
+        "imagefmt:jp2-htj2k",
+        "imagefmt:jph",
+        "imagefmt:exr-scanline",
+        "imagefmt:exr-tiled",
+        "imagefmt:hdr-rgbe",
+        "imagefmt:hdr-xyze",
+        "imagefmt:rgbe-pic",
+        "imagefmt:raw-rgba8",
+        "imagefmt:raw-rgb8",
+        "imagefmt:raw-gray8",
+        "imagefmt:raw-rgba16",
+        "imagefmt:xwd",
+        "imagefmt:xpm",
+        "imagefmt:xbm",
+        "imagefmt:sixel",
+        "imagefmt:kitty-graphics",
+        "imagefmt:iterm2-inline",
+        "imagefmt:wbmp",
+        "imagefmt:pcx",
+        "imagefmt:dcx",
+        "imagefmt:sgi-rgb",
+        "imagefmt:sun-raster",
+        "imagefmt:iff-ilbm",
+        "imagefmt:iff-pbm",
+        "imagefmt:koala",
+        "imagefmt:degas",
+        "imagefmt:neo",
+        "imagefmt:cel"
+      ],
+      "expansion": "all ordered pairs (input, output) where input != output",
+      "defaults": {
+        "kind": "convert",
+        "arity": "1:1",
+        "knowledge_status": "candidate",
+        "computability": "unknown",
+        "implementation_status": "not-implemented"
+      },
+      "ordered_pair_candidates": 4160,
+      "materialized_sha256": "c563cd50082b1a48cc9b595e896fca1eb0d00c5f1231c44e150653c25141dd22"
+    },
+    {
+      "domain": "camera-raw-and-capture",
+      "object_ir": "ir:raster",
+      "representation_ids": [
+        "imagefmt:dng",
+        "imagefmt:cr2",
+        "imagefmt:cr3",
+        "imagefmt:crw",
+        "imagefmt:nef",
+        "imagefmt:nrw",
+        "imagefmt:arw",
+        "imagefmt:sr2",
+        "imagefmt:srf",
+        "imagefmt:raf",
+        "imagefmt:orf",
+        "imagefmt:rw2",
+        "imagefmt:rwl",
+        "imagefmt:pef",
+        "imagefmt:iiq",
+        "imagefmt:3fr",
+        "imagefmt:fff",
+        "imagefmt:mos",
+        "imagefmt:mrw",
+        "imagefmt:x3f",
+        "imagefmt:erf",
+        "imagefmt:kdc",
+        "imagefmt:dcr",
+        "imagefmt:k25",
+        "imagefmt:mef",
+        "imagefmt:cap",
+        "imagefmt:raw-blackmagic",
+        "imagefmt:red-r3d-frame",
+        "imagefmt:cinemadng",
+        "imagefmt:apple-proraw",
+        "imagefmt:google-ultrahdr-jpeg",
+        "imagefmt:jpeg-hdr-gain-map",
+        "imagefmt:heif-gain-map",
+        "imagefmt:avif-gain-map"
+      ],
+      "expansion": "all ordered pairs (input, output) where input != output",
+      "defaults": {
+        "kind": "convert",
+        "arity": "1:1",
+        "knowledge_status": "candidate",
+        "computability": "unknown",
+        "implementation_status": "not-implemented"
+      },
+      "ordered_pair_candidates": 1122,
+      "materialized_sha256": "b8f58d4d7ba27456a4db1ca34fd2784babde9ccd82dcaaa8737edadd15879b1f"
+    },
+    {
+      "domain": "layered-authoring-and-project",
+      "object_ir": "ir:object-graph",
+      "representation_ids": [
+        "imagefmt:psd",
+        "imagefmt:psb",
+        "imagefmt:xcf",
+        "imagefmt:kra",
+        "imagefmt:ora",
+        "imagefmt:clip",
+        "imagefmt:sai",
+        "imagefmt:sai2",
+        "imagefmt:procreate",
+        "imagefmt:afphoto",
+        "imagefmt:cpt",
+        "imagefmt:pspimage",
+        "imagefmt:pdn",
+        "imagefmt:mdi",
+        "imagefmt:liv",
+        "imagefmt:aseprite",
+        "imagefmt:gbr",
+        "imagefmt:gih",
+        "imagefmt:abr",
+        "imagefmt:pat",
+        "imagefmt:aco",
+        "imagefmt:ase",
+        "imagefmt:gpl",
+        "imagefmt:acb"
+      ],
+      "expansion": "all ordered pairs (input, output) where input != output",
+      "defaults": {
+        "kind": "convert",
+        "arity": "1:1",
+        "knowledge_status": "candidate",
+        "computability": "unknown",
+        "implementation_status": "not-implemented"
+      },
+      "ordered_pair_candidates": 552,
+      "materialized_sha256": "add7dbf8115602ded6306251766b97e5ad4b8f3796b31c72599388dcdf2af895"
+    },
+    {
+      "domain": "texture-game-and-gpu",
+      "object_ir": "ir:raster",
+      "representation_ids": [
+        "imagefmt:dds",
+        "imagefmt:ktx1",
+        "imagefmt:ktx2",
+        "imagefmt:pvr",
+        "imagefmt:astc",
+        "imagefmt:basis-universal",
+        "imagefmt:etc1",
+        "imagefmt:etc2",
+        "imagefmt:bc1",
+        "imagefmt:bc2",
+        "imagefmt:bc3",
+        "imagefmt:bc4",
+        "imagefmt:bc5",
+        "imagefmt:bc6h",
+        "imagefmt:bc7",
+        "imagefmt:pvrtc1",
+        "imagefmt:pvrtc2",
+        "imagefmt:atc",
+        "imagefmt:crn",
+        "imagefmt:vtex",
+        "imagefmt:vtf",
+        "imagefmt:tex-unity",
+        "imagefmt:utx",
+        "imagefmt:txd",
+        "imagefmt:bti",
+        "imagefmt:tpl",
+        "imagefmt:gim",
+        "imagefmt:gtf",
+        "imagefmt:gxt",
+        "imagefmt:gnf",
+        "imagefmt:xpr",
+        "imagefmt:tim",
+        "imagefmt:tim2",
+        "imagefmt:txtr"
+      ],
+      "expansion": "all ordered pairs (input, output) where input != output",
+      "defaults": {
+        "kind": "convert",
+        "arity": "1:1",
+        "knowledge_status": "candidate",
+        "computability": "unknown",
+        "implementation_status": "not-implemented"
+      },
+      "ordered_pair_candidates": 1122,
+      "materialized_sha256": "16d73c3131f8659d295c1b0c166386ccbc7f887b56487d009cdbc4a53b787618"
+    },
+    {
+      "domain": "scientific-medical-and-geospatial-raster",
+      "object_ir": "ir:tensor",
+      "representation_ids": [
+        "imagefmt:dicom-image",
+        "imagefmt:dicom-multiframe",
+        "imagefmt:nifti1",
+        "imagefmt:nifti2",
+        "imagefmt:analyze75",
+        "imagefmt:minc1",
+        "imagefmt:minc2",
+        "imagefmt:nrrd",
+        "imagefmt:mha",
+        "imagefmt:mhd",
+        "imagefmt:vti",
+        "imagefmt:vtk-structured-points",
+        "imagefmt:fits-image",
+        "imagefmt:hdf5-image",
+        "imagefmt:netcdf-raster",
+        "imagefmt:zarr-image",
+        "imagefmt:ome-tiff",
+        "imagefmt:ome-zarr",
+        "imagefmt:svs",
+        "imagefmt:ndpi",
+        "imagefmt:scn",
+        "imagefmt:mrxs",
+        "imagefmt:czi",
+        "imagefmt:lif",
+        "imagefmt:nd2",
+        "imagefmt:oib",
+        "imagefmt:oif",
+        "imagefmt:ims",
+        "imagefmt:geotiff",
+        "imagefmt:erdas-img",
+        "imagefmt:esri-bil",
+        "imagefmt:esri-bip",
+        "imagefmt:esri-bsq",
+        "imagefmt:jpeg2000-gmljp2",
+        "imagefmt:ecw",
+        "imagefmt:mrsid",
+        "imagefmt:grib-raster",
+        "imagefmt:sentinel-safe-raster"
+      ],
+      "expansion": "all ordered pairs (input, output) where input != output",
+      "defaults": {
+        "kind": "convert",
+        "arity": "1:1",
+        "knowledge_status": "candidate",
+        "computability": "unknown",
+        "implementation_status": "not-implemented"
+      },
+      "ordered_pair_candidates": 1406,
+      "materialized_sha256": "987c5c49af83db4640b31ebf8919e2db033e915facf40ff28806bb09ca08e910"
+    },
+    {
+      "domain": "icon-cursor-font-and-device",
+      "object_ir": "ir:raster",
+      "representation_ids": [
+        "imagefmt:ico",
+        "imagefmt:cur",
+        "imagefmt:ani",
+        "imagefmt:icns",
+        "imagefmt:iconset",
+        "imagefmt:xcursor",
+        "imagefmt:android-nine-patch",
+        "imagefmt:apple-pdf-icon",
+        "imagefmt:svg-icon",
+        "imagefmt:favicon-bundle",
+        "imagefmt:ot-sbix",
+        "imagefmt:ot-cbdt",
+        "imagefmt:ot-ebdt",
+        "imagefmt:ot-colrv0",
+        "imagefmt:ot-colrv1",
+        "imagefmt:pcf-glyph",
+        "imagefmt:bdf-glyph",
+        "imagefmt:epaper-1bpp",
+        "imagefmt:epaper-2bpp",
+        "imagefmt:rgb565",
+        "imagefmt:argb1555",
+        "imagefmt:rgb10a2",
+        "imagefmt:nv12-frame",
+        "imagefmt:yuv420p-frame"
+      ],
+      "expansion": "all ordered pairs (input, output) where input != output",
+      "defaults": {
+        "kind": "convert",
+        "arity": "1:1",
+        "knowledge_status": "candidate",
+        "computability": "unknown",
+        "implementation_status": "not-implemented"
+      },
+      "ordered_pair_candidates": 552,
+      "materialized_sha256": "25f151f2dca5a71381ab5db6a86ad8fc75e31b103e5076fbe79ccd65fd45c463"
+    },
+    {
+      "domain": "vector-illustration-and-page-graphics",
+      "object_ir": "ir:vector",
+      "representation_ids": [
+        "imagefmt:svg11",
+        "imagefmt:svg2",
+        "imagefmt:svgz",
+        "imagefmt:pdf-vector-page",
+        "imagefmt:eps",
+        "imagefmt:ps-page",
+        "imagefmt:ai",
+        "imagefmt:ait",
+        "imagefmt:cdr",
+        "imagefmt:cmx",
+        "imagefmt:wmf",
+        "imagefmt:emf",
+        "imagefmt:emfplus",
+        "imagefmt:cgm",
+        "imagefmt:odg",
+        "imagefmt:fig",
+        "imagefmt:sk1",
+        "imagefmt:sketch",
+        "imagefmt:figma-file",
+        "imagefmt:afdesign",
+        "imagefmt:canvas-gfx",
+        "imagefmt:drawio",
+        "imagefmt:dia",
+        "imagefmt:vdx",
+        "imagefmt:vsdx-page",
+        "imagefmt:dxf-2d",
+        "imagefmt:dwg-2d",
+        "imagefmt:hpgl",
+        "imagefmt:gerber-rs274x",
+        "imagefmt:gerber-x2",
+        "imagefmt:canvas2d-recording",
+        "imagefmt:lottie-json"
+      ],
+      "expansion": "all ordered pairs (input, output) where input != output",
+      "defaults": {
+        "kind": "convert",
+        "arity": "1:1",
+        "knowledge_status": "candidate",
+        "computability": "unknown",
+        "implementation_status": "not-implemented"
+      },
+      "ordered_pair_candidates": 992,
+      "materialized_sha256": "53eb2f36ad711004042cd94bbf9308ee9f6d0927170f2f036e204c9f14aec829"
+    },
+    {
+      "domain": "fax-print-prepress-and-legacy",
+      "object_ir": "ir:raster",
+      "representation_ids": [
+        "imagefmt:g3-fax",
+        "imagefmt:g4-fax",
+        "imagefmt:cal",
+        "imagefmt:mil-r-raster",
+        "imagefmt:jbig1",
+        "imagefmt:jbig2",
+        "imagefmt:djvu-page",
+        "imagefmt:cpc",
+        "imagefmt:img-gem",
+        "imagefmt:macpaint",
+        "imagefmt:pict-raster",
+        "imagefmt:dr-halo-cut",
+        "imagefmt:alias-pix",
+        "imagefmt:mtv",
+        "imagefmt:utah-rle",
+        "imagefmt:wavefront-rla",
+        "imagefmt:wavefront-rpf",
+        "imagefmt:cin",
+        "imagefmt:dpx",
+        "imagefmt:sgi-logluv-tiff",
+        "imagefmt:scitex-ct",
+        "imagefmt:ct-lw",
+        "imagefmt:epsi-preview",
+        "imagefmt:photoshop-raw"
+      ],
+      "expansion": "all ordered pairs (input, output) where input != output",
+      "defaults": {
+        "kind": "convert",
+        "arity": "1:1",
+        "knowledge_status": "candidate",
+        "computability": "unknown",
+        "implementation_status": "not-implemented"
+      },
+      "ordered_pair_candidates": 552,
+      "materialized_sha256": "06dbabadcccfc1c07890e5bcbc0f4ba046629b7adeb45fb5ac116834bfc2c33a"
+    },
+    {
+      "domain": "animation-multi-image-and-pyramid",
+      "object_ir": "ir:timed-media",
+      "representation_ids": [
+        "imagefmt:gif-animation",
+        "imagefmt:apng",
+        "imagefmt:animated-webp",
+        "imagefmt:animated-avif",
+        "imagefmt:heif-image-sequence",
+        "imagefmt:mng",
+        "imagefmt:flc",
+        "imagefmt:fli",
+        "imagefmt:ani-riff",
+        "imagefmt:multi-page-tiff",
+        "imagefmt:multi-picture-object",
+        "imagefmt:stereo-jps",
+        "imagefmt:pns",
+        "imagefmt:deepzoom-dzi",
+        "imagefmt:iiif-pyramid",
+        "imagefmt:zoomify",
+        "imagefmt:mbtiles-raster",
+        "imagefmt:pmtiles-raster",
+        "imagefmt:slippy-raster-tiles",
+        "imagefmt:sprite-sheet"
+      ],
+      "expansion": "all ordered pairs (input, output) where input != output",
+      "defaults": {
+        "kind": "convert",
+        "arity": "1:1",
+        "knowledge_status": "candidate",
+        "computability": "unknown",
+        "implementation_status": "not-implemented"
+      },
+      "ordered_pair_candidates": 380,
+      "materialized_sha256": "4f6254a3a45f381716ec509e40b272825acd12cccdc3c64b4262b2503b52acbb"
+    }
+  ]
+}

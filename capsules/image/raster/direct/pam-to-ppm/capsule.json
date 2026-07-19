@@ -1,0 +1,142 @@
+{
+  "capsule_id": "capsule:pam-to-ppm",
+  "version": "0.1.0",
+  "name": "pam-to-ppm",
+  "summary": "Zero-dependency RGBA8 code-value conversion from Netpbm PAM to Netpbm PPM.",
+  "taxonomy": {
+    "domain": "image",
+    "primary_ir": "ir:raster",
+    "secondary_irs": [
+      "ir:container-graph"
+    ],
+    "operator_kind": "convert",
+    "operator_role": "direct"
+  },
+  "license": {
+    "expression": "PolyForm-Noncommercial-1.0.0",
+    "file": "LICENSE",
+    "commercial_authorization_required": true
+  },
+  "repository": "https://github.com/EthanBird/EverythingX/tree/main/capsules/image/raster/direct/pam-to-ppm",
+  "independence": {
+    "standalone_cargo_build": true,
+    "everythingx_optional": true,
+    "external_path_dependencies": false,
+    "copy_out_tested": true
+  },
+  "conversion": {
+    "source": [
+      "exfmt:image:pam"
+    ],
+    "target": [
+      "exfmt:image:ppm"
+    ],
+    "arity": {
+      "inputs": {
+        "min": 1,
+        "max": 1
+      },
+      "outputs": {
+        "min": 1,
+        "max": 1
+      }
+    },
+    "scope": [
+      "Single-image RGBA8 or RGB8 visual rasters",
+      "Top-to-bottom normalized coordinates and unassociated alpha",
+      "Native parsing of Netpbm PAM",
+      "Native emission of Netpbm PPM",
+      "PPM/PAM MAXVAL 255 under runnable defaults"
+    ],
+    "out_of_scope": [
+      "ICC transforms, chromatic adaptation and inferred transfer-function conversion",
+      "Palette preservation and arbitrary metadata migration",
+      "Animation, multi-image sequences, HDR and sample depths above eight bits under defaults",
+      "Color-mapped TGA and BMP compression outside the declared Wave A subset"
+    ]
+  },
+  "api": {
+    "language": "rust",
+    "crate": "pam-to-ppm",
+    "entrypoint": "convert",
+    "owns_options_error_report": true,
+    "streaming": false,
+    "seek_required": false
+  },
+  "defaults": {
+    "runnable": true,
+    "strategy": "rgba8-code-value-exact",
+    "backend": "native-portable",
+    "options": {
+      "allow_sample_scaling": false,
+      "max_input_bytes": 536870912,
+      "max_pixels": 100000000,
+      "ppm_alpha": "reject",
+      "preserve_unmarked_bmp_alpha": false,
+      "strict_trailing_data": true,
+      "tga_rle": true
+    },
+    "policy": "strict"
+  },
+  "strategies": [
+    {
+      "id": "rgba8-code-value-exact",
+      "guarantees": [
+        "Accepted RGB/RGBA eight-bit channel code values and pixel coordinates are retained exactly",
+        "Non-opaque pixels are rejected rather than silently discarded when the target is PPM",
+        "Container framing, row order, RLE and checks required by each endpoint are generated natively"
+      ],
+      "tradeoffs": [
+        "Carrier representation and unsupported metadata are normalized",
+        "Code-value preservation does not assert equivalence between unspecified source colorimetry"
+      ]
+    }
+  ],
+  "backends": [
+    {
+      "id": "native-portable",
+      "tier": "native-portable",
+      "default": true,
+      "dependencies": []
+    }
+  ],
+  "validation": {
+    "specifications": [
+      "Netpbm PAM specification",
+      "Netpbm PPM specification"
+    ],
+    "conformance": [
+      "src/lib.rs unit tests"
+    ],
+    "differential": [],
+    "properties": [
+      "Opaque conformance pixels are decoded independently from emitted target bytes",
+      "Alpha is either preserved exactly or rejected by the target contract",
+      "Dimensions and pixel allocations use checked arithmetic and an explicit limit"
+    ],
+    "regression": [
+      "Malformed signatures are rejected",
+      "Pixel limits are enforced before allocation",
+      "TGA origin and RLE are normalized without coordinate changes",
+      "QOI index, diff, luma, run, RGB and RGBA chunks share one state model"
+    ],
+    "fuzz": [
+      "Planned: per-source header, dimensions, packet stream, truncation and trailing-data campaigns"
+    ],
+    "benchmarks": [
+      "Pending controlled exbench baseline"
+    ]
+  },
+  "security": {
+    "accepts_untrusted_input": true,
+    "limits": [
+      "max_pixels defaults to 100 million",
+      "max_input_bytes defaults to 512 MiB",
+      "all sizes, offsets and allocations use checked arithmetic",
+      "the complete source is validated before target bytes are committed"
+    ],
+    "known_risks": [
+      "Output I/O failure can occur while committing a fully encoded target buffer"
+    ]
+  }
+}

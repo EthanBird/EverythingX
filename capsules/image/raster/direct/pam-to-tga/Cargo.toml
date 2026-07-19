@@ -1,0 +1,12 @@
+[package]
+name = "pam-to-tga"
+version = "0.1.0"
+edition = "2024"
+publish = false
+license-file = "LICENSE"
+description = "Standalone zero-dependency Netpbm PAM to Truevision TGA raster conversion"
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
