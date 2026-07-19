@@ -1,0 +1,114 @@
+{
+  "capsule_id": "capsule:raw-pcm-to-wav-pcm",
+  "version": "0.1.0",
+  "name": "Raw PCM to WAV PCM",
+  "summary": "Zero-dependency wrapping and canonicalization of parameterized raw integer PCM as RIFF/WAVE PCM.",
+  "taxonomy": {
+    "domain": "audio",
+    "primary_ir": "ir:sampled-audio",
+    "secondary_irs": ["ir:container-graph"],
+    "operator_kind": "convert",
+    "operator_role": "direct"
+  },
+  "license": {
+    "expression": "PolyForm-Noncommercial-1.0.0",
+    "file": "LICENSE",
+    "commercial_authorization_required": true
+  },
+  "repository": "https://github.com/EthanBird/EverythingX/tree/main/capsules/audio/sampled-audio/direct/raw-pcm-to-wav-pcm",
+  "independence": {
+    "standalone_cargo_build": true,
+    "everythingx_optional": true,
+    "external_path_dependencies": false,
+    "copy_out_tested": true
+  },
+  "conversion": {
+    "source": ["exfmt:audio:raw-pcm"],
+    "target": ["exfmt:audio:wav-pcm"],
+    "arity": {
+      "inputs": {"min": 1, "max": 1},
+      "outputs": {"min": 1, "max": 1}
+    },
+    "scope": [
+      "Finite interleaved integer raw PCM with explicit parameters",
+      "8/16/24/32-bit signed or unsigned samples",
+      "Little-endian and big-endian multi-byte samples",
+      "Classic RIFF/WAVE PCM output"
+    ],
+    "out_of_scope": [
+      "Automatic inference of raw PCM parameters",
+      "Planar, floating-point, companded or DSD input",
+      "RF64, BW64, BWF metadata or WAVE_FORMAT_EXTENSIBLE output"
+    ]
+  },
+  "api": {
+    "language": "rust",
+    "crate": "raw-pcm-to-wav-pcm",
+    "entrypoint": "convert",
+    "owns_options_error_report": true,
+    "streaming": true,
+    "seek_required": true
+  },
+  "defaults": {
+    "runnable": true,
+    "strategy": "pcm-exact",
+    "backend": "native-portable",
+    "options": {
+      "channels": 1,
+      "sample_rate": 44100,
+      "bits_per_sample": 16,
+      "input_endianness": "little",
+      "input_encoding": "signed",
+      "strict_frame_alignment": true,
+      "buffer_size": 65536,
+      "max_channels": 256
+    },
+    "policy": "strict"
+  },
+  "strategies": [
+    {
+      "id": "pcm-exact",
+      "guarantees": [
+        "Complete input sample values, frame order and channel order are preserved",
+        "Byte order and signedness are normalized to WAVE PCM conventions",
+        "Header sizes are derived before output begins"
+      ],
+      "tradeoffs": ["Raw PCM interpretation necessarily depends on caller parameters"]
+    }
+  ],
+  "backends": [
+    {
+      "id": "native-portable",
+      "tier": "native-portable",
+      "default": true,
+      "dependencies": []
+    }
+  ],
+  "validation": {
+    "specifications": ["RIFF WAVE", "Microsoft WAVE_FORMAT_PCM"],
+    "conformance": ["tests/conversion.rs"],
+    "differential": [],
+    "properties": [
+      "Declared data size equals emitted complete-frame bytes",
+      "Signedness rebasing is an involution",
+      "Multi-byte endian reversal is an involution"
+    ],
+    "regression": [
+      "Signed 8-bit input becomes unsigned WAVE PCM",
+      "Unsigned 16-bit input is rebased to signed WAVE PCM",
+      "Strict mode rejects partial frames"
+    ],
+    "fuzz": ["Planned: option, length, seek and fragmented-reader campaigns"],
+    "benchmarks": ["Planned: widths, byte orders and channel-count corpus"]
+  },
+  "security": {
+    "accepts_untrusted_input": true,
+    "limits": [
+      "buffer_size is bounded to 16 MiB",
+      "channels default to a maximum of 256",
+      "classic RIFF data is bounded to 32-bit chunk sizes",
+      "all frame, rate and output arithmetic is checked"
+    ],
+    "known_risks": ["Seek or output I/O errors may occur after the WAV header is written"]
+  }
+}

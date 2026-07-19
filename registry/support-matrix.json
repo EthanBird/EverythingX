@@ -3,14 +3,26 @@
   "meaning": "Implemented conversion support derived from non-template Capsule and Adapter manifests.",
   "update_rule": "Any Capsule or Adapter capability change must regenerate this file with tools/build_support_matrix.py.",
   "summary": {
-    "standalone_capsules": 3,
-    "adapter_capabilities": 4,
-    "logical_source_target_pairs": 3
+    "standalone_capsules": 6,
+    "adapter_capabilities": 7,
+    "logical_source_target_pairs": 6
   },
   "logical_pairs": [
     {
+      "source": "exfmt:audio:aiff-pcm",
+      "target": "exfmt:audio:wav-pcm"
+    },
+    {
+      "source": "exfmt:audio:raw-pcm",
+      "target": "exfmt:audio:wav-pcm"
+    },
+    {
       "source": "exfmt:audio:wav-pcm",
       "target": "exfmt:audio:aiff-pcm"
+    },
+    {
+      "source": "exfmt:audio:wav-pcm",
+      "target": "exfmt:audio:raw-pcm"
     },
     {
       "source": "exfmt:image:bmp-family",
@@ -22,6 +34,78 @@
     }
   ],
   "capsules": [
+    {
+      "capsule_id": "capsule:aiff-pcm-to-wav-pcm",
+      "version": "0.1.0",
+      "crate": "aiff-pcm-to-wav-pcm",
+      "inputs": [
+        "exfmt:audio:aiff-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:wav-pcm"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "audio",
+        "primary_ir": "ir:sampled-audio",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/audio/sampled-audio/direct/aiff-pcm-to-wav-pcm",
+      "capability_ids": [
+        "capability:aiff-pcm-to-wav-pcm/pcm-exact/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:raw-pcm-to-wav-pcm",
+      "version": "0.1.0",
+      "crate": "raw-pcm-to-wav-pcm",
+      "inputs": [
+        "exfmt:audio:raw-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:wav-pcm"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "audio",
+        "primary_ir": "ir:sampled-audio",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/audio/sampled-audio/direct/raw-pcm-to-wav-pcm",
+      "capability_ids": [
+        "capability:raw-pcm-to-wav-pcm/pcm-exact/native-portable"
+      ]
+    },
     {
       "capsule_id": "capsule:wav-pcm-to-aiff",
       "version": "0.1.0",
@@ -56,6 +140,42 @@
       "repository_path": "capsules/audio/sampled-audio/direct/wav-pcm-to-aiff",
       "capability_ids": [
         "capability:wav-pcm-to-aiff/pcm-exact/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:wav-pcm-to-raw-pcm",
+      "version": "0.1.0",
+      "crate": "wav-pcm-to-raw-pcm",
+      "inputs": [
+        "exfmt:audio:wav-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:raw-pcm"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "audio",
+        "primary_ir": "ir:sampled-audio",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "extract",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/audio/sampled-audio/direct/wav-pcm-to-raw-pcm",
+      "capability_ids": [
+        "capability:wav-pcm-to-raw-pcm/pcm-exact/native-portable"
       ]
     },
     {
@@ -134,6 +254,28 @@
   ],
   "capabilities": [
     {
+      "capability_id": "capability:aiff-pcm-to-wav-pcm/pcm-exact/native-portable",
+      "capsule_id": "capsule:aiff-pcm-to-wav-pcm",
+      "inputs": [
+        "exfmt:audio:aiff-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:wav-pcm"
+      ],
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "computability": "semantic_lossless",
+      "loss": {
+        "payload": "none",
+        "temporal": "none",
+        "structure": "normalized",
+        "metadata": "bounded"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false
+    },
+    {
       "capability_id": "capability:bmp-to-png/pixel-exact/native-portable",
       "capsule_id": "capsule:bmp-to-png",
       "inputs": [
@@ -149,6 +291,28 @@
         "payload": "none for accepted pixel data",
         "structure": "normalized",
         "metadata": "bounded"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false
+    },
+    {
+      "capability_id": "capability:raw-pcm-to-wav-pcm/pcm-exact/native-portable",
+      "capsule_id": "capsule:raw-pcm-to-wav-pcm",
+      "inputs": [
+        "exfmt:audio:raw-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:wav-pcm"
+      ],
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "computability": "conditional_exact",
+      "loss": {
+        "payload": "none",
+        "temporal": "none",
+        "structure": "normalized",
+        "metadata": "not-present"
       },
       "defaults_are_runnable": true,
       "streaming": false,
@@ -211,6 +375,28 @@
         "temporal": "none",
         "structure": "normalized",
         "metadata": "bounded"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false
+    },
+    {
+      "capability_id": "capability:wav-pcm-to-raw-pcm/pcm-exact/native-portable",
+      "capsule_id": "capsule:wav-pcm-to-raw-pcm",
+      "inputs": [
+        "exfmt:audio:wav-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:raw-pcm"
+      ],
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "computability": "semantic_lossless",
+      "loss": {
+        "payload": "none",
+        "temporal": "none",
+        "structure": "discarded",
+        "metadata": "discarded"
       },
       "defaults_are_runnable": true,
       "streaming": false,

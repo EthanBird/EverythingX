@@ -35,15 +35,15 @@ These are source observations, not a count of unique canonical formats.
 
 | Metric | Count |
 |---|---:|
-| Actually implemented standalone Capsules | 3 |
-| Actually implemented Adapter capabilities | 4 |
-| Actually implemented logical format pairs | 3 |
+| Actually implemented standalone Capsules | 6 |
+| Actually implemented Adapter capabilities | 7 |
+| Actually implemented logical format pairs | 6 |
 | Object IR × operator-kind research positions | 4,743 |
 | Semantic-family × operator-family research cells | 310 |
 | Reviewed audio representations | 172 |
 | Audio operator templates | 42 |
 | Generated ordered audio pair candidates | 8,672 |
-| Actually implemented audio pairs | 1 |
+| Actually implemented audio pairs | 4 |
 
 `registry/support-matrix.json` is generated from real manifests and answers what works now. `operators/audio/backlog.json` is a research and implementation queue; its candidate count is not a feature count.
 
@@ -100,6 +100,14 @@ These are source observations, not a count of unique canonical formats.
 - Standalone behavior tests cover PCM widths, metadata, chunk graph, malformed headers, fragmented reads and Kernel default invocation.
 - GitHub CI passes 12 standalone behavior tests, copy-out build after Adapter deletion, and Kernel default invocation.
 
+### PCM interchange batch 0.1
+
+- `aiff-pcm-to-wav-pcm`: classic AIFF parser, exact integer 80-bit sample rates, SSND offsets, 1–32 valid bits, WAVE_FORMAT_EXTENSIBLE output and common text metadata mapping.
+- `raw-pcm-to-wav-pcm`: explicit headerless-PCM contract with runnable mono/44.1 kHz/signed-16-LE defaults; 8/16/24/32-bit byte order and signedness normalization.
+- `wav-pcm-to-raw-pcm`: PCM/extensible RIFF scanner, multiple data-chunk concatenation and signed/unsigned little/big-endian raw output with interpretation facts in the report.
+- All three are zero-dependency standalone Rust crates with their own Options, Error, Report, tests, manifests, defaults and removable static Adapters.
+- Together with `wav-pcm-to-aiff`, the implemented audio ledger now contains four real pair edges: AIFF↔WAV and raw PCM↔WAV.
+
 ## Intentionally absent
 
 - No claim that the first Capsule has completed fuzz and benchmark campaigns yet.
@@ -112,7 +120,7 @@ These are source observations, not a count of unique canonical formats.
 
 The three-Capsule reference gate is complete. Audio is the active implementation family:
 
-1. Harden `utf16-to-utf8`, `bmp-to-png` and `wav-pcm-to-aiff` with corpus manifests, fuzz targets and reproducible benchmark reports.
-2. Complete the PCM interchange Wave A beginning with `aiff-pcm-to-wav-pcm`, raw PCM↔WAV, WAV↔CAF/AU/RF64/BWF/BW64/Wave64.
+1. Harden all six production Capsules with corpus manifests, fuzz targets and reproducible benchmark reports.
+2. Continue PCM interchange Wave A with WAV↔CAF/AU/RF64/BWF/BW64/Wave64, then channel split/aggregate, trim, concatenate and channel-map operators.
 3. Continue through lossless codecs, container/essence operations, lossy codecs, signal transforms, musical events, sessions, banks and spatial audio according to `docs/12-audio-operator-program.md`.
 4. Do not switch to isolated Text/Table operators until the active audio wave has reached its declared closure gate.

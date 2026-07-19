@@ -1,0 +1,24 @@
+{
+  "adapter_id": "adapter:wav-pcm-to-raw-pcm-static",
+  "version": "0.1.0",
+  "capsule": {"id": "capsule:wav-pcm-to-raw-pcm", "version_requirement": "^0.1.0"},
+  "protocol": {"name": "everythingx-adapter-protocol", "version_requirement": "0.1"},
+  "transport": {"kind": "static-rust", "entrypoint": "WavPcmToRawPcmAdapter"},
+  "capabilities": [{
+    "capability_id": "capability:wav-pcm-to-raw-pcm/pcm-exact/native-portable",
+    "capsule_entrypoint": "convert",
+    "strategy": "pcm-exact",
+    "backend": "native-portable",
+    "inputs": ["exfmt:audio:wav-pcm"],
+    "outputs": ["exfmt:audio:raw-pcm"],
+    "preconditions": ["Input is finite RIFF/WAVE carrying supported integer PCM"],
+    "effects": ["Output is signed little-endian interleaved raw PCM by default"],
+    "invariants": ["Sample values", "Frame order", "Channel order", "Sample rate report"],
+    "computability": "semantic_lossless",
+    "loss": {"payload": "none", "temporal": "none", "structure": "discarded", "metadata": "discarded"},
+    "default_options": {"output_endianness": "little", "output_encoding": "signed", "strict_header_consistency": true, "buffer_size": 65536, "max_channels": 256},
+    "defaults_are_runnable": true,
+    "execution": {"streaming": false, "seek_required": false, "cost_evidence": []},
+    "report_mapping": {"unknown_fields_are_preserved": true, "rules": ["Raw interpretation parameters map to capsule_report", "static Adapter buffers protocol input for seek"]}
+  }]
+}

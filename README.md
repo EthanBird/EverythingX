@@ -108,7 +108,7 @@ tools/          数据同步、目录构建和一致性校验
 
 ## 当前阶段
 
-现在不开发桌面端、CLI 或路径规划器。三个零依赖参考 Capsule 已经具备独立实现：`utf16-to-utf8`、自研 parser/encoder/Deflate 的 `bmp-to-png`，以及覆盖 RIFF 扫描、PCM 字节序和有符号性、WAVE_FORMAT_EXTENSIBLE 与常用元数据的 `wav-pcm-to-aiff`。架构验证阶段已经结束，开发节奏改为“先完成族级格式空间与全量算子 backlog，再连续实现整个算子簇”。首版哲学施工层有 31 个 Object IR、153 个算子动词、4,743 个 IR×算子研究位置和 310 个族级研究单元。音频是当前活动族：首轮已归类 172 个表示、42 类操作模板和 8,672 条有序格式候选边。薄 Kernel 仍只支持注册、默认验证和直接调用；只有独立转换库的数量、质量和证据密度达到门槛后，才开发转换图。
+现在不开发桌面端、CLI 或路径规划器。三个零依赖参考 Capsule 已完成架构验证；PCM interchange 的第一批三个 Capsule 也已实现，使当前生产 Capsule 增至 6 个。开发节奏是“先完成族级格式空间与全量算子 backlog，再连续实现整个算子簇”。首版哲学施工层有 31 个 Object IR、153 个算子动词、4,743 个 IR×算子研究位置和 310 个族级研究单元。音频是当前活动族：首轮已归类 172 个表示、42 类操作模板和 8,672 条有序格式候选边，其中 4 条音频边已有实现。薄 Kernel 仍只支持注册、默认验证和直接调用；只有独立转换库的数量、质量和证据密度达到门槛后，才开发转换图。
 
 ## 当前实际支持的转换
 
@@ -119,6 +119,9 @@ tools/          数据同步、目录构建和一致性校验
 | UTF-16 | UTF-8 | `utf16-to-utf8` | strict、replace-invalid |
 | Windows BMP family | PNG | `bmp-to-png` | pixel-exact |
 | RIFF/WAVE integer PCM | classic AIFF PCM | `wav-pcm-to-aiff` | pcm-exact |
+| classic AIFF PCM | RIFF/WAVE integer PCM | `aiff-pcm-to-wav-pcm` | pcm-exact |
+| parameterized raw integer PCM | RIFF/WAVE integer PCM | `raw-pcm-to-wav-pcm` | pcm-exact |
+| RIFF/WAVE integer PCM | parameterized raw integer PCM | `wav-pcm-to-raw-pcm` | pcm-exact |
 
 机器可读权威清单是 `registry/support-matrix.json`。任何 Capsule 或 Adapter 更新都必须运行 `python3 tools/build_support_matrix.py`；CI 会拒绝过期矩阵。计划中、研究中和不可计算的边统一保存在 `operators/`，不得写进已支持清单。
 

@@ -1,0 +1,57 @@
+{
+  "capsule_id": "capsule:wav-pcm-to-raw-pcm",
+  "version": "0.1.0",
+  "name": "WAV PCM to Raw PCM",
+  "summary": "Zero-dependency extraction and canonicalization of RIFF/WAVE integer PCM as parameterized raw PCM.",
+  "taxonomy": {
+    "domain": "audio",
+    "primary_ir": "ir:sampled-audio",
+    "secondary_irs": ["ir:container-graph"],
+    "operator_kind": "extract",
+    "operator_role": "direct"
+  },
+  "license": {"expression": "PolyForm-Noncommercial-1.0.0", "file": "LICENSE", "commercial_authorization_required": true},
+  "repository": "https://github.com/EthanBird/EverythingX/tree/main/capsules/audio/sampled-audio/direct/wav-pcm-to-raw-pcm",
+  "independence": {"standalone_cargo_build": true, "everythingx_optional": true, "external_path_dependencies": false, "copy_out_tested": true},
+  "conversion": {
+    "source": ["exfmt:audio:wav-pcm"],
+    "target": ["exfmt:audio:raw-pcm"],
+    "arity": {"inputs": {"min": 1, "max": 1}, "outputs": {"min": 1, "max": 1}},
+    "scope": [
+      "RIFF/WAVE WAVE_FORMAT_PCM",
+      "WAVE_FORMAT_EXTENSIBLE with integer PCM subtype",
+      "8/16/24/32-bit integer containers",
+      "Arbitrary chunk order and multiple frame-aligned data chunks",
+      "Signed or unsigned, little-endian or big-endian raw output"
+    ],
+    "out_of_scope": ["RIFX", "RF64/BW64", "Float or compressed WAVE", "Planar raw output", "Metadata sidecars"]
+  },
+  "api": {"language": "rust", "crate": "wav-pcm-to-raw-pcm", "entrypoint": "convert", "owns_options_error_report": true, "streaming": true, "seek_required": true},
+  "defaults": {
+    "runnable": true,
+    "strategy": "pcm-exact",
+    "backend": "native-portable",
+    "options": {"output_endianness": "little", "output_encoding": "signed", "strict_header_consistency": true, "buffer_size": 65536, "max_channels": 256},
+    "policy": "strict"
+  },
+  "strategies": [{
+    "id": "pcm-exact",
+    "guarantees": ["Sample values, frames and channel order are preserved", "Raw interpretation parameters are returned in Report", "Multiple data chunks concatenate in source order"],
+    "tradeoffs": ["Container structure and metadata are discarded by definition"]
+  }],
+  "backends": [{"id": "native-portable", "tier": "native-portable", "default": true, "dependencies": []}],
+  "validation": {
+    "specifications": ["RIFF WAVE", "WAVE_FORMAT_EXTENSIBLE"],
+    "conformance": ["tests/conversion.rs"],
+    "differential": [],
+    "properties": ["Raw output length equals complete WAVE data frames", "Signedness rebasing and endian reversal preserve integer levels"],
+    "regression": ["Unsigned WAVE 8-bit becomes signed raw by default", "Multiple data chunks concatenate", "Extensible subtype must be PCM"],
+    "fuzz": ["Planned: RIFF graph, fmt, alignment and fragmented-reader campaigns"],
+    "benchmarks": ["Planned: widths, channels and chunk-layout corpus"]
+  },
+  "security": {
+    "accepts_untrusted_input": true,
+    "limits": ["fmt chunks are bounded to 4096 bytes", "buffer_size is bounded to 16 MiB", "channels default to a maximum of 256", "all offsets and sizes are checked"],
+    "known_risks": ["Seek or output I/O errors may occur after partial raw output"]
+  }
+}

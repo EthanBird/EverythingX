@@ -8,7 +8,7 @@
     "reviewed_representations": 172,
     "operator_templates": 42,
     "ordered_pair_candidates": 8672,
-    "implemented_pair_candidates": 1
+    "implemented_pair_candidates": 4
   },
   "domain_counts": {
     "sampled-audio": {
@@ -42,8 +42,20 @@
   },
   "currently_implemented_audio_pairs": [
     {
+      "input": "audiofmt:aiff-pcm",
+      "output": "audiofmt:wav-pcm"
+    },
+    {
+      "input": "audiofmt:raw-pcm",
+      "output": "audiofmt:wav-pcm"
+    },
+    {
       "input": "audiofmt:wav-pcm",
       "output": "audiofmt:aiff-pcm"
+    },
+    {
+      "input": "audiofmt:wav-pcm",
+      "output": "audiofmt:raw-pcm"
     }
   ],
   "observed_audio_media_types": [

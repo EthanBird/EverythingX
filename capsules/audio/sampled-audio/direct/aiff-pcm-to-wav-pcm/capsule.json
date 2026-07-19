@@ -1,0 +1,31 @@
+{
+  "capsule_id": "capsule:aiff-pcm-to-wav-pcm",
+  "version": "0.1.0",
+  "name": "AIFF PCM to WAV PCM",
+  "summary": "Zero-dependency streaming conversion of classic AIFF integer PCM into RIFF/WAVE PCM.",
+  "taxonomy": {"domain": "audio", "primary_ir": "ir:sampled-audio", "secondary_irs": ["ir:container-graph"], "operator_kind": "convert", "operator_role": "direct"},
+  "license": {"expression": "PolyForm-Noncommercial-1.0.0", "file": "LICENSE", "commercial_authorization_required": true},
+  "repository": "https://github.com/EthanBird/EverythingX/tree/main/capsules/audio/sampled-audio/direct/aiff-pcm-to-wav-pcm",
+  "independence": {"standalone_cargo_build": true, "everythingx_optional": true, "external_path_dependencies": false, "copy_out_tested": true},
+  "conversion": {
+    "source": ["exfmt:audio:aiff-pcm"], "target": ["exfmt:audio:wav-pcm"],
+    "arity": {"inputs": {"min": 1, "max": 1}, "outputs": {"min": 1, "max": 1}},
+    "scope": ["Classic FORM AIFF integer PCM", "1 through 32 valid sample bits in byte containers", "Exact positive integer 80-bit extended sample rates", "SSND offsets and multiple sound chunks", "Common AIFF text metadata"],
+    "out_of_scope": ["AIFC compressed or floating-point audio", "Fractional sample rates", "RF64/BW64 output", "Instrument, marker and application metadata migration"]
+  },
+  "api": {"language": "rust", "crate": "aiff-pcm-to-wav-pcm", "entrypoint": "convert", "owns_options_error_report": true, "streaming": true, "seek_required": true},
+  "defaults": {
+    "runnable": true, "strategy": "pcm-exact", "backend": "native-portable",
+    "options": {"metadata": "common-text", "strict_header_consistency": true, "buffer_size": 65536, "max_metadata_bytes": 1048576, "max_channels": 256},
+    "policy": "strict"
+  },
+  "strategies": [{"id": "pcm-exact", "guarantees": ["PCM frame and channel order is unchanged", "Eight-bit signedness and multi-byte endianness are converted deterministically", "AIFF sample size is retained as WAVE valid bits", "Exact integer sample rate is preserved"], "tradeoffs": ["Unsupported metadata is not serialized", "Classic RIFF output is limited by 32-bit chunk sizes"]}],
+  "backends": [{"id": "native-portable", "tier": "native-portable", "default": true, "dependencies": []}],
+  "validation": {
+    "specifications": ["Audio Interchange File Format", "RIFF WAVE", "WAVE_FORMAT_EXTENSIBLE"], "conformance": ["tests/conversion.rs"], "differential": [],
+    "properties": ["Frame and channel order are preserved", "AIFF big-endian signed samples map to WAVE conventions", "RIFF and chunk sizes include even-byte padding"],
+    "regression": ["Signed 8-bit AIFF becomes unsigned WAVE", "16/24/32-bit samples become little-endian", "Text metadata maps to LIST/INFO", "Strict frame mismatch is rejected"],
+    "fuzz": ["Planned: FORM graph, COMM, SSND, rate and metadata campaigns"], "benchmarks": ["Planned: widths, channels and multi-gigabyte streaming corpus"]
+  },
+  "security": {"accepts_untrusted_input": true, "limits": ["buffer_size is bounded to 16 MiB", "mapped metadata defaults to 1 MiB", "channels default to a maximum of 256", "all offsets and output sizes are checked"], "known_risks": ["Seek or output I/O errors may occur after the WAVE header is written", "static Adapter buffers forward-only protocol input"]}
+}

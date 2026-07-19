@@ -1,0 +1,12 @@
+[package]
+name = "wav-pcm-to-raw-pcm"
+version = "0.1.0"
+edition = "2024"
+publish = false
+license-file = "LICENSE"
+description = "Standalone, zero-dependency WAV PCM to raw integer PCM extraction library"
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]

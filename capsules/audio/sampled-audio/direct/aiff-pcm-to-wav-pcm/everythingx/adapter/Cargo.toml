@@ -1,0 +1,15 @@
+[package]
+name = "everythingx-adapter-aiff-pcm-to-wav-pcm"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
+aiff-pcm-to-wav-pcm = { path = "../.." }
+everythingx-protocol = { path = "../../../../../../../kernel/ex-protocol" }
+
+[dev-dependencies]
+everythingx-kernel = { path = "../../../../../../../kernel/ex-kernel" }

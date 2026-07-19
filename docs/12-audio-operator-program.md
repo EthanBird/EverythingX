@@ -111,8 +111,8 @@ M3U、PLS、XSPF、CUE 等主要是外部引用与时间边界。转换要维护
 优先连续完成：
 
 ```text
-aiff-pcm-to-wav-pcm
-raw-pcm-to-wav-pcm       wav-pcm-to-raw-pcm
+[done] aiff-pcm-to-wav-pcm
+[done] raw-pcm-to-wav-pcm       [done] wav-pcm-to-raw-pcm
 wav-pcm-to-caf-pcm       caf-pcm-to-wav-pcm
 wav-pcm-to-au-pcm        au-pcm-to-wav-pcm
 wav-pcm-to-rf64-pcm      rf64-pcm-to-wav-pcm
@@ -179,4 +179,3 @@ lossless metadata migration and verification
 - Ogg Opus：<https://www.rfc-editor.org/rfc/rfc7845.html>
 
 目录只把这些来源作为事实输入；是否可计算仍由 EverythingX 的不变量、表示能力和证据规则决定。
-

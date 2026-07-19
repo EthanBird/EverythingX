@@ -13,7 +13,7 @@
       "object_ir": "ir:sampled-audio",
       "pairwise_candidates": true,
       "representations": [
-        {"id": "audiofmt:raw-pcm", "name": "Headerless raw PCM", "fidelity": "lossless", "carrier": "file-or-stream"},
+        {"id": "audiofmt:raw-pcm", "name": "Headerless raw PCM", "fidelity": "lossless", "carrier": "file-or-stream", "format_id": "exfmt:audio:raw-pcm"},
         {"id": "audiofmt:wav-pcm", "name": "RIFF/WAVE PCM", "fidelity": "lossless", "carrier": "file", "format_id": "exfmt:audio:wav-pcm"},
         {"id": "audiofmt:rf64-pcm", "name": "RF64 PCM", "fidelity": "lossless", "carrier": "file"},
         {"id": "audiofmt:bwf-pcm", "name": "Broadcast WAVE PCM", "fidelity": "lossless", "carrier": "file"},
