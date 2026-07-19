@@ -1,0 +1,132 @@
+{
+  "capsule_id": "capsule:bw64-pcm-to-au-pcm",
+  "version": "0.1.0",
+  "name": "bw64-pcm-to-au-pcm",
+  "summary": "Zero-dependency integer PCM conversion from BW64 PCM to Sun AU/SND PCM.",
+  "taxonomy": {
+    "domain": "audio",
+    "primary_ir": "ir:sampled-audio",
+    "secondary_irs": [
+      "ir:container-graph"
+    ],
+    "operator_kind": "convert",
+    "operator_role": "direct"
+  },
+  "license": {
+    "expression": "PolyForm-Noncommercial-1.0.0",
+    "file": "LICENSE",
+    "commercial_authorization_required": true
+  },
+  "repository": "https://github.com/EthanBird/EverythingX/tree/main/capsules/audio/sampled-audio/direct/bw64-pcm-to-au-pcm",
+  "independence": {
+    "standalone_cargo_build": true,
+    "everythingx_optional": true,
+    "external_path_dependencies": false,
+    "copy_out_tested": true
+  },
+  "conversion": {
+    "source": [
+      "exfmt:audio:bw64-pcm"
+    ],
+    "target": [
+      "exfmt:audio:au-pcm"
+    ],
+    "arity": {
+      "inputs": {
+        "min": 1,
+        "max": 1
+      },
+      "outputs": {
+        "min": 1,
+        "max": 1
+      }
+    },
+    "scope": [
+      "8/16/24/32-bit interleaved integer PCM",
+      "Exact integer sample rates and frame-aligned data",
+      "Native parsing of BW64 PCM",
+      "Native emission of Sun AU/SND PCM"
+    ],
+    "out_of_scope": [
+      "Floating point, compressed, planar or DSD audio",
+      "Arbitrary metadata migration beyond target-profile structural requirements",
+      "Sample-rate, channel-layout or bit-depth conversion"
+    ]
+  },
+  "api": {
+    "language": "rust",
+    "crate": "bw64-pcm-to-au-pcm",
+    "entrypoint": "convert",
+    "owns_options_error_report": true,
+    "streaming": true,
+    "seek_required": true
+  },
+  "defaults": {
+    "runnable": true,
+    "strategy": "pcm-exact",
+    "backend": "native-portable",
+    "options": {
+      "strict_header_consistency": true,
+      "buffer_size": 65536,
+      "max_channels": 256
+    },
+    "policy": "strict"
+  },
+  "strategies": [
+    {
+      "id": "pcm-exact",
+      "guarantees": [
+        "Integer PCM sample levels, frame order and channel order are retained",
+        "Container sizes, padding and byte order are generated natively",
+        "Eight-bit signedness is normalized to the target convention"
+      ],
+      "tradeoffs": [
+        "Non-structural source metadata is not migrated in version 0.1"
+      ]
+    }
+  ],
+  "backends": [
+    {
+      "id": "native-portable",
+      "tier": "native-portable",
+      "default": true,
+      "dependencies": []
+    }
+  ],
+  "validation": {
+    "specifications": [
+      "BW64 PCM",
+      "Sun AU/SND PCM"
+    ],
+    "conformance": [
+      "src/lib.rs unit tests"
+    ],
+    "differential": [],
+    "properties": [
+      "16-bit PCM round-trips through independent target parsing",
+      "8-bit sample levels survive signedness convention changes",
+      "Strict defaults reject trailing or inconsistent container sizes"
+    ],
+    "regression": [
+      "Wrong signatures are rejected",
+      "PCM frames remain aligned"
+    ],
+    "fuzz": [
+      "Planned: source chunk graph, size and fragmented-reader campaigns"
+    ],
+    "benchmarks": [
+      "Planned: widths, channels and multi-gigabyte streaming corpus"
+    ]
+  },
+  "security": {
+    "accepts_untrusted_input": true,
+    "limits": [
+      "buffer_size is bounded to 16 MiB",
+      "channels default to a maximum of 256",
+      "all chunk offsets and target sizes use checked arithmetic"
+    ],
+    "known_risks": [
+      "Seek or output I/O failure can occur after the target header is written"
+    ]
+  }
+}

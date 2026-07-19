@@ -1,0 +1,12 @@
+[package]
+name = "bw64-pcm-to-caf-pcm"
+version = "0.1.0"
+edition = "2024"
+publish = false
+license-file = "LICENSE"
+description = "Standalone zero-dependency BW64 PCM to Core Audio Format PCM PCM converter"
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]

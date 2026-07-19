@@ -108,7 +108,7 @@ tools/          数据同步、目录构建和一致性校验
 
 ## 当前阶段
 
-现在不开发桌面端、CLI 或路径规划器。架构参考 Capsule 与首轮 PCM interchange 已完成，当前生产 Capsule 达到 22 个。本轮按完整波次一次增加 16 个：WAV 与 CAF、AU、RF64、BW64、Wave64、BWF 的双向转换，以及 4 个 raw PCM 变换。开发节奏固定为“先完成族级格式空间与全量算子 backlog，再批量实现并测试整个算子簇”。首版施工层有 31 个 Object IR、153 个算子动词、4,743 个 IR×算子研究位置和 310 个族级研究单元。音频当前归类 172 个表示、42 类操作模板和 8,672 条有序候选边，其中 16 条不同格式音频边已有实现。薄 Kernel 仍只负责注册、默认验证和直接调用。
+现在不开发桌面端、CLI 或路径规划器。架构参考 Capsule 与 PCM interchange 前两轮已完成，当前生产 Capsule 达到 42 个。最新批次一次增加 20 个非 WAV 容器直连 Capsule，使 CAF、AU、RF64、BW64、Wave64、BWF 之间不必强制绕行 WAV；连同上一轮的 12 个 WAV 双向容器 Capsule 和 4 个 raw PCM 变换，批量生成、独立交付的 Wave A 实现达到 36 个。开发节奏固定为“先完成族级格式空间与全量算子 backlog，再批量实现并测试整个算子簇”。首版施工层有 31 个 Object IR、153 个算子动词、4,743 个 IR×算子研究位置和 310 个族级研究单元。音频当前归类 172 个表示、42 类操作模板和 8,672 条有序候选边，其中 36 条不同格式音频边已有实现。薄 Kernel 仍只负责注册、默认验证和直接调用。
 
 ## 当前实际支持的转换
 
@@ -134,6 +134,26 @@ tools/          数据同步、目录构建和一致性校验
 | Sony Wave64 PCM | RIFF/WAVE integer PCM | `wave64-pcm-to-wav-pcm` | pcm-exact |
 | RIFF/WAVE integer PCM | Broadcast WAVE PCM | `wav-pcm-to-bwf-pcm` | pcm-exact |
 | Broadcast WAVE PCM | RIFF/WAVE integer PCM | `bwf-pcm-to-wav-pcm` | pcm-exact |
+| Core Audio Format PCM | Sun AU/SND PCM | `caf-pcm-to-au-pcm` | pcm-exact |
+| Sun AU/SND PCM | Core Audio Format PCM | `au-pcm-to-caf-pcm` | pcm-exact |
+| Core Audio Format PCM | RF64 PCM | `caf-pcm-to-rf64-pcm` | pcm-exact |
+| RF64 PCM | Core Audio Format PCM | `rf64-pcm-to-caf-pcm` | pcm-exact |
+| Core Audio Format PCM | BW64 PCM | `caf-pcm-to-bw64-pcm` | pcm-exact |
+| BW64 PCM | Core Audio Format PCM | `bw64-pcm-to-caf-pcm` | pcm-exact |
+| Core Audio Format PCM | Sony Wave64 PCM | `caf-pcm-to-wave64-pcm` | pcm-exact |
+| Sony Wave64 PCM | Core Audio Format PCM | `wave64-pcm-to-caf-pcm` | pcm-exact |
+| Core Audio Format PCM | Broadcast WAVE PCM | `caf-pcm-to-bwf-pcm` | pcm-exact |
+| Broadcast WAVE PCM | Core Audio Format PCM | `bwf-pcm-to-caf-pcm` | pcm-exact |
+| Sun AU/SND PCM | RF64 PCM | `au-pcm-to-rf64-pcm` | pcm-exact |
+| RF64 PCM | Sun AU/SND PCM | `rf64-pcm-to-au-pcm` | pcm-exact |
+| Sun AU/SND PCM | BW64 PCM | `au-pcm-to-bw64-pcm` | pcm-exact |
+| BW64 PCM | Sun AU/SND PCM | `bw64-pcm-to-au-pcm` | pcm-exact |
+| Sun AU/SND PCM | Sony Wave64 PCM | `au-pcm-to-wave64-pcm` | pcm-exact |
+| Sony Wave64 PCM | Sun AU/SND PCM | `wave64-pcm-to-au-pcm` | pcm-exact |
+| Sun AU/SND PCM | Broadcast WAVE PCM | `au-pcm-to-bwf-pcm` | pcm-exact |
+| Broadcast WAVE PCM | Sun AU/SND PCM | `bwf-pcm-to-au-pcm` | pcm-exact |
+| RF64 PCM | BW64 PCM | `rf64-pcm-to-bw64-pcm` | pcm-exact |
+| BW64 PCM | RF64 PCM | `bw64-pcm-to-rf64-pcm` | pcm-exact |
 | parameterized raw PCM | trimmed raw PCM | `raw-pcm-trim` | frame-exact |
 | parameterized raw PCM | frame-reversed raw PCM | `raw-pcm-reverse` | frame-exact |
 | parameterized raw PCM | projected/reordered raw PCM channels | `raw-pcm-channel-map` | frame-exact |

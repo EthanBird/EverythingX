@@ -126,6 +126,23 @@ pcm-split-channels       pcm-aggregate-channels
 [done] raw-pcm-reverse
 ```
 
+Wave A.2 继续填充不经 WAV 中转的 PCM 容器直连网：
+
+```text
+[done] caf-pcm-to-au-pcm        [done] au-pcm-to-caf-pcm
+[done] caf-pcm-to-rf64-pcm      [done] rf64-pcm-to-caf-pcm
+[done] caf-pcm-to-bw64-pcm      [done] bw64-pcm-to-caf-pcm
+[done] caf-pcm-to-wave64-pcm    [done] wave64-pcm-to-caf-pcm
+[done] caf-pcm-to-bwf-pcm       [done] bwf-pcm-to-caf-pcm
+[done] au-pcm-to-rf64-pcm       [done] rf64-pcm-to-au-pcm
+[done] au-pcm-to-bw64-pcm       [done] bw64-pcm-to-au-pcm
+[done] au-pcm-to-wave64-pcm     [done] wave64-pcm-to-au-pcm
+[done] au-pcm-to-bwf-pcm        [done] bwf-pcm-to-au-pcm
+[done] rf64-pcm-to-bw64-pcm     [done] bw64-pcm-to-rf64-pcm
+```
+
+这一批 20 个有向 Capsule 均直接读取源容器并直接写出目标容器，不把 WAV 当作隐藏的中间文件；每个 Capsule 包含 4 个核心单元测试与 1 个 Adapter 默认调用测试。
+
 这些仍是彼此独立的 Rust libraries；共享知识可以来自规范与测试向量，不能通过仓库外 path dependency 破坏 copy-out 独立性。
 
 ### Wave B｜Lossless codec 闭环

@@ -35,15 +35,15 @@ These are source observations, not a count of unique canonical formats.
 
 | Metric | Count |
 |---|---:|
-| Actually implemented standalone Capsules | 22 |
-| Actually implemented Adapter capabilities | 23 |
-| Actually implemented logical format pairs | 19 |
+| Actually implemented standalone Capsules | 42 |
+| Actually implemented Adapter capabilities | 43 |
+| Actually implemented logical format pairs | 39 |
 | Object IR × operator-kind research positions | 4,743 |
 | Semantic-family × operator-family research cells | 310 |
 | Reviewed audio representations | 172 |
 | Audio operator templates | 42 |
 | Generated ordered audio pair candidates | 8,672 |
-| Actually implemented distinct-format audio pairs | 16 |
+| Actually implemented distinct-format audio pairs | 36 |
 
 `registry/support-matrix.json` is generated from real manifests and answers what works now. `operators/audio/backlog.json` is a research and implementation queue; its candidate count is not a feature count.
 
@@ -116,6 +116,15 @@ These are source observations, not a count of unique canonical formats.
 - Every new static Adapter contains a Kernel default-invocation test, for 80 newly introduced core and integration tests across the batch.
 - The development-only generator is freshness-checked, but each generated leaf contains complete source and has no runtime or path dependency outside itself after deleting `everythingx/`.
 
+### PCM direct mesh batch 0.3 — 20 Capsules
+
+- Ten directed Capsules complete CAF↔AU, CAF↔RF64, CAF↔BW64, CAF↔Wave64 and CAF↔BWF.
+- Eight directed Capsules complete AU↔RF64, AU↔BW64, AU↔Wave64 and AU↔BWF.
+- Two directed Capsules complete RF64↔BW64.
+- These are direct parsers and emitters for their declared endpoints; they do not materialize a WAV intermediary.
+- Every Capsule retains its own complete source, manifest, defaults, lockfile, license, tests, fuzz target and benchmark target, with no external runtime or path dependency.
+- The batch adds 80 core unit tests and 20 Kernel/Adapter default-invocation tests.
+
 ## Intentionally absent
 
 - No claim that the first Capsule has completed fuzz and benchmark campaigns yet.
@@ -128,7 +137,7 @@ These are source observations, not a count of unique canonical formats.
 
 The three-Capsule reference gate is complete. Audio is the active implementation family:
 
-1. Harden all 22 production Capsules with corpus manifests, fuzz targets and reproducible benchmark reports.
+1. Harden all 42 production Capsules with corpus manifests, fuzz targets and reproducible benchmark reports.
 2. Close the remaining PCM Wave A multi-input/output work: channel split/aggregate and concatenate, which first requires an n:m Adapter transport contract.
 3. Continue through lossless codecs, container/essence operations, lossy codecs, signal transforms, musical events, sessions, banks and spatial audio according to `docs/12-audio-operator-program.md`.
 4. Do not switch to isolated Text/Table operators until the active audio wave has reached its declared closure gate.

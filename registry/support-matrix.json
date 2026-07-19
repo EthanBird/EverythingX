@@ -3,9 +3,9 @@
   "meaning": "Implemented conversion support derived from non-template Capsule and Adapter manifests.",
   "update_rule": "Any Capsule or Adapter capability change must regenerate this file with tools/build_support_matrix.py.",
   "summary": {
-    "standalone_capsules": 22,
-    "adapter_capabilities": 23,
-    "logical_source_target_pairs": 19
+    "standalone_capsules": 42,
+    "adapter_capabilities": 43,
+    "logical_source_target_pairs": 39
   },
   "logical_pairs": [
     {
@@ -14,7 +14,39 @@
     },
     {
       "source": "exfmt:audio:au-pcm",
+      "target": "exfmt:audio:bw64-pcm"
+    },
+    {
+      "source": "exfmt:audio:au-pcm",
+      "target": "exfmt:audio:bwf-pcm"
+    },
+    {
+      "source": "exfmt:audio:au-pcm",
+      "target": "exfmt:audio:caf-pcm"
+    },
+    {
+      "source": "exfmt:audio:au-pcm",
+      "target": "exfmt:audio:rf64-pcm"
+    },
+    {
+      "source": "exfmt:audio:au-pcm",
       "target": "exfmt:audio:wav-pcm"
+    },
+    {
+      "source": "exfmt:audio:au-pcm",
+      "target": "exfmt:audio:wave64-pcm"
+    },
+    {
+      "source": "exfmt:audio:bw64-pcm",
+      "target": "exfmt:audio:au-pcm"
+    },
+    {
+      "source": "exfmt:audio:bw64-pcm",
+      "target": "exfmt:audio:caf-pcm"
+    },
+    {
+      "source": "exfmt:audio:bw64-pcm",
+      "target": "exfmt:audio:rf64-pcm"
     },
     {
       "source": "exfmt:audio:bw64-pcm",
@@ -22,11 +54,39 @@
     },
     {
       "source": "exfmt:audio:bwf-pcm",
+      "target": "exfmt:audio:au-pcm"
+    },
+    {
+      "source": "exfmt:audio:bwf-pcm",
+      "target": "exfmt:audio:caf-pcm"
+    },
+    {
+      "source": "exfmt:audio:bwf-pcm",
       "target": "exfmt:audio:wav-pcm"
     },
     {
       "source": "exfmt:audio:caf-pcm",
+      "target": "exfmt:audio:au-pcm"
+    },
+    {
+      "source": "exfmt:audio:caf-pcm",
+      "target": "exfmt:audio:bw64-pcm"
+    },
+    {
+      "source": "exfmt:audio:caf-pcm",
+      "target": "exfmt:audio:bwf-pcm"
+    },
+    {
+      "source": "exfmt:audio:caf-pcm",
+      "target": "exfmt:audio:rf64-pcm"
+    },
+    {
+      "source": "exfmt:audio:caf-pcm",
       "target": "exfmt:audio:wav-pcm"
+    },
+    {
+      "source": "exfmt:audio:caf-pcm",
+      "target": "exfmt:audio:wave64-pcm"
     },
     {
       "source": "exfmt:audio:raw-pcm",
@@ -35,6 +95,18 @@
     {
       "source": "exfmt:audio:raw-pcm",
       "target": "exfmt:audio:wav-pcm"
+    },
+    {
+      "source": "exfmt:audio:rf64-pcm",
+      "target": "exfmt:audio:au-pcm"
+    },
+    {
+      "source": "exfmt:audio:rf64-pcm",
+      "target": "exfmt:audio:bw64-pcm"
+    },
+    {
+      "source": "exfmt:audio:rf64-pcm",
+      "target": "exfmt:audio:caf-pcm"
     },
     {
       "source": "exfmt:audio:rf64-pcm",
@@ -71,6 +143,14 @@
     {
       "source": "exfmt:audio:wav-pcm",
       "target": "exfmt:audio:wave64-pcm"
+    },
+    {
+      "source": "exfmt:audio:wave64-pcm",
+      "target": "exfmt:audio:au-pcm"
+    },
+    {
+      "source": "exfmt:audio:wave64-pcm",
+      "target": "exfmt:audio:caf-pcm"
     },
     {
       "source": "exfmt:audio:wave64-pcm",
@@ -123,6 +203,150 @@
       ]
     },
     {
+      "capsule_id": "capsule:au-pcm-to-bw64-pcm",
+      "version": "0.1.0",
+      "crate": "au-pcm-to-bw64-pcm",
+      "inputs": [
+        "exfmt:audio:au-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:bw64-pcm"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "audio",
+        "primary_ir": "ir:sampled-audio",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/audio/sampled-audio/direct/au-pcm-to-bw64-pcm",
+      "capability_ids": [
+        "capability:au-pcm-to-bw64-pcm/pcm-exact/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:au-pcm-to-bwf-pcm",
+      "version": "0.1.0",
+      "crate": "au-pcm-to-bwf-pcm",
+      "inputs": [
+        "exfmt:audio:au-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:bwf-pcm"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "audio",
+        "primary_ir": "ir:sampled-audio",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/audio/sampled-audio/direct/au-pcm-to-bwf-pcm",
+      "capability_ids": [
+        "capability:au-pcm-to-bwf-pcm/pcm-exact/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:au-pcm-to-caf-pcm",
+      "version": "0.1.0",
+      "crate": "au-pcm-to-caf-pcm",
+      "inputs": [
+        "exfmt:audio:au-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:caf-pcm"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "audio",
+        "primary_ir": "ir:sampled-audio",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/audio/sampled-audio/direct/au-pcm-to-caf-pcm",
+      "capability_ids": [
+        "capability:au-pcm-to-caf-pcm/pcm-exact/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:au-pcm-to-rf64-pcm",
+      "version": "0.1.0",
+      "crate": "au-pcm-to-rf64-pcm",
+      "inputs": [
+        "exfmt:audio:au-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:rf64-pcm"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "audio",
+        "primary_ir": "ir:sampled-audio",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/audio/sampled-audio/direct/au-pcm-to-rf64-pcm",
+      "capability_ids": [
+        "capability:au-pcm-to-rf64-pcm/pcm-exact/native-portable"
+      ]
+    },
+    {
       "capsule_id": "capsule:au-pcm-to-wav-pcm",
       "version": "0.1.0",
       "crate": "au-pcm-to-wav-pcm",
@@ -156,6 +380,150 @@
       "repository_path": "capsules/audio/sampled-audio/direct/au-pcm-to-wav-pcm",
       "capability_ids": [
         "capability:au-pcm-to-wav-pcm/pcm-exact/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:au-pcm-to-wave64-pcm",
+      "version": "0.1.0",
+      "crate": "au-pcm-to-wave64-pcm",
+      "inputs": [
+        "exfmt:audio:au-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:wave64-pcm"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "audio",
+        "primary_ir": "ir:sampled-audio",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/audio/sampled-audio/direct/au-pcm-to-wave64-pcm",
+      "capability_ids": [
+        "capability:au-pcm-to-wave64-pcm/pcm-exact/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:bw64-pcm-to-au-pcm",
+      "version": "0.1.0",
+      "crate": "bw64-pcm-to-au-pcm",
+      "inputs": [
+        "exfmt:audio:bw64-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:au-pcm"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "audio",
+        "primary_ir": "ir:sampled-audio",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/audio/sampled-audio/direct/bw64-pcm-to-au-pcm",
+      "capability_ids": [
+        "capability:bw64-pcm-to-au-pcm/pcm-exact/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:bw64-pcm-to-caf-pcm",
+      "version": "0.1.0",
+      "crate": "bw64-pcm-to-caf-pcm",
+      "inputs": [
+        "exfmt:audio:bw64-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:caf-pcm"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "audio",
+        "primary_ir": "ir:sampled-audio",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/audio/sampled-audio/direct/bw64-pcm-to-caf-pcm",
+      "capability_ids": [
+        "capability:bw64-pcm-to-caf-pcm/pcm-exact/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:bw64-pcm-to-rf64-pcm",
+      "version": "0.1.0",
+      "crate": "bw64-pcm-to-rf64-pcm",
+      "inputs": [
+        "exfmt:audio:bw64-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:rf64-pcm"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "audio",
+        "primary_ir": "ir:sampled-audio",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/audio/sampled-audio/direct/bw64-pcm-to-rf64-pcm",
+      "capability_ids": [
+        "capability:bw64-pcm-to-rf64-pcm/pcm-exact/native-portable"
       ]
     },
     {
@@ -195,6 +563,78 @@
       ]
     },
     {
+      "capsule_id": "capsule:bwf-pcm-to-au-pcm",
+      "version": "0.1.0",
+      "crate": "bwf-pcm-to-au-pcm",
+      "inputs": [
+        "exfmt:audio:bwf-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:au-pcm"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "audio",
+        "primary_ir": "ir:sampled-audio",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/audio/sampled-audio/direct/bwf-pcm-to-au-pcm",
+      "capability_ids": [
+        "capability:bwf-pcm-to-au-pcm/pcm-exact/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:bwf-pcm-to-caf-pcm",
+      "version": "0.1.0",
+      "crate": "bwf-pcm-to-caf-pcm",
+      "inputs": [
+        "exfmt:audio:bwf-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:caf-pcm"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "audio",
+        "primary_ir": "ir:sampled-audio",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/audio/sampled-audio/direct/bwf-pcm-to-caf-pcm",
+      "capability_ids": [
+        "capability:bwf-pcm-to-caf-pcm/pcm-exact/native-portable"
+      ]
+    },
+    {
       "capsule_id": "capsule:bwf-pcm-to-wav-pcm",
       "version": "0.1.0",
       "crate": "bwf-pcm-to-wav-pcm",
@@ -228,6 +668,150 @@
       "repository_path": "capsules/audio/sampled-audio/direct/bwf-pcm-to-wav-pcm",
       "capability_ids": [
         "capability:bwf-pcm-to-wav-pcm/pcm-exact/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:caf-pcm-to-au-pcm",
+      "version": "0.1.0",
+      "crate": "caf-pcm-to-au-pcm",
+      "inputs": [
+        "exfmt:audio:caf-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:au-pcm"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "audio",
+        "primary_ir": "ir:sampled-audio",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/audio/sampled-audio/direct/caf-pcm-to-au-pcm",
+      "capability_ids": [
+        "capability:caf-pcm-to-au-pcm/pcm-exact/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:caf-pcm-to-bw64-pcm",
+      "version": "0.1.0",
+      "crate": "caf-pcm-to-bw64-pcm",
+      "inputs": [
+        "exfmt:audio:caf-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:bw64-pcm"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "audio",
+        "primary_ir": "ir:sampled-audio",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/audio/sampled-audio/direct/caf-pcm-to-bw64-pcm",
+      "capability_ids": [
+        "capability:caf-pcm-to-bw64-pcm/pcm-exact/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:caf-pcm-to-bwf-pcm",
+      "version": "0.1.0",
+      "crate": "caf-pcm-to-bwf-pcm",
+      "inputs": [
+        "exfmt:audio:caf-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:bwf-pcm"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "audio",
+        "primary_ir": "ir:sampled-audio",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/audio/sampled-audio/direct/caf-pcm-to-bwf-pcm",
+      "capability_ids": [
+        "capability:caf-pcm-to-bwf-pcm/pcm-exact/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:caf-pcm-to-rf64-pcm",
+      "version": "0.1.0",
+      "crate": "caf-pcm-to-rf64-pcm",
+      "inputs": [
+        "exfmt:audio:caf-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:rf64-pcm"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "audio",
+        "primary_ir": "ir:sampled-audio",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/audio/sampled-audio/direct/caf-pcm-to-rf64-pcm",
+      "capability_ids": [
+        "capability:caf-pcm-to-rf64-pcm/pcm-exact/native-portable"
       ]
     },
     {
@@ -267,6 +851,42 @@
       ]
     },
     {
+      "capsule_id": "capsule:caf-pcm-to-wave64-pcm",
+      "version": "0.1.0",
+      "crate": "caf-pcm-to-wave64-pcm",
+      "inputs": [
+        "exfmt:audio:caf-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:wave64-pcm"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "audio",
+        "primary_ir": "ir:sampled-audio",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/audio/sampled-audio/direct/caf-pcm-to-wave64-pcm",
+      "capability_ids": [
+        "capability:caf-pcm-to-wave64-pcm/pcm-exact/native-portable"
+      ]
+    },
+    {
       "capsule_id": "capsule:raw-pcm-to-wav-pcm",
       "version": "0.1.0",
       "crate": "raw-pcm-to-wav-pcm",
@@ -300,6 +920,114 @@
       "repository_path": "capsules/audio/sampled-audio/direct/raw-pcm-to-wav-pcm",
       "capability_ids": [
         "capability:raw-pcm-to-wav-pcm/pcm-exact/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:rf64-pcm-to-au-pcm",
+      "version": "0.1.0",
+      "crate": "rf64-pcm-to-au-pcm",
+      "inputs": [
+        "exfmt:audio:rf64-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:au-pcm"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "audio",
+        "primary_ir": "ir:sampled-audio",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/audio/sampled-audio/direct/rf64-pcm-to-au-pcm",
+      "capability_ids": [
+        "capability:rf64-pcm-to-au-pcm/pcm-exact/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:rf64-pcm-to-bw64-pcm",
+      "version": "0.1.0",
+      "crate": "rf64-pcm-to-bw64-pcm",
+      "inputs": [
+        "exfmt:audio:rf64-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:bw64-pcm"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "audio",
+        "primary_ir": "ir:sampled-audio",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/audio/sampled-audio/direct/rf64-pcm-to-bw64-pcm",
+      "capability_ids": [
+        "capability:rf64-pcm-to-bw64-pcm/pcm-exact/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:rf64-pcm-to-caf-pcm",
+      "version": "0.1.0",
+      "crate": "rf64-pcm-to-caf-pcm",
+      "inputs": [
+        "exfmt:audio:rf64-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:caf-pcm"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "audio",
+        "primary_ir": "ir:sampled-audio",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/audio/sampled-audio/direct/rf64-pcm-to-caf-pcm",
+      "capability_ids": [
+        "capability:rf64-pcm-to-caf-pcm/pcm-exact/native-portable"
       ]
     },
     {
@@ -627,6 +1355,78 @@
       ]
     },
     {
+      "capsule_id": "capsule:wave64-pcm-to-au-pcm",
+      "version": "0.1.0",
+      "crate": "wave64-pcm-to-au-pcm",
+      "inputs": [
+        "exfmt:audio:wave64-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:au-pcm"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "audio",
+        "primary_ir": "ir:sampled-audio",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/audio/sampled-audio/direct/wave64-pcm-to-au-pcm",
+      "capability_ids": [
+        "capability:wave64-pcm-to-au-pcm/pcm-exact/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:wave64-pcm-to-caf-pcm",
+      "version": "0.1.0",
+      "crate": "wave64-pcm-to-caf-pcm",
+      "inputs": [
+        "exfmt:audio:wave64-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:caf-pcm"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "audio",
+        "primary_ir": "ir:sampled-audio",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/audio/sampled-audio/direct/wave64-pcm-to-caf-pcm",
+      "capability_ids": [
+        "capability:wave64-pcm-to-caf-pcm/pcm-exact/native-portable"
+      ]
+    },
+    {
       "capsule_id": "capsule:wave64-pcm-to-wav-pcm",
       "version": "0.1.0",
       "crate": "wave64-pcm-to-wav-pcm",
@@ -904,6 +1704,94 @@
       "seek_required": false
     },
     {
+      "capability_id": "capability:au-pcm-to-bw64-pcm/pcm-exact/native-portable",
+      "capsule_id": "capsule:au-pcm-to-bw64-pcm",
+      "inputs": [
+        "exfmt:audio:au-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:bw64-pcm"
+      ],
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "computability": "semantic_lossless",
+      "loss": {
+        "payload": "none",
+        "temporal": "none",
+        "structure": "normalized",
+        "metadata": "unbounded"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false
+    },
+    {
+      "capability_id": "capability:au-pcm-to-bwf-pcm/pcm-exact/native-portable",
+      "capsule_id": "capsule:au-pcm-to-bwf-pcm",
+      "inputs": [
+        "exfmt:audio:au-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:bwf-pcm"
+      ],
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "computability": "semantic_lossless",
+      "loss": {
+        "payload": "none",
+        "temporal": "none",
+        "structure": "normalized",
+        "metadata": "unbounded"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false
+    },
+    {
+      "capability_id": "capability:au-pcm-to-caf-pcm/pcm-exact/native-portable",
+      "capsule_id": "capsule:au-pcm-to-caf-pcm",
+      "inputs": [
+        "exfmt:audio:au-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:caf-pcm"
+      ],
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "computability": "semantic_lossless",
+      "loss": {
+        "payload": "none",
+        "temporal": "none",
+        "structure": "normalized",
+        "metadata": "unbounded"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false
+    },
+    {
+      "capability_id": "capability:au-pcm-to-rf64-pcm/pcm-exact/native-portable",
+      "capsule_id": "capsule:au-pcm-to-rf64-pcm",
+      "inputs": [
+        "exfmt:audio:au-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:rf64-pcm"
+      ],
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "computability": "semantic_lossless",
+      "loss": {
+        "payload": "none",
+        "temporal": "none",
+        "structure": "normalized",
+        "metadata": "unbounded"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false
+    },
+    {
       "capability_id": "capability:au-pcm-to-wav-pcm/pcm-exact/native-portable",
       "capsule_id": "capsule:au-pcm-to-wav-pcm",
       "inputs": [
@@ -911,6 +1799,28 @@
       ],
       "outputs": [
         "exfmt:audio:wav-pcm"
+      ],
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "computability": "semantic_lossless",
+      "loss": {
+        "payload": "none",
+        "temporal": "none",
+        "structure": "normalized",
+        "metadata": "unbounded"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false
+    },
+    {
+      "capability_id": "capability:au-pcm-to-wave64-pcm/pcm-exact/native-portable",
+      "capsule_id": "capsule:au-pcm-to-wave64-pcm",
+      "inputs": [
+        "exfmt:audio:au-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:wave64-pcm"
       ],
       "strategy": "pcm-exact",
       "backend": "native-portable",
@@ -947,6 +1857,72 @@
       "seek_required": false
     },
     {
+      "capability_id": "capability:bw64-pcm-to-au-pcm/pcm-exact/native-portable",
+      "capsule_id": "capsule:bw64-pcm-to-au-pcm",
+      "inputs": [
+        "exfmt:audio:bw64-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:au-pcm"
+      ],
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "computability": "semantic_lossless",
+      "loss": {
+        "payload": "none",
+        "temporal": "none",
+        "structure": "normalized",
+        "metadata": "unbounded"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false
+    },
+    {
+      "capability_id": "capability:bw64-pcm-to-caf-pcm/pcm-exact/native-portable",
+      "capsule_id": "capsule:bw64-pcm-to-caf-pcm",
+      "inputs": [
+        "exfmt:audio:bw64-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:caf-pcm"
+      ],
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "computability": "semantic_lossless",
+      "loss": {
+        "payload": "none",
+        "temporal": "none",
+        "structure": "normalized",
+        "metadata": "unbounded"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false
+    },
+    {
+      "capability_id": "capability:bw64-pcm-to-rf64-pcm/pcm-exact/native-portable",
+      "capsule_id": "capsule:bw64-pcm-to-rf64-pcm",
+      "inputs": [
+        "exfmt:audio:bw64-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:rf64-pcm"
+      ],
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "computability": "semantic_lossless",
+      "loss": {
+        "payload": "none",
+        "temporal": "none",
+        "structure": "normalized",
+        "metadata": "unbounded"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false
+    },
+    {
       "capability_id": "capability:bw64-pcm-to-wav-pcm/pcm-exact/native-portable",
       "capsule_id": "capsule:bw64-pcm-to-wav-pcm",
       "inputs": [
@@ -954,6 +1930,50 @@
       ],
       "outputs": [
         "exfmt:audio:wav-pcm"
+      ],
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "computability": "semantic_lossless",
+      "loss": {
+        "payload": "none",
+        "temporal": "none",
+        "structure": "normalized",
+        "metadata": "unbounded"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false
+    },
+    {
+      "capability_id": "capability:bwf-pcm-to-au-pcm/pcm-exact/native-portable",
+      "capsule_id": "capsule:bwf-pcm-to-au-pcm",
+      "inputs": [
+        "exfmt:audio:bwf-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:au-pcm"
+      ],
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "computability": "semantic_lossless",
+      "loss": {
+        "payload": "none",
+        "temporal": "none",
+        "structure": "normalized",
+        "metadata": "unbounded"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false
+    },
+    {
+      "capability_id": "capability:bwf-pcm-to-caf-pcm/pcm-exact/native-portable",
+      "capsule_id": "capsule:bwf-pcm-to-caf-pcm",
+      "inputs": [
+        "exfmt:audio:bwf-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:caf-pcm"
       ],
       "strategy": "pcm-exact",
       "backend": "native-portable",
@@ -991,6 +2011,94 @@
       "seek_required": false
     },
     {
+      "capability_id": "capability:caf-pcm-to-au-pcm/pcm-exact/native-portable",
+      "capsule_id": "capsule:caf-pcm-to-au-pcm",
+      "inputs": [
+        "exfmt:audio:caf-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:au-pcm"
+      ],
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "computability": "semantic_lossless",
+      "loss": {
+        "payload": "none",
+        "temporal": "none",
+        "structure": "normalized",
+        "metadata": "unbounded"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false
+    },
+    {
+      "capability_id": "capability:caf-pcm-to-bw64-pcm/pcm-exact/native-portable",
+      "capsule_id": "capsule:caf-pcm-to-bw64-pcm",
+      "inputs": [
+        "exfmt:audio:caf-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:bw64-pcm"
+      ],
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "computability": "semantic_lossless",
+      "loss": {
+        "payload": "none",
+        "temporal": "none",
+        "structure": "normalized",
+        "metadata": "unbounded"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false
+    },
+    {
+      "capability_id": "capability:caf-pcm-to-bwf-pcm/pcm-exact/native-portable",
+      "capsule_id": "capsule:caf-pcm-to-bwf-pcm",
+      "inputs": [
+        "exfmt:audio:caf-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:bwf-pcm"
+      ],
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "computability": "semantic_lossless",
+      "loss": {
+        "payload": "none",
+        "temporal": "none",
+        "structure": "normalized",
+        "metadata": "unbounded"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false
+    },
+    {
+      "capability_id": "capability:caf-pcm-to-rf64-pcm/pcm-exact/native-portable",
+      "capsule_id": "capsule:caf-pcm-to-rf64-pcm",
+      "inputs": [
+        "exfmt:audio:caf-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:rf64-pcm"
+      ],
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "computability": "semantic_lossless",
+      "loss": {
+        "payload": "none",
+        "temporal": "none",
+        "structure": "normalized",
+        "metadata": "unbounded"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false
+    },
+    {
       "capability_id": "capability:caf-pcm-to-wav-pcm/pcm-exact/native-portable",
       "capsule_id": "capsule:caf-pcm-to-wav-pcm",
       "inputs": [
@@ -998,6 +2106,28 @@
       ],
       "outputs": [
         "exfmt:audio:wav-pcm"
+      ],
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "computability": "semantic_lossless",
+      "loss": {
+        "payload": "none",
+        "temporal": "none",
+        "structure": "normalized",
+        "metadata": "unbounded"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false
+    },
+    {
+      "capability_id": "capability:caf-pcm-to-wave64-pcm/pcm-exact/native-portable",
+      "capsule_id": "capsule:caf-pcm-to-wave64-pcm",
+      "inputs": [
+        "exfmt:audio:caf-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:wave64-pcm"
       ],
       "strategy": "pcm-exact",
       "backend": "native-portable",
@@ -1117,6 +2247,72 @@
         "temporal": "normalized",
         "structure": "normalized",
         "metadata": "not-present"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false
+    },
+    {
+      "capability_id": "capability:rf64-pcm-to-au-pcm/pcm-exact/native-portable",
+      "capsule_id": "capsule:rf64-pcm-to-au-pcm",
+      "inputs": [
+        "exfmt:audio:rf64-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:au-pcm"
+      ],
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "computability": "semantic_lossless",
+      "loss": {
+        "payload": "none",
+        "temporal": "none",
+        "structure": "normalized",
+        "metadata": "unbounded"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false
+    },
+    {
+      "capability_id": "capability:rf64-pcm-to-bw64-pcm/pcm-exact/native-portable",
+      "capsule_id": "capsule:rf64-pcm-to-bw64-pcm",
+      "inputs": [
+        "exfmt:audio:rf64-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:bw64-pcm"
+      ],
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "computability": "semantic_lossless",
+      "loss": {
+        "payload": "none",
+        "temporal": "none",
+        "structure": "normalized",
+        "metadata": "unbounded"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false
+    },
+    {
+      "capability_id": "capability:rf64-pcm-to-caf-pcm/pcm-exact/native-portable",
+      "capsule_id": "capsule:rf64-pcm-to-caf-pcm",
+      "inputs": [
+        "exfmt:audio:rf64-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:caf-pcm"
+      ],
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "computability": "semantic_lossless",
+      "loss": {
+        "payload": "none",
+        "temporal": "none",
+        "structure": "normalized",
+        "metadata": "unbounded"
       },
       "defaults_are_runnable": true,
       "streaming": false,
@@ -1346,6 +2542,50 @@
       ],
       "outputs": [
         "exfmt:audio:wave64-pcm"
+      ],
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "computability": "semantic_lossless",
+      "loss": {
+        "payload": "none",
+        "temporal": "none",
+        "structure": "normalized",
+        "metadata": "unbounded"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false
+    },
+    {
+      "capability_id": "capability:wave64-pcm-to-au-pcm/pcm-exact/native-portable",
+      "capsule_id": "capsule:wave64-pcm-to-au-pcm",
+      "inputs": [
+        "exfmt:audio:wave64-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:au-pcm"
+      ],
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "computability": "semantic_lossless",
+      "loss": {
+        "payload": "none",
+        "temporal": "none",
+        "structure": "normalized",
+        "metadata": "unbounded"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false
+    },
+    {
+      "capability_id": "capability:wave64-pcm-to-caf-pcm/pcm-exact/native-portable",
+      "capsule_id": "capsule:wave64-pcm-to-caf-pcm",
+      "inputs": [
+        "exfmt:audio:wave64-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:caf-pcm"
       ],
       "strategy": "pcm-exact",
       "backend": "native-portable",
