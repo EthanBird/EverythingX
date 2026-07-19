@@ -1,0 +1,1461 @@
+{
+  "schema_version": "0.1.0",
+  "generated_at": "2026-07-19T16:37:28.384513+00:00",
+  "commit_sha": "2993a3fdb58d0eac4ec42449b62bfd84f82d42bc",
+  "environment": {
+    "os": "Linux-6.17.0-1020-azure-x86_64-with-glibc2.39",
+    "architecture": "x86_64",
+    "cpu_count": 4,
+    "github_runner_image": "ubuntu24",
+    "github_run_id": "29695160852"
+  },
+  "toolchain": {
+    "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+    "rustc_verbose": "rustc 1.97.1 (8bab26f4f 2026-07-14)\nbinary: rustc\ncommit-hash: 8bab26f4f68e0e26f0bb7960be334d5b520ea452\ncommit-date: 2026-07-14\nhost: x86_64-unknown-linux-gnu\nrelease: 1.97.1\nLLVM version: 22.1.6",
+    "cargo": "cargo 1.97.1 (c980f4866 2026-06-30)",
+    "rustup": "rustup 1.29.0 (28d1352db 2026-03-05)\ninfo: This is the version for the rustup toolchain manager, not the rustc compiler.\ninfo: the currently active `rustc` version is `rustc 1.97.1 (8bab26f4f 2026-07-14)`",
+    "sysroot_path": "/home/runner/.rustup/toolchains/stable-x86_64-unknown-linux-gnu",
+    "sysroot": {
+      "logical_bytes": 653573349,
+      "allocated_bytes": 653938688,
+      "files": 166
+    }
+  },
+  "source": {
+    "repository_logical_bytes": 13820955,
+    "production_capsules": 104
+  },
+  "measurements": {
+    "unified_release": {
+      "scope": "Kernel, protocol, all 104 Adapters and all 104 production Capsules linked into the capability benchmark executable.",
+      "cold_seconds": 62.327,
+      "no_op_seconds": 0.087,
+      "target": {
+        "logical_bytes": 92965214,
+        "allocated_bytes": 97955840,
+        "files": 1556
+      },
+      "artifact_breakdown": {
+        "cargo-metadata": {
+          "logical_bytes": 389364,
+          "files": 918
+        },
+        "dependency-info": {
+          "logical_bytes": 222331,
+          "files": 212
+        },
+        "executable": {
+          "logical_bytes": 18567840,
+          "files": 2
+        },
+        "other": {
+          "logical_bytes": 177,
+          "files": 4
+        },
+        "rlib": {
+          "logical_bytes": 52803692,
+          "files": 210
+        },
+        "rmeta": {
+          "logical_bytes": 20981810,
+          "files": 210
+        }
+      },
+      "binary_bytes": 9283920,
+      "stripped_binary_bytes": 7227264
+    },
+    "kernel_test_compile": {
+      "scope": "Kernel workspace tests compiled but not executed.",
+      "cold_seconds": 0.54,
+      "target": {
+        "logical_bytes": 33999930,
+        "allocated_bytes": 34426880,
+        "files": 199
+      }
+    },
+    "standalone_capsules": {
+      "scope": "Every production Capsule release-built from its own manifest and isolated target directory, excluding its EverythingX Adapter.",
+      "count": 104,
+      "build_seconds": {
+        "min": 0.117,
+        "median": 0.291,
+        "p95": 0.923,
+        "max": 0.93,
+        "sum": 46.617
+      },
+      "target_logical_bytes_total": 73956311,
+      "target_allocated_bytes_total": 77950976,
+      "rlib_bytes_total": 26897656,
+      "slowest": [
+        {
+          "capsule": "image/raster/direct/png-to-qoi",
+          "build_seconds": 0.93,
+          "source_bytes_without_adapter": 81229,
+          "rlib_bytes": 392354,
+          "target": {
+            "logical_bytes": 960902,
+            "allocated_bytes": 995328,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/png-to-pam",
+          "build_seconds": 0.929,
+          "source_bytes_without_adapter": 81208,
+          "rlib_bytes": 392330,
+          "target": {
+            "logical_bytes": 960783,
+            "allocated_bytes": 995328,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/png-to-bmp",
+          "build_seconds": 0.926,
+          "source_bytes_without_adapter": 81267,
+          "rlib_bytes": 392342,
+          "target": {
+            "logical_bytes": 960879,
+            "allocated_bytes": 995328,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/ppm-to-png",
+          "build_seconds": 0.925,
+          "source_bytes_without_adapter": 81209,
+          "rlib_bytes": 392328,
+          "target": {
+            "logical_bytes": 960851,
+            "allocated_bytes": 995328,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/qoi-to-png",
+          "build_seconds": 0.924,
+          "source_bytes_without_adapter": 81223,
+          "rlib_bytes": 392342,
+          "target": {
+            "logical_bytes": 960879,
+            "allocated_bytes": 995328,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/pam-to-png",
+          "build_seconds": 0.923,
+          "source_bytes_without_adapter": 81208,
+          "rlib_bytes": 392342,
+          "target": {
+            "logical_bytes": 960807,
+            "allocated_bytes": 995328,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/png-to-ppm",
+          "build_seconds": 0.922,
+          "source_bytes_without_adapter": 81218,
+          "rlib_bytes": 392342,
+          "target": {
+            "logical_bytes": 960878,
+            "allocated_bytes": 995328,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/png-to-tga",
+          "build_seconds": 0.919,
+          "source_bytes_without_adapter": 81274,
+          "rlib_bytes": 392356,
+          "target": {
+            "logical_bytes": 960905,
+            "allocated_bytes": 995328,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/tga-to-png",
+          "build_seconds": 0.909,
+          "source_bytes_without_adapter": 81272,
+          "rlib_bytes": 392352,
+          "target": {
+            "logical_bytes": 960899,
+            "allocated_bytes": 995328,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/transform/png-flip-vertical",
+          "build_seconds": 0.707,
+          "source_bytes_without_adapter": 50916,
+          "rlib_bytes": 232566,
+          "target": {
+            "logical_bytes": 617819,
+            "allocated_bytes": 651264,
+            "files": 14
+          }
+        }
+      ],
+      "largest_rlibs": [
+        {
+          "capsule": "image/raster/direct/bmp-to-png",
+          "build_seconds": 0.269,
+          "source_bytes_without_adapter": 70981,
+          "rlib_bytes": 399438,
+          "target": {
+            "logical_bytes": 1181338,
+            "allocated_bytes": 1216512,
+            "files": 14
+          }
+        },
+        {
+          "capsule": "image/raster/direct/png-to-tga",
+          "build_seconds": 0.919,
+          "source_bytes_without_adapter": 81274,
+          "rlib_bytes": 392356,
+          "target": {
+            "logical_bytes": 960905,
+            "allocated_bytes": 995328,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/png-to-qoi",
+          "build_seconds": 0.93,
+          "source_bytes_without_adapter": 81229,
+          "rlib_bytes": 392354,
+          "target": {
+            "logical_bytes": 960902,
+            "allocated_bytes": 995328,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/tga-to-png",
+          "build_seconds": 0.909,
+          "source_bytes_without_adapter": 81272,
+          "rlib_bytes": 392352,
+          "target": {
+            "logical_bytes": 960899,
+            "allocated_bytes": 995328,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/pam-to-png",
+          "build_seconds": 0.923,
+          "source_bytes_without_adapter": 81208,
+          "rlib_bytes": 392342,
+          "target": {
+            "logical_bytes": 960807,
+            "allocated_bytes": 995328,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/png-to-bmp",
+          "build_seconds": 0.926,
+          "source_bytes_without_adapter": 81267,
+          "rlib_bytes": 392342,
+          "target": {
+            "logical_bytes": 960879,
+            "allocated_bytes": 995328,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/png-to-ppm",
+          "build_seconds": 0.922,
+          "source_bytes_without_adapter": 81218,
+          "rlib_bytes": 392342,
+          "target": {
+            "logical_bytes": 960878,
+            "allocated_bytes": 995328,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/qoi-to-png",
+          "build_seconds": 0.924,
+          "source_bytes_without_adapter": 81223,
+          "rlib_bytes": 392342,
+          "target": {
+            "logical_bytes": 960879,
+            "allocated_bytes": 995328,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/png-to-pam",
+          "build_seconds": 0.929,
+          "source_bytes_without_adapter": 81208,
+          "rlib_bytes": 392330,
+          "target": {
+            "logical_bytes": 960783,
+            "allocated_bytes": 995328,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/ppm-to-png",
+          "build_seconds": 0.925,
+          "source_bytes_without_adapter": 81209,
+          "rlib_bytes": 392328,
+          "target": {
+            "logical_bytes": 960851,
+            "allocated_bytes": 995328,
+            "files": 15
+          }
+        }
+      ],
+      "capsules": [
+        {
+          "capsule": "audio/sampled-audio/direct/aiff-pcm-to-au-pcm",
+          "build_seconds": 0.278,
+          "source_bytes_without_adapter": 38812,
+          "rlib_bytes": 274648,
+          "target": {
+            "logical_bytes": 797278,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/aiff-pcm-to-bw64-pcm",
+          "build_seconds": 0.289,
+          "source_bytes_without_adapter": 38813,
+          "rlib_bytes": 275426,
+          "target": {
+            "logical_bytes": 796594,
+            "allocated_bytes": 835584,
+            "files": 14
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/aiff-pcm-to-bwf-pcm",
+          "build_seconds": 0.291,
+          "source_bytes_without_adapter": 38849,
+          "rlib_bytes": 275318,
+          "target": {
+            "logical_bytes": 798632,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/aiff-pcm-to-caf-pcm",
+          "build_seconds": 0.283,
+          "source_bytes_without_adapter": 38861,
+          "rlib_bytes": 275046,
+          "target": {
+            "logical_bytes": 798088,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/aiff-pcm-to-rf64-pcm",
+          "build_seconds": 0.293,
+          "source_bytes_without_adapter": 38814,
+          "rlib_bytes": 275426,
+          "target": {
+            "logical_bytes": 798864,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/aiff-pcm-to-wav-pcm",
+          "build_seconds": 0.17,
+          "source_bytes_without_adapter": 25713,
+          "rlib_bytes": 192724,
+          "target": {
+            "logical_bytes": 571068,
+            "allocated_bytes": 610304,
+            "files": 14
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/aiff-pcm-to-wave64-pcm",
+          "build_seconds": 0.291,
+          "source_bytes_without_adapter": 38879,
+          "rlib_bytes": 275460,
+          "target": {
+            "logical_bytes": 798963,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/au-pcm-to-aiff-pcm",
+          "build_seconds": 0.279,
+          "source_bytes_without_adapter": 38810,
+          "rlib_bytes": 276048,
+          "target": {
+            "logical_bytes": 800078,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/au-pcm-to-bw64-pcm",
+          "build_seconds": 0.285,
+          "source_bytes_without_adapter": 38774,
+          "rlib_bytes": 276192,
+          "target": {
+            "logical_bytes": 798097,
+            "allocated_bytes": 835584,
+            "files": 14
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/au-pcm-to-bwf-pcm",
+          "build_seconds": 0.29,
+          "source_bytes_without_adapter": 38809,
+          "rlib_bytes": 276084,
+          "target": {
+            "logical_bytes": 800134,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/au-pcm-to-caf-pcm",
+          "build_seconds": 0.275,
+          "source_bytes_without_adapter": 38824,
+          "rlib_bytes": 275804,
+          "target": {
+            "logical_bytes": 799574,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/au-pcm-to-rf64-pcm",
+          "build_seconds": 0.287,
+          "source_bytes_without_adapter": 38771,
+          "rlib_bytes": 276192,
+          "target": {
+            "logical_bytes": 800366,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/au-pcm-to-wav-pcm",
+          "build_seconds": 0.284,
+          "source_bytes_without_adapter": 38785,
+          "rlib_bytes": 275412,
+          "target": {
+            "logical_bytes": 798791,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/au-pcm-to-wave64-pcm",
+          "build_seconds": 0.287,
+          "source_bytes_without_adapter": 38839,
+          "rlib_bytes": 276226,
+          "target": {
+            "logical_bytes": 800464,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/bw64-pcm-to-aiff-pcm",
+          "build_seconds": 0.292,
+          "source_bytes_without_adapter": 38814,
+          "rlib_bytes": 275594,
+          "target": {
+            "logical_bytes": 796958,
+            "allocated_bytes": 835584,
+            "files": 14
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/bw64-pcm-to-au-pcm",
+          "build_seconds": 0.281,
+          "source_bytes_without_adapter": 38775,
+          "rlib_bytes": 274960,
+          "target": {
+            "logical_bytes": 795662,
+            "allocated_bytes": 835584,
+            "files": 14
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/bw64-pcm-to-bwf-pcm",
+          "build_seconds": 0.282,
+          "source_bytes_without_adapter": 38807,
+          "rlib_bytes": 275750,
+          "target": {
+            "logical_bytes": 797257,
+            "allocated_bytes": 835584,
+            "files": 14
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/bw64-pcm-to-caf-pcm",
+          "build_seconds": 0.285,
+          "source_bytes_without_adapter": 38823,
+          "rlib_bytes": 275350,
+          "target": {
+            "logical_bytes": 796457,
+            "allocated_bytes": 835584,
+            "files": 14
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/bw64-pcm-to-rf64-pcm",
+          "build_seconds": 0.278,
+          "source_bytes_without_adapter": 38762,
+          "rlib_bytes": 274850,
+          "target": {
+            "logical_bytes": 795471,
+            "allocated_bytes": 835584,
+            "files": 14
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/bw64-pcm-to-wav-pcm",
+          "build_seconds": 0.28,
+          "source_bytes_without_adapter": 38783,
+          "rlib_bytes": 275254,
+          "target": {
+            "logical_bytes": 796265,
+            "allocated_bytes": 835584,
+            "files": 14
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/bw64-pcm-to-wave64-pcm",
+          "build_seconds": 0.295,
+          "source_bytes_without_adapter": 38837,
+          "rlib_bytes": 275780,
+          "target": {
+            "logical_bytes": 797362,
+            "allocated_bytes": 835584,
+            "files": 14
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/bwf-pcm-to-aiff-pcm",
+          "build_seconds": 0.288,
+          "source_bytes_without_adapter": 38848,
+          "rlib_bytes": 275670,
+          "target": {
+            "logical_bytes": 799365,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/bwf-pcm-to-au-pcm",
+          "build_seconds": 0.28,
+          "source_bytes_without_adapter": 38809,
+          "rlib_bytes": 275036,
+          "target": {
+            "logical_bytes": 798068,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/bwf-pcm-to-bw64-pcm",
+          "build_seconds": 0.282,
+          "source_bytes_without_adapter": 38807,
+          "rlib_bytes": 275750,
+          "target": {
+            "logical_bytes": 797256,
+            "allocated_bytes": 835584,
+            "files": 14
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/bwf-pcm-to-caf-pcm",
+          "build_seconds": 0.288,
+          "source_bytes_without_adapter": 38858,
+          "rlib_bytes": 275424,
+          "target": {
+            "logical_bytes": 798859,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/bwf-pcm-to-rf64-pcm",
+          "build_seconds": 0.285,
+          "source_bytes_without_adapter": 38808,
+          "rlib_bytes": 275766,
+          "target": {
+            "logical_bytes": 799558,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/bwf-pcm-to-wav-pcm",
+          "build_seconds": 0.284,
+          "source_bytes_without_adapter": 38817,
+          "rlib_bytes": 275744,
+          "target": {
+            "logical_bytes": 799498,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/bwf-pcm-to-wave64-pcm",
+          "build_seconds": 0.294,
+          "source_bytes_without_adapter": 38868,
+          "rlib_bytes": 275824,
+          "target": {
+            "logical_bytes": 799704,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/caf-pcm-to-aiff-pcm",
+          "build_seconds": 0.283,
+          "source_bytes_without_adapter": 38864,
+          "rlib_bytes": 276390,
+          "target": {
+            "logical_bytes": 800777,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/caf-pcm-to-au-pcm",
+          "build_seconds": 0.277,
+          "source_bytes_without_adapter": 38824,
+          "rlib_bytes": 275748,
+          "target": {
+            "logical_bytes": 799462,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/caf-pcm-to-bw64-pcm",
+          "build_seconds": 0.288,
+          "source_bytes_without_adapter": 38823,
+          "rlib_bytes": 276534,
+          "target": {
+            "logical_bytes": 798796,
+            "allocated_bytes": 835584,
+            "files": 14
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/caf-pcm-to-bwf-pcm",
+          "build_seconds": 0.292,
+          "source_bytes_without_adapter": 38858,
+          "rlib_bytes": 276416,
+          "target": {
+            "logical_bytes": 800814,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/caf-pcm-to-rf64-pcm",
+          "build_seconds": 0.29,
+          "source_bytes_without_adapter": 38824,
+          "rlib_bytes": 276534,
+          "target": {
+            "logical_bytes": 801064,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/caf-pcm-to-wav-pcm",
+          "build_seconds": 0.288,
+          "source_bytes_without_adapter": 38833,
+          "rlib_bytes": 275744,
+          "target": {
+            "logical_bytes": 799469,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/caf-pcm-to-wave64-pcm",
+          "build_seconds": 0.291,
+          "source_bytes_without_adapter": 38889,
+          "rlib_bytes": 276576,
+          "target": {
+            "logical_bytes": 801180,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/raw-pcm-to-wav-pcm",
+          "build_seconds": 0.117,
+          "source_bytes_without_adapter": 19885,
+          "rlib_bytes": 101554,
+          "target": {
+            "logical_bytes": 301095,
+            "allocated_bytes": 335872,
+            "files": 14
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/rf64-pcm-to-aiff-pcm",
+          "build_seconds": 0.29,
+          "source_bytes_without_adapter": 38815,
+          "rlib_bytes": 275594,
+          "target": {
+            "logical_bytes": 799228,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/rf64-pcm-to-au-pcm",
+          "build_seconds": 0.281,
+          "source_bytes_without_adapter": 38774,
+          "rlib_bytes": 274960,
+          "target": {
+            "logical_bytes": 797931,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/rf64-pcm-to-bw64-pcm",
+          "build_seconds": 0.277,
+          "source_bytes_without_adapter": 38761,
+          "rlib_bytes": 274850,
+          "target": {
+            "logical_bytes": 795471,
+            "allocated_bytes": 835584,
+            "files": 14
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/rf64-pcm-to-bwf-pcm",
+          "build_seconds": 0.282,
+          "source_bytes_without_adapter": 38807,
+          "rlib_bytes": 275766,
+          "target": {
+            "logical_bytes": 799558,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/rf64-pcm-to-caf-pcm",
+          "build_seconds": 0.285,
+          "source_bytes_without_adapter": 38822,
+          "rlib_bytes": 275350,
+          "target": {
+            "logical_bytes": 798725,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/rf64-pcm-to-wav-pcm",
+          "build_seconds": 0.281,
+          "source_bytes_without_adapter": 38783,
+          "rlib_bytes": 275174,
+          "target": {
+            "logical_bytes": 798374,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/rf64-pcm-to-wave64-pcm",
+          "build_seconds": 0.292,
+          "source_bytes_without_adapter": 38836,
+          "rlib_bytes": 275780,
+          "target": {
+            "logical_bytes": 799632,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/wav-pcm-to-aiff",
+          "build_seconds": 0.207,
+          "source_bytes_without_adapter": 47701,
+          "rlib_bytes": 266686,
+          "target": {
+            "logical_bytes": 785481,
+            "allocated_bytes": 823296,
+            "files": 14
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/wav-pcm-to-au-pcm",
+          "build_seconds": 0.279,
+          "source_bytes_without_adapter": 38785,
+          "rlib_bytes": 274428,
+          "target": {
+            "logical_bytes": 796851,
+            "allocated_bytes": 831488,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/wav-pcm-to-bw64-pcm",
+          "build_seconds": 0.284,
+          "source_bytes_without_adapter": 38782,
+          "rlib_bytes": 275238,
+          "target": {
+            "logical_bytes": 796232,
+            "allocated_bytes": 835584,
+            "files": 14
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/wav-pcm-to-bwf-pcm",
+          "build_seconds": 0.283,
+          "source_bytes_without_adapter": 38814,
+          "rlib_bytes": 275728,
+          "target": {
+            "logical_bytes": 799466,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/wav-pcm-to-caf-pcm",
+          "build_seconds": 0.284,
+          "source_bytes_without_adapter": 38833,
+          "rlib_bytes": 274816,
+          "target": {
+            "logical_bytes": 797643,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/wav-pcm-to-raw-pcm",
+          "build_seconds": 0.133,
+          "source_bytes_without_adapter": 21401,
+          "rlib_bytes": 117624,
+          "target": {
+            "logical_bytes": 347765,
+            "allocated_bytes": 380928,
+            "files": 14
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/wav-pcm-to-rf64-pcm",
+          "build_seconds": 0.283,
+          "source_bytes_without_adapter": 38784,
+          "rlib_bytes": 275158,
+          "target": {
+            "logical_bytes": 798342,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/wav-pcm-to-wave64-pcm",
+          "build_seconds": 0.293,
+          "source_bytes_without_adapter": 38848,
+          "rlib_bytes": 275224,
+          "target": {
+            "logical_bytes": 798505,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/wave64-pcm-to-aiff-pcm",
+          "build_seconds": 0.295,
+          "source_bytes_without_adapter": 38879,
+          "rlib_bytes": 276012,
+          "target": {
+            "logical_bytes": 800067,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/wave64-pcm-to-au-pcm",
+          "build_seconds": 0.288,
+          "source_bytes_without_adapter": 38835,
+          "rlib_bytes": 275378,
+          "target": {
+            "logical_bytes": 798767,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/wave64-pcm-to-bw64-pcm",
+          "build_seconds": 0.293,
+          "source_bytes_without_adapter": 38835,
+          "rlib_bytes": 276196,
+          "target": {
+            "logical_bytes": 798165,
+            "allocated_bytes": 835584,
+            "files": 14
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/wave64-pcm-to-bwf-pcm",
+          "build_seconds": 0.295,
+          "source_bytes_without_adapter": 38871,
+          "rlib_bytes": 276072,
+          "target": {
+            "logical_bytes": 800172,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/wave64-pcm-to-caf-pcm",
+          "build_seconds": 0.291,
+          "source_bytes_without_adapter": 38886,
+          "rlib_bytes": 275776,
+          "target": {
+            "logical_bytes": 799580,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/wave64-pcm-to-rf64-pcm",
+          "build_seconds": 0.295,
+          "source_bytes_without_adapter": 38838,
+          "rlib_bytes": 276196,
+          "target": {
+            "logical_bytes": 800434,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/direct/wave64-pcm-to-wav-pcm",
+          "build_seconds": 0.292,
+          "source_bytes_without_adapter": 38848,
+          "rlib_bytes": 275432,
+          "target": {
+            "logical_bytes": 798891,
+            "allocated_bytes": 839680,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/transform/raw-pcm-channel-map",
+          "build_seconds": 0.146,
+          "source_bytes_without_adapter": 18507,
+          "rlib_bytes": 121470,
+          "target": {
+            "logical_bytes": 362813,
+            "allocated_bytes": 397312,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/transform/raw-pcm-endian-signedness-normalize",
+          "build_seconds": 0.143,
+          "source_bytes_without_adapter": 18688,
+          "rlib_bytes": 121078,
+          "target": {
+            "logical_bytes": 361638,
+            "allocated_bytes": 397312,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/transform/raw-pcm-reverse",
+          "build_seconds": 0.144,
+          "source_bytes_without_adapter": 18415,
+          "rlib_bytes": 120702,
+          "target": {
+            "logical_bytes": 360631,
+            "allocated_bytes": 397312,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "audio/sampled-audio/transform/raw-pcm-trim",
+          "build_seconds": 0.141,
+          "source_bytes_without_adapter": 18369,
+          "rlib_bytes": 120654,
+          "target": {
+            "logical_bytes": 360495,
+            "allocated_bytes": 397312,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/analyze/validate-png",
+          "build_seconds": 0.694,
+          "source_bytes_without_adapter": 51047,
+          "rlib_bytes": 229312,
+          "target": {
+            "logical_bytes": 609617,
+            "allocated_bytes": 643072,
+            "files": 14
+          }
+        },
+        {
+          "capsule": "image/raster/direct/bmp-to-pam",
+          "build_seconds": 0.696,
+          "source_bytes_without_adapter": 49117,
+          "rlib_bytes": 206404,
+          "target": {
+            "logical_bytes": 509898,
+            "allocated_bytes": 548864,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/bmp-to-png",
+          "build_seconds": 0.269,
+          "source_bytes_without_adapter": 70981,
+          "rlib_bytes": 399438,
+          "target": {
+            "logical_bytes": 1181338,
+            "allocated_bytes": 1216512,
+            "files": 14
+          }
+        },
+        {
+          "capsule": "image/raster/direct/bmp-to-ppm",
+          "build_seconds": 0.699,
+          "source_bytes_without_adapter": 49116,
+          "rlib_bytes": 206402,
+          "target": {
+            "logical_bytes": 509965,
+            "allocated_bytes": 548864,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/bmp-to-qoi",
+          "build_seconds": 0.696,
+          "source_bytes_without_adapter": 49129,
+          "rlib_bytes": 206404,
+          "target": {
+            "logical_bytes": 509968,
+            "allocated_bytes": 548864,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/bmp-to-tga",
+          "build_seconds": 0.703,
+          "source_bytes_without_adapter": 49182,
+          "rlib_bytes": 206286,
+          "target": {
+            "logical_bytes": 509624,
+            "allocated_bytes": 548864,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/pam-to-bmp",
+          "build_seconds": 0.697,
+          "source_bytes_without_adapter": 49116,
+          "rlib_bytes": 206420,
+          "target": {
+            "logical_bytes": 509930,
+            "allocated_bytes": 548864,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/pam-to-png",
+          "build_seconds": 0.923,
+          "source_bytes_without_adapter": 81208,
+          "rlib_bytes": 392342,
+          "target": {
+            "logical_bytes": 960807,
+            "allocated_bytes": 995328,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/pam-to-ppm",
+          "build_seconds": 0.697,
+          "source_bytes_without_adapter": 49060,
+          "rlib_bytes": 206418,
+          "target": {
+            "logical_bytes": 509855,
+            "allocated_bytes": 548864,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/pam-to-qoi",
+          "build_seconds": 0.698,
+          "source_bytes_without_adapter": 49074,
+          "rlib_bytes": 206420,
+          "target": {
+            "logical_bytes": 509929,
+            "allocated_bytes": 548864,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/pam-to-tga",
+          "build_seconds": 0.695,
+          "source_bytes_without_adapter": 49125,
+          "rlib_bytes": 206420,
+          "target": {
+            "logical_bytes": 509929,
+            "allocated_bytes": 548864,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/png-to-bmp",
+          "build_seconds": 0.926,
+          "source_bytes_without_adapter": 81267,
+          "rlib_bytes": 392342,
+          "target": {
+            "logical_bytes": 960879,
+            "allocated_bytes": 995328,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/png-to-pam",
+          "build_seconds": 0.929,
+          "source_bytes_without_adapter": 81208,
+          "rlib_bytes": 392330,
+          "target": {
+            "logical_bytes": 960783,
+            "allocated_bytes": 995328,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/png-to-ppm",
+          "build_seconds": 0.922,
+          "source_bytes_without_adapter": 81218,
+          "rlib_bytes": 392342,
+          "target": {
+            "logical_bytes": 960878,
+            "allocated_bytes": 995328,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/png-to-qoi",
+          "build_seconds": 0.93,
+          "source_bytes_without_adapter": 81229,
+          "rlib_bytes": 392354,
+          "target": {
+            "logical_bytes": 960902,
+            "allocated_bytes": 995328,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/png-to-tga",
+          "build_seconds": 0.919,
+          "source_bytes_without_adapter": 81274,
+          "rlib_bytes": 392356,
+          "target": {
+            "logical_bytes": 960905,
+            "allocated_bytes": 995328,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/ppm-to-bmp",
+          "build_seconds": 0.695,
+          "source_bytes_without_adapter": 49117,
+          "rlib_bytes": 206420,
+          "target": {
+            "logical_bytes": 510000,
+            "allocated_bytes": 548864,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/ppm-to-pam",
+          "build_seconds": 0.695,
+          "source_bytes_without_adapter": 49061,
+          "rlib_bytes": 206292,
+          "target": {
+            "logical_bytes": 509603,
+            "allocated_bytes": 548864,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/ppm-to-png",
+          "build_seconds": 0.925,
+          "source_bytes_without_adapter": 81209,
+          "rlib_bytes": 392328,
+          "target": {
+            "logical_bytes": 960851,
+            "allocated_bytes": 995328,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/ppm-to-qoi",
+          "build_seconds": 0.703,
+          "source_bytes_without_adapter": 49073,
+          "rlib_bytes": 206420,
+          "target": {
+            "logical_bytes": 509890,
+            "allocated_bytes": 548864,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/ppm-to-tga",
+          "build_seconds": 0.697,
+          "source_bytes_without_adapter": 49122,
+          "rlib_bytes": 206292,
+          "target": {
+            "logical_bytes": 509744,
+            "allocated_bytes": 548864,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/qoi-to-bmp",
+          "build_seconds": 0.693,
+          "source_bytes_without_adapter": 49131,
+          "rlib_bytes": 206418,
+          "target": {
+            "logical_bytes": 509996,
+            "allocated_bytes": 548864,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/qoi-to-pam",
+          "build_seconds": 0.698,
+          "source_bytes_without_adapter": 49074,
+          "rlib_bytes": 206420,
+          "target": {
+            "logical_bytes": 509929,
+            "allocated_bytes": 548864,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/qoi-to-png",
+          "build_seconds": 0.924,
+          "source_bytes_without_adapter": 81223,
+          "rlib_bytes": 392342,
+          "target": {
+            "logical_bytes": 960879,
+            "allocated_bytes": 995328,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/qoi-to-ppm",
+          "build_seconds": 0.703,
+          "source_bytes_without_adapter": 49073,
+          "rlib_bytes": 206420,
+          "target": {
+            "logical_bytes": 509891,
+            "allocated_bytes": 548864,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/qoi-to-tga",
+          "build_seconds": 0.696,
+          "source_bytes_without_adapter": 49138,
+          "rlib_bytes": 206418,
+          "target": {
+            "logical_bytes": 509888,
+            "allocated_bytes": 548864,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/tga-to-bmp",
+          "build_seconds": 0.701,
+          "source_bytes_without_adapter": 49182,
+          "rlib_bytes": 206420,
+          "target": {
+            "logical_bytes": 509891,
+            "allocated_bytes": 548864,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/tga-to-pam",
+          "build_seconds": 0.698,
+          "source_bytes_without_adapter": 49124,
+          "rlib_bytes": 206420,
+          "target": {
+            "logical_bytes": 509929,
+            "allocated_bytes": 548864,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/tga-to-png",
+          "build_seconds": 0.909,
+          "source_bytes_without_adapter": 81272,
+          "rlib_bytes": 392352,
+          "target": {
+            "logical_bytes": 960899,
+            "allocated_bytes": 995328,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/tga-to-ppm",
+          "build_seconds": 0.698,
+          "source_bytes_without_adapter": 49123,
+          "rlib_bytes": 206418,
+          "target": {
+            "logical_bytes": 509996,
+            "allocated_bytes": 548864,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/direct/tga-to-qoi",
+          "build_seconds": 0.701,
+          "source_bytes_without_adapter": 49138,
+          "rlib_bytes": 206302,
+          "target": {
+            "logical_bytes": 509655,
+            "allocated_bytes": 548864,
+            "files": 15
+          }
+        },
+        {
+          "capsule": "image/raster/structural/normalize-png",
+          "build_seconds": 0.699,
+          "source_bytes_without_adapter": 50936,
+          "rlib_bytes": 230978,
+          "target": {
+            "logical_bytes": 614575,
+            "allocated_bytes": 651264,
+            "files": 14
+          }
+        },
+        {
+          "capsule": "image/raster/transform/png-alpha-premultiply",
+          "build_seconds": 0.695,
+          "source_bytes_without_adapter": 51165,
+          "rlib_bytes": 231586,
+          "target": {
+            "logical_bytes": 615935,
+            "allocated_bytes": 651264,
+            "files": 14
+          }
+        },
+        {
+          "capsule": "image/raster/transform/png-alpha-unpremultiply",
+          "build_seconds": 0.64,
+          "source_bytes_without_adapter": 51271,
+          "rlib_bytes": 253280,
+          "target": {
+            "logical_bytes": 659362,
+            "allocated_bytes": 692224,
+            "files": 14
+          }
+        },
+        {
+          "capsule": "image/raster/transform/png-crop",
+          "build_seconds": 0.646,
+          "source_bytes_without_adapter": 50894,
+          "rlib_bytes": 253788,
+          "target": {
+            "logical_bytes": 660093,
+            "allocated_bytes": 692224,
+            "files": 14
+          }
+        },
+        {
+          "capsule": "image/raster/transform/png-flip-horizontal",
+          "build_seconds": 0.636,
+          "source_bytes_without_adapter": 50935,
+          "rlib_bytes": 253970,
+          "target": {
+            "logical_bytes": 660666,
+            "allocated_bytes": 700416,
+            "files": 14
+          }
+        },
+        {
+          "capsule": "image/raster/transform/png-flip-vertical",
+          "build_seconds": 0.707,
+          "source_bytes_without_adapter": 50916,
+          "rlib_bytes": 232566,
+          "target": {
+            "logical_bytes": 617819,
+            "allocated_bytes": 651264,
+            "files": 14
+          }
+        },
+        {
+          "capsule": "image/raster/transform/png-pad",
+          "build_seconds": 0.645,
+          "source_bytes_without_adapter": 50930,
+          "rlib_bytes": 254822,
+          "target": {
+            "logical_bytes": 662142,
+            "allocated_bytes": 700416,
+            "files": 14
+          }
+        },
+        {
+          "capsule": "image/raster/transform/png-rotate-180",
+          "build_seconds": 0.641,
+          "source_bytes_without_adapter": 50814,
+          "rlib_bytes": 252198,
+          "target": {
+            "logical_bytes": 657026,
+            "allocated_bytes": 692224,
+            "files": 14
+          }
+        },
+        {
+          "capsule": "image/raster/transform/png-rotate-270",
+          "build_seconds": 0.659,
+          "source_bytes_without_adapter": 50846,
+          "rlib_bytes": 255058,
+          "target": {
+            "logical_bytes": 662756,
+            "allocated_bytes": 700416,
+            "files": 14
+          }
+        },
+        {
+          "capsule": "image/raster/transform/png-rotate-90",
+          "build_seconds": 0.642,
+          "source_bytes_without_adapter": 50830,
+          "rlib_bytes": 254942,
+          "target": {
+            "logical_bytes": 662506,
+            "allocated_bytes": 700416,
+            "files": 14
+          }
+        },
+        {
+          "capsule": "text/byte-coding/direct/utf16-to-utf8",
+          "build_seconds": 0.119,
+          "source_bytes_without_adapter": 24410,
+          "rlib_bytes": 91200,
+          "target": {
+            "logical_bytes": 268938,
+            "allocated_bytes": 307200,
+            "files": 14
+          }
+        }
+      ]
+    }
+  }
+}
