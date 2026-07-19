@@ -135,7 +135,7 @@
       "Planned chunk, Huffman, filter, interlace and transform-coordinate campaigns"
     ],
     "benchmarks": [
-      "Pending controlled exbench baseline"
+      "registry/performance/baseline.json#capability:png-rotate-180/png-native-canonical/native-portable"
     ]
   },
   "security": {

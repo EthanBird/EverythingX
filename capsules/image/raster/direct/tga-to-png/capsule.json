@@ -124,7 +124,7 @@
       "Planned: per-source header, dimensions, packet stream, truncation and trailing-data campaigns"
     ],
     "benchmarks": [
-      "Pending controlled exbench baseline"
+      "registry/performance/baseline.json#capability:tga-to-png/rgba8-code-value-exact/native-portable"
     ]
   },
   "security": {

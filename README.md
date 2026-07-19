@@ -106,11 +106,12 @@ tools/          数据同步、目录构建和一致性校验
 13. `docs/12-audio-operator-program.md`
 14. `docs/13-performance-evidence.md`
 15. `docs/14-image-operator-program.md`
-16. `capsules/README.md`
+16. `docs/15-png-wave-b.md`
+17. `capsules/README.md`
 
 ## 当前阶段
 
-现在不开发桌面端、CLI 或路径规划器。当前生产 Capsule 达到 84 个、Adapter 能力 85 条、真实逻辑格式对 81 个。本轮按要求暂停音频 Wave B，转入图像族：先建立 295 种图像表示、68 类图像算子模板和 10,838 条有向候选边的开放研究台账，再一次增加 20 个零依赖 Raster Wave A Capsule，闭合 BMP、TGA、QOI、PPM、PAM 五种载体的全部有向转换。连同原有 BMP→PNG，当前有 21 条真实图像格式边。音频台账与 58 条不同格式音频边保持不变，FLAC 计划后移。薄 Kernel 仍只负责注册、默认验证和直接调用，不拥有图像 codec 或强制共享 IR。
+现在不开发桌面端、CLI 或路径规划器。当前生产 Capsule 达到 104 个、Adapter 能力 105 条、真实逻辑格式对 91 个。图像族已经连续交付 Raster Wave A 与 PNG Wave B：BMP、TGA、QOI、PPM、PAM 五种载体的 20 条有向转换全部闭合；PNG 又补齐与五者之间缺失的 9 条边，并增加原生校验、规范化、裁剪、填充、翻转、旋转和 Alpha 运算 11 个独立 Capsule。当前有 30 条不同图像格式边和 11 个 PNG 自变换能力。音频台账与 58 条不同格式音频边保持不变，FLAC 计划后移。薄 Kernel 仍只负责注册、默认验证和直接调用，不拥有图像 codec 或强制共享 IR。
 
 ## 当前实际支持的转换
 
@@ -120,6 +121,15 @@ tools/          数据同步、目录构建和一致性校验
 |---|---|---|---:|
 | UTF-16 | UTF-8 | `utf16-to-utf8` | strict、replace-invalid |
 | Windows BMP family | PNG | `bmp-to-png` | pixel-exact |
+| PNG | Windows BMP family | `png-to-bmp` | rgba8-code-value-exact；16-bit 需显式缩放 |
+| PNG | TGA | `png-to-tga` | rgba8-code-value-exact；16-bit 需显式缩放 |
+| PNG | QOI | `png-to-qoi` | rgba8-code-value-exact；16-bit 需显式缩放 |
+| PNG | PPM | `png-to-ppm` | rgba8-code-value-exact；Alpha 默认拒绝 |
+| PNG | PAM | `png-to-pam` | rgba8-code-value-exact；16-bit 需显式缩放 |
+| TGA | PNG | `tga-to-png` | rgba8-code-value-exact |
+| QOI | PNG | `qoi-to-png` | rgba8-code-value-exact |
+| PPM | PNG | `ppm-to-png` | rgba8-code-value-exact |
+| PAM | PNG | `pam-to-png` | rgba8-code-value-exact |
 | Windows BMP family | TGA | `bmp-to-tga` | rgba8-code-value-exact |
 | Windows BMP family | QOI | `bmp-to-qoi` | rgba8-code-value-exact |
 | Windows BMP family | PPM | `bmp-to-ppm` | rgba8-code-value-exact |
@@ -203,9 +213,17 @@ tools/          数据同步、目录构建和一致性校验
 | parameterized raw PCM | projected/reordered raw PCM channels | `raw-pcm-channel-map` | frame-exact |
 | parameterized raw PCM | normalized endian/signedness raw PCM | `raw-pcm-endian-signedness-normalize` | frame-exact |
 
+PNG 同格式算子也属于真实图边，但为避免把格式对表写成 11 行重复的 PNG→PNG，集中列出如下：
+
+| 类别 | 独立 Capsule |
+|---|---|
+| 校验/结构 | `validate-png`、`normalize-png` |
+| 空间 | `png-crop`、`png-pad`、`png-flip-horizontal`、`png-flip-vertical`、`png-rotate-90`、`png-rotate-180`、`png-rotate-270` |
+| Alpha | `png-alpha-premultiply`、`png-alpha-unpremultiply` |
+
 机器可读权威清单是 `registry/support-matrix.json`。任何 Capsule 或 Adapter 更新都必须运行 `python3 tools/build_support_matrix.py`；CI 会拒绝过期矩阵。计划中、研究中和不可计算的边统一保存在 `operators/`，不得写进已支持清单。
 
-全部生产 Capsule 还必须进入统一的端到端性能评估。`tools/benchmark_capsules.py` 通过 Kernel 默认调用测量每个能力的 small/large p50/p95、吞吐、输出比例和显式工作内存，并生成供 Planner 使用的线性成本模型与 0–100 派生分。当前受控基线已覆盖全部 84 个生产 Capsule 和 85 条能力，保存在 `registry/performance/baseline.json`；20 条新图像边测得 129.723–290.495 MiB/s。CI 会拒绝能力边漏测或 evidence 链接失效。分数只能在相同 profile 和环境类别内用于等价边排序，硬约束、语义损失与原始成本模型始终优先。方法见 `docs/13-performance-evidence.md`。
+全部生产 Capsule 还必须进入统一的端到端性能评估。`tools/benchmark_capsules.py` 通过 Kernel 默认调用测量每个能力的 small/large p50/p95、吞吐、输出比例和显式工作内存，并生成供 Planner 使用的线性成本模型与 0–100 派生分。当前受控基线已覆盖全部 104 个生产 Capsule 和 105 条能力，保存在 `registry/performance/baseline.json`。PNG Wave B 的 20 条新能力测得 26.616–91.577 MiB/s：PNG→8-bit 载体为 69.071–79.120 MiB/s，载体→PNG 为 34.527–42.347 MiB/s，PNG 变换为 26.616–30.234 MiB/s，严格校验为 91.577 MiB/s。CI 会拒绝能力边漏测或 evidence 链接失效。分数只能在相同 profile 和环境类别内用于等价边排序，硬约束、语义损失与原始成本模型始终优先。方法见 `docs/13-performance-evidence.md`。
 
 生产 Capsule 使用 `capsules/<domain>/<primary-object-ir>/<operator-role>/<capsule-name>` 层级；Schema 与 CI 会校验目录和 manifest 分类一致，并递归发现新 Capsule，因此扩展任意族类不需要继续维护手写路径列表。
 

@@ -11,6 +11,7 @@ const DEFAULT_MAX_INPUT_BYTES: u64 = 512 * 1024 * 1024;
 const DEFAULT_MAX_INFLATE_BYTES: u64 = 1024 * 1024 * 1024;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[allow(dead_code)]
 enum Operation { Validate, Normalize, Crop, Pad, FlipHorizontal, FlipVertical, Rotate90, Rotate180, Rotate270, AlphaPremultiply, AlphaUnpremultiply }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]

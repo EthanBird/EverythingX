@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Validate repository data and manifests
-        run: python3 tools/validate_repository.py --allow-performance-baseline-lag
+        run: python3 tools/validate_repository.py
 
       - name: Prove implemented support matrix is current
         run: python3 tools/build_support_matrix.py --check

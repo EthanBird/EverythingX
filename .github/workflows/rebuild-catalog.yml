@@ -29,7 +29,7 @@ jobs:
         run: python3 tools/build_catalog.py --source-root ../research/raw
 
       - name: Validate repository
-        run: python3 tools/validate_repository.py --allow-performance-baseline-lag
+        run: python3 tools/validate_repository.py
 
       - name: Prove image operator backlog is current
         run: python3 tools/build_image_backlog.py --check

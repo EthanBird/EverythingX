@@ -32,6 +32,7 @@ Kernel.invoke_defaults
 - small：约 16 KiB，估计固定开销与短任务延迟；
 - large：约 4 MiB，估计线性吞吐、输出比例与工作内存；
 - BMP 使用 64×64 与 1024×1024 的 24-bit BI_RGB 图像；
+- PNG 使用 64×64 与 1024×1024 的合法 RGB8、stored-Deflate、filter-none 图像；
 - PCM 容器使用双声道、48 kHz、signed 16-bit PCM；
 - raw PCM 使用可同时满足单声道和双声道默认值的帧对齐输入；
 - UTF-16 使用带 BOM 的有效 BMP 字符序列。
@@ -104,7 +105,7 @@ score = 100 × exp(Σ weightᵢ × ln(max(componentᵢ, 1) / 100))
 - 记录 Rust 编译器、OS、架构、commit、runner image、fixture/harness hash；
 - 输出机器可读原始成本与派生分。
 
-当前门槛是全部 84 个生产 Capsule、85 个 AdapterCapability 必须参与；UTF-16 Capsule 的 strict 与 replace-invalid 策略分别测量。受控基线的整体大输入吞吐中位数为 1,357.302 MiB/s，范围为 28.877–3,609.165 MiB/s；20 条新 Raster Wave A 边为 129.723–290.495 MiB/s。
+当前门槛是全部 104 个生产 Capsule、105 个 AdapterCapability 必须参与；UTF-16 Capsule 的 strict 与 replace-invalid 策略分别测量。受控基线的整体大输入吞吐中位数为 1,361.282 MiB/s，范围为 26.616–3,650.848 MiB/s；20 条 Raster Wave A 边为 129.723–290.495 MiB/s，20 条 PNG Wave B 能力为 26.616–91.577 MiB/s。
 
 ## 7. 基线更新规则
 
@@ -117,16 +118,17 @@ score = 100 × exp(Σ weightᵢ × ln(max(componentᵢ, 1) / 100))
 
 ## 8. 下一轮 Capsule 计划
 
-八种 integer PCM 容器的 56 条有向直连边已经闭合，但按当前开发优先级，音频 Wave B 暂停。下一轮先完成 PNG 中心的图像波次：
+八种 integer PCM 容器的 56 条有向直连边和 PNG Wave B 已经闭合；按当前开发优先级，音频 Wave B 继续暂停，下一轮进入仍未覆盖的常见图像格式：
 
 ```text
-PNG ↔ TGA/QOI/PPM/PAM
-PNG → BMP（BMP → PNG 已有专用实现）
-validate PNG             normalize PNG
-crop / pad / flip / rotate90/180/270
-alpha premultiply / alpha unpremultiply
+GIF87a/GIF89a ↔ PNG（含帧、时间、disposal 语义）
+ICO/CUR ↔ PNG/BMP（含多尺寸成员选择与聚合）
+JPEG baseline/progressive ↔ PNG
+TIFF profile families ↔ PNG
+WebP lossy/lossless/animation ↔ PNG
+AVIF/HEIF item/sequence ↔ PNG
 ```
 
-这批完成后再进入 JPEG、WebP、GIF、AVIF/HEIF；FLAC 的 20-Capsule 计划保留到图像阶段之后。
+每个 codec 必须先声明 native/dependency backend 决策和可验证 profile，动画与多成员格式必须使用集合/时序算子，不能由单图 `convert` 静默丢弃。FLAC 的 20-Capsule 计划保留到图像阶段之后。
 
 八组双向 codec 边产生 16 个 Capsule，封装互转产生 2 个，验证与 metadata 规范化各 1 个，总计 20。FLAC decoder/encoder、CRC、Rice coding、subframe 与 frame scanner 必须是 Capsule 内完整可复制的 Rust 实现；开发期可以由生成器同步经过验证的源码，但不能增加 EverythingX 运行时依赖。所有新能力继续自动进入功能、copy-out 与性能评估。

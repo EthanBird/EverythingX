@@ -35,9 +35,9 @@ These are source observations, not a count of unique canonical formats.
 
 | Metric | Count |
 |---|---:|
-| Actually implemented standalone Capsules | 84 |
-| Actually implemented Adapter capabilities | 85 |
-| Actually implemented logical format pairs | 81 |
+| Actually implemented standalone Capsules | 104 |
+| Actually implemented Adapter capabilities | 105 |
+| Actually implemented logical format pairs | 91 |
 | Object IR × operator-kind research positions | 4,743 |
 | Semantic-family × operator-family research cells | 310 |
 | Reviewed audio representations | 172 |
@@ -47,9 +47,10 @@ These are source observations, not a count of unique canonical formats.
 | Reviewed image representations | 295 |
 | Image operator templates | 68 |
 | Generated ordered image pair candidates | 10,838 |
-| Actually implemented image format pairs | 21 |
-| Capsules covered by performance harness | 84 |
-| Capability edges covered by performance harness | 85 |
+| Actually implemented distinct-format image pairs | 30 |
+| Implemented PNG same-format operator capabilities | 11 |
+| Capsules covered by performance harness | 104 |
+| Capability edges covered by performance harness | 105 |
 
 `registry/support-matrix.json` is generated from real manifests and answers what works now. `operators/audio/backlog.json` is a research and implementation queue; its candidate count is not a feature count.
 
@@ -148,15 +149,25 @@ These are source observations, not a count of unique canonical formats.
 - Every generated leaf owns the complete implementation and remains buildable after copy-out and Adapter deletion.
 - The batch adds 80 core unit tests and 20 Kernel/Adapter default-invocation tests; all 84 production Capsules pass copy-out testing.
 
-### Performance evidence 0.1
+### PNG Wave B batch 0.2 — 20 Capsules
 
-- One generated release-mode harness recursively covers all 84 production Capsules and all 85 Adapter capabilities.
+- Nine directed conversions close PNG↔BMP/TGA/QOI/PPM/PAM when combined with the existing specialized BMP→PNG Capsule.
+- Eleven PNG-native operators provide strict validation, canonical normalization, crop, pad, horizontal/vertical reflection, 90/180/270-degree rotation and alpha premultiply/unpremultiply.
+- Each leaf materializes a dependency-free PNG state machine covering color types 0/2/3/4/6, legal 1/2/4/8/16-bit combinations, PLTE/tRNS, CRC-32, Adler-32, stored/fixed/dynamic Deflate, filters 0–4 and Adam7.
+- Pixel-changing PNG operations use an RGBA16 internal proof model and retain 16-bit precision; conversion to an 8-bit carrier rejects 16-bit input under defaults and requires explicit scaling.
+- Fixed/dynamic Huffman vectors, Adam7 coordinates, indexed 2-bit transparency, all encoder filters, malformed checksums, allocation limits and independent target decoding are direct unit-test gates.
+- The batch adds 231 standalone tests and 20 Kernel/Adapter default-invocation tests. All 104 production Capsules enter recursive copy-out testing and all 105 capabilities enter the performance harness.
+
+### Performance evidence 0.2
+
+- One generated release-mode harness recursively covers all 104 production Capsules and all 105 Adapter capabilities.
 - Every capability is invoked through the Kernel with runnable defaults on deterministic small and large valid inputs.
 - Evidence records p50/p95 latency, throughput, output ratio and Capsule-reported working memory together with compiler, environment, commit and harness identity.
 - Planner-facing records expose a size-sensitive raw cost model; a calibrated 0–100 geometric score is retained only for same-profile ranking and UI summaries.
 - CI first runs functional, copy-out and Adapter tests, then rejects missing benchmark coverage or failed benchmark invocations.
-- The current controlled `ubuntu-24.04`/x86-64 baseline covers 84 Capsules and 85 capabilities: median large-workload throughput is 1,357.302 MiB/s; observed range is 28.877–3,609.165 MiB/s and calibrated score range is 14.888–60.433.
+- The current controlled `ubuntu-24.04`/x86-64 baseline covers 104 Capsules and 105 capabilities: median large-workload throughput is 1,361.282 MiB/s; observed range is 26.616–3,650.848 MiB/s and calibrated score range is 11.135–59.411.
 - The 20 new Raster Wave A edges measure 129.723–290.495 MiB/s; their 3.75–4.67 memory ratios make profile-specialized streaming the next evidence-backed optimization target.
+- PNG Wave B measures 26.616–91.577 MiB/s. PNG spatial/alpha transforms report a 5.665 input-byte memory ratio, making row streaming and atomic-spool strategies the next measured optimization target.
 
 ## Intentionally absent
 
@@ -170,8 +181,8 @@ These are source observations, not a count of unique canonical formats.
 
 Image is the active implementation family; audio Wave B remains recorded but paused:
 
-1. Harden all 84 production Capsules with corpus manifests, fuzz targets and reproducible benchmark reports.
-2. Build the PNG-centered wave: nine missing PNG mesh directions, PNG validation and normalization, then a coherent raster spatial/alpha transform basis.
-3. Add profile-specialized streaming fast paths where the measured source/target order permits bounded rows instead of complete RGBA/output buffers.
-4. Move next through JPEG, WebP, GIF, AVIF/HEIF and camera raw only after the PNG conformance gate.
+1. Harden all 104 production Capsules with corpus manifests, fuzz targets and reproducible benchmark reports.
+2. Add profile-specialized PNG streaming fast paths where the measured source/target order permits bounded rows instead of complete RGBA16/output buffers.
+3. Move through GIF and ICO first, then JPEG, TIFF, WebP and AVIF/HEIF with an explicit native/dependency backend decision per codec.
+4. Add animation-aware frame algebra rather than silently flattening GIF/APNG/WebP animation.
 5. Resume the recorded 20-Capsule FLAC family after the requested image phase.

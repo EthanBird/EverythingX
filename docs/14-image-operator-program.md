@@ -1,7 +1,7 @@
 # Image operator program
 
 Date: 2026-07-19  
-Status: open-world representation ledger established; Raster Wave A implemented.
+Status: open-world representation ledger established; Raster Wave A and PNG Wave B implemented.
 
 ## 1. Boundary of the image family
 
@@ -123,18 +123,41 @@ access, orientation reversal or atomic output validation. Performance evidence
 will decide graph cost and optimization priority; it never overrides semantic
 preconditions or loss.
 
-## 6. Next image wave
+## 6. PNG Wave B
 
-Audio Wave B is paused. The next image batch is the PNG-centered compressed
-raster wave:
+Audio Wave B remains paused. PNG Wave B delivered:
 
-1. implement the nine missing PNG directions against BMP/TGA/QOI/PPM/PAM
+1. nine missing PNG directions against BMP/TGA/QOI/PPM/PAM
    (the existing specialized BMP→PNG edge remains);
-2. add independent PNG validation and deterministic structural normalization;
-3. add crop, pad, horizontal/vertical flip, 90/180/270-degree rotation,
+2. independent strict PNG validation and deterministic structural normalization;
+3. crop, pad, horizontal/vertical flip, 90/180/270-degree rotation,
    alpha premultiply and alpha unpremultiply Capsules;
-4. differential-test PNG decoding/encoding against official conformance data
-   before moving to JPEG, WebP, GIF, AVIF/HEIF and camera raw.
+4. a native PNG decoder for legal color/depth combinations, PLTE/tRNS,
+   all Deflate block types, five filters and Adam7;
+5. a canonical RGB/RGBA 8/16-bit encoder with adaptive filters, stored Deflate,
+   CRC-32, Adler-32 and deterministic 64 KiB IDAT chunking.
 
-This produces a 20-plus Capsule batch while closing a declared format subgraph
-and a coherent transform basis instead of scattering isolated edges.
+The 20-Capsule wave closes a declared format subgraph and a coherent transform
+basis instead of scattering isolated edges. Direct fixed/dynamic Huffman,
+Adam7, sub-byte indexed transparency and 16-bit round-trip tests are copied into
+every leaf; the generator is development tooling, not a runtime dependency.
+
+## 7. Next common-format waves
+
+PNG Wave B does not justify claiming that common image formats are complete.
+The next ordered program is:
+
+1. GIF87a/GIF89a and ICO/CUR, including frame/member algebra and explicit
+   animation/selection semantics;
+2. baseline/progressive JPEG and TIFF profile families, with color and metadata
+   contracts separated from pixel-code-value claims;
+3. WebP lossy/lossless/animation and AVIF/HEIF item/sequence graphs;
+4. SVG and PDF rasterization bridges as object-graph render operations, never
+   mislabeled as carrier-only conversions;
+5. camera raw development only after calibration, demosaic and color-transform
+   preconditions are represented in capability records.
+
+Each codec receives a native-versus-dependency decision record. “Zero dependency”
+does not permit a partial decoder to masquerade as common-format support; where
+the codec state space is too large for the current native proof, a dependency
+backend remains preferable to a false support claim.
