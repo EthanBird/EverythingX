@@ -3733,7 +3733,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": []
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:bmp-to-pam/rgba8-code-value-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:bmp-to-png/pixel-exact/native-portable",
@@ -3781,7 +3783,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": []
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:bmp-to-ppm/rgba8-code-value-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:bmp-to-qoi/rgba8-code-value-exact/native-portable",
@@ -3805,7 +3809,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": []
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:bmp-to-qoi/rgba8-code-value-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:bmp-to-tga/rgba8-code-value-exact/native-portable",
@@ -3829,7 +3835,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": []
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:bmp-to-tga/rgba8-code-value-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:bw64-pcm-to-aiff-pcm/pcm-exact/native-portable",
@@ -4378,7 +4386,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": []
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:pam-to-bmp/rgba8-code-value-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:pam-to-ppm/rgba8-code-value-exact/native-portable",
@@ -4402,7 +4412,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": []
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:pam-to-ppm/rgba8-code-value-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:pam-to-qoi/rgba8-code-value-exact/native-portable",
@@ -4426,7 +4438,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": []
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:pam-to-qoi/rgba8-code-value-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:pam-to-tga/rgba8-code-value-exact/native-portable",
@@ -4450,7 +4464,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": []
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:pam-to-tga/rgba8-code-value-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:ppm-to-bmp/rgba8-code-value-exact/native-portable",
@@ -4474,7 +4490,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": []
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:ppm-to-bmp/rgba8-code-value-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:ppm-to-pam/rgba8-code-value-exact/native-portable",
@@ -4498,7 +4516,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": []
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:ppm-to-pam/rgba8-code-value-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:ppm-to-qoi/rgba8-code-value-exact/native-portable",
@@ -4522,7 +4542,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": []
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:ppm-to-qoi/rgba8-code-value-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:ppm-to-tga/rgba8-code-value-exact/native-portable",
@@ -4546,7 +4568,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": []
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:ppm-to-tga/rgba8-code-value-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:qoi-to-bmp/rgba8-code-value-exact/native-portable",
@@ -4570,7 +4594,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": []
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:qoi-to-bmp/rgba8-code-value-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:qoi-to-pam/rgba8-code-value-exact/native-portable",
@@ -4594,7 +4620,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": []
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:qoi-to-pam/rgba8-code-value-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:qoi-to-ppm/rgba8-code-value-exact/native-portable",
@@ -4618,7 +4646,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": []
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:qoi-to-ppm/rgba8-code-value-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:qoi-to-tga/rgba8-code-value-exact/native-portable",
@@ -4642,7 +4672,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": []
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:qoi-to-tga/rgba8-code-value-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:raw-pcm-channel-map/frame-exact/native-portable",
@@ -4966,7 +4998,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": []
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:tga-to-bmp/rgba8-code-value-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:tga-to-pam/rgba8-code-value-exact/native-portable",
@@ -4990,7 +5024,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": []
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:tga-to-pam/rgba8-code-value-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:tga-to-ppm/rgba8-code-value-exact/native-portable",
@@ -5014,7 +5050,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": []
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:tga-to-ppm/rgba8-code-value-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:tga-to-qoi/rgba8-code-value-exact/native-portable",
@@ -5038,7 +5076,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": []
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:tga-to-qoi/rgba8-code-value-exact/native-portable"
+      ]
     },
     {
       "capability_id": "capability:utf16-to-utf8/replace-invalid/native-portable",

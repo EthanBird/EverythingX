@@ -60,7 +60,9 @@
       "execution": {
         "streaming": false,
         "seek_required": false,
-        "cost_evidence": []
+        "cost_evidence": [
+          "registry/performance/baseline.json#capability:tga-to-pam/rgba8-code-value-exact/native-portable"
+        ]
       },
       "report_mapping": {
         "unknown_fields_are_preserved": true,

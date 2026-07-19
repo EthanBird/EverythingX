@@ -104,7 +104,7 @@ score = 100 × exp(Σ weightᵢ × ln(max(componentᵢ, 1) / 100))
 - 记录 Rust 编译器、OS、架构、commit、runner image、fixture/harness hash；
 - 输出机器可读原始成本与派生分。
 
-当前门槛是全部 64 个生产 Capsule、65 个 AdapterCapability 必须参与；UTF-16 Capsule 的 strict 与 replace-invalid 策略分别测量。
+当前门槛是全部 84 个生产 Capsule、85 个 AdapterCapability 必须参与；UTF-16 Capsule 的 strict 与 replace-invalid 策略分别测量。受控基线的整体大输入吞吐中位数为 1,357.302 MiB/s，范围为 28.877–3,609.165 MiB/s；20 条新 Raster Wave A 边为 129.723–290.495 MiB/s。
 
 ## 7. 基线更新规则
 
@@ -117,15 +117,16 @@ score = 100 × exp(Σ weightᵢ × ln(max(componentᵢ, 1) / 100))
 
 ## 8. 下一轮 Capsule 计划
 
-八种 integer PCM 容器的 56 条有向直连边已经闭合。下一轮进入 Wave B，一次规划 20 个 FLAC Capsule：
+八种 integer PCM 容器的 56 条有向直连边已经闭合，但按当前开发优先级，音频 Wave B 暂停。下一轮先完成 PNG 中心的图像波次：
 
 ```text
-WAV ↔ native FLAC        AIFF ↔ native FLAC
-CAF ↔ native FLAC        AU ↔ native FLAC
-RF64 ↔ native FLAC       BW64 ↔ native FLAC
-Wave64 ↔ native FLAC     BWF ↔ native FLAC
-native FLAC ↔ Ogg FLAC
-validate native FLAC     normalize FLAC metadata
+PNG ↔ TGA/QOI/PPM/PAM
+PNG → BMP（BMP → PNG 已有专用实现）
+validate PNG             normalize PNG
+crop / pad / flip / rotate90/180/270
+alpha premultiply / alpha unpremultiply
 ```
+
+这批完成后再进入 JPEG、WebP、GIF、AVIF/HEIF；FLAC 的 20-Capsule 计划保留到图像阶段之后。
 
 八组双向 codec 边产生 16 个 Capsule，封装互转产生 2 个，验证与 metadata 规范化各 1 个，总计 20。FLAC decoder/encoder、CRC、Rice coding、subframe 与 frame scanner 必须是 Capsule 内完整可复制的 Rust 实现；开发期可以由生成器同步经过验证的源码，但不能增加 EverythingX 运行时依赖。所有新能力继续自动进入功能、copy-out 与性能评估。

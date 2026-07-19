@@ -105,11 +105,12 @@ tools/          数据同步、目录构建和一致性校验
 12. `docs/11-object-ir-and-operator-universe.md`
 13. `docs/12-audio-operator-program.md`
 14. `docs/13-performance-evidence.md`
-15. `capsules/README.md`
+15. `docs/14-image-operator-program.md`
+16. `capsules/README.md`
 
 ## 当前阶段
 
-现在不开发桌面端、CLI 或路径规划器。当前生产 Capsule 达到 64 个。最新批次一次增加 22 个直连 Capsule：补齐 RF64、BW64、Wave64、BWF 之间剩余方向，并完成 AIFF 与 CAF、AU、RF64、BW64、Wave64、BWF 的双向转换。WAV、AIFF、CAF、AU、RF64、BW64、Wave64、BWF 八种 integer PCM 容器现在形成全部 56 条有向直连边；批量生成、独立交付的 Wave A 实现达到 58 个。开发节奏固定为“先完成族级格式空间与全量算子 backlog，再批量实现并测试整个算子簇”。首版施工层有 31 个 Object IR、153 个算子动词、4,743 个 IR×算子研究位置和 310 个族级研究单元。音频当前归类 172 个表示、42 类操作模板和 8,672 条有序候选边，其中 58 条不同格式音频边已有实现。薄 Kernel 仍只负责注册、默认验证和直接调用。
+现在不开发桌面端、CLI 或路径规划器。当前生产 Capsule 达到 84 个、Adapter 能力 85 条、真实逻辑格式对 81 个。本轮按要求暂停音频 Wave B，转入图像族：先建立 295 种图像表示、68 类图像算子模板和 10,838 条有向候选边的开放研究台账，再一次增加 20 个零依赖 Raster Wave A Capsule，闭合 BMP、TGA、QOI、PPM、PAM 五种载体的全部有向转换。连同原有 BMP→PNG，当前有 21 条真实图像格式边。音频台账与 58 条不同格式音频边保持不变，FLAC 计划后移。薄 Kernel 仍只负责注册、默认验证和直接调用，不拥有图像 codec 或强制共享 IR。
 
 ## 当前实际支持的转换
 
@@ -119,6 +120,26 @@ tools/          数据同步、目录构建和一致性校验
 |---|---|---|---:|
 | UTF-16 | UTF-8 | `utf16-to-utf8` | strict、replace-invalid |
 | Windows BMP family | PNG | `bmp-to-png` | pixel-exact |
+| Windows BMP family | TGA | `bmp-to-tga` | rgba8-code-value-exact |
+| Windows BMP family | QOI | `bmp-to-qoi` | rgba8-code-value-exact |
+| Windows BMP family | PPM | `bmp-to-ppm` | rgba8-code-value-exact |
+| Windows BMP family | PAM | `bmp-to-pam` | rgba8-code-value-exact |
+| TGA | Windows BMP family | `tga-to-bmp` | rgba8-code-value-exact |
+| TGA | QOI | `tga-to-qoi` | rgba8-code-value-exact |
+| TGA | PPM | `tga-to-ppm` | rgba8-code-value-exact |
+| TGA | PAM | `tga-to-pam` | rgba8-code-value-exact |
+| QOI | Windows BMP family | `qoi-to-bmp` | rgba8-code-value-exact |
+| QOI | TGA | `qoi-to-tga` | rgba8-code-value-exact |
+| QOI | PPM | `qoi-to-ppm` | rgba8-code-value-exact |
+| QOI | PAM | `qoi-to-pam` | rgba8-code-value-exact |
+| PPM | Windows BMP family | `ppm-to-bmp` | rgba8-code-value-exact |
+| PPM | TGA | `ppm-to-tga` | rgba8-code-value-exact |
+| PPM | QOI | `ppm-to-qoi` | rgba8-code-value-exact |
+| PPM | PAM | `ppm-to-pam` | rgba8-code-value-exact |
+| PAM | Windows BMP family | `pam-to-bmp` | rgba8-code-value-exact |
+| PAM | TGA | `pam-to-tga` | rgba8-code-value-exact |
+| PAM | QOI | `pam-to-qoi` | rgba8-code-value-exact |
+| PAM | PPM | `pam-to-ppm` | rgba8-code-value-exact |
 | RIFF/WAVE integer PCM | classic AIFF PCM | `wav-pcm-to-aiff` | pcm-exact |
 | classic AIFF PCM | RIFF/WAVE integer PCM | `aiff-pcm-to-wav-pcm` | pcm-exact |
 | parameterized raw integer PCM | RIFF/WAVE integer PCM | `raw-pcm-to-wav-pcm` | pcm-exact |
@@ -184,7 +205,7 @@ tools/          数据同步、目录构建和一致性校验
 
 机器可读权威清单是 `registry/support-matrix.json`。任何 Capsule 或 Adapter 更新都必须运行 `python3 tools/build_support_matrix.py`；CI 会拒绝过期矩阵。计划中、研究中和不可计算的边统一保存在 `operators/`，不得写进已支持清单。
 
-全部生产 Capsule 还必须进入统一的端到端性能评估。`tools/benchmark_capsules.py` 通过 Kernel 默认调用测量每个能力的 small/large p50/p95、吞吐、输出比例和显式工作内存，并生成供 Planner 使用的线性成本模型与 0–100 派生分。当前受控基线已覆盖全部 64 个生产 Capsule 和 65 条能力，保存在 `registry/performance/baseline.json`；CI 会拒绝能力边漏测或 evidence 链接失效。分数只能在相同 profile 和环境类别内用于等价边排序，硬约束、语义损失与原始成本模型始终优先。方法见 `docs/13-performance-evidence.md`。
+全部生产 Capsule 还必须进入统一的端到端性能评估。`tools/benchmark_capsules.py` 通过 Kernel 默认调用测量每个能力的 small/large p50/p95、吞吐、输出比例和显式工作内存，并生成供 Planner 使用的线性成本模型与 0–100 派生分。当前受控基线已覆盖全部 84 个生产 Capsule 和 85 条能力，保存在 `registry/performance/baseline.json`；20 条新图像边测得 129.723–290.495 MiB/s。CI 会拒绝能力边漏测或 evidence 链接失效。分数只能在相同 profile 和环境类别内用于等价边排序，硬约束、语义损失与原始成本模型始终优先。方法见 `docs/13-performance-evidence.md`。
 
 生产 Capsule 使用 `capsules/<domain>/<primary-object-ir>/<operator-role>/<capsule-name>` 层级；Schema 与 CI 会校验目录和 manifest 分类一致，并递归发现新 Capsule，因此扩展任意族类不需要继续维护手写路径列表。
 

@@ -1,7 +1,7 @@
 # Project status — Architecture 2.0
 
 Date: 2026-07-19  
-Status: Reference architecture validated; operator-universe construction and audio-family program active.
+Status: Reference architecture validated; image-family program active, audio Wave B paused.
 
 ## Accepted architecture
 
@@ -35,17 +35,21 @@ These are source observations, not a count of unique canonical formats.
 
 | Metric | Count |
 |---|---:|
-| Actually implemented standalone Capsules | 64 |
-| Actually implemented Adapter capabilities | 65 |
-| Actually implemented logical format pairs | 61 |
+| Actually implemented standalone Capsules | 84 |
+| Actually implemented Adapter capabilities | 85 |
+| Actually implemented logical format pairs | 81 |
 | Object IR × operator-kind research positions | 4,743 |
 | Semantic-family × operator-family research cells | 310 |
 | Reviewed audio representations | 172 |
 | Audio operator templates | 42 |
 | Generated ordered audio pair candidates | 8,672 |
 | Actually implemented distinct-format audio pairs | 58 |
-| Capsules covered by performance harness | 64 |
-| Capability edges covered by performance harness | 65 |
+| Reviewed image representations | 295 |
+| Image operator templates | 68 |
+| Generated ordered image pair candidates | 10,838 |
+| Actually implemented image format pairs | 21 |
+| Capsules covered by performance harness | 84 |
+| Capability edges covered by performance harness | 85 |
 
 `registry/support-matrix.json` is generated from real manifests and answers what works now. `operators/audio/backlog.json` is a research and implementation queue; its candidate count is not a feature count.
 
@@ -66,6 +70,7 @@ These are source observations, not a count of unique canonical formats.
 - Generated 4,743 Object IR/operator research positions and 310 family research cells
 - Generated implemented-support matrix with CI freshness enforcement
 - Audio representation universe and complete ordered-pair research backlog
+- Image representation universe and complete ordered-pair research backlog
 - Recursive Capsule taxonomy by domain, primary Object IR and operator role
 - Automatic recursive discovery for manifests, copy-out tests and Adapter tests
 
@@ -135,15 +140,23 @@ These are source observations, not a count of unique canonical formats.
 - Eight integer PCM containers now form a complete directed graph of 56 direct Capsule edges.
 - The batch adds 88 core unit tests and 22 Kernel/Adapter default-invocation tests; all 64 production Capsules pass copy-out testing.
 
+### Raster Wave A batch 0.1 — 20 Capsules
+
+- BMP, TGA, QOI, PPM and PAM now form a complete directed graph of 20 standalone conversion edges.
+- Native zero-dependency code covers QOI 1.0 chunks, TGA raw/RLE and origin normalization, common BMP RGB/BGRA8 structures, and visual PPM/PAM parsing and emission.
+- Accepted RGBA8/RGB8 code values and coordinates are exact; PPM rejects non-opaque pixels by default unless a caller explicitly selects a lossy alpha policy.
+- Every generated leaf owns the complete implementation and remains buildable after copy-out and Adapter deletion.
+- The batch adds 80 core unit tests and 20 Kernel/Adapter default-invocation tests; all 84 production Capsules pass copy-out testing.
+
 ### Performance evidence 0.1
 
-- One generated release-mode harness recursively covers all 64 production Capsules and all 65 Adapter capabilities.
+- One generated release-mode harness recursively covers all 84 production Capsules and all 85 Adapter capabilities.
 - Every capability is invoked through the Kernel with runnable defaults on deterministic small and large valid inputs.
 - Evidence records p50/p95 latency, throughput, output ratio and Capsule-reported working memory together with compiler, environment, commit and harness identity.
 - Planner-facing records expose a size-sensitive raw cost model; a calibrated 0–100 geometric score is retained only for same-profile ranking and UI summaries.
 - CI first runs functional, copy-out and Adapter tests, then rejects missing benchmark coverage or failed benchmark invocations.
-- The current controlled `ubuntu-24.04`/x86-64 baseline covers 64 Capsules and 65 capabilities: median large-workload throughput is 2,210.839 MiB/s; observed range is 27.833–3,632.887 MiB/s and calibrated score range is 14.415–58.476.
-- AIFF↔AU reaches about 3.56–3.63 GiB/s because both use big-endian signed PCM; AIFF↔little-endian containers measures about 1.24–1.44 GiB/s because samples require byte-order transformation.
+- The current controlled `ubuntu-24.04`/x86-64 baseline covers 84 Capsules and 85 capabilities: median large-workload throughput is 1,357.302 MiB/s; observed range is 28.877–3,609.165 MiB/s and calibrated score range is 14.888–60.433.
+- The 20 new Raster Wave A edges measure 129.723–290.495 MiB/s; their 3.75–4.67 memory ratios make profile-specialized streaming the next evidence-backed optimization target.
 
 ## Intentionally absent
 
@@ -155,10 +168,10 @@ These are source observations, not a count of unique canonical formats.
 
 ## Next milestone
 
-The three-Capsule reference gate is complete. Audio is the active implementation family:
+Image is the active implementation family; audio Wave B remains recorded but paused:
 
-1. Harden all 64 production Capsules with corpus manifests, fuzz targets and reproducible benchmark reports.
-2. Start Wave B with a 20-Capsule FLAC family: eight PCM containers↔native FLAC (16), native FLAC↔Ogg FLAC (2), FLAC validation (1) and FLAC metadata normalization (1).
-3. Close the remaining PCM Wave A multi-input/output work: channel split/aggregate and concatenate, which first requires an n:m Adapter transport contract.
-4. Continue through ALAC, WavPack, APE, TTA and TAK after the FLAC implementation reaches conformance and performance gates.
-5. Do not switch to isolated Text/Table operators until the active audio wave has reached its declared closure gate.
+1. Harden all 84 production Capsules with corpus manifests, fuzz targets and reproducible benchmark reports.
+2. Build the PNG-centered wave: nine missing PNG mesh directions, PNG validation and normalization, then a coherent raster spatial/alpha transform basis.
+3. Add profile-specialized streaming fast paths where the measured source/target order permits bounded rows instead of complete RGBA/output buffers.
+4. Move next through JPEG, WebP, GIF, AVIF/HEIF and camera raw only after the PNG conformance gate.
+5. Resume the recorded 20-Capsule FLAC family after the requested image phase.
