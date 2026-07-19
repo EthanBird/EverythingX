@@ -1,0 +1,12 @@
+[package]
+name = "png-crop"
+version = "0.1.0"
+edition = "2024"
+publish = false
+license-file = "LICENSE"
+description = "Crop a PNG to an explicit rectangle with a runnable full-image default."
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]

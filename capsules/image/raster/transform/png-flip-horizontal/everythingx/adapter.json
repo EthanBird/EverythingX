@@ -1,0 +1,81 @@
+{
+  "adapter_id": "adapter:png-flip-horizontal-static",
+  "version": "0.1.0",
+  "capsule": {
+    "id": "capsule:png-flip-horizontal",
+    "version_requirement": "^0.1.0"
+  },
+  "protocol": {
+    "name": "everythingx-adapter-protocol",
+    "version_requirement": "0.1"
+  },
+  "transport": {
+    "kind": "static-rust",
+    "entrypoint": "GeneratedPngAdapter"
+  },
+  "capabilities": [
+    {
+      "capability_id": "capability:png-flip-horizontal/png-native-canonical/native-portable",
+      "capsule_entrypoint": "convert",
+      "strategy": "png-native-canonical",
+      "backend": "native-portable",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "preconditions": [
+        "Input is a structurally valid PNG within declared limits"
+      ],
+      "effects": [
+        "Reflect PNG pixels across the vertical axis."
+      ],
+      "invariants": [
+        "PNG pixel sample precision",
+        "Deterministic integer arithmetic"
+      ],
+      "computability": "total_for_declared_subset",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "none"
+      },
+      "default_options": {
+        "background_alpha": 0,
+        "background_blue": 0,
+        "background_green": 0,
+        "background_red": 0,
+        "crop_height": 0,
+        "crop_width": 0,
+        "crop_x": 0,
+        "crop_y": 0,
+        "filter": "adaptive",
+        "max_inflate_bytes": 1073741824,
+        "max_input_bytes": 536870912,
+        "max_pixels": 100000000,
+        "pad_bottom": 0,
+        "pad_left": 0,
+        "pad_right": 0,
+        "pad_top": 0,
+        "strict_crc": true,
+        "strict_trailing_data": true
+      },
+      "defaults_are_runnable": true,
+      "execution": {
+        "streaming": false,
+        "seek_required": false,
+        "cost_evidence": []
+      },
+      "report_mapping": {
+        "unknown_fields_are_preserved": true,
+        "rules": [
+          "Dimensions, source PNG properties and operation map to capsule_report",
+          "static Adapter enforces input and output memory shares"
+        ]
+      }
+    }
+  ]
+}

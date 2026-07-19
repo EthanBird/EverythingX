@@ -1,0 +1,12 @@
+[package]
+name = "validate-png"
+version = "0.1.0"
+edition = "2024"
+publish = false
+license-file = "LICENSE"
+description = "Validate PNG structure, CRC, zlib, Deflate, filters and pixels, then copy the exact byte stream."
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]

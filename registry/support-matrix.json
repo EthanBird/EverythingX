@@ -3,9 +3,9 @@
   "meaning": "Implemented conversion support derived from non-template Capsule and Adapter manifests.",
   "update_rule": "Any Capsule or Adapter capability change must regenerate this file with tools/build_support_matrix.py.",
   "summary": {
-    "standalone_capsules": 84,
-    "adapter_capabilities": 85,
-    "logical_source_target_pairs": 81
+    "standalone_capsules": 104,
+    "adapter_capabilities": 105,
+    "logical_source_target_pairs": 91
   },
   "logical_pairs": [
     {
@@ -270,6 +270,10 @@
     },
     {
       "source": "exfmt:image:pam",
+      "target": "exfmt:image:png"
+    },
+    {
+      "source": "exfmt:image:pam",
       "target": "exfmt:image:ppm"
     },
     {
@@ -281,12 +285,40 @@
       "target": "exfmt:image:tga-raster"
     },
     {
+      "source": "exfmt:image:png",
+      "target": "exfmt:image:bmp-family"
+    },
+    {
+      "source": "exfmt:image:png",
+      "target": "exfmt:image:pam"
+    },
+    {
+      "source": "exfmt:image:png",
+      "target": "exfmt:image:png"
+    },
+    {
+      "source": "exfmt:image:png",
+      "target": "exfmt:image:ppm"
+    },
+    {
+      "source": "exfmt:image:png",
+      "target": "exfmt:image:qoi"
+    },
+    {
+      "source": "exfmt:image:png",
+      "target": "exfmt:image:tga-raster"
+    },
+    {
       "source": "exfmt:image:ppm",
       "target": "exfmt:image:bmp-family"
     },
     {
       "source": "exfmt:image:ppm",
       "target": "exfmt:image:pam"
+    },
+    {
+      "source": "exfmt:image:ppm",
+      "target": "exfmt:image:png"
     },
     {
       "source": "exfmt:image:ppm",
@@ -303,6 +335,10 @@
     {
       "source": "exfmt:image:qoi",
       "target": "exfmt:image:pam"
+    },
+    {
+      "source": "exfmt:image:qoi",
+      "target": "exfmt:image:png"
     },
     {
       "source": "exfmt:image:qoi",
@@ -319,6 +355,10 @@
     {
       "source": "exfmt:image:tga-raster",
       "target": "exfmt:image:pam"
+    },
+    {
+      "source": "exfmt:image:tga-raster",
+      "target": "exfmt:image:png"
     },
     {
       "source": "exfmt:image:tga-raster",
@@ -2567,6 +2607,42 @@
       ]
     },
     {
+      "capsule_id": "capsule:validate-png",
+      "version": "0.1.0",
+      "crate": "validate-png",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "validate",
+        "operator_role": "analyze"
+      },
+      "repository_path": "capsules/image/raster/analyze/validate-png",
+      "capability_ids": [
+        "capability:validate-png/png-native-canonical/native-portable"
+      ]
+    },
+    {
       "capsule_id": "capsule:bmp-to-pam",
       "version": "0.1.0",
       "crate": "bmp-to-pam",
@@ -2783,6 +2859,42 @@
       ]
     },
     {
+      "capsule_id": "capsule:pam-to-png",
+      "version": "0.1.0",
+      "crate": "pam-to-png",
+      "inputs": [
+        "exfmt:image:pam"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/image/raster/direct/pam-to-png",
+      "capability_ids": [
+        "capability:pam-to-png/rgba8-code-value-exact/native-portable"
+      ]
+    },
+    {
       "capsule_id": "capsule:pam-to-ppm",
       "version": "0.1.0",
       "crate": "pam-to-ppm",
@@ -2891,6 +3003,186 @@
       ]
     },
     {
+      "capsule_id": "capsule:png-to-bmp",
+      "version": "0.1.0",
+      "crate": "png-to-bmp",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "exfmt:image:bmp-family"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/image/raster/direct/png-to-bmp",
+      "capability_ids": [
+        "capability:png-to-bmp/rgba8-code-value-exact/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:png-to-pam",
+      "version": "0.1.0",
+      "crate": "png-to-pam",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "exfmt:image:pam"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/image/raster/direct/png-to-pam",
+      "capability_ids": [
+        "capability:png-to-pam/rgba8-code-value-exact/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:png-to-ppm",
+      "version": "0.1.0",
+      "crate": "png-to-ppm",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "exfmt:image:ppm"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/image/raster/direct/png-to-ppm",
+      "capability_ids": [
+        "capability:png-to-ppm/rgba8-code-value-exact/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:png-to-qoi",
+      "version": "0.1.0",
+      "crate": "png-to-qoi",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "exfmt:image:qoi"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/image/raster/direct/png-to-qoi",
+      "capability_ids": [
+        "capability:png-to-qoi/rgba8-code-value-exact/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:png-to-tga",
+      "version": "0.1.0",
+      "crate": "png-to-tga",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "exfmt:image:tga-raster"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/image/raster/direct/png-to-tga",
+      "capability_ids": [
+        "capability:png-to-tga/rgba8-code-value-exact/native-portable"
+      ]
+    },
+    {
       "capsule_id": "capsule:ppm-to-bmp",
       "version": "0.1.0",
       "crate": "ppm-to-bmp",
@@ -2960,6 +3252,42 @@
       "repository_path": "capsules/image/raster/direct/ppm-to-pam",
       "capability_ids": [
         "capability:ppm-to-pam/rgba8-code-value-exact/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:ppm-to-png",
+      "version": "0.1.0",
+      "crate": "ppm-to-png",
+      "inputs": [
+        "exfmt:image:ppm"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/image/raster/direct/ppm-to-png",
+      "capability_ids": [
+        "capability:ppm-to-png/rgba8-code-value-exact/native-portable"
       ]
     },
     {
@@ -3107,6 +3435,42 @@
       ]
     },
     {
+      "capsule_id": "capsule:qoi-to-png",
+      "version": "0.1.0",
+      "crate": "qoi-to-png",
+      "inputs": [
+        "exfmt:image:qoi"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/image/raster/direct/qoi-to-png",
+      "capability_ids": [
+        "capability:qoi-to-png/rgba8-code-value-exact/native-portable"
+      ]
+    },
+    {
       "capsule_id": "capsule:qoi-to-ppm",
       "version": "0.1.0",
       "crate": "qoi-to-ppm",
@@ -3251,6 +3615,42 @@
       ]
     },
     {
+      "capsule_id": "capsule:tga-to-png",
+      "version": "0.1.0",
+      "crate": "tga-to-png",
+      "inputs": [
+        "exfmt:image:tga-raster"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/image/raster/direct/tga-to-png",
+      "capability_ids": [
+        "capability:tga-to-png/rgba8-code-value-exact/native-portable"
+      ]
+    },
+    {
       "capsule_id": "capsule:tga-to-ppm",
       "version": "0.1.0",
       "crate": "tga-to-ppm",
@@ -3320,6 +3720,366 @@
       "repository_path": "capsules/image/raster/direct/tga-to-qoi",
       "capability_ids": [
         "capability:tga-to-qoi/rgba8-code-value-exact/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:normalize-png",
+      "version": "0.1.0",
+      "crate": "normalize-png",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "normalize",
+        "operator_role": "structural"
+      },
+      "repository_path": "capsules/image/raster/structural/normalize-png",
+      "capability_ids": [
+        "capability:normalize-png/png-native-canonical/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:png-alpha-premultiply",
+      "version": "0.1.0",
+      "crate": "png-alpha-premultiply",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "map",
+        "operator_role": "transform"
+      },
+      "repository_path": "capsules/image/raster/transform/png-alpha-premultiply",
+      "capability_ids": [
+        "capability:png-alpha-premultiply/png-native-canonical/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:png-alpha-unpremultiply",
+      "version": "0.1.0",
+      "crate": "png-alpha-unpremultiply",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "map",
+        "operator_role": "transform"
+      },
+      "repository_path": "capsules/image/raster/transform/png-alpha-unpremultiply",
+      "capability_ids": [
+        "capability:png-alpha-unpremultiply/png-native-canonical/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:png-crop",
+      "version": "0.1.0",
+      "crate": "png-crop",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "project",
+        "operator_role": "transform"
+      },
+      "repository_path": "capsules/image/raster/transform/png-crop",
+      "capability_ids": [
+        "capability:png-crop/png-native-canonical/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:png-flip-horizontal",
+      "version": "0.1.0",
+      "crate": "png-flip-horizontal",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "reorder",
+        "operator_role": "transform"
+      },
+      "repository_path": "capsules/image/raster/transform/png-flip-horizontal",
+      "capability_ids": [
+        "capability:png-flip-horizontal/png-native-canonical/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:png-flip-vertical",
+      "version": "0.1.0",
+      "crate": "png-flip-vertical",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "reorder",
+        "operator_role": "transform"
+      },
+      "repository_path": "capsules/image/raster/transform/png-flip-vertical",
+      "capability_ids": [
+        "capability:png-flip-vertical/png-native-canonical/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:png-pad",
+      "version": "0.1.0",
+      "crate": "png-pad",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "pad",
+        "operator_role": "transform"
+      },
+      "repository_path": "capsules/image/raster/transform/png-pad",
+      "capability_ids": [
+        "capability:png-pad/png-native-canonical/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:png-rotate-180",
+      "version": "0.1.0",
+      "crate": "png-rotate-180",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "reorder",
+        "operator_role": "transform"
+      },
+      "repository_path": "capsules/image/raster/transform/png-rotate-180",
+      "capability_ids": [
+        "capability:png-rotate-180/png-native-canonical/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:png-rotate-270",
+      "version": "0.1.0",
+      "crate": "png-rotate-270",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "reorder",
+        "operator_role": "transform"
+      },
+      "repository_path": "capsules/image/raster/transform/png-rotate-270",
+      "capability_ids": [
+        "capability:png-rotate-270/png-native-canonical/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:png-rotate-90",
+      "version": "0.1.0",
+      "crate": "png-rotate-90",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph"
+        ],
+        "operator_kind": "reorder",
+        "operator_role": "transform"
+      },
+      "repository_path": "capsules/image/raster/transform/png-rotate-90",
+      "capability_ids": [
+        "capability:png-rotate-90/png-native-canonical/native-portable"
       ]
     },
     {
@@ -4365,6 +5125,30 @@
       ]
     },
     {
+      "capability_id": "capability:normalize-png/png-native-canonical/native-portable",
+      "capsule_id": "capsule:normalize-png",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "strategy": "png-native-canonical",
+      "backend": "native-portable",
+      "computability": "total_for_declared_subset",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "none"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": []
+    },
+    {
       "capability_id": "capability:pam-to-bmp/rgba8-code-value-exact/native-portable",
       "capsule_id": "capsule:pam-to-bmp",
       "inputs": [
@@ -4389,6 +5173,30 @@
       "cost_evidence": [
         "registry/performance/baseline.json#capability:pam-to-bmp/rgba8-code-value-exact/native-portable"
       ]
+    },
+    {
+      "capability_id": "capability:pam-to-png/rgba8-code-value-exact/native-portable",
+      "capsule_id": "capsule:pam-to-png",
+      "inputs": [
+        "exfmt:image:pam"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "strategy": "rgba8-code-value-exact",
+      "backend": "native-portable",
+      "computability": "conditional_exact",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "conditional"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": []
     },
     {
       "capability_id": "capability:pam-to-ppm/rgba8-code-value-exact/native-portable",
@@ -4469,6 +5277,342 @@
       ]
     },
     {
+      "capability_id": "capability:png-alpha-premultiply/png-native-canonical/native-portable",
+      "capsule_id": "capsule:png-alpha-premultiply",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "strategy": "png-native-canonical",
+      "backend": "native-portable",
+      "computability": "total_for_declared_subset",
+      "loss": {
+        "pixels": "bounded",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "none"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": []
+    },
+    {
+      "capability_id": "capability:png-alpha-unpremultiply/png-native-canonical/native-portable",
+      "capsule_id": "capsule:png-alpha-unpremultiply",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "strategy": "png-native-canonical",
+      "backend": "native-portable",
+      "computability": "total_for_declared_subset",
+      "loss": {
+        "pixels": "bounded",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "none"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": []
+    },
+    {
+      "capability_id": "capability:png-crop/png-native-canonical/native-portable",
+      "capsule_id": "capsule:png-crop",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "strategy": "png-native-canonical",
+      "backend": "native-portable",
+      "computability": "total_for_declared_subset",
+      "loss": {
+        "pixels": "bounded",
+        "coordinates": "normalized",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "none"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": []
+    },
+    {
+      "capability_id": "capability:png-flip-horizontal/png-native-canonical/native-portable",
+      "capsule_id": "capsule:png-flip-horizontal",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "strategy": "png-native-canonical",
+      "backend": "native-portable",
+      "computability": "total_for_declared_subset",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "none"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": []
+    },
+    {
+      "capability_id": "capability:png-flip-vertical/png-native-canonical/native-portable",
+      "capsule_id": "capsule:png-flip-vertical",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "strategy": "png-native-canonical",
+      "backend": "native-portable",
+      "computability": "total_for_declared_subset",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "none"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": []
+    },
+    {
+      "capability_id": "capability:png-pad/png-native-canonical/native-portable",
+      "capsule_id": "capsule:png-pad",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "strategy": "png-native-canonical",
+      "backend": "native-portable",
+      "computability": "total_for_declared_subset",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "none"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": []
+    },
+    {
+      "capability_id": "capability:png-rotate-180/png-native-canonical/native-portable",
+      "capsule_id": "capsule:png-rotate-180",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "strategy": "png-native-canonical",
+      "backend": "native-portable",
+      "computability": "total_for_declared_subset",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "none"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": []
+    },
+    {
+      "capability_id": "capability:png-rotate-270/png-native-canonical/native-portable",
+      "capsule_id": "capsule:png-rotate-270",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "strategy": "png-native-canonical",
+      "backend": "native-portable",
+      "computability": "total_for_declared_subset",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "none"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": []
+    },
+    {
+      "capability_id": "capability:png-rotate-90/png-native-canonical/native-portable",
+      "capsule_id": "capsule:png-rotate-90",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "strategy": "png-native-canonical",
+      "backend": "native-portable",
+      "computability": "total_for_declared_subset",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "none"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": []
+    },
+    {
+      "capability_id": "capability:png-to-bmp/rgba8-code-value-exact/native-portable",
+      "capsule_id": "capsule:png-to-bmp",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "exfmt:image:bmp-family"
+      ],
+      "strategy": "rgba8-code-value-exact",
+      "backend": "native-portable",
+      "computability": "conditional_exact",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "conditional"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": []
+    },
+    {
+      "capability_id": "capability:png-to-pam/rgba8-code-value-exact/native-portable",
+      "capsule_id": "capsule:png-to-pam",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "exfmt:image:pam"
+      ],
+      "strategy": "rgba8-code-value-exact",
+      "backend": "native-portable",
+      "computability": "conditional_exact",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "conditional"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": []
+    },
+    {
+      "capability_id": "capability:png-to-ppm/rgba8-code-value-exact/native-portable",
+      "capsule_id": "capsule:png-to-ppm",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "exfmt:image:ppm"
+      ],
+      "strategy": "rgba8-code-value-exact",
+      "backend": "native-portable",
+      "computability": "conditional_exact",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "conditional"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": []
+    },
+    {
+      "capability_id": "capability:png-to-qoi/rgba8-code-value-exact/native-portable",
+      "capsule_id": "capsule:png-to-qoi",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "exfmt:image:qoi"
+      ],
+      "strategy": "rgba8-code-value-exact",
+      "backend": "native-portable",
+      "computability": "conditional_exact",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "conditional"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": []
+    },
+    {
+      "capability_id": "capability:png-to-tga/rgba8-code-value-exact/native-portable",
+      "capsule_id": "capsule:png-to-tga",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "exfmt:image:tga-raster"
+      ],
+      "strategy": "rgba8-code-value-exact",
+      "backend": "native-portable",
+      "computability": "conditional_exact",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "conditional"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": []
+    },
+    {
       "capability_id": "capability:ppm-to-bmp/rgba8-code-value-exact/native-portable",
       "capsule_id": "capsule:ppm-to-bmp",
       "inputs": [
@@ -4519,6 +5663,30 @@
       "cost_evidence": [
         "registry/performance/baseline.json#capability:ppm-to-pam/rgba8-code-value-exact/native-portable"
       ]
+    },
+    {
+      "capability_id": "capability:ppm-to-png/rgba8-code-value-exact/native-portable",
+      "capsule_id": "capsule:ppm-to-png",
+      "inputs": [
+        "exfmt:image:ppm"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "strategy": "rgba8-code-value-exact",
+      "backend": "native-portable",
+      "computability": "conditional_exact",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "conditional"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": []
     },
     {
       "capability_id": "capability:ppm-to-qoi/rgba8-code-value-exact/native-portable",
@@ -4623,6 +5791,30 @@
       "cost_evidence": [
         "registry/performance/baseline.json#capability:qoi-to-pam/rgba8-code-value-exact/native-portable"
       ]
+    },
+    {
+      "capability_id": "capability:qoi-to-png/rgba8-code-value-exact/native-portable",
+      "capsule_id": "capsule:qoi-to-png",
+      "inputs": [
+        "exfmt:image:qoi"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "strategy": "rgba8-code-value-exact",
+      "backend": "native-portable",
+      "computability": "conditional_exact",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "conditional"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": []
     },
     {
       "capability_id": "capability:qoi-to-ppm/rgba8-code-value-exact/native-portable",
@@ -5029,6 +6221,30 @@
       ]
     },
     {
+      "capability_id": "capability:tga-to-png/rgba8-code-value-exact/native-portable",
+      "capsule_id": "capsule:tga-to-png",
+      "inputs": [
+        "exfmt:image:tga-raster"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "strategy": "rgba8-code-value-exact",
+      "backend": "native-portable",
+      "computability": "conditional_exact",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "conditional"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": []
+    },
+    {
       "capability_id": "capability:tga-to-ppm/rgba8-code-value-exact/native-portable",
       "capsule_id": "capsule:tga-to-ppm",
       "inputs": [
@@ -5125,6 +6341,30 @@
       "cost_evidence": [
         "registry/performance/baseline.json#capability:utf16-to-utf8/strict/native-portable"
       ]
+    },
+    {
+      "capability_id": "capability:validate-png/png-native-canonical/native-portable",
+      "capsule_id": "capsule:validate-png",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "strategy": "png-native-canonical",
+      "backend": "native-portable",
+      "computability": "total_for_declared_subset",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "none",
+        "metadata": "none",
+        "color-semantics": "none"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": []
     },
     {
       "capability_id": "capability:wav-pcm-to-aiff/pcm-exact/native-portable",

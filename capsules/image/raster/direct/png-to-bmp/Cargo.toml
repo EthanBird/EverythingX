@@ -1,0 +1,12 @@
+[package]
+name = "png-to-bmp"
+version = "0.1.0"
+edition = "2024"
+publish = false
+license-file = "LICENSE"
+description = "Standalone zero-dependency Portable Network Graphics to Windows BMP raster conversion"
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]

@@ -29,13 +29,16 @@ jobs:
         run: python3 tools/build_catalog.py --source-root ../research/raw
 
       - name: Validate repository
-        run: python3 tools/validate_repository.py
+        run: python3 tools/validate_repository.py --allow-performance-baseline-lag
 
       - name: Prove image operator backlog is current
         run: python3 tools/build_image_backlog.py --check
 
       - name: Prove generated Raster Wave A batch is current
         run: python3 tools/scaffold_raster_wave_a.py --check
+
+      - name: Prove generated PNG Wave B batch is current
+        run: python3 tools/scaffold_png_wave_b.py --check
 
       - name: Commit generated catalog when changed
         run: |

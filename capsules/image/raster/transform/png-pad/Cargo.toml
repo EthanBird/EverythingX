@@ -1,0 +1,12 @@
+[package]
+name = "png-pad"
+version = "0.1.0"
+edition = "2024"
+publish = false
+license-file = "LICENSE"
+description = "Pad a PNG with configurable 16-bit RGBA borders and a runnable zero-border default."
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]

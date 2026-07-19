@@ -1,0 +1,15 @@
+[package]
+name = "everythingx-adapter-png-to-qoi"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
+everythingx-protocol = { path = "../../../../../../../kernel/ex-protocol" }
+png-to-qoi = { path = "../.." }
+
+[dev-dependencies]
+everythingx-kernel = { path = "../../../../../../../kernel/ex-kernel" }

@@ -1,0 +1,153 @@
+{
+  "capsule_id": "capsule:normalize-png",
+  "version": "0.1.0",
+  "name": "normalize-png",
+  "summary": "Canonicalize any supported PNG into deterministic RGB/RGBA PNG.",
+  "taxonomy": {
+    "domain": "image",
+    "primary_ir": "ir:raster",
+    "secondary_irs": [
+      "ir:container-graph"
+    ],
+    "operator_kind": "normalize",
+    "operator_role": "structural"
+  },
+  "license": {
+    "expression": "PolyForm-Noncommercial-1.0.0",
+    "file": "LICENSE",
+    "commercial_authorization_required": true
+  },
+  "repository": "https://github.com/EthanBird/EverythingX/tree/main/capsules/image/raster/structural/normalize-png",
+  "independence": {
+    "standalone_cargo_build": true,
+    "everythingx_optional": true,
+    "external_path_dependencies": false,
+    "copy_out_tested": true
+  },
+  "conversion": {
+    "source": [
+      "exfmt:image:png"
+    ],
+    "target": [
+      "exfmt:image:png"
+    ],
+    "arity": {
+      "inputs": {
+        "min": 1,
+        "max": 1
+      },
+      "outputs": {
+        "min": 1,
+        "max": 1
+      }
+    },
+    "scope": [
+      "PNG color types 0, 2, 3, 4 and 6",
+      "PNG bit depths 1, 2, 4, 8 and 16 where legal",
+      "Stored, fixed-Huffman and dynamic-Huffman Deflate",
+      "PNG filters 0 through 4 and Adam7 interlace",
+      "Canonicalize any supported PNG into deterministic RGB/RGBA PNG."
+    ],
+    "out_of_scope": [
+      "APNG frame graph operations",
+      "ICC color conversion",
+      "Preservation of arbitrary ancillary chunks after pixel-changing or normalization operations"
+    ]
+  },
+  "api": {
+    "language": "rust",
+    "crate": "normalize-png",
+    "entrypoint": "convert",
+    "owns_options_error_report": true,
+    "streaming": false,
+    "seek_required": false
+  },
+  "defaults": {
+    "runnable": true,
+    "strategy": "png-native-canonical",
+    "backend": "native-portable",
+    "options": {
+      "background_alpha": 0,
+      "background_blue": 0,
+      "background_green": 0,
+      "background_red": 0,
+      "crop_height": 0,
+      "crop_width": 0,
+      "crop_x": 0,
+      "crop_y": 0,
+      "filter": "adaptive",
+      "max_inflate_bytes": 1073741824,
+      "max_input_bytes": 536870912,
+      "max_pixels": 100000000,
+      "pad_bottom": 0,
+      "pad_left": 0,
+      "pad_right": 0,
+      "pad_top": 0,
+      "strict_crc": true,
+      "strict_trailing_data": true
+    },
+    "policy": "strict"
+  },
+  "strategies": [
+    {
+      "id": "png-native-canonical",
+      "guarantees": [
+        "CRC and Adler-32 are verified",
+        "All legal PNG sample layouts decode to RGBA16 before the operation",
+        "16-bit samples remain 16-bit through canonical output",
+        "The complete input is validated before output is committed"
+      ],
+      "tradeoffs": [
+        "Canonical pixel-changing output uses RGB/RGBA and strips ancillary metadata",
+        "The native encoder currently favors deterministic stored Deflate over maximum compression"
+      ]
+    }
+  ],
+  "backends": [
+    {
+      "id": "native-portable",
+      "tier": "native-portable",
+      "default": true,
+      "dependencies": []
+    }
+  ],
+  "validation": {
+    "specifications": [
+      "W3C PNG Third Edition",
+      "RFC 1950 zlib",
+      "RFC 1951 Deflate"
+    ],
+    "conformance": [
+      "src/lib.rs and src/png_native.rs unit tests"
+    ],
+    "differential": [],
+    "properties": [
+      "Canonical output decodes independently",
+      "Dimension and allocation arithmetic is checked",
+      "Five PNG filters round-trip"
+    ],
+    "regression": [
+      "CRC corruption rejected",
+      "Pixel limit enforced before allocation",
+      "Malformed streams never write a partial output"
+    ],
+    "fuzz": [
+      "Planned chunk, Huffman, filter, interlace and transform-coordinate campaigns"
+    ],
+    "benchmarks": [
+      "Pending controlled exbench baseline"
+    ]
+  },
+  "security": {
+    "accepts_untrusted_input": true,
+    "limits": [
+      "max_pixels defaults to 100 million",
+      "max_input_bytes defaults to 512 MiB",
+      "max_inflate_bytes defaults to 1 GiB",
+      "checked chunk, row, pass and output arithmetic"
+    ],
+    "known_risks": [
+      "Output I/O failure can occur while committing a fully validated result"
+    ]
+  }
+}

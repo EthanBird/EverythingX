@@ -1,0 +1,12 @@
+[package]
+name = "normalize-png"
+version = "0.1.0"
+edition = "2024"
+publish = false
+license-file = "LICENSE"
+description = "Canonicalize any supported PNG into deterministic RGB/RGBA PNG."
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]

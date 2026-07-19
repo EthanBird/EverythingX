@@ -254,6 +254,62 @@ fn pam_fixture(large: bool) -> Vec<u8> {
     out
 }
 
+fn png_crc(bytes: &[u8]) -> u32 {
+    let mut crc = 0xffff_ffffu32;
+    for &byte in bytes {
+        crc ^= byte as u32;
+        for _ in 0..8 {
+            crc = if crc & 1 != 0 { (crc >> 1) ^ 0xedb8_8320 } else { crc >> 1 };
+        }
+    }
+    !crc
+}
+
+fn png_chunk(out: &mut Vec<u8>, kind: &[u8; 4], data: &[u8]) {
+    out.extend_from_slice(&(data.len() as u32).to_be_bytes());
+    out.extend_from_slice(kind);
+    out.extend_from_slice(data);
+    let mut checked = Vec::with_capacity(4 + data.len());
+    checked.extend_from_slice(kind);
+    checked.extend_from_slice(data);
+    out.extend_from_slice(&png_crc(&checked).to_be_bytes());
+}
+
+fn png_fixture(large: bool) -> Vec<u8> {
+    let (width, height) = raster_dimensions(large);
+    let mut filtered = Vec::with_capacity(height as usize * (width as usize * 3 + 1));
+    for y in 0..height {
+        filtered.push(0);
+        for x in 0..width { filtered.extend_from_slice(&raster_rgb(x, y)); }
+    }
+    let mut zlib = vec![0x78, 0x01];
+    let mut pos = 0;
+    while pos < filtered.len() {
+        let len = (filtered.len() - pos).min(65_535);
+        zlib.push(if pos + len == filtered.len() { 1 } else { 0 });
+        let length = len as u16;
+        zlib.extend_from_slice(&length.to_le_bytes());
+        zlib.extend_from_slice(&(!length).to_le_bytes());
+        zlib.extend_from_slice(&filtered[pos..pos + len]);
+        pos += len;
+    }
+    let (mut a, mut b) = (1u32, 0u32);
+    for chunk in filtered.chunks(5_552) {
+        for &byte in chunk { a += byte as u32; b += a; }
+        a %= 65_521; b %= 65_521;
+    }
+    zlib.extend_from_slice(&((b << 16) | a).to_be_bytes());
+    let mut out = b"\x89PNG\r\n\x1a\n".to_vec();
+    let mut ihdr = Vec::new();
+    ihdr.extend_from_slice(&width.to_be_bytes());
+    ihdr.extend_from_slice(&height.to_be_bytes());
+    ihdr.extend_from_slice(&[8, 2, 0, 0, 0]);
+    png_chunk(&mut out, b"IHDR", &ihdr);
+    for part in zlib.chunks(64 * 1024) { png_chunk(&mut out, b"IDAT", part); }
+    png_chunk(&mut out, b"IEND", &[]);
+    out
+}
+
 fn utf16_fixture(payload_bytes: usize) -> Vec<u8> {
     let units = payload_bytes.max(4) / 2;
     let mut out = Vec::with_capacity(units * 2);
@@ -282,6 +338,7 @@ fn fixture(format: &str, large: bool) -> Vec<u8> {
         "exfmt:image:qoi" => qoi_fixture(large),
         "exfmt:image:ppm" => ppm_fixture(large),
         "exfmt:image:pam" => pam_fixture(large),
+        "exfmt:image:png" => png_fixture(large),
         "exfmt:text:utf-16" => utf16_fixture(size),
         other => panic!("no benchmark fixture for {other}"),
     }

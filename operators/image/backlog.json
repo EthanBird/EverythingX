@@ -8,7 +8,7 @@
     "reviewed_representations": 295,
     "operator_templates": 68,
     "ordered_pair_candidates": 10838,
-    "implemented_pair_candidates": 21
+    "implemented_pair_candidates": 31
   },
   "domain_counts": {
     "general-raster-still": {
@@ -84,6 +84,10 @@
     },
     {
       "input": "imagefmt:pam",
+      "output": "imagefmt:png"
+    },
+    {
+      "input": "imagefmt:pam",
       "output": "imagefmt:ppm"
     },
     {
@@ -95,12 +99,40 @@
       "output": "imagefmt:tga"
     },
     {
+      "input": "imagefmt:png",
+      "output": "imagefmt:bmp"
+    },
+    {
+      "input": "imagefmt:png",
+      "output": "imagefmt:pam"
+    },
+    {
+      "input": "imagefmt:png",
+      "output": "imagefmt:png"
+    },
+    {
+      "input": "imagefmt:png",
+      "output": "imagefmt:ppm"
+    },
+    {
+      "input": "imagefmt:png",
+      "output": "imagefmt:qoi"
+    },
+    {
+      "input": "imagefmt:png",
+      "output": "imagefmt:tga"
+    },
+    {
       "input": "imagefmt:ppm",
       "output": "imagefmt:bmp"
     },
     {
       "input": "imagefmt:ppm",
       "output": "imagefmt:pam"
+    },
+    {
+      "input": "imagefmt:ppm",
+      "output": "imagefmt:png"
     },
     {
       "input": "imagefmt:ppm",
@@ -117,6 +149,10 @@
     {
       "input": "imagefmt:qoi",
       "output": "imagefmt:pam"
+    },
+    {
+      "input": "imagefmt:qoi",
+      "output": "imagefmt:png"
     },
     {
       "input": "imagefmt:qoi",
@@ -133,6 +169,10 @@
     {
       "input": "imagefmt:tga",
       "output": "imagefmt:pam"
+    },
+    {
+      "input": "imagefmt:tga",
+      "output": "imagefmt:png"
     },
     {
       "input": "imagefmt:tga",

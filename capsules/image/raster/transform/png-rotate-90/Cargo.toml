@@ -1,0 +1,12 @@
+[package]
+name = "png-rotate-90"
+version = "0.1.0"
+edition = "2024"
+publish = false
+license-file = "LICENSE"
+description = "Rotate PNG pixels 90 degrees clockwise."
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]

@@ -1,0 +1,12 @@
+[package]
+name = "png-alpha-unpremultiply"
+version = "0.1.0"
+edition = "2024"
+publish = false
+license-file = "LICENSE"
+description = "Recover unassociated PNG RGB samples from premultiplied code values with saturation and defined alpha-zero behavior."
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
