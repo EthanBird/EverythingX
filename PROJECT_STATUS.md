@@ -35,15 +35,15 @@ These are source observations, not a count of unique canonical formats.
 
 | Metric | Count |
 |---|---:|
-| Actually implemented standalone Capsules | 6 |
-| Actually implemented Adapter capabilities | 7 |
-| Actually implemented logical format pairs | 6 |
+| Actually implemented standalone Capsules | 22 |
+| Actually implemented Adapter capabilities | 23 |
+| Actually implemented logical format pairs | 19 |
 | Object IR × operator-kind research positions | 4,743 |
 | Semantic-family × operator-family research cells | 310 |
 | Reviewed audio representations | 172 |
 | Audio operator templates | 42 |
 | Generated ordered audio pair candidates | 8,672 |
-| Actually implemented audio pairs | 4 |
+| Actually implemented distinct-format audio pairs | 16 |
 
 `registry/support-matrix.json` is generated from real manifests and answers what works now. `operators/audio/backlog.json` is a research and implementation queue; its candidate count is not a feature count.
 
@@ -108,6 +108,14 @@ These are source observations, not a count of unique canonical formats.
 - All three are zero-dependency standalone Rust crates with their own Options, Error, Report, tests, manifests, defaults and removable static Adapters.
 - Together with `wav-pcm-to-aiff`, the implemented audio ledger now contains four real pair edges: AIFF↔WAV and raw PCM↔WAV.
 
+### PCM Wave A batch 0.2 — 16 Capsules
+
+- Twelve bidirectional container Capsules complete WAV↔CAF, WAV↔AU, WAV↔RF64, WAV↔BW64, WAV↔Wave64 and WAV↔BWF.
+- Four parameter-owned raw PCM Capsules implement trim, frame reverse, channel projection/reordering and endian/signedness normalization.
+- Every new Capsule contains four core unit tests: default behavior, malformed or partial input, option/resource validation and custom semantics.
+- Every new static Adapter contains a Kernel default-invocation test, for 80 newly introduced core and integration tests across the batch.
+- The development-only generator is freshness-checked, but each generated leaf contains complete source and has no runtime or path dependency outside itself after deleting `everythingx/`.
+
 ## Intentionally absent
 
 - No claim that the first Capsule has completed fuzz and benchmark campaigns yet.
@@ -120,7 +128,7 @@ These are source observations, not a count of unique canonical formats.
 
 The three-Capsule reference gate is complete. Audio is the active implementation family:
 
-1. Harden all six production Capsules with corpus manifests, fuzz targets and reproducible benchmark reports.
-2. Continue PCM interchange Wave A with WAV↔CAF/AU/RF64/BWF/BW64/Wave64, then channel split/aggregate, trim, concatenate and channel-map operators.
+1. Harden all 22 production Capsules with corpus manifests, fuzz targets and reproducible benchmark reports.
+2. Close the remaining PCM Wave A multi-input/output work: channel split/aggregate and concatenate, which first requires an n:m Adapter transport contract.
 3. Continue through lossless codecs, container/essence operations, lossy codecs, signal transforms, musical events, sessions, banks and spatial audio according to `docs/12-audio-operator-program.md`.
 4. Do not switch to isolated Text/Table operators until the active audio wave has reached its declared closure gate.

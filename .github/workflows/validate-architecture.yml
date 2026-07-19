@@ -26,6 +26,9 @@ jobs:
       - name: Prove Object IR operator universe is current
         run: python3 tools/build_operator_universe.py --check
 
+      - name: Prove generated PCM Wave A batch is current
+        run: python3 tools/scaffold_pcm_wave_a.py --check
+
       - name: Check Capsule dependency boundaries
         run: python3 tools/check_capsule_independence.py
 

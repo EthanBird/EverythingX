@@ -1,0 +1,12 @@
+[package]
+name = "raw-pcm-channel-map"
+version = "0.1.0"
+edition = "2024"
+publish = false
+license-file = "LICENSE"
+description = "Standalone zero-dependency Explicit projection, duplication and reordering of raw PCM channels."
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]

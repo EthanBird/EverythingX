@@ -1,0 +1,136 @@
+{
+  "capsule_id": "capsule:raw-pcm-trim",
+  "version": "0.1.0",
+  "name": "raw-pcm-trim",
+  "summary": "Frame-exact trimming of parameterized raw interleaved PCM.",
+  "taxonomy": {
+    "domain": "audio",
+    "primary_ir": "ir:sampled-audio",
+    "secondary_irs": [
+      "ir:sequence"
+    ],
+    "operator_kind": "trim",
+    "operator_role": "transform"
+  },
+  "license": {
+    "expression": "PolyForm-Noncommercial-1.0.0",
+    "file": "LICENSE",
+    "commercial_authorization_required": true
+  },
+  "repository": "https://github.com/EthanBird/EverythingX/tree/main/capsules/audio/sampled-audio/transform/raw-pcm-trim",
+  "independence": {
+    "standalone_cargo_build": true,
+    "everythingx_optional": true,
+    "external_path_dependencies": false,
+    "copy_out_tested": true
+  },
+  "conversion": {
+    "source": [
+      "exfmt:audio:raw-pcm"
+    ],
+    "target": [
+      "exfmt:audio:raw-pcm"
+    ],
+    "arity": {
+      "inputs": {
+        "min": 1,
+        "max": 1
+      },
+      "outputs": {
+        "min": 1,
+        "max": 1
+      }
+    },
+    "scope": [
+      "8/16/24/32-bit interleaved integer PCM",
+      "Explicit parameter-owned raw PCM semantics",
+      "Frame-exact trimming of parameterized raw interleaved PCM."
+    ],
+    "out_of_scope": [
+      "Floating point, planar, companded or DSD audio",
+      "Automatic inference of headerless PCM parameters"
+    ]
+  },
+  "api": {
+    "language": "rust",
+    "crate": "raw-pcm-trim",
+    "entrypoint": "convert",
+    "owns_options_error_report": true,
+    "streaming": true,
+    "seek_required": true
+  },
+  "defaults": {
+    "runnable": true,
+    "strategy": "frame-exact",
+    "backend": "native-portable",
+    "options": {
+      "channels": 1,
+      "bits_per_sample": 16,
+      "input_endianness": "little",
+      "output_endianness": "little",
+      "input_encoding": "signed",
+      "output_encoding": "signed",
+      "start_frame": 0,
+      "frame_count": "all",
+      "channel_map": "0",
+      "buffer_size": 65536,
+      "max_channels": 256
+    },
+    "policy": "strict"
+  },
+  "strategies": [
+    {
+      "id": "frame-exact",
+      "guarantees": [
+        "Only complete frames are accepted",
+        "Integer sample bytes are transformed deterministically",
+        "All parameters and output frame counts are reported"
+      ],
+      "tradeoffs": [
+        "Raw PCM interpretation depends on explicit parameters"
+      ]
+    }
+  ],
+  "backends": [
+    {
+      "id": "native-portable",
+      "tier": "native-portable",
+      "default": true,
+      "dependencies": []
+    }
+  ],
+  "validation": {
+    "specifications": [
+      "Parameterized interleaved integer PCM contract"
+    ],
+    "conformance": [
+      "src/lib.rs unit tests"
+    ],
+    "differential": [],
+    "properties": [
+      "Partial frames are rejected",
+      "Default and custom semantics are independently asserted"
+    ],
+    "regression": [
+      "Buffer limits are validated",
+      "Frame/channel boundaries remain intact"
+    ],
+    "fuzz": [
+      "Planned: parameter, alignment, length and reader-fragmentation campaigns"
+    ],
+    "benchmarks": [
+      "Planned: widths, channels and large-stream corpus"
+    ]
+  },
+  "security": {
+    "accepts_untrusted_input": true,
+    "limits": [
+      "buffer_size is bounded to 16 MiB",
+      "channels default to a maximum of 256",
+      "all frame and byte arithmetic is checked"
+    ],
+    "known_risks": [
+      "Output I/O failure can occur after partial output"
+    ]
+  }
+}

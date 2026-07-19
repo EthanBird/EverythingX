@@ -1,0 +1,12 @@
+[package]
+name = "wav-pcm-to-au-pcm"
+version = "0.1.0"
+edition = "2024"
+publish = false
+license-file = "LICENSE"
+description = "Standalone zero-dependency RIFF/WAVE PCM to Sun AU/SND PCM PCM converter"
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]

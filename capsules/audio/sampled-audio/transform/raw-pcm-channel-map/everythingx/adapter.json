@@ -1,0 +1,73 @@
+{
+  "adapter_id": "adapter:raw-pcm-channel-map-static",
+  "version": "0.1.0",
+  "capsule": {
+    "id": "capsule:raw-pcm-channel-map",
+    "version_requirement": "^0.1.0"
+  },
+  "protocol": {
+    "name": "everythingx-adapter-protocol",
+    "version_requirement": "0.1"
+  },
+  "transport": {
+    "kind": "static-rust",
+    "entrypoint": "GeneratedRawPcmAdapter"
+  },
+  "capabilities": [
+    {
+      "capability_id": "capability:raw-pcm-channel-map/frame-exact/native-portable",
+      "capsule_entrypoint": "convert",
+      "strategy": "frame-exact",
+      "backend": "native-portable",
+      "inputs": [
+        "exfmt:audio:raw-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:raw-pcm"
+      ],
+      "preconditions": [
+        "Input matches the explicit raw PCM parameters"
+      ],
+      "effects": [
+        "Explicit projection, duplication and reordering of raw PCM channels."
+      ],
+      "invariants": [
+        "Complete integer sample values",
+        "Declared frame semantics"
+      ],
+      "computability": "exact",
+      "loss": {
+        "payload": "none",
+        "temporal": "normalized",
+        "structure": "normalized",
+        "metadata": "not-present"
+      },
+      "default_options": {
+        "channels": 2,
+        "bits_per_sample": 16,
+        "input_endianness": "little",
+        "output_endianness": "little",
+        "input_encoding": "signed",
+        "output_encoding": "signed",
+        "start_frame": 0,
+        "frame_count": "all",
+        "channel_map": "1,0",
+        "buffer_size": 65536,
+        "max_channels": 256
+      },
+      "defaults_are_runnable": true,
+      "execution": {
+        "streaming": false,
+        "seek_required": false,
+        "cost_evidence": []
+      },
+      "report_mapping": {
+        "unknown_fields_are_preserved": true,
+        "rules": [
+          "Frame and channel counts map to capsule_report",
+          "static Adapter buffers protocol input for seek"
+        ]
+      }
+    }
+  ]
+}

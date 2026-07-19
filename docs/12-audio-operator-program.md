@@ -113,15 +113,17 @@ M3U、PLS、XSPF、CUE 等主要是外部引用与时间边界。转换要维护
 ```text
 [done] aiff-pcm-to-wav-pcm
 [done] raw-pcm-to-wav-pcm       [done] wav-pcm-to-raw-pcm
-wav-pcm-to-caf-pcm       caf-pcm-to-wav-pcm
-wav-pcm-to-au-pcm        au-pcm-to-wav-pcm
-wav-pcm-to-rf64-pcm      rf64-pcm-to-wav-pcm
-wav-pcm-to-bwf-pcm       bwf-pcm-to-wav-pcm
-wav-pcm-to-bw64-pcm      bw64-pcm-to-wav-pcm
-wav-pcm-to-wave64-pcm    wave64-pcm-to-wav-pcm
+[done] wav-pcm-to-caf-pcm       [done] caf-pcm-to-wav-pcm
+[done] wav-pcm-to-au-pcm        [done] au-pcm-to-wav-pcm
+[done] wav-pcm-to-rf64-pcm      [done] rf64-pcm-to-wav-pcm
+[done] wav-pcm-to-bwf-pcm       [done] bwf-pcm-to-wav-pcm
+[done] wav-pcm-to-bw64-pcm      [done] bw64-pcm-to-wav-pcm
+[done] wav-pcm-to-wave64-pcm    [done] wave64-pcm-to-wav-pcm
 pcm-split-channels       pcm-aggregate-channels
-pcm-trim                 pcm-concatenate
-pcm-channel-map          pcm-endian-signedness-normalize
+[done] raw-pcm-trim       pcm-concatenate
+[done] raw-pcm-channel-map
+[done] raw-pcm-endian-signedness-normalize
+[done] raw-pcm-reverse
 ```
 
 这些仍是彼此独立的 Rust libraries；共享知识可以来自规范与测试向量，不能通过仓库外 path dependency 破坏 copy-out 独立性。

@@ -108,7 +108,7 @@ tools/          数据同步、目录构建和一致性校验
 
 ## 当前阶段
 
-现在不开发桌面端、CLI 或路径规划器。三个零依赖参考 Capsule 已完成架构验证；PCM interchange 的第一批三个 Capsule 也已实现，使当前生产 Capsule 增至 6 个。开发节奏是“先完成族级格式空间与全量算子 backlog，再连续实现整个算子簇”。首版哲学施工层有 31 个 Object IR、153 个算子动词、4,743 个 IR×算子研究位置和 310 个族级研究单元。音频是当前活动族：首轮已归类 172 个表示、42 类操作模板和 8,672 条有序格式候选边，其中 4 条音频边已有实现。薄 Kernel 仍只支持注册、默认验证和直接调用；只有独立转换库的数量、质量和证据密度达到门槛后，才开发转换图。
+现在不开发桌面端、CLI 或路径规划器。架构参考 Capsule 与首轮 PCM interchange 已完成，当前生产 Capsule 达到 22 个。本轮按完整波次一次增加 16 个：WAV 与 CAF、AU、RF64、BW64、Wave64、BWF 的双向转换，以及 4 个 raw PCM 变换。开发节奏固定为“先完成族级格式空间与全量算子 backlog，再批量实现并测试整个算子簇”。首版施工层有 31 个 Object IR、153 个算子动词、4,743 个 IR×算子研究位置和 310 个族级研究单元。音频当前归类 172 个表示、42 类操作模板和 8,672 条有序候选边，其中 16 条不同格式音频边已有实现。薄 Kernel 仍只负责注册、默认验证和直接调用。
 
 ## 当前实际支持的转换
 
@@ -122,6 +122,22 @@ tools/          数据同步、目录构建和一致性校验
 | classic AIFF PCM | RIFF/WAVE integer PCM | `aiff-pcm-to-wav-pcm` | pcm-exact |
 | parameterized raw integer PCM | RIFF/WAVE integer PCM | `raw-pcm-to-wav-pcm` | pcm-exact |
 | RIFF/WAVE integer PCM | parameterized raw integer PCM | `wav-pcm-to-raw-pcm` | pcm-exact |
+| RIFF/WAVE integer PCM | Core Audio Format PCM | `wav-pcm-to-caf-pcm` | pcm-exact |
+| Core Audio Format PCM | RIFF/WAVE integer PCM | `caf-pcm-to-wav-pcm` | pcm-exact |
+| RIFF/WAVE integer PCM | Sun AU/SND PCM | `wav-pcm-to-au-pcm` | pcm-exact |
+| Sun AU/SND PCM | RIFF/WAVE integer PCM | `au-pcm-to-wav-pcm` | pcm-exact |
+| RIFF/WAVE integer PCM | RF64 PCM | `wav-pcm-to-rf64-pcm` | pcm-exact |
+| RF64 PCM | RIFF/WAVE integer PCM | `rf64-pcm-to-wav-pcm` | pcm-exact |
+| RIFF/WAVE integer PCM | BW64 PCM | `wav-pcm-to-bw64-pcm` | pcm-exact |
+| BW64 PCM | RIFF/WAVE integer PCM | `bw64-pcm-to-wav-pcm` | pcm-exact |
+| RIFF/WAVE integer PCM | Sony Wave64 PCM | `wav-pcm-to-wave64-pcm` | pcm-exact |
+| Sony Wave64 PCM | RIFF/WAVE integer PCM | `wave64-pcm-to-wav-pcm` | pcm-exact |
+| RIFF/WAVE integer PCM | Broadcast WAVE PCM | `wav-pcm-to-bwf-pcm` | pcm-exact |
+| Broadcast WAVE PCM | RIFF/WAVE integer PCM | `bwf-pcm-to-wav-pcm` | pcm-exact |
+| parameterized raw PCM | trimmed raw PCM | `raw-pcm-trim` | frame-exact |
+| parameterized raw PCM | frame-reversed raw PCM | `raw-pcm-reverse` | frame-exact |
+| parameterized raw PCM | projected/reordered raw PCM channels | `raw-pcm-channel-map` | frame-exact |
+| parameterized raw PCM | normalized endian/signedness raw PCM | `raw-pcm-endian-signedness-normalize` | frame-exact |
 
 机器可读权威清单是 `registry/support-matrix.json`。任何 Capsule 或 Adapter 更新都必须运行 `python3 tools/build_support_matrix.py`；CI 会拒绝过期矩阵。计划中、研究中和不可计算的边统一保存在 `operators/`，不得写进已支持清单。
 
