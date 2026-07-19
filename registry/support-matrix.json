@@ -1,0 +1,190 @@
+{
+  "schema_version": "0.1.0",
+  "meaning": "Implemented conversion support derived from non-template Capsule and Adapter manifests.",
+  "update_rule": "Any Capsule or Adapter capability change must regenerate this file with tools/build_support_matrix.py.",
+  "summary": {
+    "standalone_capsules": 3,
+    "adapter_capabilities": 4,
+    "logical_source_target_pairs": 3
+  },
+  "logical_pairs": [
+    {
+      "source": "exfmt:audio:wav-pcm",
+      "target": "exfmt:audio:aiff-pcm"
+    },
+    {
+      "source": "exfmt:image:bmp-family",
+      "target": "exfmt:image:png"
+    },
+    {
+      "source": "exfmt:text:utf-16",
+      "target": "exfmt:text:utf-8"
+    }
+  ],
+  "capsules": [
+    {
+      "capsule_id": "capsule:bmp-to-png",
+      "version": "0.1.0",
+      "crate": "bmp-to-png",
+      "inputs": [
+        "exfmt:image:bmp-family"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "capability_ids": [
+        "capability:bmp-to-png/pixel-exact/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:utf16-to-utf8",
+      "version": "0.1.0",
+      "crate": "utf16-to-utf8",
+      "inputs": [
+        "exfmt:text:utf-16"
+      ],
+      "outputs": [
+        "exfmt:text:utf-8"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "capability_ids": [
+        "capability:utf16-to-utf8/replace-invalid/native-portable",
+        "capability:utf16-to-utf8/strict/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:wav-pcm-to-aiff",
+      "version": "0.1.0",
+      "crate": "wav-pcm-to-aiff",
+      "inputs": [
+        "exfmt:audio:wav-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:aiff-pcm"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "capability_ids": [
+        "capability:wav-pcm-to-aiff/pcm-exact/native-portable"
+      ]
+    }
+  ],
+  "capabilities": [
+    {
+      "capability_id": "capability:bmp-to-png/pixel-exact/native-portable",
+      "capsule_id": "capsule:bmp-to-png",
+      "inputs": [
+        "exfmt:image:bmp-family"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "strategy": "pixel-exact",
+      "backend": "native-portable",
+      "computability": "semantic_lossless",
+      "loss": {
+        "payload": "none for accepted pixel data",
+        "structure": "normalized",
+        "metadata": "bounded"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false
+    },
+    {
+      "capability_id": "capability:utf16-to-utf8/replace-invalid/native-portable",
+      "capsule_id": "capsule:utf16-to-utf8",
+      "inputs": [
+        "exfmt:text:utf-16"
+      ],
+      "outputs": [
+        "exfmt:text:utf-8"
+      ],
+      "strategy": "replace-invalid",
+      "backend": "native-portable",
+      "computability": "controlled_lossy",
+      "loss": {
+        "payload": "bounded by replacement_count",
+        "structure": "normalized"
+      },
+      "defaults_are_runnable": true,
+      "streaming": true,
+      "seek_required": false
+    },
+    {
+      "capability_id": "capability:utf16-to-utf8/strict/native-portable",
+      "capsule_id": "capsule:utf16-to-utf8",
+      "inputs": [
+        "exfmt:text:utf-16"
+      ],
+      "outputs": [
+        "exfmt:text:utf-8"
+      ],
+      "strategy": "strict",
+      "backend": "native-portable",
+      "computability": "semantic_lossless",
+      "loss": {
+        "payload": "none",
+        "structure": "normalized"
+      },
+      "defaults_are_runnable": true,
+      "streaming": true,
+      "seek_required": false
+    },
+    {
+      "capability_id": "capability:wav-pcm-to-aiff/pcm-exact/native-portable",
+      "capsule_id": "capsule:wav-pcm-to-aiff",
+      "inputs": [
+        "exfmt:audio:wav-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:aiff-pcm"
+      ],
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "computability": "semantic_lossless",
+      "loss": {
+        "payload": "none",
+        "temporal": "none",
+        "structure": "normalized",
+        "metadata": "bounded"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false
+    }
+  ]
+}

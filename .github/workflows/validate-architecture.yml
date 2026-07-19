@@ -17,6 +17,15 @@ jobs:
       - name: Validate repository data and manifests
         run: python3 tools/validate_repository.py
 
+      - name: Prove implemented support matrix is current
+        run: python3 tools/build_support_matrix.py --check
+
+      - name: Prove audio operator backlog is current
+        run: python3 tools/build_audio_backlog.py --check
+
+      - name: Prove Object IR operator universe is current
+        run: python3 tools/build_operator_universe.py --check
+
       - name: Check Capsule dependency boundaries
         run: python3 tools/check_capsule_independence.py capsules/_template capsules/utf16-to-utf8 capsules/bmp-to-png capsules/wav-pcm-to-aiff
 

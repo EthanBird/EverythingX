@@ -1,0 +1,319 @@
+{
+  "schema_version": "0.1.0",
+  "generated_from": [
+    "operators/operator-basis.json",
+    "ontology/facets.json"
+  ],
+  "meaning": "Exhaustive research positions for the current finite operator basis; a position may later be marked not-applicable or impossible.",
+  "summary": {
+    "object_irs": 31,
+    "operator_families": 10,
+    "operator_kinds": 153,
+    "object_ir_operator_positions": 4743,
+    "semantic_families": 31,
+    "semantic_family_operator_cells": 310,
+    "family_catalogs_present": 1
+  },
+  "object_ir_operator_set": {
+    "expansion": "every object IR crossed with every operator kind",
+    "object_ir_ids": [
+      "ir:artifact",
+      "ir:byte-coding",
+      "ir:container-graph",
+      "ir:sequence",
+      "ir:record-set",
+      "ir:table",
+      "ir:relation-set",
+      "ir:tree",
+      "ir:graph",
+      "ir:tensor",
+      "ir:object-graph",
+      "ir:event-log",
+      "ir:timeline",
+      "ir:scene",
+      "ir:package",
+      "ir:filesystem",
+      "ir:text",
+      "ir:document",
+      "ir:raster",
+      "ir:vector",
+      "ir:sampled-audio",
+      "ir:audio-events",
+      "ir:timed-media",
+      "ir:subtitle-caption",
+      "ir:font",
+      "ir:geospatial",
+      "ir:geometry-brep",
+      "ir:program",
+      "ir:formula-workflow",
+      "ir:simulation",
+      "ir:domain-record"
+    ],
+    "operator_families": [
+      {
+        "id": "observe-and-prove",
+        "kinds": [
+          "identify",
+          "classify",
+          "probe",
+          "parse",
+          "validate",
+          "verify",
+          "measure",
+          "compare",
+          "fingerprint",
+          "index",
+          "inventory",
+          "explain"
+        ]
+      },
+      {
+        "id": "carrier-and-boundary",
+        "kinds": [
+          "frame",
+          "carve",
+          "materialize",
+          "streamify",
+          "snapshot",
+          "clone",
+          "segment",
+          "concatenate",
+          "bundle",
+          "unbundle",
+          "mount",
+          "unmount"
+        ]
+      },
+      {
+        "id": "byte-coding",
+        "kinds": [
+          "encode",
+          "decode",
+          "compress",
+          "decompress",
+          "transcode",
+          "armor",
+          "dearmor",
+          "encrypt",
+          "decrypt",
+          "sign",
+          "verify-signature",
+          "hash",
+          "checksum",
+          "add-error-correction",
+          "recover-error-correction"
+        ]
+      },
+      {
+        "id": "syntax-container-and-parts",
+        "kinds": [
+          "serialize",
+          "normalize",
+          "canonicalize",
+          "repair",
+          "upgrade",
+          "downgrade",
+          "repackage",
+          "remux",
+          "extract",
+          "embed",
+          "replace-member",
+          "remove-member",
+          "split",
+          "aggregate",
+          "interleave",
+          "deinterleave",
+          "relocate-index",
+          "compact"
+        ]
+      },
+      {
+        "id": "model-algebra",
+        "kinds": [
+          "project",
+          "select",
+          "filter",
+          "map",
+          "reduce",
+          "sort",
+          "group",
+          "join",
+          "union",
+          "intersect",
+          "difference",
+          "pivot",
+          "unpivot",
+          "reshape",
+          "cast",
+          "deduplicate",
+          "merge",
+          "diff",
+          "patch",
+          "query",
+          "schema-migrate",
+          "rekey",
+          "reorder"
+        ]
+      },
+      {
+        "id": "semantic-representation",
+        "kinds": [
+          "convert",
+          "render",
+          "rasterize",
+          "vectorize",
+          "sample",
+          "reconstruct",
+          "synthesize",
+          "transcribe",
+          "translate",
+          "align",
+          "register",
+          "calibrate",
+          "annotate",
+          "summarize"
+        ]
+      },
+      {
+        "id": "signal-and-timeline",
+        "kinds": [
+          "trim",
+          "pad",
+          "resample",
+          "quantize",
+          "dither",
+          "channel-map",
+          "mix",
+          "separate",
+          "gain",
+          "loudness-normalize",
+          "filter-signal",
+          "equalize",
+          "compress-dynamics",
+          "limit",
+          "denoise",
+          "dereverberate",
+          "time-stretch",
+          "pitch-shift",
+          "fade",
+          "crossfade",
+          "reverse",
+          "loop",
+          "synchronize",
+          "retime"
+        ]
+      },
+      {
+        "id": "behavior-and-computation",
+        "kinds": [
+          "evaluate",
+          "execute",
+          "compile",
+          "assemble",
+          "disassemble",
+          "decompile",
+          "link",
+          "freeze",
+          "simulate",
+          "strip-active-content",
+          "sandbox-wrap",
+          "record-execution"
+        ]
+      },
+      {
+        "id": "inferential-construction",
+        "kinds": [
+          "infer",
+          "recognize",
+          "detect",
+          "segment-semantically",
+          "restore",
+          "inpaint",
+          "super-resolve",
+          "source-separate",
+          "ocr",
+          "speech-recognize",
+          "estimate",
+          "generate"
+        ]
+      },
+      {
+        "id": "domain-policy-and-provenance",
+        "kinds": [
+          "domain-validate",
+          "ontology-map",
+          "unit-convert",
+          "redact",
+          "anonymize",
+          "pseudonymize",
+          "attach-provenance",
+          "verify-provenance",
+          "retain",
+          "dispose",
+          "license-map"
+        ]
+      }
+    ],
+    "defaults": {
+      "applicability": "unknown",
+      "knowledge_status": "candidate"
+    },
+    "position_count": 4743,
+    "materialized_sha256": "7e097582118058ca418e136f18a3fdbab7a5da69ac2680f7b5e0a6118ffd332f"
+  },
+  "semantic_family_operator_set": {
+    "expansion": "every semantic family crossed with every operator family",
+    "semantic_families": [
+      "archive",
+      "audio-signal",
+      "cad-bim",
+      "configuration",
+      "cryptographic-material",
+      "disk-memory-firmware",
+      "document-flow",
+      "domain-record",
+      "executable",
+      "filesystem-image",
+      "font",
+      "geometry-3d",
+      "geospatial",
+      "graph-database",
+      "key-value-database",
+      "message",
+      "network-capture",
+      "package",
+      "page-description",
+      "plain-text",
+      "raster-image",
+      "relational-database",
+      "scientific-array",
+      "simulation-model",
+      "source-code",
+      "structured-text",
+      "subtitle-caption",
+      "tabular-data",
+      "timed-media",
+      "unknown",
+      "vector-graphics"
+    ],
+    "operator_family_ids": [
+      "observe-and-prove",
+      "carrier-and-boundary",
+      "byte-coding",
+      "syntax-container-and-parts",
+      "model-algebra",
+      "semantic-representation",
+      "signal-and-timeline",
+      "behavior-and-computation",
+      "inferential-construction",
+      "domain-policy-and-provenance"
+    ],
+    "catalog_status_overrides": {
+      "audio-signal": "family-catalog-present"
+    },
+    "default_catalog_status": "family-catalog-not-created",
+    "default_review_status": "not-reviewed",
+    "cell_count": 310,
+    "materialized_sha256": "1fe5d2d83c654c4d6b4eb62726e6bbe2095323beca870ae44ded8d527d555beb"
+  }
+}

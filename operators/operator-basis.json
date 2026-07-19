@@ -1,0 +1,104 @@
+{
+  "schema_version": "0.1.0",
+  "title": "EverythingX finite operator basis",
+  "principle": "The basis is finite; concrete typed and parameterized operator instances are open-ended and generated from FormatVariant, ObjectIR, invariants and relations.",
+  "operator_instance": {
+    "form": "Operator(kind, input_type_expr, output_type_expr, parameters, preconditions, invariants, effects, loss, cost, evidence)",
+    "arity": ["1:0", "1:1", "1:n", "n:1", "n:m"],
+    "knowledge_states": ["candidate", "reviewed-computable", "reviewed-conditional", "reviewed-impossible", "implemented", "verified"],
+    "computability": ["exact", "conditional_exact", "semantic_lossless", "controlled_lossy", "rendered", "inferential", "impossible", "unknown"]
+  },
+  "object_irs": [
+    {"id": "ir:artifact", "layer": "L0", "model": "bounded carriers, members, file sets, streams and provenance"},
+    {"id": "ir:byte-coding", "layer": "L1", "model": "bytes plus encoding, compression, encryption and error-correction transforms"},
+    {"id": "ir:container-graph", "layer": "L2", "model": "typed chunks, boxes, members, offsets, references and payload streams"},
+    {"id": "ir:sequence", "layer": "L3", "model": "ordered values"},
+    {"id": "ir:record-set", "layer": "L3", "model": "records and fields"},
+    {"id": "ir:table", "layer": "L3", "model": "rows, columns, types and nullability"},
+    {"id": "ir:relation-set", "layer": "L3", "model": "relations, keys, constraints and indexes"},
+    {"id": "ir:tree", "layer": "L3", "model": "hierarchical nodes"},
+    {"id": "ir:graph", "layer": "L3", "model": "nodes and edges"},
+    {"id": "ir:tensor", "layer": "L3", "model": "typed n-dimensional dense or sparse arrays"},
+    {"id": "ir:object-graph", "layer": "L3", "model": "identity-bearing typed objects and references"},
+    {"id": "ir:event-log", "layer": "L3", "model": "ordered events and clocks"},
+    {"id": "ir:timeline", "layer": "L3", "model": "time-addressed tracks, samples, events and synchronization"},
+    {"id": "ir:scene", "layer": "L3", "model": "spatial objects, geometry, transforms, appearance and cameras"},
+    {"id": "ir:package", "layer": "L3", "model": "members, relationships and package rules"},
+    {"id": "ir:filesystem", "layer": "L3", "model": "names, directories, metadata, links and allocation"},
+    {"id": "ir:text", "layer": "L4", "model": "Unicode scalars, spans, language and annotations"},
+    {"id": "ir:document", "layer": "L4", "model": "flow, pages, styles, resources, annotations and reading order"},
+    {"id": "ir:raster", "layer": "L4", "model": "pixel grid, channels, color space and metadata"},
+    {"id": "ir:vector", "layer": "L4", "model": "paths, shapes, paint, text and transforms"},
+    {"id": "ir:sampled-audio", "layer": "L4", "model": "sample frames, channels, rate, sample representation and channel layout"},
+    {"id": "ir:audio-events", "layer": "L4", "model": "notes, controls, tempo, instruments and timed performance events"},
+    {"id": "ir:timed-media", "layer": "L4", "model": "synchronized audio, video, text and metadata tracks"},
+    {"id": "ir:subtitle-caption", "layer": "L4", "model": "timed text, styling and accessibility semantics"},
+    {"id": "ir:font", "layer": "L4", "model": "glyphs, outlines, metrics, variation and shaping tables"},
+    {"id": "ir:geospatial", "layer": "L4", "model": "features, rasters, coordinates, CRS and topology"},
+    {"id": "ir:geometry-brep", "layer": "L4", "model": "curves, surfaces, solids, topology, tolerances and assemblies"},
+    {"id": "ir:program", "layer": "L5", "model": "source AST, bytecode, machine code, symbols and behavior"},
+    {"id": "ir:formula-workflow", "layer": "L5", "model": "expressions, dependencies, actions and evaluation state"},
+    {"id": "ir:simulation", "layer": "L5", "model": "model, parameters, solver assumptions, state and results"},
+    {"id": "ir:domain-record", "layer": "L6", "model": "versioned domain ontology, units, constraints and provenance"}
+  ],
+  "families": [
+    {
+      "id": "observe-and-prove",
+      "purpose": "Create knowledge about an artifact without claiming a representation change.",
+      "kinds": ["identify", "classify", "probe", "parse", "validate", "verify", "measure", "compare", "fingerprint", "index", "inventory", "explain"]
+    },
+    {
+      "id": "carrier-and-boundary",
+      "purpose": "Change or discover L0 boundaries and materialization.",
+      "kinds": ["frame", "carve", "materialize", "streamify", "snapshot", "clone", "segment", "concatenate", "bundle", "unbundle", "mount", "unmount"]
+    },
+    {
+      "id": "byte-coding",
+      "purpose": "Apply or remove reversible or lossy L1 byte/signal coding.",
+      "kinds": ["encode", "decode", "compress", "decompress", "transcode", "armor", "dearmor", "encrypt", "decrypt", "sign", "verify-signature", "hash", "checksum", "add-error-correction", "recover-error-correction"]
+    },
+    {
+      "id": "syntax-container-and-parts",
+      "purpose": "Operate on L2 syntax, containers and part-whole relations.",
+      "kinds": ["serialize", "normalize", "canonicalize", "repair", "upgrade", "downgrade", "repackage", "remux", "extract", "embed", "replace-member", "remove-member", "split", "aggregate", "interleave", "deinterleave", "relocate-index", "compact"]
+    },
+    {
+      "id": "model-algebra",
+      "purpose": "Transform L3 models while stating structural invariants.",
+      "kinds": ["project", "select", "filter", "map", "reduce", "sort", "group", "join", "union", "intersect", "difference", "pivot", "unpivot", "reshape", "cast", "deduplicate", "merge", "diff", "patch", "query", "schema-migrate", "rekey", "reorder"]
+    },
+    {
+      "id": "semantic-representation",
+      "purpose": "Move within or across L4 semantic spaces.",
+      "kinds": ["convert", "render", "rasterize", "vectorize", "sample", "reconstruct", "synthesize", "transcribe", "translate", "align", "register", "calibrate", "annotate", "summarize"]
+    },
+    {
+      "id": "signal-and-timeline",
+      "purpose": "Operate on sampled, framed or event time axes.",
+      "kinds": ["trim", "pad", "resample", "quantize", "dither", "channel-map", "mix", "separate", "gain", "loudness-normalize", "filter-signal", "equalize", "compress-dynamics", "limit", "denoise", "dereverberate", "time-stretch", "pitch-shift", "fade", "crossfade", "reverse", "loop", "synchronize", "retime"]
+    },
+    {
+      "id": "behavior-and-computation",
+      "purpose": "Transform or observe L5 executable and evaluable meaning.",
+      "kinds": ["evaluate", "execute", "compile", "assemble", "disassemble", "decompile", "link", "freeze", "simulate", "strip-active-content", "sandbox-wrap", "record-execution"]
+    },
+    {
+      "id": "inferential-construction",
+      "purpose": "Construct information not deterministically present in the source.",
+      "kinds": ["infer", "recognize", "detect", "segment-semantically", "restore", "inpaint", "super-resolve", "source-separate", "ocr", "speech-recognize", "estimate", "generate"]
+    },
+    {
+      "id": "domain-policy-and-provenance",
+      "purpose": "Apply L6 domain semantics, policy and history.",
+      "kinds": ["domain-validate", "ontology-map", "unit-convert", "redact", "anonymize", "pseudonymize", "attach-provenance", "verify-provenance", "retain", "dispose", "license-map"]
+    }
+  ],
+  "closure_rules": [
+    "Every concrete operator binds input and output type expressions, never extensions alone.",
+    "Every part operation names container_of, embeds, packages, references or has_logical_component.",
+    "Every cross-IR operator declares whether it is convert, render, project or infer.",
+    "Every n-ary operator declares ordering, identity, associativity and conflict behavior when those concepts exist.",
+    "Every candidate receives a computability review before implementation priority is assigned.",
+    "Negative reviews remain first-class backlog records instead of being deleted."
+  ]
+}

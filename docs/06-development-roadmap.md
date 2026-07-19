@@ -70,9 +70,23 @@
 
 当前已建立零依赖 `ex-protocol` 和 `ex-kernel` 骨架，以及默认配置的端到端直接调用。后续两个参考 Capsule 只允许校正边界，不得借机加入多步图搜索或统一 family IR。
 
+## Phase 3.5｜全量算子目录（当前）
+
+在继续扩大实现数量前，先完成格式宇宙与独立 Capsule 之间的施工层：
+
+- 31 类自治 Object IR 位置；
+- 十族、153 个动词的有限算子基；
+- 4,743 个 Object IR×算子研究位置与 310 个语义家族×算子族研究单元；
+- FormatVariant × ObjectIR × OperatorTemplate 的候选边展开规则；
+- implemented、candidate、unknown、blocked、impossible 分离；
+- 自动生成并校验实际支持矩阵；
+- 每个活动格式族先提交全量目录与连续开发波次。
+
+当前首个族级目录是音频：172 个表示、42 类模板、8,672 条有序格式候选。退出条件不是立刻实现所有边，而是所有边都能被追踪、批量判断可计算性并形成闭环施工簇。
+
 ## Phase 4｜高价值独立库群（持续 3–6 个月）
 
-按“用户频率 × 独立价值 × 可验证性 ÷ 复杂度”推进：
+按“用户频率 × 独立价值 × 可验证性 ÷ 复杂度”推进，但同一时间只保持一个主要活动族，避免孤立 Capsule 在各族间跳跃。
 
 ### Text/Table
 
@@ -98,14 +112,7 @@ svg-render-to-png   # 明确是 render
 
 ### Audio
 
-```text
-wav-pcm-to-aiff
-aiff-to-wav-pcm
-flac-to-wav-pcm
-wav-pcm-to-flac
-audio-extract-channel
-audio-split-time-range
-```
+音频是当前活动族，不再用六个示例代表全部范围。完整格式空间、8,672 条 pair backlog、42 类非 pair 操作和 Wave A–G 见 `docs/12-audio-operator-program.md`。首个闭环是 PCM interchange，随后连续推进 lossless codec、container/essence、有损 codec、signal、events/tracker、session/bank/spatial。
 
 ### Package/Document
 

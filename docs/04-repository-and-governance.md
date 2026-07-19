@@ -94,3 +94,30 @@ hardware         GPU/codec accelerator
 - 不通过共享 Artifact trait 侵入 Capsule API。
 - 不以“步骤原子化”为理由破坏一个转换库的独立完整性。
 - 不在证据不足时宣传最优、无损或全格式支持。
+
+## 10. 支持矩阵与族级施工门禁
+
+任何真实 Capsule 或 AdapterCapability 变化必须同时重建：
+
+```bash
+python3 tools/build_support_matrix.py
+```
+
+`registry/support-matrix.json` 是“现在支持什么”的唯一机器可读权威。README 可以展示其摘要，但 backlog、设计稿、占位目录和 template 都不得计入支持数。
+
+开始一个新格式族的实现前，必须先在 `operators/` 建立：
+
+1. 该族的容器、编码、profile、事件、工程和复合表示快照；
+2. 对十类基础算子的扫描结果；
+3. 可重建的候选边 backlog；
+4. computability review 与负知识字段；
+5. 连续开发波次和族级退出条件。
+
+进入一个活动族后，不以单个 Capsule 为节奏在多个族间随机切换。先完成该族的目录覆盖和一个闭环算子簇，再决定是否切换。音频目录另有：
+
+```bash
+python3 tools/build_operator_universe.py
+python3 tools/build_audio_backlog.py
+```
+
+CI 同时检查全部生成式施工账本是否过期。

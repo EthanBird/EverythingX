@@ -38,7 +38,18 @@ identify → validate → parse → extract/project
 
 这不是要求一个 Capsule 同时实现所有步骤。每个可交付转换仍是独立 Rust 库，拥有自己的 Options、Error、Report、可运行默认参数和可删除 Adapter。
 
+## 族级连续开发律
+
+上面的族类顺序只用于选择下一活动族，不表示可以每完成一个 Capsule 就跨族跳转。一个族开始前必须完成 Object IR、格式/profile、全量候选边和负知识目录；开始后按闭环波次连续推进。
+
+切换活动族至少满足一项：
+
+1. 当前波次的所有计划 Capsule 均通过独立 CI；
+2. 剩余边已审核为 blocked、impossible 或有证据的 deferred；
+3. 新族具有显著更高的可验证价值，且切换原因写入 ADR。
+
+当前活动族是音频。`wav-pcm-to-aiff` 不再是孤立终点，而是 PCM interchange Wave A 的第一条已实现边。
+
 ## Planner 门槛前的生产组合
 
 第一批目标约 60 个 production Capsule，重点由文本/表格、归档、图像、音频/字幕、文档/数据库和时序容器构成。至少 50 个生产 Capsule、80 个已验证能力和 30 条真实组合路径出现之前，不依据想象中的公共 IR 开发多步 Planner。
-

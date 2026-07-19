@@ -9,6 +9,10 @@ import sys
 from pathlib import Path
 from typing import Any
 
+from build_support_matrix import build_matrix
+from build_audio_backlog import build_backlog
+from build_operator_universe import build_operator_universe
+
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -166,6 +170,24 @@ def main() -> int:
     if summary["catalog_sha256"] != digest(source_path):
         raise ValueError("catalog summary SHA-256 does not match NDJSON")
 
+    support_matrix = load_json(ROOT / "registry" / "support-matrix.json")
+    if support_matrix != build_matrix():
+        raise ValueError(
+            "registry/support-matrix.json is stale; run tools/build_support_matrix.py"
+        )
+
+    audio_backlog = load_json(ROOT / "operators" / "audio" / "backlog.json")
+    if audio_backlog != build_backlog():
+        raise ValueError(
+            "operators/audio/backlog.json is stale; run tools/build_audio_backlog.py"
+        )
+
+    operator_backlog = load_json(ROOT / "operators" / "backlog.json")
+    if operator_backlog != build_operator_universe():
+        raise ValueError(
+            "operators/backlog.json is stale; run tools/build_operator_universe.py"
+        )
+
     print(
         json.dumps(
             {
@@ -176,6 +198,10 @@ def main() -> int:
                 "capsule_manifests": len(capsule_ids),
                 "adapter_manifests": len(adapter_ids),
                 "capabilities": len(capability_ids),
+                "supported_logical_pairs": support_matrix["summary"]["logical_source_target_pairs"],
+                "audio_representations": audio_backlog["summary"]["reviewed_representations"],
+                "audio_pair_candidates": audio_backlog["summary"]["ordered_pair_candidates"],
+                "object_ir_operator_positions": operator_backlog["summary"]["object_ir_operator_positions"],
             },
             ensure_ascii=False,
             indent=2,

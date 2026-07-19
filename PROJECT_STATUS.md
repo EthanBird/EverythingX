@@ -1,7 +1,7 @@
 # Project status — Architecture 2.0
 
 Date: 2026-07-19  
-Status: Architecture 2.0 implementation has started.
+Status: Reference architecture validated; operator-universe construction and audio-family program active.
 
 ## Accepted architecture
 
@@ -31,6 +31,22 @@ Status: Architecture 2.0 implementation has started.
 
 These are source observations, not a count of unique canonical formats.
 
+## Operator and support ledgers
+
+| Metric | Count |
+|---|---:|
+| Actually implemented standalone Capsules | 3 |
+| Actually implemented Adapter capabilities | 4 |
+| Actually implemented logical format pairs | 3 |
+| Object IR × operator-kind research positions | 4,743 |
+| Semantic-family × operator-family research cells | 310 |
+| Reviewed audio representations | 172 |
+| Audio operator templates | 42 |
+| Generated ordered audio pair candidates | 8,672 |
+| Actually implemented audio pairs | 1 |
+
+`registry/support-matrix.json` is generated from real manifests and answers what works now. `operators/audio/backlog.json` is a research and implementation queue; its candidate count is not a feature count.
+
 ## Delivered in Architecture 2.0
 
 - `ARCHITECTURE.md`
@@ -44,6 +60,10 @@ These are source observations, not a count of unique canonical formats.
 - Capsule independence checker
 - CI proof that the copied Capsule builds after deleting EverythingX integration
 - Revised governance, ADR and development roadmap
+- Finite cross-family operator basis and 31 Object IR positions
+- Generated 4,743 Object IR/operator research positions and 310 family research cells
+- Generated implemented-support matrix with CI freshness enforcement
+- Audio representation universe and complete ordered-pair research backlog
 
 ## Implemented Capsules
 
@@ -88,8 +108,9 @@ These are source observations, not a count of unique canonical formats.
 
 ## Next milestone
 
-The three-Capsule reference gate is complete. Start the high-value independent library group:
+The three-Capsule reference gate is complete. Audio is the active implementation family:
 
 1. Harden `utf16-to-utf8`, `bmp-to-png` and `wav-pcm-to-aiff` with corpus manifests, fuzz targets and reproducible benchmark reports.
-2. Implement `utf32-to-utf8` as the next zero-dependency representation Capsule.
-3. Follow with `json-to-jsonl` and `jsonl-to-json` without adding multi-step planning or a mandatory family IR.
+2. Complete the PCM interchange Wave A beginning with `aiff-pcm-to-wav-pcm`, raw PCM↔WAV, WAV↔CAF/AU/RF64/BWF/BW64/Wave64.
+3. Continue through lossless codecs, container/essence operations, lossy codecs, signal transforms, musical events, sessions, banks and spatial audio according to `docs/12-audio-operator-program.md`.
+4. Do not switch to isolated Text/Table operators until the active audio wave has reached its declared closure gate.

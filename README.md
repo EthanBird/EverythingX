@@ -78,6 +78,7 @@ U(t) = authoritative registries
 capsules/       独立转换库模板；复制出去仍能构建
 kernel/         EverythingX 运行时边界，只负责控制面
 registry/       格式宇宙、Capsule 与 Adapter 的注册规则
+operators/      Object IR、算子基、族级格式空间与可重建候选 backlog
 canonical/      经证据审核的格式概念与 operational variants
 catalog/        外部来源观察和索引
 ontology/       多轴文件本体、关系、状态与损失词表
@@ -101,10 +102,24 @@ tools/          数据同步、目录构建和一致性校验
 9. `docs/examples/heic-to-jpeg.md`
 10. `docs/06-development-roadmap.md`
 11. `docs/10-capsule-family-priority.md`
+12. `docs/11-object-ir-and-operator-universe.md`
+13. `docs/12-audio-operator-program.md`
 
 ## 当前阶段
 
-现在不开发桌面端、CLI 或路径规划器。三个零依赖参考 Capsule 已经具备独立实现：`utf16-to-utf8`、自研 parser/encoder/Deflate 的 `bmp-to-png`，以及覆盖 RIFF 扫描、PCM 字节序和有符号性、WAVE_FORMAT_EXTENSIBLE 与常用元数据的 `wav-pcm-to-aiff`。薄 Kernel 仍只支持注册、默认验证和直接调用；下一阶段优先扩充 Text/Table 独立库，并持续强化现有 Capsule 的 corpus、fuzz 与 benchmark 证据。只有当独立转换库的数量、质量和证据密度达到门槛后，才开发转换图。
+现在不开发桌面端、CLI 或路径规划器。三个零依赖参考 Capsule 已经具备独立实现：`utf16-to-utf8`、自研 parser/encoder/Deflate 的 `bmp-to-png`，以及覆盖 RIFF 扫描、PCM 字节序和有符号性、WAVE_FORMAT_EXTENSIBLE 与常用元数据的 `wav-pcm-to-aiff`。架构验证阶段已经结束，开发节奏改为“先完成族级格式空间与全量算子 backlog，再连续实现整个算子簇”。首版哲学施工层有 31 个 Object IR、153 个算子动词、4,743 个 IR×算子研究位置和 310 个族级研究单元。音频是当前活动族：首轮已归类 172 个表示、42 类操作模板和 8,672 条有序格式候选边。薄 Kernel 仍只支持注册、默认验证和直接调用；只有独立转换库的数量、质量和证据密度达到门槛后，才开发转换图。
+
+## 当前实际支持的转换
+
+计划数量不等于功能数量。当前可运行、经过 CI 的逻辑转换只有：
+
+| 输入 | 输出 | 独立 Capsule | 能力 |
+|---|---|---|---:|
+| UTF-16 | UTF-8 | `utf16-to-utf8` | strict、replace-invalid |
+| Windows BMP family | PNG | `bmp-to-png` | pixel-exact |
+| RIFF/WAVE integer PCM | classic AIFF PCM | `wav-pcm-to-aiff` | pcm-exact |
+
+机器可读权威清单是 `registry/support-matrix.json`。任何 Capsule 或 Adapter 更新都必须运行 `python3 tools/build_support_matrix.py`；CI 会拒绝过期矩阵。计划中、研究中和不可计算的边统一保存在 `operators/`，不得写进已支持清单。
 
 运行数据校验：
 
