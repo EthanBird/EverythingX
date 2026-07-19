@@ -74,6 +74,28 @@ SPECS = (
     Spec("bwf-pcm-to-au-pcm", "Bwf", "Au", "exfmt:audio:bwf-pcm", "exfmt:audio:au-pcm", "Broadcast WAVE PCM", "Sun AU/SND PCM"),
     Spec("rf64-pcm-to-bw64-pcm", "Rf64", "Bw64", "exfmt:audio:rf64-pcm", "exfmt:audio:bw64-pcm", "RF64 PCM", "BW64 PCM"),
     Spec("bw64-pcm-to-rf64-pcm", "Bw64", "Rf64", "exfmt:audio:bw64-pcm", "exfmt:audio:rf64-pcm", "BW64 PCM", "RF64 PCM"),
+    Spec("rf64-pcm-to-wave64-pcm", "Rf64", "Wave64", "exfmt:audio:rf64-pcm", "exfmt:audio:wave64-pcm", "RF64 PCM", "Sony Wave64 PCM"),
+    Spec("wave64-pcm-to-rf64-pcm", "Wave64", "Rf64", "exfmt:audio:wave64-pcm", "exfmt:audio:rf64-pcm", "Sony Wave64 PCM", "RF64 PCM"),
+    Spec("rf64-pcm-to-bwf-pcm", "Rf64", "Bwf", "exfmt:audio:rf64-pcm", "exfmt:audio:bwf-pcm", "RF64 PCM", "Broadcast WAVE PCM"),
+    Spec("bwf-pcm-to-rf64-pcm", "Bwf", "Rf64", "exfmt:audio:bwf-pcm", "exfmt:audio:rf64-pcm", "Broadcast WAVE PCM", "RF64 PCM"),
+    Spec("bw64-pcm-to-wave64-pcm", "Bw64", "Wave64", "exfmt:audio:bw64-pcm", "exfmt:audio:wave64-pcm", "BW64 PCM", "Sony Wave64 PCM"),
+    Spec("wave64-pcm-to-bw64-pcm", "Wave64", "Bw64", "exfmt:audio:wave64-pcm", "exfmt:audio:bw64-pcm", "Sony Wave64 PCM", "BW64 PCM"),
+    Spec("bw64-pcm-to-bwf-pcm", "Bw64", "Bwf", "exfmt:audio:bw64-pcm", "exfmt:audio:bwf-pcm", "BW64 PCM", "Broadcast WAVE PCM"),
+    Spec("bwf-pcm-to-bw64-pcm", "Bwf", "Bw64", "exfmt:audio:bwf-pcm", "exfmt:audio:bw64-pcm", "Broadcast WAVE PCM", "BW64 PCM"),
+    Spec("wave64-pcm-to-bwf-pcm", "Wave64", "Bwf", "exfmt:audio:wave64-pcm", "exfmt:audio:bwf-pcm", "Sony Wave64 PCM", "Broadcast WAVE PCM"),
+    Spec("bwf-pcm-to-wave64-pcm", "Bwf", "Wave64", "exfmt:audio:bwf-pcm", "exfmt:audio:wave64-pcm", "Broadcast WAVE PCM", "Sony Wave64 PCM"),
+    Spec("aiff-pcm-to-caf-pcm", "Aiff", "Caf", "exfmt:audio:aiff-pcm", "exfmt:audio:caf-pcm", "classic AIFF PCM", "Core Audio Format PCM"),
+    Spec("caf-pcm-to-aiff-pcm", "Caf", "Aiff", "exfmt:audio:caf-pcm", "exfmt:audio:aiff-pcm", "Core Audio Format PCM", "classic AIFF PCM"),
+    Spec("aiff-pcm-to-au-pcm", "Aiff", "Au", "exfmt:audio:aiff-pcm", "exfmt:audio:au-pcm", "classic AIFF PCM", "Sun AU/SND PCM"),
+    Spec("au-pcm-to-aiff-pcm", "Au", "Aiff", "exfmt:audio:au-pcm", "exfmt:audio:aiff-pcm", "Sun AU/SND PCM", "classic AIFF PCM"),
+    Spec("aiff-pcm-to-rf64-pcm", "Aiff", "Rf64", "exfmt:audio:aiff-pcm", "exfmt:audio:rf64-pcm", "classic AIFF PCM", "RF64 PCM"),
+    Spec("rf64-pcm-to-aiff-pcm", "Rf64", "Aiff", "exfmt:audio:rf64-pcm", "exfmt:audio:aiff-pcm", "RF64 PCM", "classic AIFF PCM"),
+    Spec("aiff-pcm-to-bw64-pcm", "Aiff", "Bw64", "exfmt:audio:aiff-pcm", "exfmt:audio:bw64-pcm", "classic AIFF PCM", "BW64 PCM"),
+    Spec("bw64-pcm-to-aiff-pcm", "Bw64", "Aiff", "exfmt:audio:bw64-pcm", "exfmt:audio:aiff-pcm", "BW64 PCM", "classic AIFF PCM"),
+    Spec("aiff-pcm-to-wave64-pcm", "Aiff", "Wave64", "exfmt:audio:aiff-pcm", "exfmt:audio:wave64-pcm", "classic AIFF PCM", "Sony Wave64 PCM"),
+    Spec("wave64-pcm-to-aiff-pcm", "Wave64", "Aiff", "exfmt:audio:wave64-pcm", "exfmt:audio:aiff-pcm", "Sony Wave64 PCM", "classic AIFF PCM"),
+    Spec("aiff-pcm-to-bwf-pcm", "Aiff", "Bwf", "exfmt:audio:aiff-pcm", "exfmt:audio:bwf-pcm", "classic AIFF PCM", "Broadcast WAVE PCM"),
+    Spec("bwf-pcm-to-aiff-pcm", "Bwf", "Aiff", "exfmt:audio:bwf-pcm", "exfmt:audio:aiff-pcm", "Broadcast WAVE PCM", "classic AIFF PCM"),
 )
 
 RAW_SPECS = (
@@ -88,7 +110,22 @@ def json_text(value: object) -> str:
     return json.dumps(value, ensure_ascii=False, indent=2) + "\n"
 
 
+def performance_evidence(capability_id: str) -> list[str]:
+    baseline = ROOT / "registry" / "performance" / "baseline.json"
+    if not baseline.is_file():
+        return []
+    measured = {
+        row.get("capability_id")
+        for row in json.loads(baseline.read_text(encoding="utf-8")).get("capabilities", [])
+    }
+    if capability_id not in measured:
+        return []
+    return [f"registry/performance/baseline.json#{capability_id}"]
+
+
 def manifest(spec: Spec) -> str:
+    capability_id = f"capability:{spec.name}/pcm-exact/native-portable"
+    evidence = performance_evidence(capability_id)
     defaults = {
         "strict_header_consistency": True,
         "buffer_size": 65536,
@@ -170,7 +207,7 @@ def manifest(spec: Spec) -> str:
             ],
             "regression": ["Wrong signatures are rejected", "PCM frames remain aligned"],
             "fuzz": ["Planned: source chunk graph, size and fragmented-reader campaigns"],
-            "benchmarks": [f"registry/performance/baseline.json#capability:{spec.name}/pcm-exact/native-portable"],
+            "benchmarks": evidence or ["Pending controlled exbench baseline"],
         },
         "security": {
             "accepts_untrusted_input": True,
@@ -186,6 +223,8 @@ def manifest(spec: Spec) -> str:
 
 
 def adapter_manifest(spec: Spec) -> str:
+    capability_id = f"capability:{spec.name}/pcm-exact/native-portable"
+    evidence = performance_evidence(capability_id)
     defaults = {"strict_header_consistency": True, "buffer_size": 65536, "max_channels": 256}
     value = {
         "adapter_id": f"adapter:{spec.name}-static",
@@ -207,7 +246,7 @@ def adapter_manifest(spec: Spec) -> str:
             "loss": {"payload": "none", "temporal": "none", "structure": "normalized", "metadata": "unbounded"},
             "default_options": defaults,
             "defaults_are_runnable": True,
-            "execution": {"streaming": False, "seek_required": False, "cost_evidence": [f"registry/performance/baseline.json#capability:{spec.name}/pcm-exact/native-portable"]},
+            "execution": {"streaming": False, "seek_required": False, "cost_evidence": evidence},
             "report_mapping": {"unknown_fields_are_preserved": True, "rules": ["PCM facts map to capsule_report", "static Adapter buffers forward-only protocol input"]},
         }],
     }
@@ -328,6 +367,8 @@ def raw_defaults(spec: RawSpec) -> dict[str, object]:
 
 
 def raw_manifest(spec: RawSpec) -> str:
+    capability_id = f"capability:{spec.name}/frame-exact/native-portable"
+    evidence = performance_evidence(capability_id)
     defaults = raw_defaults(spec)
     value = {
         "capsule_id": f"capsule:{spec.name}",
@@ -366,7 +407,7 @@ def raw_manifest(spec: RawSpec) -> str:
             "properties": ["Partial frames are rejected", "Default and custom semantics are independently asserted"],
             "regression": ["Buffer limits are validated", "Frame/channel boundaries remain intact"],
             "fuzz": ["Planned: parameter, alignment, length and reader-fragmentation campaigns"],
-            "benchmarks": [f"registry/performance/baseline.json#capability:{spec.name}/frame-exact/native-portable"],
+            "benchmarks": evidence or ["Pending controlled exbench baseline"],
         },
         "security": {
             "accepts_untrusted_input": True,
@@ -378,6 +419,8 @@ def raw_manifest(spec: RawSpec) -> str:
 
 
 def raw_adapter_manifest(spec: RawSpec) -> str:
+    capability_id = f"capability:{spec.name}/frame-exact/native-portable"
+    evidence = performance_evidence(capability_id)
     value = {
         "adapter_id": f"adapter:{spec.name}-static",
         "version": "0.1.0",
@@ -398,7 +441,7 @@ def raw_adapter_manifest(spec: RawSpec) -> str:
             "loss": {"payload": "none", "temporal": "normalized", "structure": "normalized", "metadata": "not-present"},
             "default_options": raw_defaults(spec),
             "defaults_are_runnable": True,
-            "execution": {"streaming": False, "seek_required": False, "cost_evidence": [f"registry/performance/baseline.json#capability:{spec.name}/frame-exact/native-portable"]},
+            "execution": {"streaming": False, "seek_required": False, "cost_evidence": evidence},
             "report_mapping": {"unknown_fields_are_preserved": True, "rules": ["Frame and channel counts map to capsule_report", "static Adapter buffers protocol input for seek"]},
         }],
     }

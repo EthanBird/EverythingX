@@ -8,7 +8,7 @@
     "reviewed_representations": 172,
     "operator_templates": 42,
     "ordered_pair_candidates": 8672,
-    "implemented_pair_candidates": 37
+    "implemented_pair_candidates": 59
   },
   "domain_counts": {
     "sampled-audio": {
@@ -43,7 +43,35 @@
   "currently_implemented_audio_pairs": [
     {
       "input": "audiofmt:aiff-pcm",
+      "output": "audiofmt:au-pcm"
+    },
+    {
+      "input": "audiofmt:aiff-pcm",
+      "output": "audiofmt:bw64-pcm"
+    },
+    {
+      "input": "audiofmt:aiff-pcm",
+      "output": "audiofmt:bwf-pcm"
+    },
+    {
+      "input": "audiofmt:aiff-pcm",
+      "output": "audiofmt:caf-pcm"
+    },
+    {
+      "input": "audiofmt:aiff-pcm",
+      "output": "audiofmt:rf64-pcm"
+    },
+    {
+      "input": "audiofmt:aiff-pcm",
       "output": "audiofmt:wav-pcm"
+    },
+    {
+      "input": "audiofmt:aiff-pcm",
+      "output": "audiofmt:wave64-pcm"
+    },
+    {
+      "input": "audiofmt:au-pcm",
+      "output": "audiofmt:aiff-pcm"
     },
     {
       "input": "audiofmt:au-pcm",
@@ -71,7 +99,15 @@
     },
     {
       "input": "audiofmt:bw64-pcm",
+      "output": "audiofmt:aiff-pcm"
+    },
+    {
+      "input": "audiofmt:bw64-pcm",
       "output": "audiofmt:au-pcm"
+    },
+    {
+      "input": "audiofmt:bw64-pcm",
+      "output": "audiofmt:bwf-pcm"
     },
     {
       "input": "audiofmt:bw64-pcm",
@@ -86,8 +122,20 @@
       "output": "audiofmt:wav-pcm"
     },
     {
+      "input": "audiofmt:bw64-pcm",
+      "output": "audiofmt:wave64-pcm"
+    },
+    {
+      "input": "audiofmt:bwf-pcm",
+      "output": "audiofmt:aiff-pcm"
+    },
+    {
       "input": "audiofmt:bwf-pcm",
       "output": "audiofmt:au-pcm"
+    },
+    {
+      "input": "audiofmt:bwf-pcm",
+      "output": "audiofmt:bw64-pcm"
     },
     {
       "input": "audiofmt:bwf-pcm",
@@ -95,7 +143,19 @@
     },
     {
       "input": "audiofmt:bwf-pcm",
+      "output": "audiofmt:rf64-pcm"
+    },
+    {
+      "input": "audiofmt:bwf-pcm",
       "output": "audiofmt:wav-pcm"
+    },
+    {
+      "input": "audiofmt:bwf-pcm",
+      "output": "audiofmt:wave64-pcm"
+    },
+    {
+      "input": "audiofmt:caf-pcm",
+      "output": "audiofmt:aiff-pcm"
     },
     {
       "input": "audiofmt:caf-pcm",
@@ -131,6 +191,10 @@
     },
     {
       "input": "audiofmt:rf64-pcm",
+      "output": "audiofmt:aiff-pcm"
+    },
+    {
+      "input": "audiofmt:rf64-pcm",
       "output": "audiofmt:au-pcm"
     },
     {
@@ -139,11 +203,19 @@
     },
     {
       "input": "audiofmt:rf64-pcm",
+      "output": "audiofmt:bwf-pcm"
+    },
+    {
+      "input": "audiofmt:rf64-pcm",
       "output": "audiofmt:caf-pcm"
     },
     {
       "input": "audiofmt:rf64-pcm",
       "output": "audiofmt:wav-pcm"
+    },
+    {
+      "input": "audiofmt:rf64-pcm",
+      "output": "audiofmt:wave64-pcm"
     },
     {
       "input": "audiofmt:wav-pcm",
@@ -179,11 +251,27 @@
     },
     {
       "input": "audiofmt:wave64-pcm",
+      "output": "audiofmt:aiff-pcm"
+    },
+    {
+      "input": "audiofmt:wave64-pcm",
       "output": "audiofmt:au-pcm"
     },
     {
       "input": "audiofmt:wave64-pcm",
+      "output": "audiofmt:bw64-pcm"
+    },
+    {
+      "input": "audiofmt:wave64-pcm",
+      "output": "audiofmt:bwf-pcm"
+    },
+    {
+      "input": "audiofmt:wave64-pcm",
       "output": "audiofmt:caf-pcm"
+    },
+    {
+      "input": "audiofmt:wave64-pcm",
+      "output": "audiofmt:rf64-pcm"
     },
     {
       "input": "audiofmt:wave64-pcm",

@@ -1,0 +1,15 @@
+[package]
+name = "everythingx-adapter-bwf-pcm-to-aiff-pcm"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
+everythingx-protocol = { path = "../../../../../../../kernel/ex-protocol" }
+bwf-pcm-to-aiff-pcm = { path = "../.." }
+
+[dev-dependencies]
+everythingx-kernel = { path = "../../../../../../../kernel/ex-kernel" }

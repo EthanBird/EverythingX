@@ -1,0 +1,67 @@
+{
+  "adapter_id": "adapter:rf64-pcm-to-wave64-pcm-static",
+  "version": "0.1.0",
+  "capsule": {
+    "id": "capsule:rf64-pcm-to-wave64-pcm",
+    "version_requirement": "^0.1.0"
+  },
+  "protocol": {
+    "name": "everythingx-adapter-protocol",
+    "version_requirement": "0.1"
+  },
+  "transport": {
+    "kind": "static-rust",
+    "entrypoint": "GeneratedPcmAdapter"
+  },
+  "capabilities": [
+    {
+      "capability_id": "capability:rf64-pcm-to-wave64-pcm/pcm-exact/native-portable",
+      "capsule_entrypoint": "convert",
+      "strategy": "pcm-exact",
+      "backend": "native-portable",
+      "inputs": [
+        "exfmt:audio:rf64-pcm"
+      ],
+      "outputs": [
+        "exfmt:audio:wave64-pcm"
+      ],
+      "preconditions": [
+        "Input is supported integer PCM in RF64 PCM"
+      ],
+      "effects": [
+        "Output is Sony Wave64 PCM"
+      ],
+      "invariants": [
+        "Sample rate",
+        "Frame count",
+        "Channel count",
+        "PCM sample sequence"
+      ],
+      "computability": "semantic_lossless",
+      "loss": {
+        "payload": "none",
+        "temporal": "none",
+        "structure": "normalized",
+        "metadata": "unbounded"
+      },
+      "default_options": {
+        "strict_header_consistency": true,
+        "buffer_size": 65536,
+        "max_channels": 256
+      },
+      "defaults_are_runnable": true,
+      "execution": {
+        "streaming": false,
+        "seek_required": false,
+        "cost_evidence": []
+      },
+      "report_mapping": {
+        "unknown_fields_are_preserved": true,
+        "rules": [
+          "PCM facts map to capsule_report",
+          "static Adapter buffers forward-only protocol input"
+        ]
+      }
+    }
+  ]
+}

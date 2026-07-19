@@ -1,0 +1,15 @@
+[package]
+name = "everythingx-adapter-rf64-pcm-to-wave64-pcm"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
+everythingx-protocol = { path = "../../../../../../../kernel/ex-protocol" }
+rf64-pcm-to-wave64-pcm = { path = "../.." }
+
+[dev-dependencies]
+everythingx-kernel = { path = "../../../../../../../kernel/ex-kernel" }

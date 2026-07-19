@@ -19,8 +19,19 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "benchmarks" / "capability-bench" / "Cargo.toml"
 PROFILE_ID = "exbench:ci-default-v1"
-EXPECTED_CAPSULES = 42
-EXPECTED_CAPABILITIES = 43
+
+
+def expected_coverage() -> dict[str, int]:
+    capsules = 0
+    capabilities = 0
+    for manifest in sorted((ROOT / "capsules").rglob("capsule.json")):
+        if any(part.startswith("_") for part in manifest.relative_to(ROOT / "capsules").parts):
+            continue
+        capsules += 1
+        adapter = manifest.parent / "everythingx" / "adapter.json"
+        value = json.loads(adapter.read_text(encoding="utf-8"))
+        capabilities += len(value["capabilities"])
+    return {"capsules": capsules, "capabilities": capabilities}
 
 
 def percentile_record(parts: list[str]) -> dict[str, Any]:
@@ -160,8 +171,9 @@ def command_output(command: list[str]) -> str:
 
 def build_report(raw: str) -> dict[str, Any]:
     calibration, rows, summary = parse_raw(raw)
-    if summary != {"capsules": EXPECTED_CAPSULES, "capabilities": EXPECTED_CAPABILITIES}:
-        raise ValueError(f"expected {EXPECTED_CAPSULES} Capsules/{EXPECTED_CAPABILITIES} capabilities, got {summary}")
+    expected = expected_coverage()
+    if summary != expected:
+        raise ValueError(f"expected repository coverage {expected}, got {summary}")
     calibration_mib_s = calibration["input_bytes"] / (calibration["p50_ns"] / 1_000_000_000) / (1024 * 1024)
     evidence = [score_row(row, calibration_mib_s) for row in sorted(rows, key=lambda item: item["capability_id"])]
     return {

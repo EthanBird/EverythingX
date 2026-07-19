@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
 import sys
@@ -75,7 +76,7 @@ def validate_facets(record: dict[str, Any], vocabulary: dict[str, Any], location
                 raise ValueError(f"{location}: unknown {facet_name} value {value}")
 
 
-def main() -> int:
+def main(allow_performance_baseline_lag: bool = False) -> int:
     # Parse every authored JSON and schema before deeper checks.
     json_paths = sorted(ROOT.glob("**/*.json"))
     for path in json_paths:
@@ -217,10 +218,16 @@ def main() -> int:
     performance_rows = performance["capabilities"]
     measured_ids = ensure_unique(performance_rows, "capability_id", "registry/performance/baseline.json")
     measured_capsules = {row.get("capsule_id") for row in performance_rows}
-    if measured_ids != production_capability_ids:
-        raise ValueError("performance baseline capability coverage does not match production Adapter capabilities")
-    if measured_capsules != production_capsule_ids:
-        raise ValueError("performance baseline Capsule coverage does not match production Capsules")
+    if allow_performance_baseline_lag:
+        if not measured_ids.issubset(production_capability_ids):
+            raise ValueError("performance baseline contains capabilities absent from production")
+        if not measured_capsules.issubset(production_capsule_ids):
+            raise ValueError("performance baseline contains Capsules absent from production")
+    else:
+        if measured_ids != production_capability_ids:
+            raise ValueError("performance baseline capability coverage does not match production Adapter capabilities")
+        if measured_capsules != production_capsule_ids:
+            raise ValueError("performance baseline Capsule coverage does not match production Capsules")
     if performance.get("summary") != {"capabilities": len(measured_ids), "capsules": len(measured_capsules)}:
         raise ValueError("performance baseline summary does not match measured records")
     for row in performance_rows:
@@ -262,8 +269,14 @@ def main() -> int:
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--allow-performance-baseline-lag",
+        action="store_true",
+        help="Bootstrap a larger benchmark run while requiring the checked-in baseline to remain a valid production subset.",
+    )
     try:
-        raise SystemExit(main())
+        raise SystemExit(main(parser.parse_args().allow_performance_baseline_lag))
     except (OSError, ValueError, KeyError, TypeError, json.JSONDecodeError) as error:
         print(f"validation failed: {error}", file=sys.stderr)
         raise SystemExit(1)

@@ -1,0 +1,12 @@
+[package]
+name = "rf64-pcm-to-aiff-pcm"
+version = "0.1.0"
+edition = "2024"
+publish = false
+license-file = "LICENSE"
+description = "Standalone zero-dependency RF64 PCM to classic AIFF PCM PCM converter"
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]

@@ -13,7 +13,7 @@ const W64_FMT: [u8; 16] = [0x66,0x6d,0x74,0x20,0xf3,0xac,0xd3,0x11,0x8c,0xd1,0x0
 const W64_DATA: [u8; 16] = [0x64,0x61,0x74,0x61,0xf3,0xac,0xd3,0x11,0x8c,0xd1,0x00,0xc0,0x4f,0x8e,0xdb,0x8a];
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
-enum Profile { Wav, Caf, Au, Rf64, Bw64, Wave64, Bwf }
+enum Profile { Wav, Aiff, Caf, Au, Rf64, Bw64, Wave64, Bwf }
 const SOURCE: Profile = Profile::Caf;
 const TARGET: Profile = Profile::Bwf;
 
@@ -66,12 +66,13 @@ struct Plan { prefix: Vec<u8>, padding: usize }
 fn le16(bytes: &[u8]) -> u16 { u16::from_le_bytes([bytes[0],bytes[1]]) }
 fn le32(bytes: &[u8]) -> u32 { u32::from_le_bytes([bytes[0],bytes[1],bytes[2],bytes[3]]) }
 fn le64(bytes: &[u8]) -> u64 { u64::from_le_bytes(bytes.try_into().expect("eight bytes")) }
+fn be16(bytes: &[u8]) -> u16 { u16::from_be_bytes([bytes[0],bytes[1]]) }
 fn be32(bytes: &[u8]) -> u32 { u32::from_be_bytes(bytes.try_into().expect("four bytes")) }
 fn be64(bytes: &[u8]) -> u64 { u64::from_be_bytes(bytes.try_into().expect("eight bytes")) }
 fn align(value: u64, alignment: u64) -> Result<u64, Error> { value.checked_add(alignment - 1).map(|v| v / alignment * alignment).ok_or(Error::Overflow) }
 
 fn storage(profile: Profile) -> Storage { match profile {
-    Profile::Au => Storage { endian: Endian::Big, eight_bit_signed: true },
+    Profile::Aiff | Profile::Au => Storage { endian: Endian::Big, eight_bit_signed: true },
     Profile::Caf => Storage { endian: Endian::Little, eight_bit_signed: true },
     _ => Storage { endian: Endian::Little, eight_bit_signed: false },
 } }
@@ -113,6 +114,30 @@ fn parse_au<R:Read+Seek>(input:&mut R,options:&Options)->Result<Parsed,Error>{
     finish(physical-start,Format{channels,rate,container_bits:bits,valid_bits:bits,block_align:block},storage(Profile::Au),vec![Segment{offset,size}],Vec::new())
 }
 
+fn decode_aiff_rate(bytes:&[u8])->Result<u32,Error>{
+    if bytes.len()!=10{return Err(Error::Invalid("AIFF sample rate is not an 80-bit extended value"));}
+    let raw=be16(&bytes[0..2]);if raw&0x8000!=0{return Err(Error::Unsupported("negative AIFF sample rate"));}
+    let exponent=raw&0x7fff;if exponent==0||exponent==0x7fff{return Err(Error::Unsupported("non-finite, denormal or zero AIFF sample rate"));}
+    let mantissa=be64(&bytes[2..10]);if mantissa&(1u64<<63)==0{return Err(Error::Invalid("AIFF sample rate has no integer bit"));}
+    let shift=i32::from(exponent)-16_383-63;
+    let value=if shift>=0{mantissa.checked_shl(shift as u32).ok_or(Error::Unsupported("AIFF sample rate is too large"))?}else{let right=(-shift)as u32;if right>=64{return Err(Error::Unsupported("fractional AIFF sample rate is unsupported"));}let mask=if right==0{0}else{(1u64<<right)-1};if mantissa&mask!=0{return Err(Error::Unsupported("fractional AIFF sample rate is unsupported"));}mantissa>>right};
+    u32::try_from(value).ok().filter(|value|*value!=0).ok_or(Error::Unsupported("AIFF sample rate is outside the integer range"))
+}
+
+fn parse_aiff<R:Read+Seek>(input:&mut R,options:&Options)->Result<Parsed,Error>{
+    let start=input.stream_position()?;let physical=input.seek(SeekFrom::End(0))?;input.seek(SeekFrom::Start(start))?;let mut h=[0u8;12];input.read_exact(&mut h)?;
+    if &h[0..4]!=b"FORM"||&h[8..12]!=b"AIFF"{return Err(Error::Invalid("input is not classic AIFF"));}
+    let end=start.checked_add(8+u64::from(be32(&h[4..8]))).ok_or(Error::Overflow)?;if end>physical{return Err(Error::Invalid("AIFF FORM size extends past EOF"));}if options.strict_header_consistency&&end!=physical{return Err(Error::Invalid("AIFF FORM size does not match input length"));}
+    let mut position=start+12;let mut format=None;let mut declared_frames=None;let mut segments=Vec::new();
+    while position+8<=end{input.seek(SeekFrom::Start(position))?;let mut ch=[0u8;8];input.read_exact(&mut ch)?;let size=u64::from(be32(&ch[4..8]));let payload=position+8;let next=payload.checked_add(size).and_then(|value|value.checked_add(size&1)).ok_or(Error::Overflow)?;if next>end{return Err(Error::Invalid("AIFF chunk extends past FORM boundary"));}
+        if &ch[0..4]==b"COMM"{if format.is_some()||size<18{return Err(Error::Invalid("AIFF COMM chunk is missing, duplicate or incomplete"));}let mut b=[0u8;18];input.read_exact(&mut b)?;let channels=be16(&b[0..2]);let frames=be32(&b[2..6]);let bits=be16(&b[6..8]);let rate=decode_aiff_rate(&b[8..18])?;if channels==0||channels>options.max_channels{return Err(Error::Unsupported("AIFF channel count is unsupported"));}if !matches!(bits,8|16|24|32){return Err(Error::Unsupported("AIFF PCM width must be 8, 16, 24 or 32 bits"));}let block=channels.checked_mul(bits/8).ok_or(Error::Overflow)?;format=Some(Format{channels,rate,container_bits:bits,valid_bits:bits,block_align:block});declared_frames=Some(u64::from(frames));}
+        else if &ch[0..4]==b"SSND"{if size<8{return Err(Error::Invalid("AIFF SSND chunk is incomplete"));}let mut fields=[0u8;8];input.read_exact(&mut fields)?;let offset=u64::from(be32(&fields[0..4]));if offset>size-8{return Err(Error::Invalid("AIFF SSND offset exceeds its chunk"));}segments.push(Segment{offset:payload+8+offset,size:size-8-offset});}
+        position=next;
+    }
+    if position!=end{return Err(Error::Invalid("AIFF chunks do not consume the FORM"));}let format=format.ok_or(Error::Invalid("missing AIFF COMM chunk"))?;let audio=segments.iter().try_fold(0u64,|sum,segment|sum.checked_add(segment.size).ok_or(Error::Overflow))?;if options.strict_header_consistency&&audio/u64::from(format.block_align)!=declared_frames.ok_or(Error::Invalid("missing AIFF frame count"))?{return Err(Error::Invalid("AIFF COMM frame count does not match SSND audio"));}
+    finish(physical-start,format,storage(Profile::Aiff),segments,Vec::new())
+}
+
 fn parse_caf<R:Read+Seek>(input:&mut R,options:&Options)->Result<Parsed,Error>{
     let start=input.stream_position()?;let physical=input.seek(SeekFrom::End(0))?;input.seek(SeekFrom::Start(start))?;let mut h=[0u8;8];input.read_exact(&mut h)?;if &h[0..4]!=b"caff"||u16::from_be_bytes([h[4],h[5]])!=1{return Err(Error::Invalid("input is not CAF version 1"));}
     let mut position=start+8;let mut format=None;let mut data=None;let mut store=storage(Profile::Caf);
@@ -135,9 +160,12 @@ fn finish(input_bytes:u64,format:Format,store:Storage,segments:Vec<Segment>,warn
     if segments.is_empty(){return Err(Error::Invalid("missing PCM data"));}let mut audio=0u64;for segment in &segments{if segment.size%u64::from(format.block_align)!=0{return Err(Error::Invalid("PCM data is not frame aligned"));}audio=audio.checked_add(segment.size).ok_or(Error::Overflow)?;}Ok(Parsed{input_bytes,format,storage:store,segments,audio_bytes:audio,warnings})
 }
 
-fn parse<R:Read+Seek>(input:&mut R,options:&Options)->Result<Parsed,Error>{match SOURCE{Profile::Wav|Profile::Rf64|Profile::Bw64|Profile::Bwf=>parse_riff(input,SOURCE,options),Profile::Caf=>parse_caf(input,options),Profile::Au=>parse_au(input,options),Profile::Wave64=>parse_wave64(input,options)}}
+fn parse<R:Read+Seek>(input:&mut R,options:&Options)->Result<Parsed,Error>{match SOURCE{Profile::Wav|Profile::Rf64|Profile::Bw64|Profile::Bwf=>parse_riff(input,SOURCE,options),Profile::Aiff=>parse_aiff(input,options),Profile::Caf=>parse_caf(input,options),Profile::Au=>parse_au(input,options),Profile::Wave64=>parse_wave64(input,options)}}
 
 fn wave_fmt(format:Format)->Vec<u8>{let extensible=format.valid_bits!=format.container_bits;let mut b=Vec::with_capacity(if extensible{40}else{16});b.extend_from_slice(&(if extensible{0xfffeu16}else{1u16}).to_le_bytes());b.extend_from_slice(&format.channels.to_le_bytes());b.extend_from_slice(&format.rate.to_le_bytes());b.extend_from_slice(&(format.rate*u32::from(format.block_align)).to_le_bytes());b.extend_from_slice(&format.block_align.to_le_bytes());b.extend_from_slice(&format.container_bits.to_le_bytes());if extensible{b.extend_from_slice(&22u16.to_le_bytes());b.extend_from_slice(&format.valid_bits.to_le_bytes());b.extend_from_slice(&0u32.to_le_bytes());b.extend_from_slice(&PCM_GUID);}b}
+
+fn aiff_rate(rate:u32)->[u8;10]{let power=31-rate.leading_zeros();let exponent=(16_383+power)as u16;let mantissa=(rate as u64)<<(63-power);let mut out=[0u8;10];out[0..2].copy_from_slice(&exponent.to_be_bytes());out[2..10].copy_from_slice(&mantissa.to_be_bytes());out}
+fn aiff_plan(format:Format,audio:u64)->Result<Plan,Error>{if format.valid_bits!=format.container_bits{return Err(Error::Unsupported("AIFF target requires equal valid and container widths in version 0.1"));}let frames=audio/u64::from(format.block_align);let frames=u32::try_from(frames).map_err(|_|Error::SizeLimit)?;let ssnd=audio.checked_add(8).ok_or(Error::Overflow)?;let pad=audio&1;let total=12u64.checked_add(8+18).and_then(|value|value.checked_add(8+ssnd+pad)).ok_or(Error::Overflow)?;let form=u32::try_from(total-8).map_err(|_|Error::SizeLimit)?;let ssnd=u32::try_from(ssnd).map_err(|_|Error::SizeLimit)?;let mut b=b"FORM".to_vec();b.extend_from_slice(&form.to_be_bytes());b.extend_from_slice(b"AIFFCOMM");b.extend_from_slice(&18u32.to_be_bytes());b.extend_from_slice(&format.channels.to_be_bytes());b.extend_from_slice(&frames.to_be_bytes());b.extend_from_slice(&format.valid_bits.to_be_bytes());b.extend_from_slice(&aiff_rate(format.rate));b.extend_from_slice(b"SSND");b.extend_from_slice(&ssnd.to_be_bytes());b.extend_from_slice(&0u32.to_be_bytes());b.extend_from_slice(&0u32.to_be_bytes());Ok(Plan{prefix:b,padding:pad as usize})}
 
 fn riff_plan(profile:Profile,format:Format,audio:u64)->Result<Plan,Error>{
     let fmt=wave_fmt(format);let pad=(audio&1)as usize;let bext=profile==Profile::Bwf;let extended=matches!(profile,Profile::Rf64|Profile::Bw64);let extra=if bext{8+602}else if extended{8+28}else{0};let total=12u64.checked_add(8+fmt.len()as u64).and_then(|v|v.checked_add(extra)).and_then(|v|v.checked_add(8+audio+pad as u64)).ok_or(Error::Overflow)?;let mut b=Vec::new();
@@ -151,7 +179,7 @@ fn riff_plan(profile:Profile,format:Format,audio:u64)->Result<Plan,Error>{
 fn caf_plan(format:Format,audio:u64)->Result<Plan,Error>{let mut b=b"caff\0\x01\0\0desc".to_vec();b.extend_from_slice(&32i64.to_be_bytes());b.extend_from_slice(&(format.rate as f64).to_bits().to_be_bytes());b.extend_from_slice(b"lpcm");let flags=4u32|8u32|if format.valid_bits!=format.container_bits{16}else{0};b.extend_from_slice(&flags.to_be_bytes());b.extend_from_slice(&u32::from(format.block_align).to_be_bytes());b.extend_from_slice(&1u32.to_be_bytes());b.extend_from_slice(&u32::from(format.channels).to_be_bytes());b.extend_from_slice(&u32::from(format.valid_bits).to_be_bytes());b.extend_from_slice(b"data");let size=i64::try_from(audio.checked_add(4).ok_or(Error::Overflow)?).map_err(|_|Error::SizeLimit)?;b.extend_from_slice(&size.to_be_bytes());b.extend_from_slice(&0u32.to_be_bytes());Ok(Plan{prefix:b,padding:0})}
 fn au_plan(format:Format,audio:u64)->Result<Plan,Error>{let mut b=b".snd".to_vec();b.extend_from_slice(&24u32.to_be_bytes());b.extend_from_slice(&u32::try_from(audio).map_err(|_|Error::SizeLimit)?.to_be_bytes());let encoding=match format.container_bits{8=>2u32,16=>3,24=>4,32=>5,_=>return Err(Error::Unsupported("AU target width is unsupported"))};if format.valid_bits!=format.container_bits{return Err(Error::Unsupported("AU cannot retain narrower valid-bit declarations"));}b.extend_from_slice(&encoding.to_be_bytes());b.extend_from_slice(&format.rate.to_be_bytes());b.extend_from_slice(&u32::from(format.channels).to_be_bytes());Ok(Plan{prefix:b,padding:0})}
 fn wave64_plan(format:Format,audio:u64)->Result<Plan,Error>{let fmt=wave_fmt(format);let fmt_total=24+fmt.len()as u64;let data_size=24u64.checked_add(audio).ok_or(Error::Overflow)?;let data_total=align(data_size,8)?;let total=40u64.checked_add(align(fmt_total,8)?).and_then(|v|v.checked_add(data_total)).ok_or(Error::Overflow)?;let mut b=Vec::new();b.extend_from_slice(&W64_RIFF);b.extend_from_slice(&total.to_le_bytes());b.extend_from_slice(&W64_WAVE);b.extend_from_slice(&W64_FMT);b.extend_from_slice(&fmt_total.to_le_bytes());b.extend_from_slice(&fmt);while b.len()%8!=0{b.push(0);}b.extend_from_slice(&W64_DATA);b.extend_from_slice(&data_size.to_le_bytes());Ok(Plan{prefix:b,padding:(data_total-data_size)as usize})}
-fn plan(format:Format,audio:u64)->Result<Plan,Error>{match TARGET{Profile::Wav|Profile::Rf64|Profile::Bw64|Profile::Bwf=>riff_plan(TARGET,format,audio),Profile::Caf=>caf_plan(format,audio),Profile::Au=>au_plan(format,audio),Profile::Wave64=>wave64_plan(format,audio)}}
+fn plan(format:Format,audio:u64)->Result<Plan,Error>{match TARGET{Profile::Wav|Profile::Rf64|Profile::Bw64|Profile::Bwf=>riff_plan(TARGET,format,audio),Profile::Aiff=>aiff_plan(format,audio),Profile::Caf=>caf_plan(format,audio),Profile::Au=>au_plan(format,audio),Profile::Wave64=>wave64_plan(format,audio)}}
 
 fn transform(bytes:&mut[u8],width:usize,source:Storage,target:Storage){for sample in bytes.chunks_exact_mut(width){if width>1&&source.endian!=target.endian{sample.reverse();}let source_signed=if width==1{source.eight_bit_signed}else{true};let target_signed=if width==1{target.eight_bit_signed}else{true};if source_signed!=target_signed{let index=if width==1||target.endian==Endian::Big{0}else{width-1};sample[index]^=0x80;}}}
 
@@ -164,13 +192,13 @@ pub fn convert<R:Read+Seek,W:Write>(input:&mut R,output:&mut W,options:&Options)
 
 /// Stable one-frame fixture used only to prove removable Adapter defaults.
 #[doc(hidden)]
-pub fn conformance_fixture()->Vec<u8>{let format=Format{channels:1,rate:44_100,container_bits:16,valid_bits:16,block_align:2};let plan=match SOURCE{Profile::Wav|Profile::Rf64|Profile::Bw64|Profile::Bwf=>riff_plan(SOURCE,format,2).expect("fixture RIFF"),Profile::Caf=>caf_plan(format,2).expect("fixture CAF"),Profile::Au=>au_plan(format,2).expect("fixture AU"),Profile::Wave64=>wave64_plan(format,2).expect("fixture Wave64")};let mut audio=vec![0x34,0x12];transform(&mut audio,2,Storage{endian:Endian::Little,eight_bit_signed:true},storage(SOURCE));let mut out=plan.prefix;out.extend_from_slice(&audio);out.extend(std::iter::repeat_n(0,plan.padding));out}
+pub fn conformance_fixture()->Vec<u8>{let format=Format{channels:1,rate:44_100,container_bits:16,valid_bits:16,block_align:2};let plan=match SOURCE{Profile::Wav|Profile::Rf64|Profile::Bw64|Profile::Bwf=>riff_plan(SOURCE,format,2).expect("fixture RIFF"),Profile::Aiff=>aiff_plan(format,2).expect("fixture AIFF"),Profile::Caf=>caf_plan(format,2).expect("fixture CAF"),Profile::Au=>au_plan(format,2).expect("fixture AU"),Profile::Wave64=>wave64_plan(format,2).expect("fixture Wave64")};let mut audio=vec![0x34,0x12];transform(&mut audio,2,Storage{endian:Endian::Little,eight_bit_signed:true},storage(SOURCE));let mut out=plan.prefix;out.extend_from_slice(&audio);out.extend(std::iter::repeat_n(0,plan.padding));out}
 
 #[cfg(test)]
 mod tests{
     use super::*;use std::io::Cursor;
-    fn fixture(profile:Profile,bits:u16,canonical:&[u8])->Vec<u8>{let format=Format{channels:1,rate:44_100,container_bits:bits,valid_bits:bits,block_align:bits/8};let plan=match profile{Profile::Wav|Profile::Rf64|Profile::Bw64|Profile::Bwf=>riff_plan(profile,format,canonical.len()as u64).unwrap(),Profile::Caf=>caf_plan(format,canonical.len()as u64).unwrap(),Profile::Au=>au_plan(format,canonical.len()as u64).unwrap(),Profile::Wave64=>wave64_plan(format,canonical.len()as u64).unwrap()};let mut audio=canonical.to_vec();transform(&mut audio,usize::from(bits/8),Storage{endian:Endian::Little,eight_bit_signed:true},storage(profile));let mut out=plan.prefix;out.extend_from_slice(&audio);out.extend(std::iter::repeat_n(0,plan.padding));out}
-    fn decoded_target(bytes:Vec<u8>)->Vec<u8>{let mut input=Cursor::new(bytes);let parsed=match TARGET{Profile::Wav|Profile::Rf64|Profile::Bw64|Profile::Bwf=>parse_riff(&mut input,TARGET,&Options::default()).unwrap(),Profile::Caf=>parse_caf(&mut input,&Options::default()).unwrap(),Profile::Au=>parse_au(&mut input,&Options::default()).unwrap(),Profile::Wave64=>parse_wave64(&mut input,&Options::default()).unwrap()};let mut audio=Vec::new();for segment in &parsed.segments{input.seek(SeekFrom::Start(segment.offset)).unwrap();let mut part=vec![0u8;segment.size as usize];input.read_exact(&mut part).unwrap();audio.extend_from_slice(&part);}transform(&mut audio,usize::from(parsed.format.container_bits/8),parsed.storage,Storage{endian:Endian::Little,eight_bit_signed:true});audio}
+    fn fixture(profile:Profile,bits:u16,canonical:&[u8])->Vec<u8>{let format=Format{channels:1,rate:44_100,container_bits:bits,valid_bits:bits,block_align:bits/8};let plan=match profile{Profile::Wav|Profile::Rf64|Profile::Bw64|Profile::Bwf=>riff_plan(profile,format,canonical.len()as u64).unwrap(),Profile::Aiff=>aiff_plan(format,canonical.len()as u64).unwrap(),Profile::Caf=>caf_plan(format,canonical.len()as u64).unwrap(),Profile::Au=>au_plan(format,canonical.len()as u64).unwrap(),Profile::Wave64=>wave64_plan(format,canonical.len()as u64).unwrap()};let mut audio=canonical.to_vec();transform(&mut audio,usize::from(bits/8),Storage{endian:Endian::Little,eight_bit_signed:true},storage(profile));let mut out=plan.prefix;out.extend_from_slice(&audio);out.extend(std::iter::repeat_n(0,plan.padding));out}
+    fn decoded_target(bytes:Vec<u8>)->Vec<u8>{let mut input=Cursor::new(bytes);let parsed=match TARGET{Profile::Wav|Profile::Rf64|Profile::Bw64|Profile::Bwf=>parse_riff(&mut input,TARGET,&Options::default()).unwrap(),Profile::Aiff=>parse_aiff(&mut input,&Options::default()).unwrap(),Profile::Caf=>parse_caf(&mut input,&Options::default()).unwrap(),Profile::Au=>parse_au(&mut input,&Options::default()).unwrap(),Profile::Wave64=>parse_wave64(&mut input,&Options::default()).unwrap()};let mut audio=Vec::new();for segment in &parsed.segments{input.seek(SeekFrom::Start(segment.offset)).unwrap();let mut part=vec![0u8;segment.size as usize];input.read_exact(&mut part).unwrap();audio.extend_from_slice(&part);}transform(&mut audio,usize::from(parsed.format.container_bits/8),parsed.storage,Storage{endian:Endian::Little,eight_bit_signed:true});audio}
     #[test]fn preserves_sixteen_bit_pcm(){let source=fixture(SOURCE,16,&[0x34,0x12,0xcc,0xed]);let mut output=Vec::new();let report=convert(&mut Cursor::new(source),&mut output,&Options::default()).unwrap();assert_eq!(decoded_target(output),[0x34,0x12,0xcc,0xed]);assert_eq!(report.sample_frames,2);}
     #[test]fn preserves_eight_bit_levels_across_signedness_conventions(){let source=fixture(SOURCE,8,&[0x80,0x00,0x7f]);let mut output=Vec::new();convert(&mut Cursor::new(source),&mut output,&Options::default()).unwrap();assert_eq!(decoded_target(output),[0x80,0x00,0x7f]);}
     #[test]fn rejects_wrong_signature(){let error=convert(&mut Cursor::new(vec![0u8;64]),&mut Vec::new(),&Options::default()).unwrap_err();assert!(matches!(error,Error::Invalid(_)|Error::Io(_)));}
