@@ -61,19 +61,40 @@ def output(command: list[str]) -> str:
 
 
 def tree_size(path: Path) -> dict[str, int]:
+    path_sum = 0
     logical = 0
     allocated = 0
     files = 0
+    unique_files = 0
+    seen_inodes: set[tuple[int, int]] = set()
     if not path.exists():
-        return {"logical_bytes": 0, "allocated_bytes": 0, "files": 0}
+        return {
+            "logical_bytes": 0,
+            "path_sum_bytes": 0,
+            "allocated_bytes": 0,
+            "files": 0,
+            "unique_files": 0,
+        }
     for candidate in path.rglob("*"):
         if not candidate.is_file() or candidate.is_symlink():
             continue
         stat = candidate.stat()
+        path_sum += stat.st_size
+        files += 1
+        inode = (stat.st_dev, stat.st_ino)
+        if inode in seen_inodes:
+            continue
+        seen_inodes.add(inode)
         logical += stat.st_size
         allocated += getattr(stat, "st_blocks", math.ceil(stat.st_size / 512)) * 512
-        files += 1
-    return {"logical_bytes": logical, "allocated_bytes": allocated, "files": files}
+        unique_files += 1
+    return {
+        "logical_bytes": logical,
+        "path_sum_bytes": path_sum,
+        "allocated_bytes": allocated,
+        "files": files,
+        "unique_files": unique_files,
+    }
 
 
 def source_tree_size(path: Path, *, omit_everythingx: bool = False) -> int:
@@ -92,9 +113,15 @@ def source_tree_size(path: Path, *, omit_everythingx: bool = False) -> int:
 
 def artifact_breakdown(path: Path) -> dict[str, dict[str, int]]:
     groups: dict[str, dict[str, int]] = {}
+    seen_inodes: set[tuple[int, int]] = set()
     for candidate in path.rglob("*"):
         if not candidate.is_file() or candidate.is_symlink():
             continue
+        stat = candidate.stat()
+        inode = (stat.st_dev, stat.st_ino)
+        if inode in seen_inodes:
+            continue
+        seen_inodes.add(inode)
         relative = candidate.relative_to(path)
         suffix = candidate.suffix
         if suffix == ".rlib":
@@ -112,7 +139,7 @@ def artifact_breakdown(path: Path) -> dict[str, dict[str, int]]:
         else:
             group = "other"
         record = groups.setdefault(group, {"logical_bytes": 0, "files": 0})
-        record["logical_bytes"] += candidate.stat().st_size
+        record["logical_bytes"] += stat.st_size
         record["files"] += 1
     return dict(sorted(groups.items()))
 
@@ -234,7 +261,7 @@ def markdown(report: dict[str, Any]) -> str:
         "- Every cold measurement uses a new `CARGO_TARGET_DIR` under the ephemeral runner temp directory.",
         "- The no-op rebuild repeats the identical release command against the populated unified target.",
         "- Each production Capsule is then built independently with its own isolated release target and locked manifest.",
-        "- Logical byte counts sum file lengths; allocated byte counts use filesystem block accounting.",
+        "- Logical and allocated totals deduplicate Cargo hardlinks by filesystem inode; `path_sum_bytes` in JSON retains the non-deduplicated audit value.",
         "- Network dependency download time is absent because the current production Capsules are dependency-free.",
         "",
     ])
@@ -303,7 +330,7 @@ def build_report(work_root: Path) -> dict[str, Any]:
     build_times = [float(item["build_seconds"]) for item in capsule_records]
     rust_sysroot = Path(output(["rustc", "--print", "sysroot"]))
     return {
-        "schema_version": "0.1.0",
+        "schema_version": "0.2.0",
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "commit_sha": os.environ.get("GITHUB_SHA", "local-or-unknown"),
         "environment": {
