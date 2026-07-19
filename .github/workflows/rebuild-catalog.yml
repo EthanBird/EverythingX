@@ -37,7 +37,7 @@ jobs:
       - name: Prove generated Raster Wave A batch is current
         run: python3 tools/scaffold_raster_wave_a.py --check
 
-      - name: Prove generated PNG Wave B batch is current
+      - name: Prove generated and evidenced PNG Wave B batch is current
         run: python3 tools/scaffold_png_wave_b.py --check
 
       - name: Commit generated catalog when changed
