@@ -248,7 +248,7 @@ def build_report(work_root: Path) -> dict[str, Any]:
 
     unified_target = work_root / "unified-release"
     release_command = [
-        "cargo", "build", "--release", "--locked", "--quiet",
+        "cargo", "build", "--release", "--quiet",
         "--manifest-path", str(BENCH_MANIFEST),
     ]
     cold_seconds, _ = run(release_command, target=unified_target)
