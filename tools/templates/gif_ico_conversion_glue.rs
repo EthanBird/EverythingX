@@ -75,7 +75,13 @@ fn decode_icon(bytes: &[u8], options: &Options, kind: legacy_native::IconKind) -
                 strict_trailing_data: true,
             },
         )
-        .map_err(|error| Error::Png(error.to_string()))?;
+        .map_err(|error| match error {
+            png_native::Error::Limit("pixel count") => Error::PixelLimitExceeded {
+                pixels: options.max_pixels.saturating_add(1),
+                limit: options.max_pixels,
+            },
+            other => Error::Png(other.to_string()),
+        })?;
         Image {
             width: decoded.width,
             height: decoded.height,
