@@ -521,6 +521,28 @@ fn write_sub_blocks(out: &mut Vec<u8>, bytes: &[u8]) {
     out.push(0);
 }
 
+fn encode_literal_lzw(indices: &[u8], minimum_code_size: u8) -> Vec<u8> {
+    let clear = 1u16 << minimum_code_size;
+    let end = clear + 1;
+    let mut width = minimum_code_size + 1;
+    let mut next = end as usize + 1;
+    let mut previous = false;
+    let mut codes = GifWriter::new();
+    codes.code(clear, width);
+    for &index in indices {
+        codes.code(index as u16, width);
+        if previous && next < 4096 {
+            next += 1;
+            if next == (1usize << width) && width < 12 {
+                width += 1;
+            }
+        }
+        previous = true;
+    }
+    codes.code(end, width);
+    codes.finish()
+}
+
 pub(crate) fn encode_gif(image: &Image) -> Result<Vec<u8>, Error> {
     let count = checked_pixels(image.width, image.height, u64::MAX)?;
     if image.pixels.len() != count {
@@ -563,16 +585,7 @@ pub(crate) fn encode_gif(image: &Image) -> Result<Vec<u8>, Error> {
     let table_entries = palette.len().next_power_of_two().min(256);
     let table_bits = table_entries.trailing_zeros() as u8;
     let minimum_code_size = table_bits.max(2);
-    let clear = 1u16 << minimum_code_size;
-    let end = clear + 1;
-    let width = minimum_code_size + 1;
-    let mut codes = GifWriter::new();
-    for index in indices {
-        codes.code(clear, width);
-        codes.code(index as u16, width);
-    }
-    codes.code(end, width);
-    let compressed = codes.finish();
+    let compressed = encode_literal_lzw(&indices, minimum_code_size);
     let mut out = b"GIF89a".to_vec();
     out.extend_from_slice(&(image.width as u16).to_le_bytes());
     out.extend_from_slice(&(image.height as u16).to_le_bytes());
@@ -835,6 +848,24 @@ mod tests {
         let encoded = encode_gif(&image).unwrap();
         let decoded = decode_gif(&encoded, 100, 10, 10_000).unwrap();
         assert_eq!(decoded.frames.len(), 1);
+        assert_eq!(decoded.frames[0].image, image);
+    }
+
+    #[test]
+    fn gif_lzw_width_growth_round_trips_past_twelve_bits() {
+        let mut pixels = Vec::new();
+        for index in 0..8192u32 {
+            let value = index as u8;
+            pixels.push(Pixel {
+                r: value,
+                g: value.wrapping_mul(37),
+                b: value.wrapping_mul(91),
+                a: 255,
+            });
+        }
+        let image = Image { width: 4096, height: 2, pixels };
+        let encoded = encode_gif(&image).unwrap();
+        let decoded = decode_gif(&encoded, 10_000, 10, 100_000).unwrap();
         assert_eq!(decoded.frames[0].image, image);
     }
 

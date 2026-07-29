@@ -15,7 +15,7 @@ permissions:
 
 concurrency:
   group: publish-gif-ico-wave-c
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   measure-and-publish:

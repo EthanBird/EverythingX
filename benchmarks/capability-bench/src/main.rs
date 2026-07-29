@@ -324,20 +324,30 @@ fn gif_codes(indices: impl IntoIterator<Item = u8>) -> Vec<u8> {
     let end = 257u16;
     let mut out = Vec::new();
     let (mut value, mut bits) = (0u32, 0u8);
-    let push = |code: u16, out: &mut Vec<u8>, value: &mut u32, bits: &mut u8| {
+    let push = |code: u16, width: u8, out: &mut Vec<u8>, value: &mut u32, bits: &mut u8| {
         *value |= (code as u32) << *bits;
-        *bits += 9;
+        *bits += width;
         while *bits >= 8 {
             out.push(*value as u8);
             *value >>= 8;
             *bits -= 8;
         }
     };
+    let mut width = 9u8;
+    let mut next = 258usize;
+    let mut previous = false;
+    push(clear, width, &mut out, &mut value, &mut bits);
     for index in indices {
-        push(clear, &mut out, &mut value, &mut bits);
-        push(index as u16, &mut out, &mut value, &mut bits);
+        push(index as u16, width, &mut out, &mut value, &mut bits);
+        if previous && next < 4096 {
+            next += 1;
+            if next == (1usize << width) && width < 12 {
+                width += 1;
+            }
+        }
+        previous = true;
     }
-    push(end, &mut out, &mut value, &mut bits);
+    push(end, width, &mut out, &mut value, &mut bits);
     if bits != 0 {
         out.push(value as u8);
     }
