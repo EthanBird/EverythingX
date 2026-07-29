@@ -7,6 +7,7 @@ on:
       - "tools/scaffold_gif_ico_wave_c.py"
       - "tools/templates/gif_ico_*.rs"
       - "tools/templates/gif_render_capsule.rs"
+      - "benchmarks/capability-bench/src/main.rs"
   workflow_dispatch:
 
 permissions:

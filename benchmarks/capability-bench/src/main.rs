@@ -161,8 +161,8 @@ fn aiff_fixture(payload_bytes: usize) -> Vec<u8> {
     out
 }
 
-fn bmp_fixture(large: bool) -> Vec<u8> {
-    let (width, height) = if large { (1024u32, 1024u32) } else { (64u32, 64u32) };
+fn bmp_fixture(large: bool, max_dimension: Option<u32>) -> Vec<u8> {
+    let (width, height) = raster_dimensions(large, max_dimension);
     let row = ((width as usize * 3) + 3) & !3;
     let pixels = row * height as usize;
     let mut out = Vec::with_capacity(54 + pixels);
@@ -187,8 +187,10 @@ fn bmp_fixture(large: bool) -> Vec<u8> {
     out
 }
 
-fn raster_dimensions(large: bool) -> (u32, u32) {
-    if large { (1024, 1024) } else { (64, 64) }
+fn raster_dimensions(large: bool, max_dimension: Option<u32>) -> (u32, u32) {
+    let dimension = if large { 1024 } else { 64 };
+    let dimension = max_dimension.map_or(dimension, |limit| dimension.min(limit));
+    (dimension, dimension)
 }
 
 fn raster_rgb(x: u32, y: u32) -> [u8; 3] {
@@ -202,8 +204,8 @@ fn raster_rgb(x: u32, y: u32) -> [u8; 3] {
     ]
 }
 
-fn tga_fixture(large: bool) -> Vec<u8> {
-    let (width, height) = raster_dimensions(large);
+fn tga_fixture(large: bool, max_dimension: Option<u32>) -> Vec<u8> {
+    let (width, height) = raster_dimensions(large, max_dimension);
     let mut out = vec![0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     out.extend_from_slice(&(width as u16).to_le_bytes());
     out.extend_from_slice(&(height as u16).to_le_bytes());
@@ -219,8 +221,8 @@ fn tga_fixture(large: bool) -> Vec<u8> {
     out
 }
 
-fn qoi_fixture(large: bool) -> Vec<u8> {
-    let (width, height) = raster_dimensions(large);
+fn qoi_fixture(large: bool, max_dimension: Option<u32>) -> Vec<u8> {
+    let (width, height) = raster_dimensions(large, max_dimension);
     let mut out = b"qoif".to_vec();
     out.extend_from_slice(&width.to_be_bytes());
     out.extend_from_slice(&height.to_be_bytes());
@@ -235,8 +237,8 @@ fn qoi_fixture(large: bool) -> Vec<u8> {
     out
 }
 
-fn ppm_fixture(large: bool) -> Vec<u8> {
-    let (width, height) = raster_dimensions(large);
+fn ppm_fixture(large: bool, max_dimension: Option<u32>) -> Vec<u8> {
+    let (width, height) = raster_dimensions(large, max_dimension);
     let mut out = format!("P6\n{width} {height}\n255\n").into_bytes();
     for y in 0..height {
         for x in 0..width {
@@ -246,8 +248,8 @@ fn ppm_fixture(large: bool) -> Vec<u8> {
     out
 }
 
-fn pam_fixture(large: bool) -> Vec<u8> {
-    let (width, height) = raster_dimensions(large);
+fn pam_fixture(large: bool, max_dimension: Option<u32>) -> Vec<u8> {
+    let (width, height) = raster_dimensions(large, max_dimension);
     let mut out = format!("P7\nWIDTH {width}\nHEIGHT {height}\nDEPTH 3\nMAXVAL 255\nTUPLTYPE RGB\nENDHDR\n").into_bytes();
     for y in 0..height {
         for x in 0..width {
@@ -312,8 +314,8 @@ fn png_fixture_dimensions(width: u32, height: u32) -> Vec<u8> {
     out
 }
 
-fn png_fixture(large: bool) -> Vec<u8> {
-    let (width, height) = raster_dimensions(large);
+fn png_fixture(large: bool, max_dimension: Option<u32>) -> Vec<u8> {
+    let (width, height) = raster_dimensions(large, max_dimension);
     png_fixture_dimensions(width, height)
 }
 
@@ -359,8 +361,8 @@ fn gif_frame(width: u32, height: u32) -> Vec<u8> {
     out
 }
 
-fn gif_fixture(large: bool, animated: bool) -> Vec<u8> {
-    let (width, height) = raster_dimensions(large);
+fn gif_fixture(large: bool, animated: bool, max_dimension: Option<u32>) -> Vec<u8> {
+    let (width, height) = raster_dimensions(large, max_dimension);
     let mut out = b"GIF89a".to_vec();
     out.extend_from_slice(&(width as u16).to_le_bytes());
     out.extend_from_slice(&(height as u16).to_le_bytes());
@@ -416,8 +418,15 @@ fn utf16_fixture(payload_bytes: usize) -> Vec<u8> {
     out
 }
 
-fn fixture(format: &str, large: bool) -> Vec<u8> {
+fn fixture(format: &str, target_format: &str, large: bool) -> Vec<u8> {
     let size = if large { LARGE_PAYLOAD } else { SMALL_PAYLOAD };
+    // ICO and CUR directory dimensions are one-byte values where zero means
+    // 256. Exercise their largest legal single-member input instead of feeding
+    // the generic 1024x1024 raster and benchmarking a deterministic rejection.
+    let max_dimension = match target_format {
+        "imagefmt:ico" | "imagefmt:cur" => Some(256),
+        _ => None,
+    };
     match format {
         "exfmt:audio:raw-pcm" => patterned_pcm(size, false),
         "exfmt:audio:wav-pcm" => riff_fixture(b"RIFF", size, false),
@@ -428,14 +437,14 @@ fn fixture(format: &str, large: bool) -> Vec<u8> {
         "exfmt:audio:au-pcm" => au_fixture(size),
         "exfmt:audio:wave64-pcm" => wave64_fixture(size),
         "exfmt:audio:aiff-pcm" => aiff_fixture(size),
-        "exfmt:image:bmp-family" => bmp_fixture(large),
-        "exfmt:image:tga-raster" => tga_fixture(large),
-        "exfmt:image:qoi" => qoi_fixture(large),
-        "exfmt:image:ppm" => ppm_fixture(large),
-        "exfmt:image:pam" => pam_fixture(large),
-        "exfmt:image:png" => png_fixture(large),
-        "imagefmt:gif89a-still" => gif_fixture(large, false),
-        "imagefmt:gif-animation" => gif_fixture(large, true),
+        "exfmt:image:bmp-family" => bmp_fixture(large, max_dimension),
+        "exfmt:image:tga-raster" => tga_fixture(large, max_dimension),
+        "exfmt:image:qoi" => qoi_fixture(large, max_dimension),
+        "exfmt:image:ppm" => ppm_fixture(large, max_dimension),
+        "exfmt:image:pam" => pam_fixture(large, max_dimension),
+        "exfmt:image:png" => png_fixture(large, max_dimension),
+        "imagefmt:gif89a-still" => gif_fixture(large, false, max_dimension),
+        "imagefmt:gif-animation" => gif_fixture(large, true, max_dimension),
         "imagefmt:ico" => icon_fixture(false, large),
         "imagefmt:cur" => icon_fixture(true, large),
         "exfmt:text:utf-16" => utf16_fixture(size),
@@ -510,8 +519,9 @@ fn main() {
     for handshake in handshakes {
         for capability in handshake.capabilities {
             let source_format = capability.source_formats.first().expect("source format");
-            let small_source = fixture(source_format, false);
-            let large_source = fixture(source_format, true);
+            let target_format = capability.target_formats.first().expect("target format");
+            let small_source = fixture(source_format, target_format, false);
+            let large_source = fixture(source_format, target_format, true);
             let small = measure(&kernel, &handshake.adapter_id, &capability.capability_id, &small_source, SMALL_SAMPLES);
             let large = measure(&kernel, &handshake.adapter_id, &capability.capability_id, &large_source, LARGE_SAMPLES);
             println!(
