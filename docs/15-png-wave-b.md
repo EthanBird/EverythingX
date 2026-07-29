@@ -59,8 +59,8 @@ CRC/Adler corruption, allocation limits, malformed inputs, operation geometry,
 independent output decoding and Adapter default invocation. The batch adds 231
 standalone tests and 20 Kernel/Adapter tests.
 
-The controlled baseline covers all 104 production Capsules and 105 capabilities.
-PNG Wave B measures 26.616–91.577 MiB/s. The raw cost model, rather than the
+The controlled baseline covers all 133 production Capsules and 134 capabilities.
+PNG Wave B measures 27.107–85.394 MiB/s. The raw cost model, rather than the
 display score, is the Planner input. The observed 5.665 memory ratio for PNG
 spatial/alpha transforms is a concrete reason to add row-streaming and atomic
 spool strategies in a later optimization pass.

@@ -119,8 +119,8 @@ Planner 读取 `registry/support-matrix.json` 中 capability 的 `edge_weight` �
 性能向量，也不能被更低负荷覆盖。
 
 `schemas/edge-weight.schema.json` 固定配置形状。生成器还验证 baseline 的 Capsule ID、
-Capability ID、strategy、backend、source format 与 Adapter 完全一致；104 个文件中
-共有 105 条权重，因为 `utf16-to-utf8` 的两个策略是两条不同图边。
+Capability ID、strategy、backend、source format 与 Adapter 完全一致；133 个文件中
+共有 134 条权重，因为 `utf16-to-utf8` 的两个策略是两条不同图边。
 
 ## 7. 可复现性与覆盖门槛
 
@@ -134,7 +134,7 @@ Capability ID、strategy、backend、source format 与 Adapter 完全一致；10
 - 记录 Rust 编译器、OS、架构、commit、runner image、fixture/harness hash；
 - 输出机器可读原始成本与派生分。
 
-当前门槛是全部 104 个生产 Capsule、105 个 AdapterCapability 必须参与；UTF-16 Capsule 的 strict 与 replace-invalid 策略分别测量。受控基线的整体大输入吞吐中位数为 1,361.282 MiB/s，范围为 26.616–3,650.848 MiB/s；20 条 Raster Wave A 边为 129.723–290.495 MiB/s，20 条 PNG Wave B 能力为 26.616–91.577 MiB/s。
+当前门槛是全部 133 个生产 Capsule、134 个 AdapterCapability 必须参与；UTF-16 Capsule 的 strict 与 replace-invalid 策略分别测量。受控基线的整体大输入吞吐中位数为 440.806 MiB/s，范围为 14.272–3,758.373 MiB/s；20 条 Raster Wave A 边为 167.451–622.254 MiB/s，20 条 PNG Wave B 能力为 27.107–85.394 MiB/s。GIF 读取/写入分别为 14.298–43.066 与 56.877–136.222 MiB/s；ICO/CUR best-member 读取与单成员写入分别为 433.063–1,202.649 与 28.520–45.038 MiB/s。
 
 CI 同时执行 `tools/sync_edge_weights.py --check` 与权重单元测试；基线、Adapter、
 Capsule 版本或生成规则只要有一个变化却未重建 Capsule 配置，提交就会失败。

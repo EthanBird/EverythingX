@@ -238,7 +238,7 @@ GIF/ICO/CUR 的结构与集合语义另有 5 个独立 Capsule：
 
 机器可读权威清单是 `registry/support-matrix.json`。任何 Capsule 或 Adapter 更新都必须运行 `python3 tools/build_support_matrix.py`；CI 会拒绝过期矩阵。计划中、研究中和不可计算的边统一保存在 `operators/`，不得写进已支持清单。
 
-全部生产 Capsule 还必须进入统一的端到端性能评估。`tools/benchmark_capsules.py` 通过 Kernel 默认调用测量每个能力的 small/large p50/p95、吞吐、输出比例和显式工作内存，并生成供 Planner 使用的线性成本模型与 0–100 派生分。当前受控基线已覆盖全部 104 个生产 Capsule 和 105 条能力，保存在 `registry/performance/baseline.json`；`tools/sync_edge_weights.py` 又把这些证据生成到每个 Capsule 根目录的统一 `edge-weight.json`，支持矩阵直接引用它们。104 个权重文件覆盖 105 条边，包含按输入大小计算的延迟、峰值内存、输出比例和 `load_0_to_100`。PNG Wave B 的 20 条新能力测得 26.616–91.577 MiB/s：PNG→8-bit 载体为 69.071–79.120 MiB/s，载体→PNG 为 34.527–42.347 MiB/s，PNG 变换为 26.616–30.234 MiB/s，严格校验为 91.577 MiB/s。CI 会拒绝能力边漏测、evidence 链接失效或 Capsule 权重与基线分叉。派生负荷只能在相同 profile 和环境类别内用于等价边排序，硬约束、语义损失与原始成本向量始终优先。方法见 `docs/13-performance-evidence.md`。
+全部生产 Capsule 还必须进入统一的端到端性能评估。`tools/benchmark_capsules.py` 通过 Kernel 默认调用测量每个能力的 small/large p50/p95、吞吐、输出比例和显式工作内存，并生成供 Planner 使用的线性成本模型与 0–100 派生分。当前受控基线已覆盖全部 133 个生产 Capsule 和 134 条能力，保存在 `registry/performance/baseline.json`；`tools/sync_edge_weights.py` 又把这些证据生成到每个 Capsule 根目录的统一 `edge-weight.json`，支持矩阵直接引用它们。133 个权重文件覆盖 134 条边，包含按输入大小计算的延迟、峰值内存、输出比例和 `load_0_to_100`。GIF 读取边测得 14.298–43.066 MiB/s、GIF 写入边为 56.877–136.222 MiB/s；ICO/CUR best-member 读取为 433.063–1,202.649 MiB/s，单成员写入为 28.520–45.038 MiB/s；动画 GIF 显式渲染为 14.272–21.807 MiB/s。CI 会拒绝能力边漏测、evidence 链接失效或 Capsule 权重与基线分叉。派生负荷只能在相同 profile 和环境类别内用于等价边排序，硬约束、语义损失与原始成本向量始终优先。方法见 `docs/13-performance-evidence.md`。
 
 生产 Capsule 使用 `capsules/<domain>/<primary-object-ir>/<operator-role>/<capsule-name>` 层级；Schema 与 CI 会校验目录和 manifest 分类一致，并递归发现新 Capsule，因此扩展任意族类不需要继续维护手写路径列表。
 

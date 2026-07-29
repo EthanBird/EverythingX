@@ -5,7 +5,7 @@ from __future__ import annotations
 
 import unittest
 
-from sync_edge_weights import build_documents
+from sync_edge_weights import build_documents, production_capsules
 
 
 class EdgeWeightTests(unittest.TestCase):
@@ -14,10 +14,11 @@ class EdgeWeightTests(unittest.TestCase):
         cls.documents = build_documents()
 
     def test_all_current_production_capsules_and_capabilities_are_materialized(self) -> None:
-        self.assertEqual(len(self.documents), 104)
+        capsules = production_capsules()
+        self.assertEqual(len(self.documents), len(capsules))
         self.assertEqual(
             sum(len(document["capabilities"]) for document in self.documents.values()),
-            105,
+            sum(len(adapter["capabilities"]) for _, _, adapter in capsules),
         )
 
     def test_derived_load_is_inverse_performance_score(self) -> None:
