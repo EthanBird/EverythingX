@@ -180,7 +180,8 @@ fn bmp_fixture(large: bool, max_dimension: Option<u32>) -> Vec<u8> {
     out.extend_from_slice(&[0; 16]);
     for y in 0..height {
         for x in 0..width {
-            out.extend_from_slice(&[(x ^ y) as u8, x.wrapping_mul(3) as u8, y.wrapping_mul(5) as u8]);
+            let [r, g, b] = raster_rgb(x, y);
+            out.extend_from_slice(&[b, g, r]);
         }
         out.resize(out.len() + row - width as usize * 3, 0);
     }
