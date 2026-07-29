@@ -1,0 +1,84 @@
+{
+  "$schema": "https://everythingx.dev/schema/edge-weight.schema.json",
+  "schema_version": "0.1.0",
+  "meaning": "Environment-bound empirical graph-edge load for this standalone Capsule; semantic loss and hard constraints are evaluated separately.",
+  "capsule": {
+    "id": "capsule:gif-to-ppm",
+    "version": "0.1.0",
+    "repository_path": "capsules/image/raster/direct/gif-to-ppm"
+  },
+  "profile": {
+    "profile_id": "exbench:ci-default-v1",
+    "generated_at": "2026-07-29T10:09:59.520096+00:00",
+    "source_report": "registry/performance/baseline.json",
+    "scope": "End-to-end Kernel default invocation including Adapter buffering and Capsule execution.",
+    "comparability": "Scores are comparable only when profile_id, harness_sha256 and environment class match.",
+    "harness_sha256": "f0e48382425346ac776e3929594face64d74bd76c409cc9001d567c96a311a00",
+    "environment_fingerprint_sha256": "521a569e3c6b78dafc47fa5fe3321448120a89e8049d5521402fdc6ce7ce88b3",
+    "environment_class": {
+      "os": "Linux-6.17.0-1020-azure-x86_64-with-glibc2.39",
+      "architecture": "x86_64",
+      "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+      "github_runner_image": "ubuntu24"
+    },
+    "evidence_commit_sha": "11113269e9421dc4d70fa290a23d6c7278c8ffb6",
+    "evidence_run_id": "30442170546"
+  },
+  "planner_contract": {
+    "kind": "environment-bound-empirical-vector",
+    "input_variable": "N = input byte length",
+    "selection_order": [
+      "semantic and resource hard constraints",
+      "raw edge-weight vector at the concrete input size",
+      "derived load only for same-profile equivalent-edge tie-breaking"
+    ],
+    "path_composition": {
+      "latency": "sum sequential edge estimates",
+      "peak_memory": "maximum live-set estimate; never blindly sum edge peaks",
+      "output_bytes": "feed each edge estimate into the next edge input"
+    }
+  },
+  "capabilities": [
+    {
+      "capability_id": "capability:gif-to-ppm/legacy-raster-rgba8/native-portable",
+      "strategy": "legacy-raster-rgba8",
+      "backend": "native-portable",
+      "inputs": [
+        "imagefmt:gif89a-still"
+      ],
+      "outputs": [
+        "exfmt:image:ppm"
+      ],
+      "edge_weight": {
+        "kind": "empirical-multidimensional",
+        "fixed_latency_micros": 153.947124,
+        "nanoseconds_per_input_byte": 22.378232956,
+        "peak_memory_bytes_per_input_byte": 6.647141837,
+        "output_bytes_per_input_byte": 1.991638366,
+        "estimated_latency_micros": "fixed_latency_micros + nanoseconds_per_input_byte * N / 1000",
+        "estimated_peak_memory_bytes": "peak_memory_bytes_per_input_byte * N",
+        "estimated_output_bytes": "output_bytes_per_input_byte * N",
+        "performance_score_0_to_100": 12.207,
+        "load_0_to_100": 87.793,
+        "load_direction": "higher-is-more-expensive"
+      },
+      "observations": {
+        "small": {
+          "input_bytes": 6612,
+          "output_bytes": 12301,
+          "p50_micros": 301.912,
+          "p95_micros": 339.142
+        },
+        "large": {
+          "input_bytes": 1579476,
+          "output_bytes": 3145745,
+          "p50_micros": 35499.829,
+          "p95_micros": 35865.701,
+          "throughput_mib_s": 42.431,
+          "reported_peak_memory_bytes": 10499001
+        }
+      },
+      "source_evidence": "registry/performance/baseline.json#capability:gif-to-ppm/legacy-raster-rgba8/native-portable"
+    }
+  ]
+}

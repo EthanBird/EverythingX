@@ -1,0 +1,84 @@
+{
+  "$schema": "https://everythingx.dev/schema/edge-weight.schema.json",
+  "schema_version": "0.1.0",
+  "meaning": "Environment-bound empirical graph-edge load for this standalone Capsule; semantic loss and hard constraints are evaluated separately.",
+  "capsule": {
+    "id": "capsule:gif-render-frame-to-png",
+    "version": "0.1.0",
+    "repository_path": "capsules/image/raster/bridge/gif-render-frame-to-png"
+  },
+  "profile": {
+    "profile_id": "exbench:ci-default-v1",
+    "generated_at": "2026-07-29T10:09:59.520096+00:00",
+    "source_report": "registry/performance/baseline.json",
+    "scope": "End-to-end Kernel default invocation including Adapter buffering and Capsule execution.",
+    "comparability": "Scores are comparable only when profile_id, harness_sha256 and environment class match.",
+    "harness_sha256": "f0e48382425346ac776e3929594face64d74bd76c409cc9001d567c96a311a00",
+    "environment_fingerprint_sha256": "521a569e3c6b78dafc47fa5fe3321448120a89e8049d5521402fdc6ce7ce88b3",
+    "environment_class": {
+      "os": "Linux-6.17.0-1020-azure-x86_64-with-glibc2.39",
+      "architecture": "x86_64",
+      "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+      "github_runner_image": "ubuntu24"
+    },
+    "evidence_commit_sha": "11113269e9421dc4d70fa290a23d6c7278c8ffb6",
+    "evidence_run_id": "30442170546"
+  },
+  "planner_contract": {
+    "kind": "environment-bound-empirical-vector",
+    "input_variable": "N = input byte length",
+    "selection_order": [
+      "semantic and resource hard constraints",
+      "raw edge-weight vector at the concrete input size",
+      "derived load only for same-profile equivalent-edge tie-breaking"
+    ],
+    "path_composition": {
+      "latency": "sum sequential edge estimates",
+      "peak_memory": "maximum live-set estimate; never blindly sum edge peaks",
+      "output_bytes": "feed each edge estimate into the next edge input"
+    }
+  },
+  "capabilities": [
+    {
+      "capability_id": "capability:gif-render-frame-to-png/gif-composited-frame-selection/native-portable",
+      "strategy": "gif-composited-frame-selection",
+      "backend": "native-portable",
+      "inputs": [
+        "imagefmt:gif-animation"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "edge_weight": {
+        "kind": "empirical-multidimensional",
+        "fixed_latency_micros": 325.316598,
+        "nanoseconds_per_input_byte": 43.629992167,
+        "peak_memory_bytes_per_input_byte": 4.324739138,
+        "output_bytes_per_input_byte": 0.996661999,
+        "estimated_latency_micros": "fixed_latency_micros + nanoseconds_per_input_byte * N / 1000",
+        "estimated_peak_memory_bytes": "peak_memory_bytes_per_input_byte * N",
+        "estimated_output_bytes": "output_bytes_per_input_byte * N",
+        "performance_score_0_to_100": 10.048,
+        "load_0_to_100": 89.952,
+        "load_direction": "higher-is-more-expensive"
+      },
+      "observations": {
+        "small": {
+          "input_bytes": 12450,
+          "output_bytes": 12420,
+          "p50_micros": 868.51,
+          "p95_micros": 897.954
+        },
+        "large": {
+          "input_bytes": 3158178,
+          "output_bytes": 3147636,
+          "p50_micros": 138116.598,
+          "p95_micros": 144997.22,
+          "throughput_mib_s": 21.807,
+          "reported_peak_memory_bytes": 13658296
+        }
+      },
+      "source_evidence": "registry/performance/baseline.json#capability:gif-render-frame-to-png/gif-composited-frame-selection/native-portable"
+    }
+  ]
+}

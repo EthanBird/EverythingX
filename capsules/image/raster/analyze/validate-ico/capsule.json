@@ -116,7 +116,7 @@
       "Planned full-structure campaign"
     ],
     "benchmarks": [
-      "Pending controlled exbench baseline"
+      "registry/performance/baseline.json#capability:validate-ico/strict-full-structure-validation/native-portable"
     ]
   },
   "security": {

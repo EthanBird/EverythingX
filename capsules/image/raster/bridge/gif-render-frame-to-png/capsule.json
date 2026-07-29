@@ -117,7 +117,7 @@
       "Planned animation block, LZW, disposal and dimension campaigns"
     ],
     "benchmarks": [
-      "Pending controlled exbench baseline"
+      "registry/performance/baseline.json#capability:gif-render-frame-to-png/gif-composited-frame-selection/native-portable"
     ]
   },
   "security": {

@@ -5828,7 +5828,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": [],
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:bmp-to-cur/legacy-raster-rgba8/native-portable"
+      ],
       "edge_weight": "capsules/image/raster/direct/bmp-to-cur/edge-weight.json#capability:bmp-to-cur/legacy-raster-rgba8/native-portable"
     },
     {
@@ -5853,7 +5855,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": [],
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:bmp-to-gif/legacy-raster-rgba8/native-portable"
+      ],
       "edge_weight": "capsules/image/raster/direct/bmp-to-gif/edge-weight.json#capability:bmp-to-gif/legacy-raster-rgba8/native-portable"
     },
     {
@@ -5878,7 +5882,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": [],
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:bmp-to-ico/legacy-raster-rgba8/native-portable"
+      ],
       "edge_weight": "capsules/image/raster/direct/bmp-to-ico/edge-weight.json#capability:bmp-to-ico/legacy-raster-rgba8/native-portable"
     },
     {
@@ -6582,7 +6588,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": [],
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:cur-best-to-bmp/legacy-raster-rgba8/native-portable"
+      ],
       "edge_weight": "capsules/image/raster/direct/cur-best-to-bmp/edge-weight.json#capability:cur-best-to-bmp/legacy-raster-rgba8/native-portable"
     },
     {
@@ -6607,7 +6615,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": [],
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:cur-best-to-png/legacy-raster-rgba8/native-portable"
+      ],
       "edge_weight": "capsules/image/raster/direct/cur-best-to-png/edge-weight.json#capability:cur-best-to-png/legacy-raster-rgba8/native-portable"
     },
     {
@@ -6632,7 +6642,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": [],
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:cur-best-to-qoi/legacy-raster-rgba8/native-portable"
+      ],
       "edge_weight": "capsules/image/raster/direct/cur-best-to-qoi/edge-weight.json#capability:cur-best-to-qoi/legacy-raster-rgba8/native-portable"
     },
     {
@@ -6657,7 +6669,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": [],
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:gif-animation-to-sprite-sheet-png/gif-horizontal-composited-sprite-sheet/native-portable"
+      ],
       "edge_weight": "capsules/image/raster/bridge/gif-animation-to-sprite-sheet-png/edge-weight.json#capability:gif-animation-to-sprite-sheet-png/gif-horizontal-composited-sprite-sheet/native-portable"
     },
     {
@@ -6682,7 +6696,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": [],
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:gif-render-frame-to-png/gif-composited-frame-selection/native-portable"
+      ],
       "edge_weight": "capsules/image/raster/bridge/gif-render-frame-to-png/edge-weight.json#capability:gif-render-frame-to-png/gif-composited-frame-selection/native-portable"
     },
     {
@@ -6707,7 +6723,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": [],
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:gif-to-bmp/legacy-raster-rgba8/native-portable"
+      ],
       "edge_weight": "capsules/image/raster/direct/gif-to-bmp/edge-weight.json#capability:gif-to-bmp/legacy-raster-rgba8/native-portable"
     },
     {
@@ -6732,7 +6750,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": [],
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:gif-to-pam/legacy-raster-rgba8/native-portable"
+      ],
       "edge_weight": "capsules/image/raster/direct/gif-to-pam/edge-weight.json#capability:gif-to-pam/legacy-raster-rgba8/native-portable"
     },
     {
@@ -6757,7 +6777,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": [],
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:gif-to-png/legacy-raster-rgba8/native-portable"
+      ],
       "edge_weight": "capsules/image/raster/direct/gif-to-png/edge-weight.json#capability:gif-to-png/legacy-raster-rgba8/native-portable"
     },
     {
@@ -6782,7 +6804,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": [],
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:gif-to-ppm/legacy-raster-rgba8/native-portable"
+      ],
       "edge_weight": "capsules/image/raster/direct/gif-to-ppm/edge-weight.json#capability:gif-to-ppm/legacy-raster-rgba8/native-portable"
     },
     {
@@ -6807,7 +6831,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": [],
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:gif-to-qoi/legacy-raster-rgba8/native-portable"
+      ],
       "edge_weight": "capsules/image/raster/direct/gif-to-qoi/edge-weight.json#capability:gif-to-qoi/legacy-raster-rgba8/native-portable"
     },
     {
@@ -6832,7 +6858,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": [],
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:gif-to-tga/legacy-raster-rgba8/native-portable"
+      ],
       "edge_weight": "capsules/image/raster/direct/gif-to-tga/edge-weight.json#capability:gif-to-tga/legacy-raster-rgba8/native-portable"
     },
     {
@@ -6857,7 +6885,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": [],
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:ico-best-to-bmp/legacy-raster-rgba8/native-portable"
+      ],
       "edge_weight": "capsules/image/raster/direct/ico-best-to-bmp/edge-weight.json#capability:ico-best-to-bmp/legacy-raster-rgba8/native-portable"
     },
     {
@@ -6882,7 +6912,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": [],
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:ico-best-to-png/legacy-raster-rgba8/native-portable"
+      ],
       "edge_weight": "capsules/image/raster/direct/ico-best-to-png/edge-weight.json#capability:ico-best-to-png/legacy-raster-rgba8/native-portable"
     },
     {
@@ -6907,7 +6939,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": [],
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:ico-best-to-qoi/legacy-raster-rgba8/native-portable"
+      ],
       "edge_weight": "capsules/image/raster/direct/ico-best-to-qoi/edge-weight.json#capability:ico-best-to-qoi/legacy-raster-rgba8/native-portable"
     },
     {
@@ -6986,7 +7020,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": [],
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:pam-to-gif/legacy-raster-rgba8/native-portable"
+      ],
       "edge_weight": "capsules/image/raster/direct/pam-to-gif/edge-weight.json#capability:pam-to-gif/legacy-raster-rgba8/native-portable"
     },
     {
@@ -7389,7 +7425,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": [],
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:png-to-cur/legacy-raster-rgba8/native-portable"
+      ],
       "edge_weight": "capsules/image/raster/direct/png-to-cur/edge-weight.json#capability:png-to-cur/legacy-raster-rgba8/native-portable"
     },
     {
@@ -7414,7 +7452,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": [],
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:png-to-gif/legacy-raster-rgba8/native-portable"
+      ],
       "edge_weight": "capsules/image/raster/direct/png-to-gif/edge-weight.json#capability:png-to-gif/legacy-raster-rgba8/native-portable"
     },
     {
@@ -7439,7 +7479,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": [],
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:png-to-ico/legacy-raster-rgba8/native-portable"
+      ],
       "edge_weight": "capsules/image/raster/direct/png-to-ico/edge-weight.json#capability:png-to-ico/legacy-raster-rgba8/native-portable"
     },
     {
@@ -7599,7 +7641,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": [],
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:ppm-to-gif/legacy-raster-rgba8/native-portable"
+      ],
       "edge_weight": "capsules/image/raster/direct/ppm-to-gif/edge-weight.json#capability:ppm-to-gif/legacy-raster-rgba8/native-portable"
     },
     {
@@ -7759,7 +7803,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": [],
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:qoi-to-cur/legacy-raster-rgba8/native-portable"
+      ],
       "edge_weight": "capsules/image/raster/direct/qoi-to-cur/edge-weight.json#capability:qoi-to-cur/legacy-raster-rgba8/native-portable"
     },
     {
@@ -7784,7 +7830,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": [],
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:qoi-to-gif/legacy-raster-rgba8/native-portable"
+      ],
       "edge_weight": "capsules/image/raster/direct/qoi-to-gif/edge-weight.json#capability:qoi-to-gif/legacy-raster-rgba8/native-portable"
     },
     {
@@ -7809,7 +7857,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": [],
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:qoi-to-ico/legacy-raster-rgba8/native-portable"
+      ],
       "edge_weight": "capsules/image/raster/direct/qoi-to-ico/edge-weight.json#capability:qoi-to-ico/legacy-raster-rgba8/native-portable"
     },
     {
@@ -8281,7 +8331,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": [],
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:tga-to-gif/legacy-raster-rgba8/native-portable"
+      ],
       "edge_weight": "capsules/image/raster/direct/tga-to-gif/edge-weight.json#capability:tga-to-gif/legacy-raster-rgba8/native-portable"
     },
     {
@@ -8462,7 +8514,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": [],
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:validate-cur/strict-full-structure-validation/native-portable"
+      ],
       "edge_weight": "capsules/image/raster/analyze/validate-cur/edge-weight.json#capability:validate-cur/strict-full-structure-validation/native-portable"
     },
     {
@@ -8487,7 +8541,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": [],
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:validate-gif/strict-full-structure-validation/native-portable"
+      ],
       "edge_weight": "capsules/image/raster/analyze/validate-gif/edge-weight.json#capability:validate-gif/strict-full-structure-validation/native-portable"
     },
     {
@@ -8512,7 +8568,9 @@
       "defaults_are_runnable": true,
       "streaming": false,
       "seek_required": false,
-      "cost_evidence": [],
+      "cost_evidence": [
+        "registry/performance/baseline.json#capability:validate-ico/strict-full-structure-validation/native-portable"
+      ],
       "edge_weight": "capsules/image/raster/analyze/validate-ico/edge-weight.json#capability:validate-ico/strict-full-structure-validation/native-portable"
     },
     {

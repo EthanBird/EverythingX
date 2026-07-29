@@ -132,7 +132,7 @@
       "Planned GIF block/LZW and ICO/CUR directory/DIB campaigns"
     ],
     "benchmarks": [
-      "Pending controlled exbench baseline"
+      "registry/performance/baseline.json#capability:qoi-to-cur/legacy-raster-rgba8/native-portable"
     ]
   },
   "security": {

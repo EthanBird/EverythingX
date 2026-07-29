@@ -63,7 +63,9 @@
       "execution": {
         "streaming": false,
         "seek_required": false,
-        "cost_evidence": []
+        "cost_evidence": [
+          "registry/performance/baseline.json#capability:gif-to-ppm/legacy-raster-rgba8/native-portable"
+        ]
       },
       "report_mapping": {
         "unknown_fields_are_preserved": true,

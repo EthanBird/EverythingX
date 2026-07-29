@@ -9,20 +9,20 @@
   },
   "profile": {
     "profile_id": "exbench:ci-default-v1",
-    "generated_at": "2026-07-19T11:40:08.885069+00:00",
+    "generated_at": "2026-07-29T10:09:59.520096+00:00",
     "source_report": "registry/performance/baseline.json",
     "scope": "End-to-end Kernel default invocation including Adapter buffering and Capsule execution.",
     "comparability": "Scores are comparable only when profile_id, harness_sha256 and environment class match.",
-    "harness_sha256": "d67d0cedd85a92f01a539d01960f16db8599105eb12b1c02b3c963c0e705ec83",
-    "environment_fingerprint_sha256": "eac84a5d059971b79353a04eafec5d3d346ce2c120494171ff58f471a7e4c91b",
+    "harness_sha256": "f0e48382425346ac776e3929594face64d74bd76c409cc9001d567c96a311a00",
+    "environment_fingerprint_sha256": "521a569e3c6b78dafc47fa5fe3321448120a89e8049d5521402fdc6ce7ce88b3",
     "environment_class": {
       "os": "Linux-6.17.0-1020-azure-x86_64-with-glibc2.39",
       "architecture": "x86_64",
-      "rustc": "rustc 1.97.0 (2d8144b78 2026-07-07)",
+      "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
       "github_runner_image": "ubuntu24"
     },
-    "evidence_commit_sha": "d6078d173ffb3e4f9ffe8e90655c8a60ce003f41",
-    "evidence_run_id": "29685419995"
+    "evidence_commit_sha": "11113269e9421dc4d70fa290a23d6c7278c8ffb6",
+    "evidence_run_id": "30442170546"
   },
   "planner_contract": {
     "kind": "environment-bound-empirical-vector",
@@ -51,30 +51,30 @@
       ],
       "edge_weight": {
         "kind": "empirical-multidimensional",
-        "fixed_latency_micros": 3.754141,
-        "nanoseconds_per_input_byte": 5.962820973,
-        "peak_memory_bytes_per_input_byte": 0,
+        "fixed_latency_micros": 0.0,
+        "nanoseconds_per_input_byte": 6.525657026,
+        "peak_memory_bytes_per_input_byte": 0.0,
         "output_bytes_per_input_byte": 0.499999762,
         "estimated_latency_micros": "fixed_latency_micros + nanoseconds_per_input_byte * N / 1000",
         "estimated_peak_memory_bytes": "peak_memory_bytes_per_input_byte * N",
         "estimated_output_bytes": "output_bytes_per_input_byte * N",
-        "performance_score_0_to_100": 24.917,
-        "load_0_to_100": 75.083,
+        "performance_score_0_to_100": 23.571,
+        "load_0_to_100": 76.429,
         "load_direction": "higher-is-more-expensive"
       },
       "observations": {
         "small": {
           "input_bytes": 16384,
           "output_bytes": 8191,
-          "p50_micros": 101.449,
-          "p95_micros": 112.541
+          "p50_micros": 104.174,
+          "p95_micros": 114.103
         },
         "large": {
           "input_bytes": 4194304,
           "output_bytes": 2097151,
-          "p50_micros": 25013.638,
-          "p95_micros": 25045.017,
-          "throughput_mib_s": 159.913,
+          "p50_micros": 27367.847,
+          "p95_micros": 27432.558,
+          "throughput_mib_s": 146.157,
           "reported_peak_memory_bytes": 0
         }
       },
@@ -92,30 +92,30 @@
       ],
       "edge_weight": {
         "kind": "empirical-multidimensional",
-        "fixed_latency_micros": 3.877478,
-        "nanoseconds_per_input_byte": 5.962067967,
-        "peak_memory_bytes_per_input_byte": 0,
+        "fixed_latency_micros": 0.0,
+        "nanoseconds_per_input_byte": 6.532309379,
+        "peak_memory_bytes_per_input_byte": 0.0,
         "output_bytes_per_input_byte": 0.499999762,
         "estimated_latency_micros": "fixed_latency_micros + nanoseconds_per_input_byte * N / 1000",
         "estimated_peak_memory_bytes": "peak_memory_bytes_per_input_byte * N",
         "estimated_output_bytes": "output_bytes_per_input_byte * N",
-        "performance_score_0_to_100": 24.909,
-        "load_0_to_100": 75.091,
+        "performance_score_0_to_100": 23.564,
+        "load_0_to_100": 76.436,
         "load_direction": "higher-is-more-expensive"
       },
       "observations": {
         "small": {
           "input_bytes": 16384,
           "output_bytes": 8191,
-          "p50_micros": 101.56,
-          "p95_micros": 115.076
+          "p50_micros": 104.424,
+          "p95_micros": 114.393
         },
         "large": {
           "input_bytes": 4194304,
           "output_bytes": 2097151,
-          "p50_micros": 25010.603,
-          "p95_micros": 25119.667,
-          "throughput_mib_s": 159.932,
+          "p50_micros": 27395.89,
+          "p95_micros": 27451.012,
+          "throughput_mib_s": 146.007,
           "reported_peak_memory_bytes": 0
         }
       },
