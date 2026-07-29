@@ -1,0 +1,12 @@
+[package]
+name = "bmp-to-cur"
+version = "0.1.0"
+edition = "2024"
+publish = false
+license-file = "LICENSE"
+description = "Windows BMP raster to single-member PNG-backed Windows CUR"
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]

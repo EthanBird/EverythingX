@@ -38,6 +38,9 @@ jobs:
       - name: Prove generated PNG Wave B batch is current
         run: python3 tools/scaffold_png_wave_b.py --check
 
+      - name: Prove generated GIF and ICO/CUR Wave C batch is current
+        run: python3 tools/scaffold_gif_ico_wave_c.py --check
+
       - name: Prove all-Capsule performance harness is current
         run: python3 tools/build_performance_harness.py --check
 

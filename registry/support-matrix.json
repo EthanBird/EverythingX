@@ -8,9 +8,9 @@
     "planner_rule": "Resolve capability.edge_weight, apply hard semantic constraints first, then estimate the raw cost vector for the concrete input size."
   },
   "summary": {
-    "standalone_capsules": 104,
-    "adapter_capabilities": 105,
-    "logical_source_target_pairs": 91
+    "standalone_capsules": 133,
+    "adapter_capabilities": 134,
+    "logical_source_target_pairs": 119
   },
   "logical_pairs": [
     {
@@ -270,6 +270,18 @@
       "target": "exfmt:image:tga-raster"
     },
     {
+      "source": "exfmt:image:bmp-family",
+      "target": "imagefmt:cur"
+    },
+    {
+      "source": "exfmt:image:bmp-family",
+      "target": "imagefmt:gif89a-still"
+    },
+    {
+      "source": "exfmt:image:bmp-family",
+      "target": "imagefmt:ico"
+    },
+    {
       "source": "exfmt:image:pam",
       "target": "exfmt:image:bmp-family"
     },
@@ -288,6 +300,10 @@
     {
       "source": "exfmt:image:pam",
       "target": "exfmt:image:tga-raster"
+    },
+    {
+      "source": "exfmt:image:pam",
+      "target": "imagefmt:gif89a-still"
     },
     {
       "source": "exfmt:image:png",
@@ -314,6 +330,18 @@
       "target": "exfmt:image:tga-raster"
     },
     {
+      "source": "exfmt:image:png",
+      "target": "imagefmt:cur"
+    },
+    {
+      "source": "exfmt:image:png",
+      "target": "imagefmt:gif89a-still"
+    },
+    {
+      "source": "exfmt:image:png",
+      "target": "imagefmt:ico"
+    },
+    {
       "source": "exfmt:image:ppm",
       "target": "exfmt:image:bmp-family"
     },
@@ -332,6 +360,10 @@
     {
       "source": "exfmt:image:ppm",
       "target": "exfmt:image:tga-raster"
+    },
+    {
+      "source": "exfmt:image:ppm",
+      "target": "imagefmt:gif89a-still"
     },
     {
       "source": "exfmt:image:qoi",
@@ -354,6 +386,18 @@
       "target": "exfmt:image:tga-raster"
     },
     {
+      "source": "exfmt:image:qoi",
+      "target": "imagefmt:cur"
+    },
+    {
+      "source": "exfmt:image:qoi",
+      "target": "imagefmt:gif89a-still"
+    },
+    {
+      "source": "exfmt:image:qoi",
+      "target": "imagefmt:ico"
+    },
+    {
       "source": "exfmt:image:tga-raster",
       "target": "exfmt:image:bmp-family"
     },
@@ -372,10 +416,78 @@
     {
       "source": "exfmt:image:tga-raster",
       "target": "exfmt:image:qoi"
+    },
+    {
+      "source": "exfmt:image:tga-raster",
+      "target": "imagefmt:gif89a-still"
     },
     {
       "source": "exfmt:text:utf-16",
       "target": "exfmt:text:utf-8"
+    },
+    {
+      "source": "imagefmt:cur",
+      "target": "exfmt:image:bmp-family"
+    },
+    {
+      "source": "imagefmt:cur",
+      "target": "exfmt:image:png"
+    },
+    {
+      "source": "imagefmt:cur",
+      "target": "exfmt:image:qoi"
+    },
+    {
+      "source": "imagefmt:cur",
+      "target": "imagefmt:cur"
+    },
+    {
+      "source": "imagefmt:gif-animation",
+      "target": "exfmt:image:png"
+    },
+    {
+      "source": "imagefmt:gif-animation",
+      "target": "imagefmt:gif-animation"
+    },
+    {
+      "source": "imagefmt:gif89a-still",
+      "target": "exfmt:image:bmp-family"
+    },
+    {
+      "source": "imagefmt:gif89a-still",
+      "target": "exfmt:image:pam"
+    },
+    {
+      "source": "imagefmt:gif89a-still",
+      "target": "exfmt:image:png"
+    },
+    {
+      "source": "imagefmt:gif89a-still",
+      "target": "exfmt:image:ppm"
+    },
+    {
+      "source": "imagefmt:gif89a-still",
+      "target": "exfmt:image:qoi"
+    },
+    {
+      "source": "imagefmt:gif89a-still",
+      "target": "exfmt:image:tga-raster"
+    },
+    {
+      "source": "imagefmt:ico",
+      "target": "exfmt:image:bmp-family"
+    },
+    {
+      "source": "imagefmt:ico",
+      "target": "exfmt:image:png"
+    },
+    {
+      "source": "imagefmt:ico",
+      "target": "exfmt:image:qoi"
+    },
+    {
+      "source": "imagefmt:ico",
+      "target": "imagefmt:ico"
     }
   ],
   "capsules": [
@@ -2674,6 +2786,120 @@
       ]
     },
     {
+      "capsule_id": "capsule:validate-cur",
+      "version": "0.1.0",
+      "crate": "validate-cur",
+      "inputs": [
+        "imagefmt:cur"
+      ],
+      "outputs": [
+        "imagefmt:cur"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph",
+          "ir:timed-media"
+        ],
+        "operator_kind": "validate",
+        "operator_role": "analyze"
+      },
+      "repository_path": "capsules/image/raster/analyze/validate-cur",
+      "edge_weight_file": "capsules/image/raster/analyze/validate-cur/edge-weight.json",
+      "capability_ids": [
+        "capability:validate-cur/strict-full-structure-validation/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:validate-gif",
+      "version": "0.1.0",
+      "crate": "validate-gif",
+      "inputs": [
+        "imagefmt:gif-animation"
+      ],
+      "outputs": [
+        "imagefmt:gif-animation"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph",
+          "ir:timed-media"
+        ],
+        "operator_kind": "validate",
+        "operator_role": "analyze"
+      },
+      "repository_path": "capsules/image/raster/analyze/validate-gif",
+      "edge_weight_file": "capsules/image/raster/analyze/validate-gif/edge-weight.json",
+      "capability_ids": [
+        "capability:validate-gif/strict-full-structure-validation/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:validate-ico",
+      "version": "0.1.0",
+      "crate": "validate-ico",
+      "inputs": [
+        "imagefmt:ico"
+      ],
+      "outputs": [
+        "imagefmt:ico"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph",
+          "ir:timed-media"
+        ],
+        "operator_kind": "validate",
+        "operator_role": "analyze"
+      },
+      "repository_path": "capsules/image/raster/analyze/validate-ico",
+      "edge_weight_file": "capsules/image/raster/analyze/validate-ico/edge-weight.json",
+      "capability_ids": [
+        "capability:validate-ico/strict-full-structure-validation/native-portable"
+      ]
+    },
+    {
       "capsule_id": "capsule:validate-png",
       "version": "0.1.0",
       "crate": "validate-png",
@@ -2708,6 +2934,194 @@
       "edge_weight_file": "capsules/image/raster/analyze/validate-png/edge-weight.json",
       "capability_ids": [
         "capability:validate-png/png-native-canonical/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:gif-animation-to-sprite-sheet-png",
+      "version": "0.1.0",
+      "crate": "gif-animation-to-sprite-sheet-png",
+      "inputs": [
+        "imagefmt:gif-animation"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:timed-media"
+        ],
+        "operator_kind": "render",
+        "operator_role": "bridge"
+      },
+      "repository_path": "capsules/image/raster/bridge/gif-animation-to-sprite-sheet-png",
+      "edge_weight_file": "capsules/image/raster/bridge/gif-animation-to-sprite-sheet-png/edge-weight.json",
+      "capability_ids": [
+        "capability:gif-animation-to-sprite-sheet-png/gif-horizontal-composited-sprite-sheet/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:gif-render-frame-to-png",
+      "version": "0.1.0",
+      "crate": "gif-render-frame-to-png",
+      "inputs": [
+        "imagefmt:gif-animation"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:timed-media"
+        ],
+        "operator_kind": "render",
+        "operator_role": "bridge"
+      },
+      "repository_path": "capsules/image/raster/bridge/gif-render-frame-to-png",
+      "edge_weight_file": "capsules/image/raster/bridge/gif-render-frame-to-png/edge-weight.json",
+      "capability_ids": [
+        "capability:gif-render-frame-to-png/gif-composited-frame-selection/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:bmp-to-cur",
+      "version": "0.1.0",
+      "crate": "bmp-to-cur",
+      "inputs": [
+        "exfmt:image:bmp-family"
+      ],
+      "outputs": [
+        "imagefmt:cur"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph",
+          "ir:timed-media"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/image/raster/direct/bmp-to-cur",
+      "edge_weight_file": "capsules/image/raster/direct/bmp-to-cur/edge-weight.json",
+      "capability_ids": [
+        "capability:bmp-to-cur/legacy-raster-rgba8/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:bmp-to-gif",
+      "version": "0.1.0",
+      "crate": "bmp-to-gif",
+      "inputs": [
+        "exfmt:image:bmp-family"
+      ],
+      "outputs": [
+        "imagefmt:gif89a-still"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph",
+          "ir:timed-media"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/image/raster/direct/bmp-to-gif",
+      "edge_weight_file": "capsules/image/raster/direct/bmp-to-gif/edge-weight.json",
+      "capability_ids": [
+        "capability:bmp-to-gif/legacy-raster-rgba8/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:bmp-to-ico",
+      "version": "0.1.0",
+      "crate": "bmp-to-ico",
+      "inputs": [
+        "exfmt:image:bmp-family"
+      ],
+      "outputs": [
+        "imagefmt:ico"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph",
+          "ir:timed-media"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/image/raster/direct/bmp-to-ico",
+      "edge_weight_file": "capsules/image/raster/direct/bmp-to-ico/edge-weight.json",
+      "capability_ids": [
+        "capability:bmp-to-ico/legacy-raster-rgba8/native-portable"
       ]
     },
     {
@@ -2896,6 +3310,462 @@
       ]
     },
     {
+      "capsule_id": "capsule:cur-best-to-bmp",
+      "version": "0.1.0",
+      "crate": "cur-best-to-bmp",
+      "inputs": [
+        "imagefmt:cur"
+      ],
+      "outputs": [
+        "exfmt:image:bmp-family"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph",
+          "ir:timed-media"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/image/raster/direct/cur-best-to-bmp",
+      "edge_weight_file": "capsules/image/raster/direct/cur-best-to-bmp/edge-weight.json",
+      "capability_ids": [
+        "capability:cur-best-to-bmp/legacy-raster-rgba8/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:cur-best-to-png",
+      "version": "0.1.0",
+      "crate": "cur-best-to-png",
+      "inputs": [
+        "imagefmt:cur"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph",
+          "ir:timed-media"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/image/raster/direct/cur-best-to-png",
+      "edge_weight_file": "capsules/image/raster/direct/cur-best-to-png/edge-weight.json",
+      "capability_ids": [
+        "capability:cur-best-to-png/legacy-raster-rgba8/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:cur-best-to-qoi",
+      "version": "0.1.0",
+      "crate": "cur-best-to-qoi",
+      "inputs": [
+        "imagefmt:cur"
+      ],
+      "outputs": [
+        "exfmt:image:qoi"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph",
+          "ir:timed-media"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/image/raster/direct/cur-best-to-qoi",
+      "edge_weight_file": "capsules/image/raster/direct/cur-best-to-qoi/edge-weight.json",
+      "capability_ids": [
+        "capability:cur-best-to-qoi/legacy-raster-rgba8/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:gif-to-bmp",
+      "version": "0.1.0",
+      "crate": "gif-to-bmp",
+      "inputs": [
+        "imagefmt:gif89a-still"
+      ],
+      "outputs": [
+        "exfmt:image:bmp-family"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph",
+          "ir:timed-media"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/image/raster/direct/gif-to-bmp",
+      "edge_weight_file": "capsules/image/raster/direct/gif-to-bmp/edge-weight.json",
+      "capability_ids": [
+        "capability:gif-to-bmp/legacy-raster-rgba8/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:gif-to-pam",
+      "version": "0.1.0",
+      "crate": "gif-to-pam",
+      "inputs": [
+        "imagefmt:gif89a-still"
+      ],
+      "outputs": [
+        "exfmt:image:pam"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph",
+          "ir:timed-media"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/image/raster/direct/gif-to-pam",
+      "edge_weight_file": "capsules/image/raster/direct/gif-to-pam/edge-weight.json",
+      "capability_ids": [
+        "capability:gif-to-pam/legacy-raster-rgba8/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:gif-to-png",
+      "version": "0.1.0",
+      "crate": "gif-to-png",
+      "inputs": [
+        "imagefmt:gif89a-still"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph",
+          "ir:timed-media"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/image/raster/direct/gif-to-png",
+      "edge_weight_file": "capsules/image/raster/direct/gif-to-png/edge-weight.json",
+      "capability_ids": [
+        "capability:gif-to-png/legacy-raster-rgba8/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:gif-to-ppm",
+      "version": "0.1.0",
+      "crate": "gif-to-ppm",
+      "inputs": [
+        "imagefmt:gif89a-still"
+      ],
+      "outputs": [
+        "exfmt:image:ppm"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph",
+          "ir:timed-media"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/image/raster/direct/gif-to-ppm",
+      "edge_weight_file": "capsules/image/raster/direct/gif-to-ppm/edge-weight.json",
+      "capability_ids": [
+        "capability:gif-to-ppm/legacy-raster-rgba8/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:gif-to-qoi",
+      "version": "0.1.0",
+      "crate": "gif-to-qoi",
+      "inputs": [
+        "imagefmt:gif89a-still"
+      ],
+      "outputs": [
+        "exfmt:image:qoi"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph",
+          "ir:timed-media"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/image/raster/direct/gif-to-qoi",
+      "edge_weight_file": "capsules/image/raster/direct/gif-to-qoi/edge-weight.json",
+      "capability_ids": [
+        "capability:gif-to-qoi/legacy-raster-rgba8/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:gif-to-tga",
+      "version": "0.1.0",
+      "crate": "gif-to-tga",
+      "inputs": [
+        "imagefmt:gif89a-still"
+      ],
+      "outputs": [
+        "exfmt:image:tga-raster"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph",
+          "ir:timed-media"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/image/raster/direct/gif-to-tga",
+      "edge_weight_file": "capsules/image/raster/direct/gif-to-tga/edge-weight.json",
+      "capability_ids": [
+        "capability:gif-to-tga/legacy-raster-rgba8/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:ico-best-to-bmp",
+      "version": "0.1.0",
+      "crate": "ico-best-to-bmp",
+      "inputs": [
+        "imagefmt:ico"
+      ],
+      "outputs": [
+        "exfmt:image:bmp-family"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph",
+          "ir:timed-media"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/image/raster/direct/ico-best-to-bmp",
+      "edge_weight_file": "capsules/image/raster/direct/ico-best-to-bmp/edge-weight.json",
+      "capability_ids": [
+        "capability:ico-best-to-bmp/legacy-raster-rgba8/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:ico-best-to-png",
+      "version": "0.1.0",
+      "crate": "ico-best-to-png",
+      "inputs": [
+        "imagefmt:ico"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph",
+          "ir:timed-media"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/image/raster/direct/ico-best-to-png",
+      "edge_weight_file": "capsules/image/raster/direct/ico-best-to-png/edge-weight.json",
+      "capability_ids": [
+        "capability:ico-best-to-png/legacy-raster-rgba8/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:ico-best-to-qoi",
+      "version": "0.1.0",
+      "crate": "ico-best-to-qoi",
+      "inputs": [
+        "imagefmt:ico"
+      ],
+      "outputs": [
+        "exfmt:image:qoi"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph",
+          "ir:timed-media"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/image/raster/direct/ico-best-to-qoi",
+      "edge_weight_file": "capsules/image/raster/direct/ico-best-to-qoi/edge-weight.json",
+      "capability_ids": [
+        "capability:ico-best-to-qoi/legacy-raster-rgba8/native-portable"
+      ]
+    },
+    {
       "capsule_id": "capsule:pam-to-bmp",
       "version": "0.1.0",
       "crate": "pam-to-bmp",
@@ -2930,6 +3800,44 @@
       "edge_weight_file": "capsules/image/raster/direct/pam-to-bmp/edge-weight.json",
       "capability_ids": [
         "capability:pam-to-bmp/rgba8-code-value-exact/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:pam-to-gif",
+      "version": "0.1.0",
+      "crate": "pam-to-gif",
+      "inputs": [
+        "exfmt:image:pam"
+      ],
+      "outputs": [
+        "imagefmt:gif89a-still"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph",
+          "ir:timed-media"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/image/raster/direct/pam-to-gif",
+      "edge_weight_file": "capsules/image/raster/direct/pam-to-gif/edge-weight.json",
+      "capability_ids": [
+        "capability:pam-to-gif/legacy-raster-rgba8/native-portable"
       ]
     },
     {
@@ -3118,6 +4026,120 @@
       ]
     },
     {
+      "capsule_id": "capsule:png-to-cur",
+      "version": "0.1.0",
+      "crate": "png-to-cur",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "imagefmt:cur"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph",
+          "ir:timed-media"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/image/raster/direct/png-to-cur",
+      "edge_weight_file": "capsules/image/raster/direct/png-to-cur/edge-weight.json",
+      "capability_ids": [
+        "capability:png-to-cur/legacy-raster-rgba8/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:png-to-gif",
+      "version": "0.1.0",
+      "crate": "png-to-gif",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "imagefmt:gif89a-still"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph",
+          "ir:timed-media"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/image/raster/direct/png-to-gif",
+      "edge_weight_file": "capsules/image/raster/direct/png-to-gif/edge-weight.json",
+      "capability_ids": [
+        "capability:png-to-gif/legacy-raster-rgba8/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:png-to-ico",
+      "version": "0.1.0",
+      "crate": "png-to-ico",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "imagefmt:ico"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph",
+          "ir:timed-media"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/image/raster/direct/png-to-ico",
+      "edge_weight_file": "capsules/image/raster/direct/png-to-ico/edge-weight.json",
+      "capability_ids": [
+        "capability:png-to-ico/legacy-raster-rgba8/native-portable"
+      ]
+    },
+    {
       "capsule_id": "capsule:png-to-pam",
       "version": "0.1.0",
       "crate": "png-to-pam",
@@ -3300,6 +4322,44 @@
       "edge_weight_file": "capsules/image/raster/direct/ppm-to-bmp/edge-weight.json",
       "capability_ids": [
         "capability:ppm-to-bmp/rgba8-code-value-exact/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:ppm-to-gif",
+      "version": "0.1.0",
+      "crate": "ppm-to-gif",
+      "inputs": [
+        "exfmt:image:ppm"
+      ],
+      "outputs": [
+        "imagefmt:gif89a-still"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph",
+          "ir:timed-media"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/image/raster/direct/ppm-to-gif",
+      "edge_weight_file": "capsules/image/raster/direct/ppm-to-gif/edge-weight.json",
+      "capability_ids": [
+        "capability:ppm-to-gif/legacy-raster-rgba8/native-portable"
       ]
     },
     {
@@ -3488,6 +4548,120 @@
       ]
     },
     {
+      "capsule_id": "capsule:qoi-to-cur",
+      "version": "0.1.0",
+      "crate": "qoi-to-cur",
+      "inputs": [
+        "exfmt:image:qoi"
+      ],
+      "outputs": [
+        "imagefmt:cur"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph",
+          "ir:timed-media"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/image/raster/direct/qoi-to-cur",
+      "edge_weight_file": "capsules/image/raster/direct/qoi-to-cur/edge-weight.json",
+      "capability_ids": [
+        "capability:qoi-to-cur/legacy-raster-rgba8/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:qoi-to-gif",
+      "version": "0.1.0",
+      "crate": "qoi-to-gif",
+      "inputs": [
+        "exfmt:image:qoi"
+      ],
+      "outputs": [
+        "imagefmt:gif89a-still"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph",
+          "ir:timed-media"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/image/raster/direct/qoi-to-gif",
+      "edge_weight_file": "capsules/image/raster/direct/qoi-to-gif/edge-weight.json",
+      "capability_ids": [
+        "capability:qoi-to-gif/legacy-raster-rgba8/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:qoi-to-ico",
+      "version": "0.1.0",
+      "crate": "qoi-to-ico",
+      "inputs": [
+        "exfmt:image:qoi"
+      ],
+      "outputs": [
+        "imagefmt:ico"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph",
+          "ir:timed-media"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/image/raster/direct/qoi-to-ico",
+      "edge_weight_file": "capsules/image/raster/direct/qoi-to-ico/edge-weight.json",
+      "capability_ids": [
+        "capability:qoi-to-ico/legacy-raster-rgba8/native-portable"
+      ]
+    },
+    {
       "capsule_id": "capsule:qoi-to-pam",
       "version": "0.1.0",
       "crate": "qoi-to-pam",
@@ -3670,6 +4844,44 @@
       "edge_weight_file": "capsules/image/raster/direct/tga-to-bmp/edge-weight.json",
       "capability_ids": [
         "capability:tga-to-bmp/rgba8-code-value-exact/native-portable"
+      ]
+    },
+    {
+      "capsule_id": "capsule:tga-to-gif",
+      "version": "0.1.0",
+      "crate": "tga-to-gif",
+      "inputs": [
+        "exfmt:image:tga-raster"
+      ],
+      "outputs": [
+        "imagefmt:gif89a-still"
+      ],
+      "arity": {
+        "inputs": {
+          "min": 1,
+          "max": 1
+        },
+        "outputs": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "standalone": true,
+      "copy_out_tested": true,
+      "taxonomy": {
+        "domain": "image",
+        "primary_ir": "ir:raster",
+        "secondary_irs": [
+          "ir:container-graph",
+          "ir:timed-media"
+        ],
+        "operator_kind": "convert",
+        "operator_role": "direct"
+      },
+      "repository_path": "capsules/image/raster/direct/tga-to-gif",
+      "edge_weight_file": "capsules/image/raster/direct/tga-to-gif/edge-weight.json",
+      "capability_ids": [
+        "capability:tga-to-gif/legacy-raster-rgba8/native-portable"
       ]
     },
     {
@@ -4595,6 +5807,81 @@
       "edge_weight": "capsules/audio/sampled-audio/direct/au-pcm-to-wave64-pcm/edge-weight.json#capability:au-pcm-to-wave64-pcm/pcm-exact/native-portable"
     },
     {
+      "capability_id": "capability:bmp-to-cur/legacy-raster-rgba8/native-portable",
+      "capsule_id": "capsule:bmp-to-cur",
+      "inputs": [
+        "exfmt:image:bmp-family"
+      ],
+      "outputs": [
+        "imagefmt:cur"
+      ],
+      "strategy": "legacy-raster-rgba8",
+      "backend": "native-portable",
+      "computability": "conditional_exact",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "conditional"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": [],
+      "edge_weight": "capsules/image/raster/direct/bmp-to-cur/edge-weight.json#capability:bmp-to-cur/legacy-raster-rgba8/native-portable"
+    },
+    {
+      "capability_id": "capability:bmp-to-gif/legacy-raster-rgba8/native-portable",
+      "capsule_id": "capsule:bmp-to-gif",
+      "inputs": [
+        "exfmt:image:bmp-family"
+      ],
+      "outputs": [
+        "imagefmt:gif89a-still"
+      ],
+      "strategy": "legacy-raster-rgba8",
+      "backend": "native-portable",
+      "computability": "conditional_exact",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "conditional"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": [],
+      "edge_weight": "capsules/image/raster/direct/bmp-to-gif/edge-weight.json#capability:bmp-to-gif/legacy-raster-rgba8/native-portable"
+    },
+    {
+      "capability_id": "capability:bmp-to-ico/legacy-raster-rgba8/native-portable",
+      "capsule_id": "capsule:bmp-to-ico",
+      "inputs": [
+        "exfmt:image:bmp-family"
+      ],
+      "outputs": [
+        "imagefmt:ico"
+      ],
+      "strategy": "legacy-raster-rgba8",
+      "backend": "native-portable",
+      "computability": "conditional_exact",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "conditional"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": [],
+      "edge_weight": "capsules/image/raster/direct/bmp-to-ico/edge-weight.json#capability:bmp-to-ico/legacy-raster-rgba8/native-portable"
+    },
+    {
       "capability_id": "capability:bmp-to-pam/rgba8-code-value-exact/native-portable",
       "capsule_id": "capsule:bmp-to-pam",
       "inputs": [
@@ -5274,6 +6561,356 @@
       "edge_weight": "capsules/audio/sampled-audio/direct/caf-pcm-to-wave64-pcm/edge-weight.json#capability:caf-pcm-to-wave64-pcm/pcm-exact/native-portable"
     },
     {
+      "capability_id": "capability:cur-best-to-bmp/legacy-raster-rgba8/native-portable",
+      "capsule_id": "capsule:cur-best-to-bmp",
+      "inputs": [
+        "imagefmt:cur"
+      ],
+      "outputs": [
+        "exfmt:image:bmp-family"
+      ],
+      "strategy": "legacy-raster-rgba8",
+      "backend": "native-portable",
+      "computability": "conditional_exact",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "unbounded",
+        "metadata": "unbounded",
+        "color-semantics": "conditional"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": [],
+      "edge_weight": "capsules/image/raster/direct/cur-best-to-bmp/edge-weight.json#capability:cur-best-to-bmp/legacy-raster-rgba8/native-portable"
+    },
+    {
+      "capability_id": "capability:cur-best-to-png/legacy-raster-rgba8/native-portable",
+      "capsule_id": "capsule:cur-best-to-png",
+      "inputs": [
+        "imagefmt:cur"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "strategy": "legacy-raster-rgba8",
+      "backend": "native-portable",
+      "computability": "conditional_exact",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "unbounded",
+        "metadata": "unbounded",
+        "color-semantics": "conditional"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": [],
+      "edge_weight": "capsules/image/raster/direct/cur-best-to-png/edge-weight.json#capability:cur-best-to-png/legacy-raster-rgba8/native-portable"
+    },
+    {
+      "capability_id": "capability:cur-best-to-qoi/legacy-raster-rgba8/native-portable",
+      "capsule_id": "capsule:cur-best-to-qoi",
+      "inputs": [
+        "imagefmt:cur"
+      ],
+      "outputs": [
+        "exfmt:image:qoi"
+      ],
+      "strategy": "legacy-raster-rgba8",
+      "backend": "native-portable",
+      "computability": "conditional_exact",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "unbounded",
+        "metadata": "unbounded",
+        "color-semantics": "conditional"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": [],
+      "edge_weight": "capsules/image/raster/direct/cur-best-to-qoi/edge-weight.json#capability:cur-best-to-qoi/legacy-raster-rgba8/native-portable"
+    },
+    {
+      "capability_id": "capability:gif-animation-to-sprite-sheet-png/gif-horizontal-composited-sprite-sheet/native-portable",
+      "capsule_id": "capsule:gif-animation-to-sprite-sheet-png",
+      "inputs": [
+        "imagefmt:gif-animation"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "strategy": "gif-horizontal-composited-sprite-sheet",
+      "backend": "native-portable",
+      "computability": "total_for_declared_subset",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "normalized",
+        "structure": "unbounded",
+        "metadata": "unbounded",
+        "color-semantics": "conditional"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": [],
+      "edge_weight": "capsules/image/raster/bridge/gif-animation-to-sprite-sheet-png/edge-weight.json#capability:gif-animation-to-sprite-sheet-png/gif-horizontal-composited-sprite-sheet/native-portable"
+    },
+    {
+      "capability_id": "capability:gif-render-frame-to-png/gif-composited-frame-selection/native-portable",
+      "capsule_id": "capsule:gif-render-frame-to-png",
+      "inputs": [
+        "imagefmt:gif-animation"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "strategy": "gif-composited-frame-selection",
+      "backend": "native-portable",
+      "computability": "total_for_declared_subset",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "normalized",
+        "structure": "unbounded",
+        "metadata": "unbounded",
+        "color-semantics": "conditional"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": [],
+      "edge_weight": "capsules/image/raster/bridge/gif-render-frame-to-png/edge-weight.json#capability:gif-render-frame-to-png/gif-composited-frame-selection/native-portable"
+    },
+    {
+      "capability_id": "capability:gif-to-bmp/legacy-raster-rgba8/native-portable",
+      "capsule_id": "capsule:gif-to-bmp",
+      "inputs": [
+        "imagefmt:gif89a-still"
+      ],
+      "outputs": [
+        "exfmt:image:bmp-family"
+      ],
+      "strategy": "legacy-raster-rgba8",
+      "backend": "native-portable",
+      "computability": "conditional_exact",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "conditional"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": [],
+      "edge_weight": "capsules/image/raster/direct/gif-to-bmp/edge-weight.json#capability:gif-to-bmp/legacy-raster-rgba8/native-portable"
+    },
+    {
+      "capability_id": "capability:gif-to-pam/legacy-raster-rgba8/native-portable",
+      "capsule_id": "capsule:gif-to-pam",
+      "inputs": [
+        "imagefmt:gif89a-still"
+      ],
+      "outputs": [
+        "exfmt:image:pam"
+      ],
+      "strategy": "legacy-raster-rgba8",
+      "backend": "native-portable",
+      "computability": "conditional_exact",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "conditional"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": [],
+      "edge_weight": "capsules/image/raster/direct/gif-to-pam/edge-weight.json#capability:gif-to-pam/legacy-raster-rgba8/native-portable"
+    },
+    {
+      "capability_id": "capability:gif-to-png/legacy-raster-rgba8/native-portable",
+      "capsule_id": "capsule:gif-to-png",
+      "inputs": [
+        "imagefmt:gif89a-still"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "strategy": "legacy-raster-rgba8",
+      "backend": "native-portable",
+      "computability": "conditional_exact",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "conditional"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": [],
+      "edge_weight": "capsules/image/raster/direct/gif-to-png/edge-weight.json#capability:gif-to-png/legacy-raster-rgba8/native-portable"
+    },
+    {
+      "capability_id": "capability:gif-to-ppm/legacy-raster-rgba8/native-portable",
+      "capsule_id": "capsule:gif-to-ppm",
+      "inputs": [
+        "imagefmt:gif89a-still"
+      ],
+      "outputs": [
+        "exfmt:image:ppm"
+      ],
+      "strategy": "legacy-raster-rgba8",
+      "backend": "native-portable",
+      "computability": "conditional_exact",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "conditional"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": [],
+      "edge_weight": "capsules/image/raster/direct/gif-to-ppm/edge-weight.json#capability:gif-to-ppm/legacy-raster-rgba8/native-portable"
+    },
+    {
+      "capability_id": "capability:gif-to-qoi/legacy-raster-rgba8/native-portable",
+      "capsule_id": "capsule:gif-to-qoi",
+      "inputs": [
+        "imagefmt:gif89a-still"
+      ],
+      "outputs": [
+        "exfmt:image:qoi"
+      ],
+      "strategy": "legacy-raster-rgba8",
+      "backend": "native-portable",
+      "computability": "conditional_exact",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "conditional"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": [],
+      "edge_weight": "capsules/image/raster/direct/gif-to-qoi/edge-weight.json#capability:gif-to-qoi/legacy-raster-rgba8/native-portable"
+    },
+    {
+      "capability_id": "capability:gif-to-tga/legacy-raster-rgba8/native-portable",
+      "capsule_id": "capsule:gif-to-tga",
+      "inputs": [
+        "imagefmt:gif89a-still"
+      ],
+      "outputs": [
+        "exfmt:image:tga-raster"
+      ],
+      "strategy": "legacy-raster-rgba8",
+      "backend": "native-portable",
+      "computability": "conditional_exact",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "conditional"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": [],
+      "edge_weight": "capsules/image/raster/direct/gif-to-tga/edge-weight.json#capability:gif-to-tga/legacy-raster-rgba8/native-portable"
+    },
+    {
+      "capability_id": "capability:ico-best-to-bmp/legacy-raster-rgba8/native-portable",
+      "capsule_id": "capsule:ico-best-to-bmp",
+      "inputs": [
+        "imagefmt:ico"
+      ],
+      "outputs": [
+        "exfmt:image:bmp-family"
+      ],
+      "strategy": "legacy-raster-rgba8",
+      "backend": "native-portable",
+      "computability": "conditional_exact",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "unbounded",
+        "metadata": "unbounded",
+        "color-semantics": "conditional"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": [],
+      "edge_weight": "capsules/image/raster/direct/ico-best-to-bmp/edge-weight.json#capability:ico-best-to-bmp/legacy-raster-rgba8/native-portable"
+    },
+    {
+      "capability_id": "capability:ico-best-to-png/legacy-raster-rgba8/native-portable",
+      "capsule_id": "capsule:ico-best-to-png",
+      "inputs": [
+        "imagefmt:ico"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "strategy": "legacy-raster-rgba8",
+      "backend": "native-portable",
+      "computability": "conditional_exact",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "unbounded",
+        "metadata": "unbounded",
+        "color-semantics": "conditional"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": [],
+      "edge_weight": "capsules/image/raster/direct/ico-best-to-png/edge-weight.json#capability:ico-best-to-png/legacy-raster-rgba8/native-portable"
+    },
+    {
+      "capability_id": "capability:ico-best-to-qoi/legacy-raster-rgba8/native-portable",
+      "capsule_id": "capsule:ico-best-to-qoi",
+      "inputs": [
+        "imagefmt:ico"
+      ],
+      "outputs": [
+        "exfmt:image:qoi"
+      ],
+      "strategy": "legacy-raster-rgba8",
+      "backend": "native-portable",
+      "computability": "conditional_exact",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "unbounded",
+        "metadata": "unbounded",
+        "color-semantics": "conditional"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": [],
+      "edge_weight": "capsules/image/raster/direct/ico-best-to-qoi/edge-weight.json#capability:ico-best-to-qoi/legacy-raster-rgba8/native-portable"
+    },
+    {
       "capability_id": "capability:normalize-png/png-native-canonical/native-portable",
       "capsule_id": "capsule:normalize-png",
       "inputs": [
@@ -5326,6 +6963,31 @@
         "registry/performance/baseline.json#capability:pam-to-bmp/rgba8-code-value-exact/native-portable"
       ],
       "edge_weight": "capsules/image/raster/direct/pam-to-bmp/edge-weight.json#capability:pam-to-bmp/rgba8-code-value-exact/native-portable"
+    },
+    {
+      "capability_id": "capability:pam-to-gif/legacy-raster-rgba8/native-portable",
+      "capsule_id": "capsule:pam-to-gif",
+      "inputs": [
+        "exfmt:image:pam"
+      ],
+      "outputs": [
+        "imagefmt:gif89a-still"
+      ],
+      "strategy": "legacy-raster-rgba8",
+      "backend": "native-portable",
+      "computability": "conditional_exact",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "conditional"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": [],
+      "edge_weight": "capsules/image/raster/direct/pam-to-gif/edge-weight.json#capability:pam-to-gif/legacy-raster-rgba8/native-portable"
     },
     {
       "capability_id": "capability:pam-to-png/rgba8-code-value-exact/native-portable",
@@ -5706,6 +7368,81 @@
       "edge_weight": "capsules/image/raster/direct/png-to-bmp/edge-weight.json#capability:png-to-bmp/rgba8-code-value-exact/native-portable"
     },
     {
+      "capability_id": "capability:png-to-cur/legacy-raster-rgba8/native-portable",
+      "capsule_id": "capsule:png-to-cur",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "imagefmt:cur"
+      ],
+      "strategy": "legacy-raster-rgba8",
+      "backend": "native-portable",
+      "computability": "conditional_exact",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "conditional"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": [],
+      "edge_weight": "capsules/image/raster/direct/png-to-cur/edge-weight.json#capability:png-to-cur/legacy-raster-rgba8/native-portable"
+    },
+    {
+      "capability_id": "capability:png-to-gif/legacy-raster-rgba8/native-portable",
+      "capsule_id": "capsule:png-to-gif",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "imagefmt:gif89a-still"
+      ],
+      "strategy": "legacy-raster-rgba8",
+      "backend": "native-portable",
+      "computability": "conditional_exact",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "conditional"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": [],
+      "edge_weight": "capsules/image/raster/direct/png-to-gif/edge-weight.json#capability:png-to-gif/legacy-raster-rgba8/native-portable"
+    },
+    {
+      "capability_id": "capability:png-to-ico/legacy-raster-rgba8/native-portable",
+      "capsule_id": "capsule:png-to-ico",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "imagefmt:ico"
+      ],
+      "strategy": "legacy-raster-rgba8",
+      "backend": "native-portable",
+      "computability": "conditional_exact",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "conditional"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": [],
+      "edge_weight": "capsules/image/raster/direct/png-to-ico/edge-weight.json#capability:png-to-ico/legacy-raster-rgba8/native-portable"
+    },
+    {
       "capability_id": "capability:png-to-pam/rgba8-code-value-exact/native-portable",
       "capsule_id": "capsule:png-to-pam",
       "inputs": [
@@ -5841,6 +7578,31 @@
       "edge_weight": "capsules/image/raster/direct/ppm-to-bmp/edge-weight.json#capability:ppm-to-bmp/rgba8-code-value-exact/native-portable"
     },
     {
+      "capability_id": "capability:ppm-to-gif/legacy-raster-rgba8/native-portable",
+      "capsule_id": "capsule:ppm-to-gif",
+      "inputs": [
+        "exfmt:image:ppm"
+      ],
+      "outputs": [
+        "imagefmt:gif89a-still"
+      ],
+      "strategy": "legacy-raster-rgba8",
+      "backend": "native-portable",
+      "computability": "conditional_exact",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "conditional"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": [],
+      "edge_weight": "capsules/image/raster/direct/ppm-to-gif/edge-weight.json#capability:ppm-to-gif/legacy-raster-rgba8/native-portable"
+    },
+    {
       "capability_id": "capability:ppm-to-pam/rgba8-code-value-exact/native-portable",
       "capsule_id": "capsule:ppm-to-pam",
       "inputs": [
@@ -5974,6 +7736,81 @@
         "registry/performance/baseline.json#capability:qoi-to-bmp/rgba8-code-value-exact/native-portable"
       ],
       "edge_weight": "capsules/image/raster/direct/qoi-to-bmp/edge-weight.json#capability:qoi-to-bmp/rgba8-code-value-exact/native-portable"
+    },
+    {
+      "capability_id": "capability:qoi-to-cur/legacy-raster-rgba8/native-portable",
+      "capsule_id": "capsule:qoi-to-cur",
+      "inputs": [
+        "exfmt:image:qoi"
+      ],
+      "outputs": [
+        "imagefmt:cur"
+      ],
+      "strategy": "legacy-raster-rgba8",
+      "backend": "native-portable",
+      "computability": "conditional_exact",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "conditional"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": [],
+      "edge_weight": "capsules/image/raster/direct/qoi-to-cur/edge-weight.json#capability:qoi-to-cur/legacy-raster-rgba8/native-portable"
+    },
+    {
+      "capability_id": "capability:qoi-to-gif/legacy-raster-rgba8/native-portable",
+      "capsule_id": "capsule:qoi-to-gif",
+      "inputs": [
+        "exfmt:image:qoi"
+      ],
+      "outputs": [
+        "imagefmt:gif89a-still"
+      ],
+      "strategy": "legacy-raster-rgba8",
+      "backend": "native-portable",
+      "computability": "conditional_exact",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "conditional"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": [],
+      "edge_weight": "capsules/image/raster/direct/qoi-to-gif/edge-weight.json#capability:qoi-to-gif/legacy-raster-rgba8/native-portable"
+    },
+    {
+      "capability_id": "capability:qoi-to-ico/legacy-raster-rgba8/native-portable",
+      "capsule_id": "capsule:qoi-to-ico",
+      "inputs": [
+        "exfmt:image:qoi"
+      ],
+      "outputs": [
+        "imagefmt:ico"
+      ],
+      "strategy": "legacy-raster-rgba8",
+      "backend": "native-portable",
+      "computability": "conditional_exact",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "conditional"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": [],
+      "edge_weight": "capsules/image/raster/direct/qoi-to-ico/edge-weight.json#capability:qoi-to-ico/legacy-raster-rgba8/native-portable"
     },
     {
       "capability_id": "capability:qoi-to-pam/rgba8-code-value-exact/native-portable",
@@ -6423,6 +8260,31 @@
       "edge_weight": "capsules/image/raster/direct/tga-to-bmp/edge-weight.json#capability:tga-to-bmp/rgba8-code-value-exact/native-portable"
     },
     {
+      "capability_id": "capability:tga-to-gif/legacy-raster-rgba8/native-portable",
+      "capsule_id": "capsule:tga-to-gif",
+      "inputs": [
+        "exfmt:image:tga-raster"
+      ],
+      "outputs": [
+        "imagefmt:gif89a-still"
+      ],
+      "strategy": "legacy-raster-rgba8",
+      "backend": "native-portable",
+      "computability": "conditional_exact",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "conditional"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": [],
+      "edge_weight": "capsules/image/raster/direct/tga-to-gif/edge-weight.json#capability:tga-to-gif/legacy-raster-rgba8/native-portable"
+    },
+    {
       "capability_id": "capability:tga-to-pam/rgba8-code-value-exact/native-portable",
       "capsule_id": "capsule:tga-to-pam",
       "inputs": [
@@ -6577,6 +8439,81 @@
         "registry/performance/baseline.json#capability:utf16-to-utf8/strict/native-portable"
       ],
       "edge_weight": "capsules/text/byte-coding/direct/utf16-to-utf8/edge-weight.json#capability:utf16-to-utf8/strict/native-portable"
+    },
+    {
+      "capability_id": "capability:validate-cur/strict-full-structure-validation/native-portable",
+      "capsule_id": "capsule:validate-cur",
+      "inputs": [
+        "imagefmt:cur"
+      ],
+      "outputs": [
+        "imagefmt:cur"
+      ],
+      "strategy": "strict-full-structure-validation",
+      "backend": "native-portable",
+      "computability": "total_for_declared_subset",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "none",
+        "metadata": "none",
+        "color-semantics": "none"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": [],
+      "edge_weight": "capsules/image/raster/analyze/validate-cur/edge-weight.json#capability:validate-cur/strict-full-structure-validation/native-portable"
+    },
+    {
+      "capability_id": "capability:validate-gif/strict-full-structure-validation/native-portable",
+      "capsule_id": "capsule:validate-gif",
+      "inputs": [
+        "imagefmt:gif-animation"
+      ],
+      "outputs": [
+        "imagefmt:gif-animation"
+      ],
+      "strategy": "strict-full-structure-validation",
+      "backend": "native-portable",
+      "computability": "total_for_declared_subset",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "none",
+        "metadata": "none",
+        "color-semantics": "none"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": [],
+      "edge_weight": "capsules/image/raster/analyze/validate-gif/edge-weight.json#capability:validate-gif/strict-full-structure-validation/native-portable"
+    },
+    {
+      "capability_id": "capability:validate-ico/strict-full-structure-validation/native-portable",
+      "capsule_id": "capsule:validate-ico",
+      "inputs": [
+        "imagefmt:ico"
+      ],
+      "outputs": [
+        "imagefmt:ico"
+      ],
+      "strategy": "strict-full-structure-validation",
+      "backend": "native-portable",
+      "computability": "total_for_declared_subset",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "none",
+        "metadata": "none",
+        "color-semantics": "none"
+      },
+      "defaults_are_runnable": true,
+      "streaming": false,
+      "seek_required": false,
+      "cost_evidence": [],
+      "edge_weight": "capsules/image/raster/analyze/validate-ico/edge-weight.json#capability:validate-ico/strict-full-structure-validation/native-portable"
     },
     {
       "capability_id": "capability:validate-png/png-native-canonical/native-portable",

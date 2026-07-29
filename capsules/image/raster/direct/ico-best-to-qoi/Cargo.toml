@@ -1,0 +1,12 @@
+[package]
+name = "ico-best-to-qoi"
+version = "0.1.0"
+edition = "2024"
+publish = false
+license-file = "LICENSE"
+description = "best-ranked Windows ICO member to Quite OK Image"
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]

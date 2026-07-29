@@ -1,7 +1,7 @@
 # Image operator program
 
-Date: 2026-07-19  
-Status: open-world representation ledger established; Raster Wave A and PNG Wave B implemented.
+Date: 2026-07-29
+Status: open-world representation ledger established; Raster Wave A, PNG Wave B and GIF/ICO Wave C implemented.
 
 ## 1. Boundary of the image family
 
@@ -142,19 +142,39 @@ basis instead of scattering isolated edges. Direct fixed/dynamic Huffman,
 Adam7, sub-byte indexed transparency and 16-bit round-trip tests are copied into
 every leaf; the generator is development tooling, not a runtime dependency.
 
-## 7. Next common-format waves
+## 7. GIF and ICO/CUR Wave C
 
-PNG Wave B does not justify claiming that common image formats are complete.
-The next ordered program is:
+Wave C adds 29 standalone Capsules:
 
-1. GIF87a/GIF89a and ICO/CUR, including frame/member algebra and explicit
-   animation/selection semantics;
-2. baseline/progressive JPEG and TIFF profile families, with color and metadata
+1. twelve directed edges between GIF and PNG/BMP/TGA/QOI/PPM/PAM;
+2. twelve explicit best-member/single-member edges between ICO/CUR and PNG/BMP/QOI;
+3. strict whole-file validators for GIF, ICO and CUR;
+4. explicit animated-GIF frame and sprite-sheet renderers.
+
+The GIF state machine covers LZW, global/local palettes, interlace, binary
+transparency, delay, loop metadata and disposal 0–3. Still-image edges reject
+animation. The exact-palette encoder rejects quantization, partial alpha and
+more than 256 colors.
+
+ICO/CUR parsing validates the complete directory and supports strict PNG
+members plus common uncompressed 1/4/8/24/32-bit DIB and AND-mask profiles.
+Read edges state best-member selection in their capability names and reports;
+write edges emit one normalized PNG member. Multi-resolution aggregation
+remains a separate collection operation.
+
+Implementation and proof details are in `docs/17-gif-ico-wave-c.md`.
+
+## 8. Next common-format waves
+
+Three raster waves do not justify claiming that common image formats are
+complete. The next ordered program is:
+
+1. baseline/progressive JPEG and TIFF profile families, with color and metadata
    contracts separated from pixel-code-value claims;
-3. WebP lossy/lossless/animation and AVIF/HEIF/HEIC item/sequence graphs;
-4. SVG and PDF rasterization bridges as object-graph render operations, never
+2. WebP lossy/lossless/animation and AVIF/HEIF/HEIC item/sequence graphs;
+3. SVG and PDF rasterization bridges as object-graph render operations, never
    mislabeled as carrier-only conversions;
-5. camera raw development only after calibration, demosaic and color-transform
+4. camera raw development only after calibration, demosaic and color-transform
    preconditions are represented in capability records.
 
 Each codec receives a native-versus-dependency decision record. “Zero dependency”

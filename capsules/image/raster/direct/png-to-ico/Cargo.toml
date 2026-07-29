@@ -1,0 +1,12 @@
+[package]
+name = "png-to-ico"
+version = "0.1.0"
+edition = "2024"
+publish = false
+license-file = "LICENSE"
+description = "Portable Network Graphics to single-member PNG-backed Windows ICO"
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]

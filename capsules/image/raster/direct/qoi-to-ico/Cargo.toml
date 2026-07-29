@@ -1,0 +1,12 @@
+[package]
+name = "qoi-to-ico"
+version = "0.1.0"
+edition = "2024"
+publish = false
+license-file = "LICENSE"
+description = "Quite OK Image to single-member PNG-backed Windows ICO"
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]

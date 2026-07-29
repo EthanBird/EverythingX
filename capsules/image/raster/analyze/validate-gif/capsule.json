@@ -1,0 +1,134 @@
+{
+  "capsule_id": "capsule:validate-gif",
+  "version": "0.1.0",
+  "name": "validate-gif",
+  "summary": "Strictly validate GIF87a/GIF89a and copy the exact byte stream.",
+  "taxonomy": {
+    "domain": "image",
+    "primary_ir": "ir:raster",
+    "secondary_irs": [
+      "ir:container-graph",
+      "ir:timed-media"
+    ],
+    "operator_kind": "validate",
+    "operator_role": "analyze"
+  },
+  "license": {
+    "expression": "PolyForm-Noncommercial-1.0.0",
+    "file": "LICENSE",
+    "commercial_authorization_required": true
+  },
+  "repository": "https://github.com/EthanBird/EverythingX/tree/main/capsules/image/raster/analyze/validate-gif",
+  "independence": {
+    "standalone_cargo_build": true,
+    "everythingx_optional": true,
+    "external_path_dependencies": false,
+    "copy_out_tested": true
+  },
+  "conversion": {
+    "source": [
+      "imagefmt:gif-animation"
+    ],
+    "target": [
+      "imagefmt:gif-animation"
+    ],
+    "arity": {
+      "inputs": {
+        "min": 1,
+        "max": 1
+      },
+      "outputs": {
+        "min": 1,
+        "max": 1
+      }
+    },
+    "scope": [
+      "Complete block or member directory traversal",
+      "GIF LZW/frame composition or every ICO/CUR PNG/DIB member decode",
+      "Exact byte-for-byte output after validation"
+    ],
+    "out_of_scope": [
+      "Repair of malformed structures",
+      "ICC color conversion"
+    ]
+  },
+  "api": {
+    "language": "rust",
+    "crate": "validate-gif",
+    "entrypoint": "convert",
+    "owns_options_error_report": true,
+    "streaming": false,
+    "seek_required": false
+  },
+  "defaults": {
+    "runnable": true,
+    "strategy": "strict-full-structure-validation",
+    "backend": "native-portable",
+    "options": {
+      "max_frames": 10000,
+      "max_input_bytes": 536870912,
+      "max_members": 1024,
+      "max_pixels": 100000000
+    },
+    "policy": "strict"
+  },
+  "strategies": [
+    {
+      "id": "strict-full-structure-validation",
+      "guarantees": [
+        "Every declared GIF frame or ICO/CUR member is decoded",
+        "Ranges, dimensions, checksums and allocation arithmetic are checked",
+        "Successful output is byte-for-byte identical to input"
+      ],
+      "tradeoffs": [
+        "Validation materializes decoded rasters to prove payload integrity"
+      ]
+    }
+  ],
+  "backends": [
+    {
+      "id": "native-portable",
+      "tier": "native-portable",
+      "default": true,
+      "dependencies": []
+    }
+  ],
+  "validation": {
+    "specifications": [
+      "GIF89a",
+      "Microsoft ICO/CUR and DIB structures",
+      "W3C PNG Third Edition"
+    ],
+    "conformance": [
+      "src/lib.rs unit tests"
+    ],
+    "differential": [],
+    "properties": [
+      "Successful validation copies exact bytes",
+      "Truncation fails before output"
+    ],
+    "regression": [
+      "Frame/member limits",
+      "Overlapping icon ranges",
+      "Malformed LZW"
+    ],
+    "fuzz": [
+      "Planned full-structure campaign"
+    ],
+    "benchmarks": [
+      "Pending controlled exbench baseline"
+    ]
+  },
+  "security": {
+    "accepts_untrusted_input": true,
+    "limits": [
+      "512 MiB input",
+      "100 million pixels",
+      "10,000 GIF frames",
+      "1,024 ICO/CUR members"
+    ],
+    "known_risks": [
+      "Validation cost scales with decoded frames or members"
+    ]
+  }
+}

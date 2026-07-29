@@ -1,0 +1,78 @@
+{
+  "adapter_id": "adapter:png-to-gif-static",
+  "version": "0.1.0",
+  "capsule": {
+    "id": "capsule:png-to-gif",
+    "version_requirement": "^0.1.0"
+  },
+  "protocol": {
+    "name": "everythingx-adapter-protocol",
+    "version_requirement": "0.1"
+  },
+  "transport": {
+    "kind": "static-rust",
+    "entrypoint": "GeneratedLegacyRasterAdapter"
+  },
+  "capabilities": [
+    {
+      "capability_id": "capability:png-to-gif/legacy-raster-rgba8/native-portable",
+      "capsule_entrypoint": "convert",
+      "strategy": "legacy-raster-rgba8",
+      "backend": "native-portable",
+      "inputs": [
+        "exfmt:image:png"
+      ],
+      "outputs": [
+        "imagefmt:gif89a-still"
+      ],
+      "preconditions": [
+        "Input belongs to the declared native parser subset",
+        "Raster has at most 256 exact colors",
+        "Alpha is opaque or binary and transparent RGB is zero"
+      ],
+      "effects": [
+        "Produce GIF87a/GIF89a exact-palette still raster"
+      ],
+      "invariants": [
+        "Width",
+        "Height",
+        "Pixel coordinates",
+        "Accepted RGBA8 code values"
+      ],
+      "computability": "conditional_exact",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "none",
+        "structure": "normalized",
+        "metadata": "unbounded",
+        "color-semantics": "conditional"
+      },
+      "default_options": {
+        "allow_sample_scaling": false,
+        "cursor_hotspot_x": 0,
+        "cursor_hotspot_y": 0,
+        "max_frames": 10000,
+        "max_input_bytes": 536870912,
+        "max_members": 1024,
+        "max_pixels": 100000000,
+        "ppm_alpha": "reject",
+        "preserve_unmarked_bmp_alpha": false,
+        "strict_trailing_data": true,
+        "tga_rle": true
+      },
+      "defaults_are_runnable": true,
+      "execution": {
+        "streaming": false,
+        "seek_required": false,
+        "cost_evidence": []
+      },
+      "report_mapping": {
+        "unknown_fields_are_preserved": true,
+        "rules": [
+          "Dimensions, channels, alpha action and selection warnings map to capsule_report",
+          "static Adapter buffers protocol input and enforces output budget"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+[package]
+name = "gif-animation-to-sprite-sheet-png"
+version = "0.1.0"
+edition = "2024"
+publish = false
+license-file = "LICENSE"
+description = "Render every composited GIF animation frame into a horizontal PNG sprite sheet."
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]

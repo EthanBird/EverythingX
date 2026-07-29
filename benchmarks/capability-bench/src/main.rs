@@ -192,10 +192,13 @@ fn raster_dimensions(large: bool) -> (u32, u32) {
 }
 
 fn raster_rgb(x: u32, y: u32) -> [u8; 3] {
+    // Keep the deterministic benchmark raster inside an exact 256-color
+    // palette so the strict, non-quantizing GIF encoder remains runnable.
+    let index = x.wrapping_add(y.wrapping_mul(17)) as u8;
     [
-        x.wrapping_mul(37).wrapping_add(y.wrapping_mul(11)) as u8,
-        x.wrapping_mul(3).wrapping_add(y.wrapping_mul(29)) as u8,
-        x.wrapping_mul(17).wrapping_add(y.wrapping_mul(5)) as u8,
+        index,
+        index.wrapping_mul(37),
+        index.wrapping_mul(91),
     ]
 }
 
@@ -275,8 +278,7 @@ fn png_chunk(out: &mut Vec<u8>, kind: &[u8; 4], data: &[u8]) {
     out.extend_from_slice(&png_crc(&checked).to_be_bytes());
 }
 
-fn png_fixture(large: bool) -> Vec<u8> {
-    let (width, height) = raster_dimensions(large);
+fn png_fixture_dimensions(width: u32, height: u32) -> Vec<u8> {
     let mut filtered = Vec::with_capacity(height as usize * (width as usize * 3 + 1));
     for y in 0..height {
         filtered.push(0);
@@ -310,6 +312,99 @@ fn png_fixture(large: bool) -> Vec<u8> {
     out
 }
 
+fn png_fixture(large: bool) -> Vec<u8> {
+    let (width, height) = raster_dimensions(large);
+    png_fixture_dimensions(width, height)
+}
+
+fn gif_codes(indices: impl IntoIterator<Item = u8>) -> Vec<u8> {
+    let clear = 256u16;
+    let end = 257u16;
+    let mut out = Vec::new();
+    let (mut value, mut bits) = (0u32, 0u8);
+    let push = |code: u16, out: &mut Vec<u8>, value: &mut u32, bits: &mut u8| {
+        *value |= (code as u32) << *bits;
+        *bits += 9;
+        while *bits >= 8 {
+            out.push(*value as u8);
+            *value >>= 8;
+            *bits -= 8;
+        }
+    };
+    for index in indices {
+        push(clear, &mut out, &mut value, &mut bits);
+        push(index as u16, &mut out, &mut value, &mut bits);
+    }
+    push(end, &mut out, &mut value, &mut bits);
+    if bits != 0 {
+        out.push(value as u8);
+    }
+    out
+}
+
+fn gif_frame(width: u32, height: u32) -> Vec<u8> {
+    let indices = (0..height).flat_map(|y| {
+        (0..width).map(move |x| x.wrapping_add(y.wrapping_mul(17)) as u8)
+    });
+    let compressed = gif_codes(indices);
+    let mut out = vec![0x2c, 0, 0, 0, 0];
+    out.extend_from_slice(&(width as u16).to_le_bytes());
+    out.extend_from_slice(&(height as u16).to_le_bytes());
+    out.extend_from_slice(&[0, 8]);
+    for block in compressed.chunks(255) {
+        out.push(block.len() as u8);
+        out.extend_from_slice(block);
+    }
+    out.push(0);
+    out
+}
+
+fn gif_fixture(large: bool, animated: bool) -> Vec<u8> {
+    let (width, height) = raster_dimensions(large);
+    let mut out = b"GIF89a".to_vec();
+    out.extend_from_slice(&(width as u16).to_le_bytes());
+    out.extend_from_slice(&(height as u16).to_le_bytes());
+    out.extend_from_slice(&[0xf7, 0, 0]);
+    for index in 0..=255u8 {
+        out.extend_from_slice(&[index, index.wrapping_mul(37), index.wrapping_mul(91)]);
+    }
+    let frame = gif_frame(width, height);
+    out.extend_from_slice(&frame);
+    if animated {
+        out.extend_from_slice(&[0x21, 0xf9, 4, 4, 1, 0, 0, 0]);
+        out.extend_from_slice(&frame);
+    }
+    out.push(0x3b);
+    out
+}
+
+fn icon_fixture(cursor: bool, large: bool) -> Vec<u8> {
+    let (dimension, members) = if large { (256u32, 16usize) } else { (64u32, 1usize) };
+    let png = png_fixture_dimensions(dimension, dimension);
+    let directory = 6 + members * 16;
+    let mut out = Vec::with_capacity(directory + members * png.len());
+    out.extend_from_slice(&0u16.to_le_bytes());
+    out.extend_from_slice(&(if cursor { 2u16 } else { 1u16 }).to_le_bytes());
+    out.extend_from_slice(&(members as u16).to_le_bytes());
+    for index in 0..members {
+        out.extend_from_slice(&[if dimension == 256 { 0 } else { dimension as u8 }; 2]);
+        out.extend_from_slice(&[0, 0]);
+        if cursor {
+            out.extend_from_slice(&0u16.to_le_bytes());
+            out.extend_from_slice(&0u16.to_le_bytes());
+        } else {
+            out.extend_from_slice(&1u16.to_le_bytes());
+            out.extend_from_slice(&32u16.to_le_bytes());
+        }
+        out.extend_from_slice(&(png.len() as u32).to_le_bytes());
+        out.extend_from_slice(&((directory + index * png.len()) as u32).to_le_bytes());
+    }
+    for _ in 0..members {
+        out.extend_from_slice(&png);
+    }
+    out
+}
+
 fn utf16_fixture(payload_bytes: usize) -> Vec<u8> {
     let units = payload_bytes.max(4) / 2;
     let mut out = Vec::with_capacity(units * 2);
@@ -339,6 +434,10 @@ fn fixture(format: &str, large: bool) -> Vec<u8> {
         "exfmt:image:ppm" => ppm_fixture(large),
         "exfmt:image:pam" => pam_fixture(large),
         "exfmt:image:png" => png_fixture(large),
+        "imagefmt:gif89a-still" => gif_fixture(large, false),
+        "imagefmt:gif-animation" => gif_fixture(large, true),
+        "imagefmt:ico" => icon_fixture(false, large),
+        "imagefmt:cur" => icon_fixture(true, large),
         "exfmt:text:utf-16" => utf16_fixture(size),
         other => panic!("no benchmark fixture for {other}"),
     }

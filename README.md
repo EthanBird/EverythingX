@@ -108,11 +108,12 @@ tools/          数据同步、目录构建和一致性校验
 15. `docs/14-image-operator-program.md`
 16. `docs/15-png-wave-b.md`
 17. `docs/16-heif-heic-program.md`
-18. `capsules/README.md`
+18. `docs/17-gif-ico-wave-c.md`
+19. `capsules/README.md`
 
 ## 当前阶段
 
-现在不开发桌面端、CLI 或路径规划器。当前生产 Capsule 达到 104 个、Adapter 能力 105 条、真实逻辑格式对 91 个。图像族已经连续交付 Raster Wave A 与 PNG Wave B：BMP、TGA、QOI、PPM、PAM 五种载体的 20 条有向转换全部闭合；PNG 又补齐与五者之间缺失的 9 条边，并增加原生校验、规范化、裁剪、填充、翻转、旋转和 Alpha 运算 11 个独立 Capsule。当前有 30 条不同图像格式边和 11 个 PNG 自变换能力。图像研究台账现有 298 个表示、11,234 条有序 pair 位置；HEIF/HEIC 已拆成 H0/H1/H2 共 58 个具名 Capsule，但尚未冒充已支持。音频台账与 58 条不同格式音频边保持不变，FLAC 计划后移。薄 Kernel 仍只负责注册、默认验证和直接调用，不拥有图像 codec 或强制共享 IR。
+现在不开发桌面端、CLI 或路径规划器。当前生产 Capsule 达到 133 个、Adapter 能力 134 条、真实逻辑格式对 119 个。图像族已经连续交付 Raster Wave A、PNG Wave B 与 GIF/ICO Wave C：BMP、TGA、QOI、PPM、PAM 五种载体的 20 条有向转换全部闭合；PNG 补齐与五者之间缺失的 9 条边并增加 11 个原生算子；GIF 又与 PNG/BMP/TGA/QOI/PPM/PAM 建立 12 条双向静态边，并提供显式动画帧/精灵表渲染；ICO、CUR 分别通过 best-member/single-member 语义与 PNG/BMP/QOI 建立 6 条边。当前图像族有 70 个独立 Capsule、70 条能力和 59 个逻辑格式对，其中 55 个是不同表示之间的边。图像研究台账现有 298 个表示、11,234 条有序 pair 位置；HEIF/HEIC 已拆成 H0/H1/H2 共 58 个具名 Capsule，但尚未冒充已支持。音频台账与 58 条不同格式音频边保持不变，FLAC 计划后移。薄 Kernel 仍只负责注册、默认验证和直接调用，不拥有图像 codec 或强制共享 IR。
 
 ## 当前实际支持的转换
 
@@ -131,6 +132,12 @@ tools/          数据同步、目录构建和一致性校验
 | QOI | PNG | `qoi-to-png` | rgba8-code-value-exact |
 | PPM | PNG | `ppm-to-png` | rgba8-code-value-exact |
 | PAM | PNG | `pam-to-png` | rgba8-code-value-exact |
+| GIF87a/GIF89a still | PNG/BMP/TGA/QOI/PPM/PAM | `gif-to-*` | exact-palette；动画默认拒绝 |
+| PNG/BMP/TGA/QOI/PPM/PAM | GIF89a still | `*-to-gif` | ≤256 精确颜色；仅不透明/二值 Alpha |
+| ICO best member | PNG/BMP/QOI | `ico-best-to-*` | 目录校验后按面积、位深确定性选择 |
+| PNG/BMP/QOI | single-member ICO | `*-to-ico` | PNG-backed，1–256 像素 |
+| CUR best member | PNG/BMP/QOI | `cur-best-to-*` | 目录校验后按面积、位深确定性选择 |
+| PNG/BMP/QOI | single-member CUR | `*-to-cur` | PNG-backed，热点默认 `(0,0)` |
 | Windows BMP family | TGA | `bmp-to-tga` | rgba8-code-value-exact |
 | Windows BMP family | QOI | `bmp-to-qoi` | rgba8-code-value-exact |
 | Windows BMP family | PPM | `bmp-to-ppm` | rgba8-code-value-exact |
@@ -221,6 +228,13 @@ PNG 同格式算子也属于真实图边，但为避免把格式对表写成 11 
 | 校验/结构 | `validate-png`、`normalize-png` |
 | 空间 | `png-crop`、`png-pad`、`png-flip-horizontal`、`png-flip-vertical`、`png-rotate-90`、`png-rotate-180`、`png-rotate-270` |
 | Alpha | `png-alpha-premultiply`、`png-alpha-unpremultiply` |
+
+GIF/ICO/CUR 的结构与集合语义另有 5 个独立 Capsule：
+
+| 类别 | 独立 Capsule |
+|---|---|
+| 严格整文件验证 | `validate-gif`、`validate-ico`、`validate-cur` |
+| 动画显式渲染 | `gif-render-frame-to-png`、`gif-animation-to-sprite-sheet-png` |
 
 机器可读权威清单是 `registry/support-matrix.json`。任何 Capsule 或 Adapter 更新都必须运行 `python3 tools/build_support_matrix.py`；CI 会拒绝过期矩阵。计划中、研究中和不可计算的边统一保存在 `operators/`，不得写进已支持清单。
 

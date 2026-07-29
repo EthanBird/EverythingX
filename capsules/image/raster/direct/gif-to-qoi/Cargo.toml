@@ -1,0 +1,12 @@
+[package]
+name = "gif-to-qoi"
+version = "0.1.0"
+edition = "2024"
+publish = false
+license-file = "LICENSE"
+description = "GIF87a/GIF89a exact-palette still raster to Quite OK Image"
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]

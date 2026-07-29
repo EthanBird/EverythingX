@@ -1,0 +1,150 @@
+{
+  "capsule_id": "capsule:bmp-to-ico",
+  "version": "0.1.0",
+  "name": "bmp-to-ico",
+  "summary": "Dependency-free conversion from Windows BMP raster to single-member PNG-backed Windows ICO.",
+  "taxonomy": {
+    "domain": "image",
+    "primary_ir": "ir:raster",
+    "secondary_irs": [
+      "ir:container-graph",
+      "ir:timed-media"
+    ],
+    "operator_kind": "convert",
+    "operator_role": "direct"
+  },
+  "license": {
+    "expression": "PolyForm-Noncommercial-1.0.0",
+    "file": "LICENSE",
+    "commercial_authorization_required": true
+  },
+  "repository": "https://github.com/EthanBird/EverythingX/tree/main/capsules/image/raster/direct/bmp-to-ico",
+  "independence": {
+    "standalone_cargo_build": true,
+    "everythingx_optional": true,
+    "external_path_dependencies": false,
+    "copy_out_tested": true
+  },
+  "conversion": {
+    "source": [
+      "exfmt:image:bmp-family"
+    ],
+    "target": [
+      "imagefmt:ico"
+    ],
+    "arity": {
+      "inputs": {
+        "min": 1,
+        "max": 1
+      },
+      "outputs": {
+        "min": 1,
+        "max": 1
+      }
+    },
+    "scope": [
+      "Single visual raster with checked dimensions and bounded allocation",
+      "RGBA8/RGB8 pixel coordinates and channel code values",
+      "Native parsing of Windows BMP raster",
+      "Native emission of single-member PNG-backed Windows ICO",
+      "One PNG-backed ICO/CUR member",
+      "Dimensions from 1 through 256",
+      "Explicit CUR hotspot coordinates with a runnable origin default"
+    ],
+    "out_of_scope": [
+      "ICC conversion and inferred transfer-function conversion",
+      "Arbitrary metadata migration",
+      "Lossy palette quantization",
+      "Multi-resolution icon aggregation"
+    ]
+  },
+  "api": {
+    "language": "rust",
+    "crate": "bmp-to-ico",
+    "entrypoint": "convert",
+    "owns_options_error_report": true,
+    "streaming": false,
+    "seek_required": false
+  },
+  "defaults": {
+    "runnable": true,
+    "strategy": "legacy-raster-rgba8",
+    "backend": "native-portable",
+    "options": {
+      "allow_sample_scaling": false,
+      "cursor_hotspot_x": 0,
+      "cursor_hotspot_y": 0,
+      "max_frames": 10000,
+      "max_input_bytes": 536870912,
+      "max_members": 1024,
+      "max_pixels": 100000000,
+      "ppm_alpha": "reject",
+      "preserve_unmarked_bmp_alpha": false,
+      "strict_trailing_data": true,
+      "tga_rle": true
+    },
+    "policy": "strict"
+  },
+  "strategies": [
+    {
+      "id": "legacy-raster-rgba8",
+      "guarantees": [
+        "No animated GIF is silently flattened by a still-image edge",
+        "No ICO/CUR member is selected without an explicit best-member capability name and report",
+        "GIF encoding rejects rather than quantizes pixels outside its exact palette domain",
+        "The complete source is validated before target bytes are committed"
+      ],
+      "tradeoffs": [
+        "ICO/CUR target emission is a normalized single PNG member",
+        "GIF exact-palette encoding favors proof simplicity over compression ratio"
+      ]
+    }
+  ],
+  "backends": [
+    {
+      "id": "native-portable",
+      "tier": "native-portable",
+      "default": true,
+      "dependencies": []
+    }
+  ],
+  "validation": {
+    "specifications": [
+      "Microsoft Windows bitmap structures",
+      "Microsoft ICO directory and PNG member structures"
+    ],
+    "conformance": [
+      "src/lib.rs, src/legacy_native.rs and src/png_native.rs unit tests"
+    ],
+    "differential": [],
+    "properties": [
+      "Accepted pixel coordinates and RGBA8 code values round-trip exactly",
+      "All dimensions, directory ranges, LZW output and allocations are checked",
+      "Malformed input never produces partial committed output"
+    ],
+    "regression": [
+      "GIF LZW clear/end codes and interlace order",
+      "GIF animation rejection on still-image edges",
+      "ICO/CUR overlapping member ranges",
+      "ICO DIB XOR/AND orientation and alpha"
+    ],
+    "fuzz": [
+      "Planned GIF block/LZW and ICO/CUR directory/DIB campaigns"
+    ],
+    "benchmarks": [
+      "Pending controlled exbench baseline"
+    ]
+  },
+  "security": {
+    "accepts_untrusted_input": true,
+    "limits": [
+      "max_input_bytes defaults to 512 MiB",
+      "max_pixels defaults to 100 million",
+      "max_frames defaults to 10,000",
+      "max_members defaults to 1,024"
+    ],
+    "known_risks": [
+      "Output I/O failure can occur while committing a fully validated result"
+    ]
+  }
+}

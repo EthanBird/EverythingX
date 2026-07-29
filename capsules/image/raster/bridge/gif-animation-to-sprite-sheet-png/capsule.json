@@ -1,0 +1,134 @@
+{
+  "capsule_id": "capsule:gif-animation-to-sprite-sheet-png",
+  "version": "0.1.0",
+  "name": "gif-animation-to-sprite-sheet-png",
+  "summary": "Render every composited GIF animation frame into a horizontal PNG sprite sheet.",
+  "taxonomy": {
+    "domain": "image",
+    "primary_ir": "ir:raster",
+    "secondary_irs": [
+      "ir:timed-media"
+    ],
+    "operator_kind": "render",
+    "operator_role": "bridge"
+  },
+  "license": {
+    "expression": "PolyForm-Noncommercial-1.0.0",
+    "file": "LICENSE",
+    "commercial_authorization_required": true
+  },
+  "repository": "https://github.com/EthanBird/EverythingX/tree/main/capsules/image/raster/bridge/gif-animation-to-sprite-sheet-png",
+  "independence": {
+    "standalone_cargo_build": true,
+    "everythingx_optional": true,
+    "external_path_dependencies": false,
+    "copy_out_tested": true
+  },
+  "conversion": {
+    "source": [
+      "imagefmt:gif-animation"
+    ],
+    "target": [
+      "exfmt:image:png"
+    ],
+    "arity": {
+      "inputs": {
+        "min": 1,
+        "max": 1
+      },
+      "outputs": {
+        "min": 1,
+        "max": 1
+      }
+    },
+    "scope": [
+      "GIF global/local palettes, LZW, interlace, transparency and disposal 0 through 3",
+      "Composited visual frames",
+      "All frames in chronological left-to-right order"
+    ],
+    "out_of_scope": [
+      "Preservation of animation timing in a still PNG",
+      "GIF plain-text rendering extension",
+      "ICC conversion"
+    ]
+  },
+  "api": {
+    "language": "rust",
+    "crate": "gif-animation-to-sprite-sheet-png",
+    "entrypoint": "convert",
+    "owns_options_error_report": true,
+    "streaming": false,
+    "seek_required": false
+  },
+  "defaults": {
+    "runnable": true,
+    "strategy": "gif-horizontal-composited-sprite-sheet",
+    "backend": "native-portable",
+    "options": {
+      "frame_index": 0,
+      "max_frames": 10000,
+      "max_input_bytes": 536870912,
+      "max_pixels": 100000000
+    },
+    "policy": "strict"
+  },
+  "strategies": [
+    {
+      "id": "gif-horizontal-composited-sprite-sheet",
+      "guarantees": [
+        "Frame disposal and transparency are composited before rendering",
+        "No animation is mistaken for an ordinary still-image carrier conversion",
+        "PNG output is CRC/Adler protected and independently decodable"
+      ],
+      "tradeoffs": [
+        "Timing and loop metadata are reported but not representable in still PNG",
+        "Sprite sheets grow horizontally with frame count"
+      ]
+    }
+  ],
+  "backends": [
+    {
+      "id": "native-portable",
+      "tier": "native-portable",
+      "default": true,
+      "dependencies": []
+    }
+  ],
+  "validation": {
+    "specifications": [
+      "GIF89a",
+      "W3C PNG Third Edition",
+      "RFC 1950/1951"
+    ],
+    "conformance": [
+      "Two-frame direct tests in src/lib.rs"
+    ],
+    "differential": [],
+    "properties": [
+      "Output dimensions encode the selected frame set",
+      "PNG decodes independently"
+    ],
+    "regression": [
+      "Out-of-range frame index",
+      "Truncated GIF",
+      "Sprite-sheet pixel limit"
+    ],
+    "fuzz": [
+      "Planned animation block, LZW, disposal and dimension campaigns"
+    ],
+    "benchmarks": [
+      "Pending controlled exbench baseline"
+    ]
+  },
+  "security": {
+    "accepts_untrusted_input": true,
+    "limits": [
+      "512 MiB input",
+      "100 million output pixels",
+      "10,000 frames"
+    ],
+    "known_risks": [
+      "Full animation compositing materializes decoded frame rasters"
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+[package]
+name = "png-to-cur"
+version = "0.1.0"
+edition = "2024"
+publish = false
+license-file = "LICENSE"
+description = "Portable Network Graphics to single-member PNG-backed Windows CUR"
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]

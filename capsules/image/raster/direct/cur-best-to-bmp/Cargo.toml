@@ -1,0 +1,12 @@
+[package]
+name = "cur-best-to-bmp"
+version = "0.1.0"
+edition = "2024"
+publish = false
+license-file = "LICENSE"
+description = "best-ranked Windows CUR member to Windows BMP raster"
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]

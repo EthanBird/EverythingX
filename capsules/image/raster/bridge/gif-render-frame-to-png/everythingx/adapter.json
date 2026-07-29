@@ -1,0 +1,66 @@
+{
+  "adapter_id": "adapter:gif-render-frame-to-png-static",
+  "version": "0.1.0",
+  "capsule": {
+    "id": "capsule:gif-render-frame-to-png",
+    "version_requirement": "^0.1.0"
+  },
+  "protocol": {
+    "name": "everythingx-adapter-protocol",
+    "version_requirement": "0.1"
+  },
+  "transport": {
+    "kind": "static-rust",
+    "entrypoint": "GeneratedGifRenderAdapter"
+  },
+  "capabilities": [
+    {
+      "capability_id": "capability:gif-render-frame-to-png/gif-composited-frame-selection/native-portable",
+      "capsule_entrypoint": "convert",
+      "strategy": "gif-composited-frame-selection",
+      "backend": "native-portable",
+      "inputs": [
+        "imagefmt:gif-animation"
+      ],
+      "outputs": [
+        "exfmt:image:png"
+      ],
+      "preconditions": [
+        "GIF animation is valid within frame and pixel limits"
+      ],
+      "effects": [
+        "Render one explicitly indexed composited GIF animation frame to PNG."
+      ],
+      "invariants": [
+        "Composited frame pixel code values",
+        "Frame chronological order"
+      ],
+      "computability": "total_for_declared_subset",
+      "loss": {
+        "pixels": "none",
+        "coordinates": "normalized",
+        "structure": "unbounded",
+        "metadata": "unbounded",
+        "color-semantics": "conditional"
+      },
+      "default_options": {
+        "frame_index": 0,
+        "max_frames": 10000,
+        "max_input_bytes": 536870912,
+        "max_pixels": 100000000
+      },
+      "defaults_are_runnable": true,
+      "execution": {
+        "streaming": false,
+        "seek_required": false,
+        "cost_evidence": []
+      },
+      "report_mapping": {
+        "unknown_fields_are_preserved": true,
+        "rules": [
+          "Source frame count, selection and dimensions map to capsule_report"
+        ]
+      }
+    }
+  ]
+}
